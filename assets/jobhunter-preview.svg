@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_jh" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a121e"/>
+      <stop offset="100%" stop-color="#111c2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg_jh)"/>
+  <rect x="40" y="30" width="720" height="390" rx="16" fill="#0e1826" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="2"/>
+
+  <text x="400" y="80" text-anchor="middle" fill="#ffffff" font-family="monospace" font-size="20" font-weight="bold">JOBHUNTER AI // GOOGLE XYZ COPILOT</text>
+  <text x="400" y="105" text-anchor="middle" fill="#38bdf8" font-family="monospace" font-size="12">OTIMIZAÇÃO CIRÚRGICA DE CURRÍCULOS &amp; VARREDURA LINKEDIN</text>
+
+  <!-- Formula Card -->
+  <rect x="100" y="140" width="600" height="110" rx="12" fill="#162438" stroke="#38bdf8" stroke-opacity="0.2"/>
+  <text x="130" y="175" fill="#38bdf8" font-family="sans-serif" font-size="14" font-weight="bold">FÓRMULA GOOGLE XYZ APLICADA:</text>
+  <text x="130" y="205" fill="#ffffff" font-family="sans-serif" font-size="15">"Realizou [X], medido pelo impacto quantitativo [Y], através da ação técnica [Z]."</text>
+  <text x="130" y="230" fill="#94a3b8" font-family="sans-serif" font-size="12">Taxa de aderência a vagas técnicas aumentada em 4.2x.</text>
+
+  <!-- Pipeline Steps -->
+  <rect x="100" y="280" width="180" height="80" rx="10" fill="#131e2e"/>
+  <text x="120" y="315" fill="#e2e8f0" font-family="sans-serif" font-size="13" font-weight="bold">1. Varredura</text>
+  <text x="120" y="340" fill="#94a3b8" font-size="11">Crawler de vagas</text>
+
+  <rect x="310" y="280" width="180" height="80" rx="10" fill="#131e2e"/>
+  <text x="330" y="315" fill="#e2e8f0" font-family="sans-serif" font-size="13" font-weight="bold">2. Análise Semântica</text>
+  <text x="330" y="340" fill="#94a3b8" font-size="11">Gaps de competência</text>
+
+  <rect x="520" y="280" width="180" height="80" rx="10" fill="#131e2e"/>
+  <text x="540" y="315" fill="#e2e8f0" font-family="sans-serif" font-size="13" font-weight="bold">3. Geração .EXE</text>
+  <text x="540" y="340" fill="#94a3b8" font-size="11">Executável Windows</text>
+</svg>

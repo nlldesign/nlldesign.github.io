@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_pepe" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14061a"/>
+      <stop offset="100%" stop-color="#240a2f"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg_pepe)"/>
+  <rect x="40" y="30" width="720" height="390" rx="16" fill="#1a0724" stroke="#ec4899" stroke-opacity="0.3" stroke-width="2"/>
+
+  <!-- Generative Curves -->
+  <path d="M 60 300 Q 200 120, 400 240 T 740 180" fill="none" stroke="#ec4899" stroke-width="4" filter="drop-shadow(0 0 12px #ec4899)"/>
+  <path d="M 60 330 Q 240 160, 420 280 T 740 220" fill="none" stroke="#8b5cf6" stroke-width="2.5" opacity="0.6"/>
+
+  <circle cx="400" cy="240" r="30" fill="#ec4899" fill-opacity="0.1" stroke="#ec4899" stroke-width="2"/>
+  <circle cx="400" cy="240" r="10" fill="#ffffff" filter="drop-shadow(0 0 10px #ffffff)"/>
+
+  <text x="400" y="85" text-anchor="middle" fill="#ffffff" font-family="monospace" font-size="22" font-weight="bold">PEPE DESIGN ORACLE</text>
+  <text x="400" y="115" text-anchor="middle" fill="#f472b6" font-family="monospace" font-size="13">DIREÇÃO DE ARTE MULTIMODAL • GOOGLE GEMINI 2.0 STUDIO</text>
+
+  <!-- Palettes generated -->
+  <rect x="250" y="340" width="60" height="30" rx="6" fill="#7c3aed"/>
+  <rect x="320" y="340" width="60" height="30" rx="6" fill="#06b6d4"/>
+  <rect x="390" y="340" width="60" height="30" rx="6" fill="#ec4899"/>
+  <rect x="460" y="340" width="60" height="30" rx="6" fill="#f59e0b"/>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_ut" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0512"/>
+      <stop offset="100%" stop-color="#190a2a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg_ut)"/>
+  <rect x="40" y="30" width="720" height="390" rx="16" fill="#0d0718" stroke="#a855f7" stroke-opacity="0.3" stroke-width="2"/>
+  
+  <!-- Perspective 3D Ruins Grid -->
+  <path d="M 40 420 L 300 200 L 500 200 L 760 420 Z" fill="#130b24" stroke="#7e22ce" stroke-width="1.5" stroke-opacity="0.5"/>
+  <line x1="300" y1="200" x2="40" y2="420" stroke="#a855f7" stroke-width="2"/>
+  <line x1="500" y1="200" x2="760" y2="420" stroke="#a855f7" stroke-width="2"/>
+  <line x1="365" y1="200" x2="280" y2="420" stroke="#7e22ce" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="435" y1="200" x2="520" y2="420" stroke="#7e22ce" stroke-width="1.5" stroke-dasharray="6,6"/>
+
+  <!-- Ancient 3D Pillars -->
+  <rect x="250" y="140" width="30" height="120" fill="#241142" stroke="#a855f7" stroke-width="2"/>
+  <rect x="520" y="140" width="30" height="120" fill="#241142" stroke="#a855f7" stroke-width="2"/>
+  <polygon points="240,140 290,140 265,120" fill="#3b1968" stroke="#a855f7" stroke-width="1.5"/>
+  <polygon points="510,140 560,140 535,120" fill="#3b1968" stroke="#a855f7" stroke-width="1.5"/>
+
+  <!-- Battle Box in 3D frame -->
+  <rect x="320" y="270" width="160" height="100" rx="6" fill="#000000" stroke="#ffffff" stroke-width="4"/>
+  
+  <!-- Red Soul Pixel Heart -->
+  <path d="M 400 320 C 390 305, 375 315, 385 330 L 400 345 L 415 330 C 425 315, 410 305, 400 320 Z" fill="#ef4444" filter="drop-shadow(0 0 10px #ef4444)"/>
+
+  <!-- Floating text -->
+  <text x="400" y="80" text-anchor="middle" fill="#ffffff" font-family="monospace" font-size="20" font-weight="bold">UNDERTALE 3D — RUÍNAS &amp; ARENA</text>
+  <text x="400" y="110" text-anchor="middle" fill="#c084fc" font-family="monospace" font-size="12">ENGINE THREE.JS • COMBATE FRENÉTICO EM TEMPO REAL</text>
+</svg>

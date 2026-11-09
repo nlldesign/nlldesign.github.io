@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_habit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0819"/>
+      <stop offset="100%" stop-color="#140f2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg_habit)"/>
+  <rect x="40" y="30" width="720" height="390" rx="16" fill="#100b24" stroke="#8b5cf6" stroke-opacity="0.3" stroke-width="2"/>
+
+  <!-- Character Banner Card -->
+  <rect x="70" y="60" width="660" height="85" rx="12" fill="#1b123d" stroke="#8b5cf6" stroke-opacity="0.2"/>
+  <circle cx="120" cy="102" r="28" fill="#6366f1"/>
+  <text x="120" y="110" text-anchor="middle" fill="#ffffff" font-family="sans-serif" font-size="24">⚔️</text>
+  <text x="170" y="90" fill="#ffffff" font-family="sans-serif" font-size="18" font-weight="bold">LUCAS • GUERREIRO DA DISCIPLINA (NVL 42)</text>
+  
+  <!-- Health Bar -->
+  <rect x="170" y="105" width="220" height="10" rx="5" fill="#312e81"/>
+  <rect x="170" y="105" width="180" height="10" rx="5" fill="#ef4444"/>
+  <text x="400" y="114" fill="#f87171" font-family="monospace" font-size="10">HP: 180/200</text>
+
+  <!-- XP Bar -->
+  <rect x="170" y="122" width="220" height="10" rx="5" fill="#312e81"/>
+  <rect x="170" y="122" width="150" height="10" rx="5" fill="#10b981"/>
+  <text x="400" y="131" fill="#34d399" font-family="monospace" font-size="10">XP: 75%</text>
+
+  <text x="610" y="110" fill="#fbbf24" font-family="monospace" font-size="18" font-weight="bold">🪙 2.450 GP</text>
+
+  <!-- Quest Rows -->
+  <rect x="70" y="165" width="315" height="60" rx="10" fill="#160e33" stroke="#8b5cf6" stroke-opacity="0.2"/>
+  <circle cx="105" cy="195" r="14" fill="#10b981" fill-opacity="0.2"/>
+  <text x="105" y="200" text-anchor="middle" fill="#34d399" font-size="14">✓</text>
+  <text x="135" y="190" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold">Treino de Hipertrofia</text>
+  <text x="135" y="208" fill="#a78bfa" font-family="monospace" font-size="11">+15 XP • +5 Ouro</text>
+
+  <rect x="70" y="240" width="315" height="60" rx="10" fill="#160e33" stroke="#8b5cf6" stroke-opacity="0.2"/>
+  <circle cx="105" cy="270" r="14" fill="#10b981" fill-opacity="0.2"/>
+  <text x="105" y="275" text-anchor="middle" fill="#34d399" font-size="14">✓</text>
+  <text x="135" y="265" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold">2h Foco em Código 3D</text>
+  <text x="135" y="283" fill="#a78bfa" font-family="monospace" font-size="11">+25 XP • +12 Ouro</text>
+
+  <rect x="70" y="315" width="315" height="60" rx="10" fill="#160e33" stroke="#8b5cf6" stroke-opacity="0.2"/>
+  <circle cx="105" cy="345" r="14" fill="#64748b" fill-opacity="0.2"/>
+  <text x="135" y="340" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold">Revisão Financeira Semanal</text>
+  <text x="135" y="358" fill="#a78bfa" font-family="monospace" font-size="11">Pendente • +10 XP</text>
+
+  <!-- Right: Economy & Rewards Inventory -->
+  <rect x="415" y="165" width="315" height="210" rx="12" fill="#160e33" stroke="#8b5cf6" stroke-opacity="0.2"/>
+  <text x="440" y="198" fill="#e2e8f0" font-family="sans-serif" font-size="15" font-weight="bold">Loja de Recompensas Reais</text>
+  
+  <rect x="440" y="220" width="265" height="42" rx="8" fill="#24174f"/>
+  <text x="455" y="246" fill="#ffffff" font-family="sans-serif" font-size="13">🎮 Noite Livre de Games</text>
+  <text x="640" y="246" fill="#fbbf24" font-family="monospace" font-size="12" font-weight="bold">200 GP</text>
+
+  <rect x="440" y="275" width="265" height="42" rx="8" fill="#24174f"/>
+  <text x="455" y="301" fill="#ffffff" font-family="sans-serif" font-size="13">🍕 Jantar Especial</text>
+  <text x="640" y="301" fill="#fbbf24" font-family="monospace" font-size="12" font-weight="bold">450 GP</text>
+
+  <text x="440" y="355" fill="#94a3b8" font-family="monospace" font-size="11">Integração com Supabase &amp; Schemas SQL</text>
+</svg>
