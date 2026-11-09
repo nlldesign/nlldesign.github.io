@@ -89,6 +89,14 @@
       color: #ffffff;
       box-shadow: 0 4px 14px -2px rgba(147, 51, 234, 0.4);
     }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
@@ -96,20 +104,20 @@
   <!-- TOP BAR (Header exatamente como o sketch) -->
   <!-- Esquerda: Logo + nome | Centro: Projetos, Sobre e outros projetos | Direita: Botões de contato + e-mail -->
   <header class="sticky top-0 z-50 backdrop-blur-md bg-sketch-bg/90 border-b border-white/10">
-    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between py-3">
       
       <!-- Esquerda: Logo + nome -->
-      <a href="#" onclick="showHomeView(); return false;" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center font-display font-bold text-lg text-white shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform">
+      <a href="#" onclick="showHomeView(); return false;" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center font-display font-bold text-base sm:text-lg text-white shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform">
           N
         </div>
         <div>
-          <span class="font-display font-bold text-base tracking-tight text-white block">NLL DESIGN</span>
-          <span class="text-xs text-slate-400 font-mono">Lucas Nellucci</span>
+          <span class="font-display font-bold text-sm sm:text-base tracking-tight text-white block">NLL DESIGN</span>
+          <span class="text-[11px] sm:text-xs text-slate-400 font-mono">Lucas Nellucci</span>
         </div>
       </a>
 
-      <!-- Centro: Projetos, Sobre e outros projetos -->
+      <!-- Centro: Projetos, Sobre e outros projetos (Desktop) -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
         <a href="#destaques" onclick="showHomeView();" class="hover:text-white transition-colors">Destaques</a>
         <a href="#apresentacao" onclick="showHomeView();" class="hover:text-white transition-colors">Sobre mim</a>
@@ -117,14 +125,15 @@
       </nav>
 
       <!-- Direita: Botões de contato + e-mail -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
         <a href="https://github.com/nlldesign" target="_blank" rel="noopener noreferrer" 
-           class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center gap-2 transition-all">
+           class="p-2 sm:px-3.5 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center gap-1.5 transition-all"
+           title="Ver perfil no GitHub">
           <i data-lucide="github" class="w-4 h-4"></i>
           <span class="hidden sm:inline">GitHub</span>
         </a>
         <a href="mailto:nellucci.design@gmail.com" 
-           class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/30 flex items-center gap-2 transition-all">
+           class="px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/30 flex items-center gap-1.5 transition-all">
           <i data-lucide="mail" class="w-4 h-4"></i>
           <span>Contato</span>
         </a>
@@ -136,7 +145,7 @@
   <!-- ========================================== -->
   <!-- VIEW 1: HOME (Baseada fielmente no Sketch 1) -->
   <!-- ========================================== -->
-  <main id="homeView" class="max-w-6xl mx-auto px-6 py-12 flex-1 w-full">
+  <main id="homeView" class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-1 w-full">
 
     <!-- SEÇÃO 1: CARROSSEL / 3 CARDS DE DESTAQUE NO TOPO -->
     <!-- Sketch: [Card Esquerda] [Card Centro: Imagem + Resumo rápido sobre o case de sucesso] [Card Direita] -->
@@ -151,22 +160,22 @@
         </div>
       </div>
 
-      <!-- Grid com 3 Cards em Destaque conforme o wireframe -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Grid com 3 Cards em Destaque conforme o wireframe (Carrossel com snap no mobile, grid no desktop) -->
+      <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-6 px-6 no-scrollbar md:mx-0 md:px-0 md:grid md:grid-cols-3 md:gap-6">
         
         <!-- Destaque 1: FibroCare -->
-        <div onclick="openProjectDetail('fibrocare')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group">
+        <div onclick="openProjectDetail('fibrocare')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group w-[82vw] sm:w-[70vw] md:w-auto shrink-0 snap-center">
           <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
             <img src="assets/fibrocare-preview.svg" alt="FibroCare" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-emerald-400">
               HealthTech UX
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="font-display font-bold text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
+          <div class="p-5 sm:p-6">
+            <h3 class="font-display font-bold text-base sm:text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
               FibroCare (FibroTracker)
             </h3>
-            <p class="text-sm text-slate-400 leading-relaxed mb-4">
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
               Resumo rápido sobre o case de sucesso: Plataforma de saúde para monitoramento de dor crônica com mapa anatômico dos 18 pontos do ACR e predição de crises em 24h–48h.
             </p>
             <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
@@ -177,18 +186,18 @@
         </div>
 
         <!-- Destaque 2: Habit RPG Tracker -->
-        <div onclick="openProjectDetail('habit-rpg')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group">
+        <div onclick="openProjectDetail('habit-rpg')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group w-[82vw] sm:w-[70vw] md:w-auto shrink-0 snap-center">
           <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
             <img src="assets/habit-rpg-preview.svg" alt="Habit RPG" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-purple-400">
               Behavioral Design
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="font-display font-bold text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
+          <div class="p-5 sm:p-6">
+            <h3 class="font-display font-bold text-base sm:text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
               Habit RPG Tracker
             </h3>
-            <p class="text-sm text-slate-400 leading-relaxed mb-4">
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
               Resumo rápido sobre o case de sucesso: Design comportamental aplicado a rotinas diárias e finanças, elevando a retenção através de loops de recompensa tangíveis.
             </p>
             <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
@@ -199,18 +208,18 @@
         </div>
 
         <!-- Destaque 3: Corpo Seco (Game UI/UX) -->
-        <div onclick="openProjectDetail('corpo-seco')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group">
+        <div onclick="openProjectDetail('corpo-seco')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group w-[82vw] sm:w-[70vw] md:w-auto shrink-0 snap-center">
           <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
             <img src="assets/corpo-seco-hero.png" alt="Corpo Seco" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-cyan-400">
               3D &amp; Diegetic UI
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="font-display font-bold text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
+          <div class="p-5 sm:p-6">
+            <h3 class="font-display font-bold text-base sm:text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
               Corpo Seco: A Maldição
             </h3>
-            <p class="text-sm text-slate-400 leading-relaxed mb-4">
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
               Resumo rápido sobre o case de sucesso: Jogo 3D de terror e suspense na mata com Three.js. Design sem barras de vida (UI diegética) onde a luz e a névoa guiam o jogador.
             </p>
             <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
@@ -224,45 +233,45 @@
     </section>
 
     <!-- SEÇÃO 2: APRESENTANDO-ME (Bloco grande conforme o sketch) -->
-    <section id="apresentacao" class="mb-20">
-      <div class="text-center mb-6">
-        <h2 class="text-2xl font-display font-bold text-white tracking-tight">Apresentando-me</h2>
+    <section id="apresentacao" class="mb-14 sm:mb-20">
+      <div class="text-center mb-5 sm:mb-6">
+        <h2 class="text-xl sm:text-2xl font-display font-bold text-white tracking-tight">Apresentando-me</h2>
       </div>
 
-      <div class="sketch-card p-8 md:p-12 rounded-3xl relative overflow-hidden">
+      <div class="sketch-card p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl relative overflow-hidden">
         <div class="max-w-3xl mx-auto">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300 text-xs font-mono font-medium mb-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300 text-xs font-mono font-medium mb-5 sm:mb-6">
             Lucas Nellucci • Product Designer &amp; Design Strategist
           </div>
 
-          <h3 class="text-2xl sm:text-3xl font-display font-bold text-white mb-6 leading-snug">
+          <h3 class="text-xl sm:text-3xl font-display font-bold text-white mb-5 sm:mb-6 leading-snug">
             Transformando complexidade em clareza, usabilidade e experiências digitais memoráveis.
           </h3>
 
-          <p class="text-base text-slate-300 leading-relaxed mb-6">
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed mb-5 sm:mb-6">
             Sou designer de produto com atuação completa desde a descoberta do problema (Product Discovery, pesquisa qualitativa e arquitetura de informação) até a execução de alta fidelidade em <strong>UI Design</strong>, <strong>Design Systems</strong> e <strong>Prototipagem Interativa</strong>.
           </p>
 
-          <p class="text-sm text-slate-400 leading-relaxed mb-8">
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6 sm:mb-8">
             Minha abordagem une psicologia cognitiva, design comportamental e domínio prático de tecnologia (React, Three.js, Canvas), garantindo que cada decisão de design seja viável, acessível (WCAG) e voltada para gerar impacto real de negócio e satisfação do usuário.
           </p>
 
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/10 text-center sm:text-left">
-            <div>
-              <div class="text-xs font-mono text-slate-500 uppercase">Foco Primário</div>
-              <div class="text-sm font-semibold text-white mt-1">Design de Produto</div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-white/10 text-center sm:text-left">
+            <div class="p-2 sm:p-0 bg-white/[0.02] sm:bg-transparent rounded-xl">
+              <div class="text-[11px] font-mono text-slate-500 uppercase">Foco Primário</div>
+              <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">Design de Produto</div>
             </div>
-            <div>
-              <div class="text-xs font-mono text-slate-500 uppercase">Metodologia</div>
-              <div class="text-sm font-semibold text-white mt-1">Discovery &amp; HFE</div>
+            <div class="p-2 sm:p-0 bg-white/[0.02] sm:bg-transparent rounded-xl">
+              <div class="text-[11px] font-mono text-slate-500 uppercase">Metodologia</div>
+              <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">Discovery &amp; HFE</div>
             </div>
-            <div>
-              <div class="text-xs font-mono text-slate-500 uppercase">Sistemas</div>
-              <div class="text-sm font-semibold text-white mt-1">Design Systems</div>
+            <div class="p-2 sm:p-0 bg-white/[0.02] sm:bg-transparent rounded-xl">
+              <div class="text-[11px] font-mono text-slate-500 uppercase">Sistemas</div>
+              <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">Design Systems</div>
             </div>
-            <div>
-              <div class="text-xs font-mono text-slate-500 uppercase">Especialidade</div>
-              <div class="text-sm font-semibold text-white mt-1">Behavioral UX &amp; 3D</div>
+            <div class="p-2 sm:p-0 bg-white/[0.02] sm:bg-transparent rounded-xl">
+              <div class="text-[11px] font-mono text-slate-500 uppercase">Especialidade</div>
+              <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">Behavioral UX &amp; 3D</div>
             </div>
           </div>
         </div>
@@ -271,17 +280,17 @@
 
     <!-- SEÇÃO 3: PROJETOS (Lista com descrição e botão para acessar, com filtro por categoria) -->
     <section id="projetos" class="mb-16">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
         <div>
-          <h2 class="text-2xl font-display font-bold text-white tracking-tight">Projetos</h2>
-          <p class="text-slate-400 text-sm mt-1">Lista completa de produtos digitais, ferramentas e jogos interativos.</p>
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-white tracking-tight">Projetos</h2>
+          <p class="text-slate-400 text-xs sm:text-sm mt-1">Lista completa de produtos digitais, ferramentas e jogos interativos.</p>
         </div>
 
         <!-- Seletor de Categoria: Projetos vs Jogos -->
-        <div class="flex items-center p-1 rounded-xl bg-dark-850 border border-white/10 text-xs font-medium">
-          <button onclick="filterList('todos')" id="filterTodos" class="px-4 py-2 rounded-lg text-white tab-pill-active transition-all">Todos</button>
-          <button onclick="filterList('produto')" id="filterProduto" class="px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all">Design de Produto</button>
-          <button onclick="filterList('jogos')" id="filterJogos" class="px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all">Jogos &amp; 3D</button>
+        <div class="flex items-center p-1 rounded-xl bg-dark-850 border border-white/10 text-xs font-medium overflow-x-auto max-w-full no-scrollbar">
+          <button onclick="filterList('todos')" id="filterTodos" class="px-3.5 sm:px-4 py-2 rounded-lg text-white tab-pill-active transition-all shrink-0">Todos</button>
+          <button onclick="filterList('produto')" id="filterProduto" class="px-3.5 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all shrink-0">Design de Produto</button>
+          <button onclick="filterList('jogos')" id="filterJogos" class="px-3.5 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all shrink-0">Jogos &amp; 3D</button>
         </div>
       </div>
 
@@ -297,79 +306,79 @@
   <!-- ==================================================== -->
   <!-- VIEW 2: PROJETO EXPANDIDO (Baseada no Sketch 2)       -->
   <!-- ==================================================== -->
-  <main id="projectDetailView" class="hidden max-w-5xl mx-auto px-6 py-10 flex-1 w-full">
+  <main id="projectDetailView" class="hidden max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10 flex-1 w-full">
     
-    <!-- Voltar para home -->
-    <div class="mb-8 flex items-center justify-between">
-      <button onclick="showHomeView()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs sm:text-sm font-medium flex items-center gap-2 transition-all">
+    <!-- Voltar para home e Top Links -->
+    <div class="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <button onclick="showHomeView()" class="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs sm:text-sm font-medium flex items-center gap-2 transition-all w-fit">
         <i data-lucide="arrow-left" class="w-4 h-4"></i>
         <span>Voltar para todos os projetos</span>
       </button>
 
-      <div id="detailTopLinks" class="flex items-center gap-3">
+      <div id="detailTopLinks" class="flex items-center gap-2 flex-wrap">
         <!-- Links de Vercel e GitHub injetados dinamicamente -->
       </div>
     </div>
 
     <!-- Título do Projeto e Tag -->
-    <div class="mb-6">
+    <div class="mb-5 sm:mb-6">
       <div class="flex items-center gap-2 mb-2">
         <span id="detailBadge" class="text-xs font-mono font-medium px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300">
           Categoria
         </span>
       </div>
-      <h1 id="detailTitle" class="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight">
+      <h1 id="detailTitle" class="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight">
         Nome do Projeto
       </h1>
-      <p id="detailSubtitle" class="text-base text-slate-400 mt-1">
+      <p id="detailSubtitle" class="text-xs sm:text-base text-slate-400 mt-1">
         Subtítulo do projeto
       </p>
     </div>
 
     <!-- 1. IMAGEM GRANDE NO TOPO (Ou Embed Player se for jogo) -->
     <!-- Sketch 2: Bloco superior cinza [Imagem] -->
-    <div id="detailMediaContainer" class="sketch-card rounded-3xl overflow-hidden mb-12 border border-white/10">
+    <div id="detailMediaContainer" class="sketch-card rounded-2xl sm:rounded-3xl overflow-hidden mb-8 sm:mb-12 border border-white/10">
       <!-- Imagem ou Player de Jogo injetado dinamicamente -->
     </div>
 
     <!-- 2. ESTRUTURA DOS 3 BLOCOS (Desafio, Abordagem, Resultado) -->
     <!-- Sketch 2: Três blocos horizontais com título em destaque à esquerda e texto à direita -->
-    <div class="space-y-6 mb-16">
+    <div class="space-y-4 sm:space-y-6 mb-10 sm:mb-16">
       
       <!-- Bloco 1: Desafio -->
-      <div class="sketch-row p-6 sm:p-8 rounded-2xl flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
-        <div class="md:w-48 shrink-0">
-          <span class="text-lg font-display font-bold text-white block">Desafio</span>
+      <div class="sketch-row p-5 sm:p-8 rounded-2xl flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8">
+        <div class="sm:w-44 shrink-0 flex items-center justify-between sm:block border-b sm:border-b-0 border-white/5 pb-2 sm:pb-0">
+          <span class="text-base sm:text-lg font-display font-bold text-white block">Desafio</span>
           <span class="text-xs font-mono text-red-400">01. O Problema</span>
         </div>
         <div class="flex-1">
-          <p id="detailDesafioText" class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p id="detailDesafioText" class="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed">
             Texto apresentando o desafio do usuário e as dores de negócio...
           </p>
         </div>
       </div>
 
       <!-- Bloco 2: Abordagem -->
-      <div class="sketch-row p-6 sm:p-8 rounded-2xl flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
-        <div class="md:w-48 shrink-0">
-          <span class="text-lg font-display font-bold text-white block">Abordagem</span>
+      <div class="sketch-row p-5 sm:p-8 rounded-2xl flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8">
+        <div class="sm:w-44 shrink-0 flex items-center justify-between sm:block border-b sm:border-b-0 border-white/5 pb-2 sm:pb-0">
+          <span class="text-base sm:text-lg font-display font-bold text-white block">Abordagem</span>
           <span class="text-xs font-mono text-brand-400">02. Design &amp; Solução</span>
         </div>
         <div class="flex-1">
-          <p id="detailAbordagemText" class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p id="detailAbordagemText" class="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed">
             Texto apresentando as decisões de arquitetura de informação, UX, UI e prototipação...
           </p>
         </div>
       </div>
 
       <!-- Bloco 3: Resultado -->
-      <div class="sketch-row p-6 sm:p-8 rounded-2xl flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
-        <div class="md:w-48 shrink-0">
-          <span class="text-lg font-display font-bold text-white block">Resultado</span>
+      <div class="sketch-row p-5 sm:p-8 rounded-2xl flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8">
+        <div class="sm:w-44 shrink-0 flex items-center justify-between sm:block border-b sm:border-b-0 border-white/5 pb-2 sm:pb-0">
+          <span class="text-base sm:text-lg font-display font-bold text-white block">Resultado</span>
           <span class="text-xs font-mono text-emerald-400">03. Impacto &amp; Métricas</span>
         </div>
         <div class="flex-1">
-          <p id="detailResultadoText" class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p id="detailResultadoText" class="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed">
             Texto apresentando as métricas de usabilidade, engajamento e valor entregue...
           </p>
         </div>
@@ -378,7 +387,7 @@
     </div>
 
     <!-- 3. Link / Botão para Acessar o Projeto (Especial para Jogos e Projetos Online) -->
-    <div id="detailBottomActionContainer" class="mb-12">
+    <div id="detailBottomActionContainer" class="mb-10 sm:mb-12">
       <!-- Injetado dinamicamente via JS -->
     </div>
 
@@ -637,19 +646,19 @@
       });
 
       container.innerHTML = filtered.map(p => `
-        <div class="sketch-row p-5 sm:p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+        <div class="sketch-row p-4 sm:p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 group">
           
-          <div class="flex-1 pr-0 md:pr-6">
-            <div class="flex items-center gap-2 mb-1.5">
+          <div class="flex-1 pr-0 sm:pr-6">
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
               <span class="text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-brand-300">
                 ${p.badge}
               </span>
               <span class="text-xs text-slate-500 font-mono">
-                ${p.type === 'produto' ? 'Design de Produto' : 'Jogo & 3D'}
+                ${p.type === 'produto' ? 'Design de Produto' : 'Jogo &amp; 3D'}
               </span>
             </div>
 
-            <h3 class="text-lg sm:text-xl font-display font-bold text-white group-hover:text-brand-300 transition-colors mb-1 cursor-pointer" onclick="openProjectDetail('${p.id}')">
+            <h3 class="text-base sm:text-xl font-display font-bold text-white group-hover:text-brand-300 transition-colors mb-1 cursor-pointer" onclick="openProjectDetail('${p.id}')">
               ${p.title}
             </h3>
 
@@ -658,19 +667,19 @@
             </p>
           </div>
 
-          <div class="shrink-0 flex items-center gap-2 pt-2 md:pt-0 border-t md:border-t-0 border-white/5">
+          <div class="shrink-0 flex items-center gap-2 pt-3 sm:pt-0 border-t sm:border-t-0 border-white/5 w-full sm:w-auto">
             ${p.vercelUrl ? `
               <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
-                 class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-mono flex items-center gap-1.5 transition-all"
+                 class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-mono flex items-center justify-center gap-1.5 transition-all shrink-0"
                  title="Abrir na Vercel">
                 <span class="font-bold">▲</span>
-                <span class="hidden sm:inline">Vercel</span>
+                <span class="inline">Vercel</span>
               </a>
             ` : ''}
 
             <button onclick="openProjectDetail('${p.id}')" 
-                    class="px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold flex items-center gap-2 shadow-lg shadow-brand-600/25 transition-all">
-              <span>${p.type === 'jogos' ? 'Jogar & Ver Case' : 'Acessar Case'}</span>
+                    class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-lg shadow-brand-600/25 transition-all">
+              <span>${p.type === 'jogos' ? 'Jogar &amp; Ver Case' : 'Acessar Case'}</span>
               <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
           </div>
