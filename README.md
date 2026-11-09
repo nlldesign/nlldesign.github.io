@@ -1,21 +1,17 @@
-# NLL DESIGN — Portfólio & Hub de Projetos
+# NLL DESIGN — Product Design & Portfolio
 
-> Portfólio oficial de Lucas (NLL Design) — Creative Developer & Technical Designer.  
-> Desenvolvendo experiências imersivas 3D em WebGL, aplicações web modernas, saúde digital e automações inteligentes.
+> Portfólio oficial de Lucas Nellucci (NLL Design) — Product Designer & Design Strategist.  
+> Especialista em transformar problemas complexos em experiências digitais intuitivas, Design Systems, Behavioral UX e Game UI/UX.
 
-🌐 **Acesse o site ao vivo:** [https://nlldesign.github.io/](https://nlldesign.github.io/)
+🌐 **Acesse o portfólio ao vivo:** [https://nlldesign.github.io/](https://nlldesign.github.io/)
 
 ---
 
-### 🚀 Projetos em Destaque:
-- **FibroCare (FibroTracker):** Monitoramento clínico cíclico & mapa anatômico para Fibromialgia.
-- **MapLeads:** Caçador de leads frios no Google Maps com Puppeteer e anti-duplicidade.
-- **Swam Invasion (Colony Survivor):** Action survivor 2D contra hordas massivas em Canvas.
-- **Corpo Seco: A Maldição do Vale:** Jogo 3D de terror e suspense em Three.js.
-- **Undertale 3D:** Recriação tridimensional das Ruínas e arena de batalha em tempo real.
-- **Habit RPG Tracker:** Dashboard de hábitos diários com economia gamificada estilo RPG.
-- **Pepe Design Oracle:** Copiloto criativo integrado ao modelo multimodal Google Gemini.
-- **JobHunter AI:** Plataforma para personalização cirúrgica de currículos (Google XYZ).
+### 🎨 Pilares de Atuação:
+- **Product Thinking & Discovery:** Mapeamento de dores reais, jornadas do usuário, análise de gaps e proposta de valor.
+- **UI & Design Systems:** Componentização escalável, tokens de design, acessibilidade WCAG e micro-interações.
+- **Design Comportamental & Gamificação:** Loops de recompensa (Hook Model), feedback tátil e interfaces de alta retenção.
+- **Game UI/UX & 3D:** Spatial UI, interfaces diegéticas e direção de arte interativa.
 
 ---
 
