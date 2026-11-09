@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NLL DESIGN | Product Designer &amp; Design de Produto</title>
-  <meta name="description" content="Portfólio de Lucas Nellucci (NLL Design) — Product Designer especializado em Design de Produto, UI/UX, Design Systems, Design Comportamental e Experiências Digitais Imersivas." />
+  <title>NLL DESIGN | Lucas Nellucci • Product Designer</title>
+  <meta name="description" content="Portfólio de Lucas Nellucci (NLL Design) — Product Designer especializado em Design de Produto, UI/UX, Design Systems e Game UI/UX." />
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
@@ -36,12 +36,14 @@
               600: '#9333ea',
               700: '#7e22ce',
             },
-            dark: {
-              950: '#07080c',
-              900: '#0c0e14',
-              850: '#11141c',
-              800: '#171b26',
-              700: '#222838',
+            sketch: {
+              bg: '#0a0b10',
+              card: '#131620',
+              cardHover: '#181d2a',
+              row: '#1a1f2c',
+              border: 'rgba(255, 255, 255, 0.08)',
+              borderHover: 'rgba(168, 85, 247, 0.35)',
+              textMuted: '#94a3b8'
             }
           }
         }
@@ -51,793 +53,780 @@
 
   <style>
     body {
-      background-color: #07080c;
+      background-color: #0a0b10;
       color: #f1f5f9;
       background-image: 
-        radial-gradient(at 0% 0%, rgba(147, 51, 234, 0.12) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
-        radial-gradient(at 50% 25%, rgba(236, 72, 153, 0.05) 0px, transparent 50%);
+        radial-gradient(at 0% 0%, rgba(147, 51, 234, 0.08) 0px, transparent 40%),
+        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.06) 0px, transparent 40%);
       background-attachment: fixed;
     }
 
-    .glass-card {
-      background: rgba(17, 20, 28, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+    .sketch-card {
+      background: #131620;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.25s ease;
     }
 
-    .glass-card:hover {
-      border-color: rgba(168, 85, 247, 0.45);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px -15px rgba(147, 51, 234, 0.22);
+    .sketch-card:hover {
+      background: #181d2a;
+      border-color: rgba(168, 85, 247, 0.4);
+      transform: translateY(-2px);
     }
 
-    .glow-gradient {
-      background: linear-gradient(135deg, #c084fc 0%, #38bdf8 50%, #f472b6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .sketch-row {
+      background: #151924;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.2s ease;
     }
 
-    .tab-active {
+    .sketch-row:hover {
+      background: #1c2232;
+      border-color: rgba(168, 85, 247, 0.35);
+    }
+
+    .tab-pill-active {
       background: #9333ea;
       color: #ffffff;
-      box-shadow: 0 4px 20px -2px rgba(147, 51, 234, 0.45);
-    }
-
-    .case-number {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-    }
-
-    .game-frame {
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: #000;
-      border-radius: 16px;
-      overflow: hidden;
+      box-shadow: 0 4px 14px -2px rgba(147, 51, 234, 0.4);
     }
   </style>
 </head>
-<body class="min-h-screen selection:bg-brand-500 selection:text-white">
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
 
-  <!-- Header / Navigation -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-dark-950/80 border-b border-white/5">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3 group">
+  <!-- TOP BAR (Header exatamente como o sketch) -->
+  <!-- Esquerda: Logo + nome | Centro: Projetos, Sobre e outros projetos | Direita: Botões de contato + e-mail -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-sketch-bg/90 border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      
+      <!-- Esquerda: Logo + nome -->
+      <a href="#" onclick="showHomeView(); return false;" class="flex items-center gap-3 group">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center font-display font-bold text-lg text-white shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform">
           N
         </div>
         <div>
-          <span class="font-display font-bold text-lg tracking-tight text-white block">NLL DESIGN</span>
-          <span class="text-xs text-slate-400 font-mono">Lucas Nellucci • Product Designer</span>
+          <span class="font-display font-bold text-base tracking-tight text-white block">NLL DESIGN</span>
+          <span class="text-xs text-slate-400 font-mono">Lucas Nellucci</span>
         </div>
       </a>
 
-      <!-- Navigation Tabs -->
-      <nav class="hidden md:flex items-center gap-1 p-1.5 rounded-2xl bg-dark-850 border border-white/10 text-sm font-medium">
-        <button onclick="switchTab('projetos')" id="navTabProjetos" class="px-5 py-2 rounded-xl text-white bg-brand-600 transition-all flex items-center gap-2">
-          <i data-lucide="layout-grid" class="w-4 h-4"></i>
-          <span>Design de Produto</span>
-        </button>
-        <button onclick="switchTab('jogos')" id="navTabJogos" class="px-5 py-2 rounded-xl text-slate-400 hover:text-white transition-all flex items-center gap-2">
-          <i data-lucide="gamepad-2" class="w-4 h-4"></i>
-          <span>Game Design &amp; 3D</span>
-        </button>
+      <!-- Centro: Projetos, Sobre e outros projetos -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#destaques" onclick="showHomeView();" class="hover:text-white transition-colors">Destaques</a>
+        <a href="#apresentacao" onclick="showHomeView();" class="hover:text-white transition-colors">Sobre mim</a>
+        <a href="#projetos" onclick="showHomeView();" class="hover:text-white transition-colors">Todos os Projetos</a>
       </nav>
 
+      <!-- Direita: Botões de contato + e-mail -->
       <div class="flex items-center gap-3">
         <a href="https://github.com/nlldesign" target="_blank" rel="noopener noreferrer" 
-           class="px-4 py-2 rounded-xl text-sm font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center gap-2 transition-all">
+           class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center gap-2 transition-all">
           <i data-lucide="github" class="w-4 h-4"></i>
           <span class="hidden sm:inline">GitHub</span>
         </a>
         <a href="mailto:nellucci.design@gmail.com" 
-           class="px-4 py-2 rounded-xl text-sm font-medium bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/30 flex items-center gap-2 transition-all">
+           class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/30 flex items-center gap-2 transition-all">
           <i data-lucide="mail" class="w-4 h-4"></i>
           <span>Contato</span>
         </a>
       </div>
+
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="max-w-7xl mx-auto px-6 pt-20 pb-14 relative">
-    <div class="max-w-3xl">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300 text-xs font-mono font-medium mb-6">
-        <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
-        Product Designer &amp; Design Strategist
-      </div>
-      
-      <h1 class="text-4xl sm:text-6xl font-display font-bold tracking-tight text-white leading-tight mb-6">
-        Desenhando <span class="glow-gradient">produtos digitais</span> intuitivos, interfaces ricas e sistemas escaláveis.
-      </h1>
+  <!-- ========================================== -->
+  <!-- VIEW 1: HOME (Baseada fielmente no Sketch 1) -->
+  <!-- ========================================== -->
+  <main id="homeView" class="max-w-6xl mx-auto px-6 py-12 flex-1 w-full">
 
-      <p class="text-base sm:text-lg text-slate-400 leading-relaxed mb-8">
-        Especialista em transformar problemas complexos em experiências claras e centradas nas pessoas. 
-        Atuação de ponta a ponta: do <strong>Product Discovery</strong> e <strong>Arquitetura de Informação</strong> ao <strong>Design System</strong>, <strong>UI Design</strong> e <strong>Prototipação Interativa</strong> de alta fidelidade.
-      </p>
-
-      <!-- Design Pillars Metrics -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 pb-8 border-t border-white/10">
+    <!-- SEÇÃO 1: CARROSSEL / 3 CARDS DE DESTAQUE NO TOPO -->
+    <!-- Sketch: [Card Esquerda] [Card Centro: Imagem + Resumo rápido sobre o case de sucesso] [Card Direita] -->
+    <section id="destaques" class="mb-20">
+      <div class="flex items-center justify-between mb-6">
         <div>
-          <div class="text-2xl font-display font-bold text-white">Product Thinking</div>
-          <div class="text-xs text-slate-400 font-mono mt-1">Discovery &amp; Estratégia</div>
+          <span class="text-xs font-mono uppercase tracking-wider text-brand-400 font-semibold block mb-1">Casos de Sucesso em Destaque</span>
+          <h2 class="text-2xl font-display font-bold text-white tracking-tight">Projetos Selecionados</h2>
         </div>
-        <div>
-          <div class="text-2xl font-display font-bold text-cyan-400">Design Systems</div>
-          <div class="text-xs text-slate-400 font-mono mt-1">Componentes &amp; Tokens</div>
-        </div>
-        <div>
-          <div class="text-2xl font-display font-bold text-brand-400">UI/UX &amp; HFE</div>
-          <div class="text-xs text-slate-400 font-mono mt-1">Usabilidade &amp; Acessibilidade</div>
-        </div>
-        <div>
-          <div class="text-2xl font-display font-bold text-pink-400">Game &amp; 3D Design</div>
-          <div class="text-xs text-slate-400 font-mono mt-1">Imersão &amp; Gamificação</div>
+        <div class="text-xs text-slate-500 font-mono hidden sm:block">
+          Clique no card para abrir o estudo completo
         </div>
       </div>
 
-      <!-- Main Switcher Tabs -->
-      <div class="flex items-center gap-3 p-1.5 rounded-2xl bg-dark-850 border border-white/10 max-w-lg">
-        <button onclick="switchTab('projetos')" id="heroTabProjetos" class="flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2 tab-active">
-          <i data-lucide="layout-grid" class="w-4 h-4"></i>
-          <span>Aba: Design de Produto</span>
-        </button>
-        <button onclick="switchTab('jogos')" id="heroTabJogos" class="flex-1 py-3 px-4 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center justify-center gap-2">
-          <i data-lucide="gamepad-2" class="w-4 h-4"></i>
-          <span>Aba: Game Design &amp; 3D</span>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section Container -->
-  <main class="max-w-7xl mx-auto px-6 pb-24">
-
-    <!-- Tab Header Info -->
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pt-4 border-t border-white/5">
-      <div>
-        <div id="tabBadge" class="text-xs font-mono uppercase tracking-wider text-brand-400 font-semibold mb-1">
-          Aba Ativa: Design de Produto
-        </div>
-        <h2 id="tabTitle" class="text-3xl font-display font-bold text-white tracking-tight">
-          Estudos de Caso de Produto (SaaS, HealthTech &amp; IA)
-        </h2>
-      </div>
-
-      <div class="text-xs font-mono text-slate-400 flex items-center gap-2">
-        <span class="inline-block w-2 h-2 rounded-full bg-brand-400"></span>
-        <span id="tabSubtitle">Metodologia: 1. Desafio de Produto • 2. Abordagem de Design • 3. Impacto &amp; Métricas</span>
-      </div>
-    </div>
-
-    <!-- Cards Grid -->
-    <div id="cardsGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <!-- Injetado dinamicamente via JS -->
-    </div>
-
-    <!-- Product Design Competencies Section -->
-    <section class="mt-24 pt-16 border-t border-white/10">
-      <div class="max-w-2xl mb-12">
-        <span class="text-xs font-mono uppercase tracking-wider text-brand-400 font-semibold block mb-2">Processo &amp; Disciplinas</span>
-        <h3 class="text-3xl font-display font-bold text-white tracking-tight">Como encaro a criação de produtos</h3>
-        <p class="text-slate-400 text-sm mt-2">Uma visão integrada unindo pesquisa com usuários, estratégia de produto e atenção cirúrgica aos detalhes visuais.</p>
-      </div>
-
+      <!-- Grid com 3 Cards em Destaque conforme o wireframe -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- 1 -->
-        <div class="glass-card p-6 rounded-2xl">
-          <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mb-5">
-            <i data-lucide="search" class="w-6 h-6"></i>
+        
+        <!-- Destaque 1: FibroCare -->
+        <div onclick="openProjectDetail('fibrocare')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group">
+          <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
+            <img src="assets/fibrocare-preview.svg" alt="FibroCare" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-emerald-400">
+              HealthTech UX
+            </div>
           </div>
-          <h4 class="text-lg font-display font-semibold text-white mb-2">Discovery &amp; Estratégia</h4>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4">Mapeamento de dores reais, entrevistas qualitativas, análise competitiva e definição clara da proposta de valor antes da primeira linha de design.</p>
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-300">
-            <span class="px-2 py-0.5 rounded bg-white/5 border border-white/5">User Journey</span>
-            <span class="px-2 py-0.5 rounded bg-white/5 border border-white/5">Personas</span>
-            <span class="px-2 py-0.5 rounded bg-white/5 border border-white/5">Jobs-To-Be-Done</span>
-          </div>
-        </div>
-
-        <!-- 2 -->
-        <div class="glass-card p-6 rounded-2xl">
-          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center mb-5">
-            <i data-lucide="palette" class="w-6 h-6"></i>
-          </div>
-          <h4 class="text-lg font-display font-semibold text-white mb-2">UI &amp; Design Systems</h4>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4">Construção de bibliotecas escaláveis de componentes, tokens de cor, tipografia consistente, dark mode acessível (WCAG) e micro-interações fluidas.</p>
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-300">
-            <span class="px-2 py-0.5 rounded bg-white/5 border border-white/5">Figma</span>
-            <span class="px-2 py-0.5 rounded bg-white/5 border border-white/5">Design Tokens</span>
-            <span class="px-2 py-0.5 rounded bg-white/5 border border-white/5">Acessibilidade</span>
+          <div class="p-6">
+            <h3 class="font-display font-bold text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
+              FibroCare (FibroTracker)
+            </h3>
+            <p class="text-sm text-slate-400 leading-relaxed mb-4">
+              Resumo rápido sobre o case de sucesso: Plataforma de saúde para monitoramento de dor crônica com mapa anatômico dos 18 pontos do ACR e predição de crises em 24h–48h.
+            </p>
+            <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+              <span>Ver case detalhado</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </div>
           </div>
         </div>
 
-        <!-- 3 -->
-        <div class="glass-card p-6 rounded-2xl">
-          <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center mb-5">
-            <i data-lucide="sparkles" class="w-6 h-6"></i>
+        <!-- Destaque 2: Habit RPG Tracker -->
+        <div onclick="openProjectDetail('habit-rpg')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group">
+          <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
+            <img src="assets/habit-rpg-preview.svg" alt="Habit RPG" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-purple-400">
+              Behavioral Design
+            </div>
           </div>
-          <h4 class="text-lg font-display font-semibold text-white mb-2">Design Comportamental</h4>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4">Gamificação ética, loops de hábito (Hook Model), redução de carga cognitiva e interfaces vivas que engajam o usuário e geram valor a longo prazo.</p>
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-300">
-            <span class="px-2 py-0.5 rounded bg-white/5 border border-white/5">Behavioral UX</span>
-            <span class="px-2 py-0.5 rounded bg-white/5 border border-white/5">Gamification</span>
-            <span class="px-2 py-0.5 rounded bg-white/5 border border-white/5">Prototipagem 3D</span>
+          <div class="p-6">
+            <h3 class="font-display font-bold text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
+              Habit RPG Tracker
+            </h3>
+            <p class="text-sm text-slate-400 leading-relaxed mb-4">
+              Resumo rápido sobre o case de sucesso: Design comportamental aplicado a rotinas diárias e finanças, elevando a retenção através de loops de recompensa tangíveis.
+            </p>
+            <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+              <span>Ver case detalhado</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destaque 3: Corpo Seco (Game UI/UX) -->
+        <div onclick="openProjectDetail('corpo-seco')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group">
+          <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
+            <img src="assets/corpo-seco-hero.png" alt="Corpo Seco" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-cyan-400">
+              3D &amp; Diegetic UI
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display font-bold text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
+              Corpo Seco: A Maldição
+            </h3>
+            <p class="text-sm text-slate-400 leading-relaxed mb-4">
+              Resumo rápido sobre o case de sucesso: Jogo 3D de terror e suspense na mata com Three.js. Design sem barras de vida (UI diegética) onde a luz e a névoa guiam o jogador.
+            </p>
+            <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+              <span>Jogar embed &amp; ver case</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: APRESENTANDO-ME (Bloco grande conforme o sketch) -->
+    <section id="apresentacao" class="mb-20">
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-display font-bold text-white tracking-tight">Apresentando-me</h2>
+      </div>
+
+      <div class="sketch-card p-8 md:p-12 rounded-3xl relative overflow-hidden">
+        <div class="max-w-3xl mx-auto">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300 text-xs font-mono font-medium mb-6">
+            Lucas Nellucci • Product Designer &amp; Design Strategist
+          </div>
+
+          <h3 class="text-2xl sm:text-3xl font-display font-bold text-white mb-6 leading-snug">
+            Transformando complexidade em clareza, usabilidade e experiências digitais memoráveis.
+          </h3>
+
+          <p class="text-base text-slate-300 leading-relaxed mb-6">
+            Sou designer de produto com atuação completa desde a descoberta do problema (Product Discovery, pesquisa qualitativa e arquitetura de informação) até a execução de alta fidelidade em <strong>UI Design</strong>, <strong>Design Systems</strong> e <strong>Prototipagem Interativa</strong>.
+          </p>
+
+          <p class="text-sm text-slate-400 leading-relaxed mb-8">
+            Minha abordagem une psicologia cognitiva, design comportamental e domínio prático de tecnologia (React, Three.js, Canvas), garantindo que cada decisão de design seja viável, acessível (WCAG) e voltada para gerar impacto real de negócio e satisfação do usuário.
+          </p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/10 text-center sm:text-left">
+            <div>
+              <div class="text-xs font-mono text-slate-500 uppercase">Foco Primário</div>
+              <div class="text-sm font-semibold text-white mt-1">Design de Produto</div>
+            </div>
+            <div>
+              <div class="text-xs font-mono text-slate-500 uppercase">Metodologia</div>
+              <div class="text-sm font-semibold text-white mt-1">Discovery &amp; HFE</div>
+            </div>
+            <div>
+              <div class="text-xs font-mono text-slate-500 uppercase">Sistemas</div>
+              <div class="text-sm font-semibold text-white mt-1">Design Systems</div>
+            </div>
+            <div>
+              <div class="text-xs font-mono text-slate-500 uppercase">Especialidade</div>
+              <div class="text-sm font-semibold text-white mt-1">Behavioral UX &amp; 3D</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- SEÇÃO 3: PROJETOS (Lista com descrição e botão para acessar, com filtro por categoria) -->
+    <section id="projetos" class="mb-16">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div>
+          <h2 class="text-2xl font-display font-bold text-white tracking-tight">Projetos</h2>
+          <p class="text-slate-400 text-sm mt-1">Lista completa de produtos digitais, ferramentas e jogos interativos.</p>
+        </div>
+
+        <!-- Seletor de Categoria: Projetos vs Jogos -->
+        <div class="flex items-center p-1 rounded-xl bg-dark-850 border border-white/10 text-xs font-medium">
+          <button onclick="filterList('todos')" id="filterTodos" class="px-4 py-2 rounded-lg text-white tab-pill-active transition-all">Todos</button>
+          <button onclick="filterList('produto')" id="filterProduto" class="px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all">Design de Produto</button>
+          <button onclick="filterList('jogos')" id="filterJogos" class="px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all">Jogos &amp; 3D</button>
+        </div>
+      </div>
+
+      <!-- Container da Lista de Linhas conforme o Sketch -->
+      <!-- [descrição do projeto ............................ Botão para acessar] -->
+      <div id="projectsListContainer" class="space-y-4">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+    </section>
+
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-white/5 py-12 text-center text-xs text-slate-500 font-mono">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div>© 2026 NLL DESIGN (Lucas Nellucci). Product Design &amp; Creative Direction.</div>
+  <!-- ==================================================== -->
+  <!-- VIEW 2: PROJETO EXPANDIDO (Baseada no Sketch 2)       -->
+  <!-- ==================================================== -->
+  <main id="projectDetailView" class="hidden max-w-5xl mx-auto px-6 py-10 flex-1 w-full">
+    
+    <!-- Voltar para home -->
+    <div class="mb-8 flex items-center justify-between">
+      <button onclick="showHomeView()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs sm:text-sm font-medium flex items-center gap-2 transition-all">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Voltar para todos os projetos</span>
+      </button>
+
+      <div id="detailTopLinks" class="flex items-center gap-3">
+        <!-- Links de Vercel e GitHub injetados dinamicamente -->
+      </div>
+    </div>
+
+    <!-- Título do Projeto e Tag -->
+    <div class="mb-6">
+      <div class="flex items-center gap-2 mb-2">
+        <span id="detailBadge" class="text-xs font-mono font-medium px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300">
+          Categoria
+        </span>
+      </div>
+      <h1 id="detailTitle" class="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight">
+        Nome do Projeto
+      </h1>
+      <p id="detailSubtitle" class="text-base text-slate-400 mt-1">
+        Subtítulo do projeto
+      </p>
+    </div>
+
+    <!-- 1. IMAGEM GRANDE NO TOPO (Ou Embed Player se for jogo) -->
+    <!-- Sketch 2: Bloco superior cinza [Imagem] -->
+    <div id="detailMediaContainer" class="sketch-card rounded-3xl overflow-hidden mb-12 border border-white/10">
+      <!-- Imagem ou Player de Jogo injetado dinamicamente -->
+    </div>
+
+    <!-- 2. ESTRUTURA DOS 3 BLOCOS (Desafio, Abordagem, Resultado) -->
+    <!-- Sketch 2: Três blocos horizontais com título em destaque à esquerda e texto à direita -->
+    <div class="space-y-6 mb-16">
+      
+      <!-- Bloco 1: Desafio -->
+      <div class="sketch-row p-6 sm:p-8 rounded-2xl flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
+        <div class="md:w-48 shrink-0">
+          <span class="text-lg font-display font-bold text-white block">Desafio</span>
+          <span class="text-xs font-mono text-red-400">01. O Problema</span>
+        </div>
+        <div class="flex-1">
+          <p id="detailDesafioText" class="text-sm sm:text-base text-slate-300 leading-relaxed">
+            Texto apresentando o desafio do usuário e as dores de negócio...
+          </p>
+        </div>
+      </div>
+
+      <!-- Bloco 2: Abordagem -->
+      <div class="sketch-row p-6 sm:p-8 rounded-2xl flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
+        <div class="md:w-48 shrink-0">
+          <span class="text-lg font-display font-bold text-white block">Abordagem</span>
+          <span class="text-xs font-mono text-brand-400">02. Design &amp; Solução</span>
+        </div>
+        <div class="flex-1">
+          <p id="detailAbordagemText" class="text-sm sm:text-base text-slate-300 leading-relaxed">
+            Texto apresentando as decisões de arquitetura de informação, UX, UI e prototipação...
+          </p>
+        </div>
+      </div>
+
+      <!-- Bloco 3: Resultado -->
+      <div class="sketch-row p-6 sm:p-8 rounded-2xl flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
+        <div class="md:w-48 shrink-0">
+          <span class="text-lg font-display font-bold text-white block">Resultado</span>
+          <span class="text-xs font-mono text-emerald-400">03. Impacto &amp; Métricas</span>
+        </div>
+        <div class="flex-1">
+          <p id="detailResultadoText" class="text-sm sm:text-base text-slate-300 leading-relaxed">
+            Texto apresentando as métricas de usabilidade, engajamento e valor entregue...
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tags e Botão Voltar no rodapé do detalhe -->
+    <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div id="detailTechsList" class="flex flex-wrap gap-2">
+        <!-- Tags injetadas dinamicamente -->
+      </div>
+      <button onclick="showHomeView()" class="text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors">
+        <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+        <span>Voltar ao topo</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- FOOTER RESUMIDO (Conforme Sketch) -->
+  <footer class="border-t border-white/10 py-10 text-center text-xs text-slate-500 font-mono">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>© 2026 NLL DESIGN • Lucas Nellucci. Product Design &amp; Creative Direction.</div>
       <div class="flex items-center gap-6">
-        <a href="https://github.com/nlldesign" class="hover:text-slate-300 transition-colors">GitHub</a>
+        <a href="https://github.com/nlldesign" target="_blank" class="hover:text-slate-300 transition-colors">GitHub</a>
         <a href="mailto:nellucci.design@gmail.com" class="hover:text-slate-300 transition-colors">nellucci.design@gmail.com</a>
       </div>
     </div>
   </footer>
 
-  <!-- Modal para Visualização Expandida / Player Embed -->
-  <div id="detailModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="glass-card max-w-4xl w-full p-6 sm:p-8 rounded-3xl border border-white/15 max-h-[94vh] overflow-y-auto relative">
-      <button onclick="closeModal()" class="absolute top-6 right-6 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-colors z-20">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-
-      <div id="modalBody">
-        <!-- Injetado dinamicamente -->
-      </div>
-    </div>
-  </div>
-
   <script>
-    // Database com posicionamento rigoroso de Product Design, UX/UI, Behavioral Design e Game UX
-    const portfolioData = {
-      projetos: [
-        {
-          id: 'fibrocare',
-          title: 'FibroCare (FibroTracker)',
-          subtitle: 'Design de Produto em Saúde Digital & Acompanhamento de Dor Crônica',
-          badge: 'HealthTech • UX / UI Design',
-          image: 'assets/fibrocare-preview.svg',
-          resumo: 'Plataforma clínica centrada no paciente com Fibromialgia. O design resolve a assimetria de comunicação entre médico e paciente através de um mapa visual de dor e previsão de crises.',
-          desafio: 'Pacientes com dores crônicas relatam dificuldade extrema de expressar a localização, intensidade e evolução da dor em consultas rápidas, gerando frustração e subdiagnóstico.',
-          abordagem: 'Concepção de uma interface com baixa carga cognitiva e dark mode relaxante. Design de um mapa corporal anatômico com os 18 tender points do ACR, permitindo registrar a dor em toques simples, aliado a um indicador visual de predição de crise em 24h-48h.',
-          resultado: 'Redução do tempo de relato clínico, aumento na adesão diária de registros sem sobrecarga mental e visualização longitudinal clara tanto para pacientes quanto para médicos.',
-          techs: ['Product Design', 'UI/UX', 'HealthTech UX', 'Design System', 'Acessibilidade WCAG'],
-          githubUrl: 'https://github.com/nlldesign/Fibrotracker',
-          vercelUrl: null,
-          embedUrl: null
-        },
-        {
-          id: 'habit-rpg',
-          title: 'Habit RPG Tracker',
-          subtitle: 'Design Comportamental & Gamificação Aplicada à Rotina e Finanças',
-          badge: 'Behavioral UX • Gamified Product',
-          image: 'assets/habit-rpg-preview.svg',
-          resumo: 'Produto digital de autogestão projetado sob a ótica do Hook Model e design comportamental, convertendo rotinas diárias e metas financeiras em uma jornada de RPG tangível.',
-          desafio: 'A taxa de abandono de apps tradicionais de hábitos supera 80% nos primeiros 14 dias devido à ausência de loops de recompensa imediatos e interfaces áridas em formato de checklist.',
-          abordagem: 'Criação de um sistema de incentivos visuais imediatos: HP (indicador da consistência), XP acumulável com micro-animações de progressão e economia interna de moedas (GP) trocáveis por recompensas do mundo real, com hierarquia limpa e feedback tátil.',
-          resultado: 'Multiplicação da retenção de hábitos diários através de reforço positivo visual, unindo produtividade pessoal e controle de finanças sem fricção.',
-          techs: ['Behavioral Design', 'Gamification UX', 'Micro-interações', 'Design de Economia'],
-          githubUrl: null,
-          vercelUrl: null,
-          embedUrl: null
-        },
-        {
-          id: 'mapleads',
-          title: 'MapLeads',
-          subtitle: 'Design de Ferramenta Operacional B2B & Fluxo de Prospecção sem Erros',
-          badge: 'B2B SaaS • Workflow UX',
-          image: 'assets/mapleads-preview.svg',
-          resumo: 'Interface de alta densidade de informação projetada para times de vendas e prospecção outbound, eliminando a complexidade de crawlers e planilhas confusas.',
-          desafio: 'Ferramentas de extração de dados costumam ser técnicas, hostis e propensas a erros de duplicação, exigindo retrabalho manual para higienizar contatos.',
-          abordagem: 'Design de um fluxo guiado em 3 passos: seleção de nicho/região, visualização em radar em tempo real e tabela interativa de leads com badges visuais de validação e bloqueio anti-duplicidade transparente.',
-          resultado: 'Interface intuitiva que dispensa treinamento técnico, permitindo a operadores comerciais extrair e validar milhares de leads em minutos com zero duplicatas.',
-          techs: ['Dashboard UX', 'Data Density Design', 'B2B Workflow', 'Error Prevention'],
-          githubUrl: 'https://github.com/nlldesign/Mapleads',
-          vercelUrl: 'https://mapleads-psi.vercel.app',
-          embedUrl: null
-        },
-        {
-          id: 'pepe-oracle',
-          title: 'Pepe Design Oracle',
-          subtitle: 'Design de Interação para Inteligência Artificial Criativa (Human-AI UX)',
-          badge: 'AI Product Design • Co-Pilot',
-          image: 'assets/pepe-oracle-preview.svg',
-          resumo: 'Copiloto de direção de arte projetado para designers e criativos, conectando intenção estética abstrata com saídas conceituais geradas por IA multimodal.',
-          desafio: 'Interagir com modelos de IA via prompts de texto puro é frustrante para designers visuais, gerando respostas vagas, alucinações e falta de controle conceitual.',
-          abordagem: 'Desenvolvimento de uma interface de co-criação com inputs estéticos visuais (mood, contraste, paletas e referências de época), orientando o modelo do Google Gemini a entregar paletas cromáticas funcionais e diretrizes práticas de composição.',
-          resultado: 'Transformação do bloqueio criativo em exploração estruturada, acelerando em 3x a fase de concepção e benchmarking estético para novos produtos digitais.',
-          techs: ['Human-AI Interaction', 'Prompt UI', 'Creative Tooling', 'Design Generativo'],
-          githubUrl: null,
-          vercelUrl: null,
-          embedUrl: null
-        },
-        {
-          id: 'jobhunter-ai',
-          title: 'JobHunter AI',
-          subtitle: 'Design de Experiência para Operações de Carreira & Feedback em Tempo Real',
-          badge: 'Career Tech • Product Design',
-          image: 'assets/jobhunter-preview.svg',
-          resumo: 'Plataforma para profissionais de tecnologia compararem seus perfis com requisitos de mercado e aplicarem melhorias orientadas a impacto.',
-          desafio: 'Candidatos têm dificuldade em visualizar seus pontos cegos de competência técnica e costumam redigir currículos descritivos sem foco em resultados quantificáveis.',
-          abordagem: 'Interface estruturada com visualização de compatibilidade de vagas, sugestões contextuais de reescrita na fórmula Google XYZ e fluxo de geração de arquivos em 1 clique.',
-          resultado: 'Redução da ansiedade no processo seletivo e taxa de conversão para entrevistas aumentada em 4.2x através de feedback visual acionável.',
-          techs: ['Information Architecture', 'User Guidance UX', 'Clareza Cognitiva'],
-          githubUrl: null,
-          vercelUrl: null,
-          embedUrl: null
-        },
-        {
-          id: 'token-tracker',
-          title: 'Token Tracker (Antigravity Plugin)',
-          subtitle: 'Developer Experience (DX) & Design de Telemetria em Tempo Real',
-          badge: 'Developer Experience • Telemetria',
-          image: 'assets/token-tracker-preview.svg',
-          resumo: 'Design de painel lateral (sidecar) para ambientes de programação assistida, garantindo que o desenvolvedor tenha visibilidade crítica sem perder o fluxo de foco.',
-          desafio: 'Engenheiros que utilizam ferramentas de IA sofrem com falta de transparência sobre custos acumulados e limites súbitos de contexto que interrompem o raciocínio.',
-          abordagem: 'Concepção de medidores circulares com zonas de risco por cor (verde, âmbar, vermelho), hierarquia tipográfica de alta legibilidade em modo escuro e notificações não-intrusivas.',
-          resultado: 'Sensação total de controle de custos e contexto sem interromper a concentração do desenvolvedor.',
-          techs: ['Developer Experience (DX)', 'Data Visualization', 'Minimal UI', 'Dark Mode'],
-          githubUrl: null,
-          vercelUrl: null,
-          embedUrl: null
-        }
-      ],
-      jogos: [
-        {
-          id: 'corpo-seco',
-          title: 'Corpo Seco: A Maldição do Vale',
-          subtitle: 'Direção de Arte, Design de Atmosfera & UI Diegética em Horror 3D',
-          badge: 'Game Design • Art Direction 3D',
-          image: 'assets/corpo-seco-hero.png',
-          resumo: 'Experiência 3D de terror e suspense na mata. O foco de design reside na eliminação de poluição de interface na tela (Diegetic UI) para amplificar o medo e a imersão sensorial.',
-          desafio: 'Manter o jogador guiado e informado sobre perigo e recursos em um jogo 3D de suspense sem quebrar a imersão com barras de vida ou menus flutuantes.',
-          abordagem: 'UI integrada ao mundo do jogo: o nível de bateria da lanterna é lido na própria intensidade da luz, a proximidade da entidade é sentida por distorções cromáticas e áudio espacial, e o caminho seguro é indicado por iluminação sutil do cenário.',
-          resultado: 'Imersão cinematográfica onde cada elemento visual e sonoro tem função mecânica direta, rodando direto no navegador a 60 FPS.',
-          techs: ['Game UI/UX', 'Diegetic UI', 'Three.js 3D', 'Psicologia das Cores', 'Sound Design'],
-          githubUrl: null,
-          vercelUrl: 'https://corpo-seco.vercel.app',
-          embedUrl: 'games/corpo-seco/index.html'
-        },
-        {
-          id: 'undertale-3d',
-          title: 'Undertale 3D: Ruínas & Arena',
-          subtitle: 'Design de Transposição de Espaço 2D para 3D & Spatial UI',
-          badge: 'Level Design • Spatial UX',
-          image: 'assets/undertale-preview.svg',
-          resumo: 'Estudo de caso de transposição espacial de uma franquia 2D aclamada para o espaço tridimensional com perspectiva e câmera dinâmica.',
-          desafio: 'Como preservar a legibilidade geométrica de um combate de esquiva rápida ao transferir a câmera de cima (top-down) para uma perspectiva 3D imersiva.',
-          abordagem: 'Design de uma arena de batalha suspensa com projeção angular calculada para preservar a precisão visual do jogador, acompanhada por feedback de impacto com flashes de contraste.',
-          resultado: 'Interação fluida e intuitiva que respeita a memória afetiva do design original enquanto inova na espacialidade.',
-          techs: ['Spatial UI', 'Level Design 3D', 'Game Feel', 'Feedback Visual'],
-          githubUrl: null,
-          vercelUrl: 'https://undertale-3d.vercel.app',
-          embedUrl: 'games/undertale-3d/index.html'
-        },
-        {
-          id: 'swam-invasion',
-          title: 'Swam Invasion (Colony Survivor)',
-          subtitle: 'Game Feel, Clareza Visual em Alta Densidade & Árvores de Upgrades',
-          badge: 'Game Feel • Visual Hierarchy',
-          image: 'assets/swam-invasion-preview.svg',
-          resumo: 'Design de combate arcade de ritmo acelerado focado em clareza de leitura visual sob estresse cognitivo com centenas de entidades na tela.',
-          desafio: 'Com mais de 1.000 entidades simultâneas em tela, o jogo pode rapidamente se tornar incompreensível e injusto para o jogador.',
-          abordagem: 'Hierarquia visual rígida por silhueta e valor de cor: o jogador possui aura de alto contraste ciano, projéteis são destacados por brilho luminescente e hordas de inimigos usam paleta de menor saturação com avisos antecipados de colisão.',
-          resultado: 'Leitura instantânea de risco e recompensa a 60 FPS, permitindo tomadas de decisão rápidas e upgrades viciantes.',
-          techs: ['Visual Hierarchy', 'Game Feel', 'Canvas 2D', 'Reward Loops'],
-          githubUrl: 'https://github.com/nlldesign/Swam-invasion',
-          vercelUrl: 'https://swam-invasion.vercel.app',
-          embedUrl: 'games/swam-invasion/index.html'
-        },
-        {
-          id: 'biopunk-idle',
-          title: 'Biopunk Idle (Rádio Esperança 3D)',
-          subtitle: 'Narrativa Ambiental, UI Analógica & Ambientação Sonora',
-          badge: 'World Building • Sensory UX',
-          image: 'assets/biopunk-preview.svg',
-          resumo: 'Design de jogo incremental com forte identidade sensorial biopunk, unindo estética analógica de rádio clandestina e gestão de recursos distópicos.',
-          desafio: 'Jogos do gênero idle frequentemente carecem de alma e atmosfera, resumindo-se a números subindo em tabelas.',
-          abordagem: 'Construção de uma interface tátil que simula sintonizadores de rádio valvulados, frequências de áudio com ruído analógico e representação visual de tanques biológicos em planos tridimensionais.',
-          resultado: 'Experiência sensorial imersiva com forte apego emocional ao mundo do jogo e retenção duradoura.',
-          techs: ['Tactile UI', 'World Building', 'Soundscape Design', 'Identidade Visual'],
-          githubUrl: null,
-          vercelUrl: 'https://biopunk-idle.vercel.app',
-          embedUrl: null
-        },
-        {
-          id: 'pizzarun',
-          title: 'PizzaRun 2.0',
-          subtitle: 'UI Arcade Responsiva & Dashboards Analíticos de Corrida',
-          badge: 'Fast-Paced UI • Analytics',
-          image: 'assets/pizzarun-preview.svg',
-          resumo: 'Aplicação web gamificada que combina corrida contra o tempo com telas analíticas pós-jogo de alta legibilidade.',
-          desafio: 'Transmitir senso de urgência sem poluir a visão do usuário durante a corrida.',
-          abordagem: 'Tipografia esportiva de alta escala, cronômetros de alto contraste e layout pós-jogo que resume métricas de entrega em gráficos limpos.',
-          resultado: 'Experiência divertida, ágil e visualmente polida com transições responsivas.',
-          techs: ['Sports UI', 'Performance Telemetry', 'Mobile-First Design'],
-          githubUrl: null,
-          vercelUrl: 'https://pizzarun2.vercel.app',
-          embedUrl: null
-        },
-        {
-          id: 'bio-horde',
-          title: 'Bio Horde 98',
-          subtitle: 'Design de Nostalgia & Pixel Art dos Anos 90',
-          badge: 'Retro Aesthetics • Arcade UX',
-          image: 'assets/bio-horde-preview.svg',
-          resumo: 'Estudo e homenagem ao design de jogos de ação dos anos 90, aplicando restrições cromáticas deliberadas para criar nostalgia autêntica.',
-          desafio: 'Recriar a sensação tátil de jogos arcade antigos em navegadores modernos sem parecer genérico.',
-          abordagem: 'Paleta restrita de cores, contrastes de alta saturação e tipografia monospaçada estilo CRT, evocando telas de fliperama clássicas.',
-          resultado: 'Design nostálgico com apelo visual imediato e gameplay direto.',
-          techs: ['Retro UI', 'Color Palette Constraints', 'Pixel Aesthetics'],
-          githubUrl: null,
-          vercelUrl: 'https://bio-horde-98.vercel.app',
-          embedUrl: 'games/bio-horde/index.html'
-        }
-      ]
-    };
+    // Catálogo unificado com metadados para Home e Projeto Expandido
+    const projectsData = [
+      {
+        id: 'fibrocare',
+        title: 'FibroCare (FibroTracker)',
+        subtitle: 'HealthTech • Mapa Anatômico de Dor & Predição de Crises',
+        type: 'produto',
+        badge: 'HealthTech UX',
+        image: 'assets/fibrocare-preview.svg',
+        descricaoLinha: 'Aplicativo clínico para pacientes com Fibromialgia. Mapa anatômico interativo dos 18 tender points do ACR e predição de crises em 24h–48h para reduzir a ansiedade de antecipação.',
+        desafio: 'Pacientes com dores crônicas relatam grande dificuldade em expressar a localização, intensidade e evolução da dor durante consultas médicas rápidas. Sem um histórico objetivo e estruturado, os reumatologistas enfrentam barreiras para ajustar medicamentos, gerando frustração contínua e subdiagnóstico de fatores desencadeantes.',
+        abordagem: 'Concepção de uma interface mobile-first com baixa carga cognitiva e dark mode calmante. Mapeamento interativo dos 18 pontos anatômicos do ACR (American College of Rheumatology) com toques rápidos, associado a um algoritmo de correlação que analisa sono e clima para projetar a probabilidade de crise em 24h a 48h.',
+        resultado: 'Redução significativa do tempo de relato em consultório médico, maior adesão diária aos registros de sintomas e empoderamento do paciente, que passa a ter previsibilidade sobre suas crises com relatórios exportáveis.',
+        techs: ['Product Design', 'UI/UX', 'HealthTech UX', 'Design System', 'Acessibilidade WCAG'],
+        githubUrl: 'https://github.com/nlldesign/Fibrotracker',
+        vercelUrl: null,
+        embedUrl: null
+      },
+      {
+        id: 'habit-rpg',
+        title: 'Habit RPG Tracker',
+        subtitle: 'Behavioral UX • Gamificação e Loops de Consistência Pessoal',
+        type: 'produto',
+        badge: 'Behavioral Design',
+        image: 'assets/habit-rpg-preview.svg',
+        descricaoLinha: 'Design de produto comportamental que converte rotinas diárias e finanças em uma jornada de RPG tangível com economia de recompensas reais.',
+        desafio: 'Mais de 80% dos usuários de aplicativos tradicionais de hábitos abandonam a ferramenta em menos de duas semanas. A falta de estímulos visuais imediatos e a estrutura árida em forma de listas de afazeres desmotivam a consistência a longo prazo.',
+        abordagem: 'Aplicação dos princípios do Hook Model e design comportamental: a saúde da consistência é representada por uma barra de HP visível, as vitórias diárias geram XP com micro-animações táteis e as moedas de ouro (GP) acumuladas desbloqueiam recompensas reais cadastradas pelo próprio usuário.',
+        resultado: 'Aumento expressivo na retenção da rotina diária e redução do atrito psicológico na gestão de tarefas e controle financeiro integrado.',
+        techs: ['Behavioral UX', 'Gamification Design', 'Micro-interações', 'Economia de Produto'],
+        githubUrl: null,
+        vercelUrl: null,
+        embedUrl: null
+      },
+      {
+        id: 'mapleads',
+        title: 'MapLeads',
+        subtitle: 'B2B SaaS • Workflow UX & Prevenção Ativa de Erros',
+        type: 'produto',
+        badge: 'B2B Workflow',
+        image: 'assets/mapleads-preview.svg',
+        descricaoLinha: 'Interface de prospecção comercial de alta densidade no Google Maps com busca em lote por nichos e bloqueio anti-duplicidade transparente.',
+        desafio: 'Operações de prospecção outbound gastam horas minerando dados de empresas em mapas de forma manual. Ferramentas existentes são excessivamente técnicas, confusas e frequentemente geram cadastros repetidos que queimam a reputação do domínio de vendas.',
+        abordagem: 'Desenvolvimento de uma interface operacional guiada em 3 etapas simples (nicho, região e validação). Visualização em radar que exibe o progresso em tempo real e tabela inteligente com badges visuais de status (WhatsApp verificado, sem duplicata) e sanitização automática de telefones.',
+        resultado: 'Extração e qualificação de mais de 1.400 empresas por hora com zero contatos duplicados, dispensando qualquer treinamento prévio para a equipe de vendas.',
+        techs: ['B2B SaaS UX', 'Data Density Design', 'Error Prevention', 'Dashboard UX'],
+        githubUrl: 'https://github.com/nlldesign/Mapleads',
+        vercelUrl: 'https://mapleads-psi.vercel.app',
+        embedUrl: null
+      },
+      {
+        id: 'pepe-oracle',
+        title: 'Pepe Design Oracle',
+        subtitle: 'Human-AI Interaction • Co-Piloto de Direção de Arte',
+        type: 'produto',
+        badge: 'AI Product Design',
+        image: 'assets/pepe-oracle-preview.svg',
+        descricaoLinha: 'Interface de co-criação estética para designers e criativos orientando a inteligência artificial generativa na criação de paletas e diretrizes visuais.',
+        desafio: 'Interagir com modelos avançados de IA através de caixas de chat de texto comum é contra-intuitivo para designers visuais, resultando em respostas conceituais vagas e falta de controle sobre cores e proporções.',
+        abordagem: 'Criação de affordances visuais de entrada (sliders de contraste, cartões de intenção de humor e seletor de épocas estilísticas) que estruturam o prompt nos bastidores e orientam a Google Gemini API a devolver paletas harmônicas e regras de composição aplicadas.',
+        resultado: 'Aceleração de até 3 vezes na fase inicial de ideação e benchmarking estético para novos produtos digitais e interfaces de marca.',
+        techs: ['Human-AI Interaction', 'Prompt Design', 'Design Generativo', 'Creative Tooling'],
+        githubUrl: null,
+        vercelUrl: null,
+        embedUrl: null
+      },
+      {
+        id: 'jobhunter-ai',
+        title: 'JobHunter AI',
+        subtitle: 'Career Operations • Análise de Vagas e Fórmula Google XYZ',
+        type: 'produto',
+        badge: 'Information Architecture',
+        image: 'assets/jobhunter-preview.svg',
+        descricaoLinha: 'Plataforma para profissionais técnicos visualizarem gaps de competência frente a vagas do mercado e reescreverem suas realizações com foco em métricas de impacto.',
+        desafio: 'Candidatos altamente qualificados são eliminados precocemente por softwares de triagem ou recrutadores devido a currículos descritivos que não evidenciam métricas de impacto claras.',
+        abordagem: 'Design de um dashboard de compatibilidade com visualização de requisitos atendidos e sugestão assistida de reescrita na fórmula Google XYZ ("Realizou X, medido por Y, através de Z").',
+        resultado: 'Elevação de 4.2x na conversão de currículos para entrevistas técnicas através de clareza visual e adequação precisa aos requisitos de mercado.',
+        techs: ['Information Architecture', 'User Guidance', 'Clareza Cognitiva', 'Career Ops'],
+        githubUrl: null,
+        vercelUrl: null,
+        embedUrl: null
+      },
+      {
+        id: 'token-tracker',
+        title: 'Token Tracker (Antigravity Plugin)',
+        subtitle: 'Developer Experience (DX) • Telemetria e Monitoramento de Custos',
+        type: 'produto',
+        badge: 'DX Design',
+        image: 'assets/token-tracker-preview.svg',
+        descricaoLinha: 'Design de painel lateral (sidecar) para desenvolvedores acompanharem consumo de tokens, custos de API e limite de contexto sem quebrar o fluxo de foco.',
+        desafio: 'Desenvolvedores que usam IA perdem a visibilidade dos custos cumulativos e sofrem interrupções abruptas por esgotamento súbito da janela de contexto durante sessões de codificação.',
+        abordagem: 'Construção de medidores circulares com zonas de risco intuitivas por cor, dados essenciais condensados em uma linha e alertas visuais periféricos e não-intrusivos.',
+        resultado: 'Previsibilidade orçamentária total e eliminação de quebras no raciocínio do desenvolvedor durante sessões longas de engenharia.',
+        techs: ['Developer Experience (DX)', 'Data Visualization', 'Minimal UI', 'Dark Mode'],
+        githubUrl: null,
+        vercelUrl: null,
+        embedUrl: null
+      },
+      {
+        id: 'corpo-seco',
+        title: 'Corpo Seco: A Maldição do Vale',
+        subtitle: 'Game UI/UX • Atmosfera de Terror 3D & UI Diegética',
+        type: 'jogos',
+        badge: '3D & Diegetic UI',
+        image: 'assets/corpo-seco-hero.png',
+        descricaoLinha: 'Jogo 3D de terror e suspense na mata. Foco em UI diegética sem barras flutuantes na tela: a lanterna, a névoa e o som espacial comunicam o perigo ao jogador.',
+        desafio: 'Manter o jogador informado sobre seu estado e recursos em um jogo 3D tenso sem quebrar a imersão com barras de vida, ícones flutuantes ou poluição de tela.',
+        abordagem: 'Integração de todos os indicadores no próprio mundo: o feixe da lanterna indica a energia restante, aberrações cromáticas e áudio binaural avisam sobre a proximidade da criatura, e o caminho seguro é revelado por contraste de iluminação da mata.',
+        resultado: 'Experiência imersiva rodando a 60 FPS diretamente no navegador, alcançando alto impacto emocional através de um design limpo e puramente sensorial.',
+        techs: ['Game UI/UX', 'Diegetic UI', 'Three.js 3D', 'Psicologia das Cores', 'Sound Design'],
+        githubUrl: null,
+        vercelUrl: 'https://corpo-seco.vercel.app',
+        embedUrl: 'games/corpo-seco/index.html'
+      },
+      {
+        id: 'undertale-3d',
+        title: 'Undertale 3D: Ruínas & Arena',
+        subtitle: 'Spatial UX • Transposição de Câmera 2D para Espaço 3D',
+        type: 'jogos',
+        badge: 'Spatial UI 3D',
+        image: 'assets/undertale-preview.svg',
+        descricaoLinha: 'Adaptação tridimensional interativa do universo de Undertale, transpondo mecânicas clássicas de combate e exploração de ruínas com física de colisão.',
+        desafio: 'Preservar a precisão geométrica do clássico combate "bullet hell" ao transferir a câmera de cima (top-down 2D) para uma perspectiva 3D em tempo real.',
+        abordagem: 'Design de arena suspensa com cálculo angular de câmera que mantém a leitura de projéteis clara, com iluminação focal na alma vermelha e feedback de dano imediato.',
+        resultado: 'Navegação fluida e combate ágil que respeita o design original com perspectiva espacial inovadora.',
+        techs: ['Spatial UI', 'Level Design 3D', 'Game Feel', 'Feedback Visual'],
+        githubUrl: null,
+        vercelUrl: 'https://undertale-3d.vercel.app',
+        embedUrl: 'games/undertale-3d/index.html'
+      },
+      {
+        id: 'swam-invasion',
+        title: 'Swam Invasion (Colony Survivor)',
+        subtitle: 'Visual Hierarchy • Clareza Visual sob Alta Densidade',
+        type: 'jogos',
+        badge: 'Canvas Game Feel',
+        image: 'assets/swam-invasion-preview.svg',
+        descricaoLinha: 'Jogo arcade frenético com mais de 1.000 entidades simultâneas em tela. Foco de design em contraste visual e leitura rápida de decisões e upgrades.',
+        desafio: 'Garantir que o jogador tome decisões estratégicas instantâneas em meio a centenas de inimigos sem sentir que a tela está ilegível ou injusta.',
+        abordagem: 'Hierarquia visual estrita por valor de cor e iluminação: o jogador tem aura de alto contraste ciano, projéteis possuem brilho luminescente e inimigos seguem paletas que não ofuscam caminhos de fuga.',
+        resultado: 'Jogabilidade intensa com 60 FPS constantes e legibilidade impecável mesmo nos estágios finais de densidade máxima.',
+        techs: ['Visual Hierarchy', 'Game Feel', 'Canvas 2D', 'Reward Loops'],
+        githubUrl: 'https://github.com/nlldesign/Swam-invasion',
+        vercelUrl: 'https://swam-invasion.vercel.app',
+        embedUrl: 'games/swam-invasion/index.html'
+      },
+      {
+        id: 'biopunk-idle',
+        title: 'Biopunk Idle (Rádio Esperança 3D)',
+        subtitle: 'Sensory UX • Narrativa Ambiental e UI Analógica Tátil',
+        type: 'jogos',
+        badge: 'Tactile UI',
+        image: 'assets/biopunk-preview.svg',
+        descricaoLinha: 'Jogo incremental temático com rádio pirata atmosférica, estética biopunk e sintonizadores analógicos de áudio e tanques biológicos.',
+        desafio: 'Evitar que um jogo idle se torne uma planilha fria e criar vínculo emocional através de ambientação estética marcante.',
+        abordagem: 'Criação de botões e knobs analógicos táteis, sons de estática e frequências de rádio via Web Audio API e representação volumétrica de recursos em tanques 3D.',
+        resultado: 'Retenção duradoura impulsionada pela atmosfera singular e pela sensação prazerosa de operar uma rádio clandestina.',
+        techs: ['Tactile UI', 'World Building', 'Soundscape Design', 'Identidade Visual'],
+        githubUrl: null,
+        vercelUrl: 'https://biopunk-idle.vercel.app',
+        embedUrl: null
+      },
+      {
+        id: 'pizzarun',
+        title: 'PizzaRun 2.0',
+        subtitle: 'Fast-Paced UI • Cronômetros e Telemetria Esportiva',
+        type: 'jogos',
+        badge: 'Sports UI',
+        image: 'assets/pizzarun-preview.svg',
+        descricaoLinha: 'Aplicação web ágil combinando entrega contra o tempo e painéis analíticos pós-corrida com alta legibilidade.',
+        desafio: 'Comunicar urgência de tempo sem sobrecarregar a visão periférica do usuário durante o trajeto.',
+        abordagem: 'Design de contadores esportivos em tipografia de alto impacto e telas de resultado que resumem eficiência em frações de segundo.',
+        resultado: 'Feedback imediato e alta satisfação visual em partidas rápidas.',
+        techs: ['Sports UI', 'Performance Telemetry', 'Mobile-First Design'],
+        githubUrl: null,
+        vercelUrl: 'https://pizzarun2.vercel.app',
+        embedUrl: null
+      },
+      {
+        id: 'bio-horde',
+        title: 'Bio Horde 98',
+        subtitle: 'Retro Aesthetics • Restrição de Paleta e Nostalgia Arcade',
+        type: 'jogos',
+        badge: 'Retro UX',
+        image: 'assets/bio-horde-preview.svg',
+        descricaoLinha: 'Ação arcade retrô anos 90 com paleta de cores restrita e mecânicas de sobrevivência contra hordas em ondas.',
+        desafio: 'Recriar a sensação visual autêntica dos fliperamas dos anos 90 em telas de alta resolução contemporâneas.',
+        abordagem: 'Uso de paleta de cores limitada deliberada, contrastes saturados e tipografia monospaçada, evocando a textura de tubos CRT.',
+        resultado: 'Design nostálgico com apelo direto para apreciadores de clássicos arcade.',
+        techs: ['Retro UI', 'Color Constraints', 'Pixel Aesthetics'],
+        githubUrl: null,
+        vercelUrl: 'https://bio-horde-98.vercel.app',
+        embedUrl: 'games/bio-horde/index.html'
+      }
+    ];
 
-    let activeTab = 'projetos';
+    let currentFilter = 'todos';
 
-    function switchTab(tab) {
-      activeTab = tab;
+    function filterList(category) {
+      currentFilter = category;
 
-      const navP = document.getElementById('navTabProjetos');
-      const navJ = document.getElementById('navTabJogos');
-      const heroP = document.getElementById('heroTabProjetos');
-      const heroJ = document.getElementById('heroTabJogos');
+      const fTodos = document.getElementById('filterTodos');
+      const fProd = document.getElementById('filterProduto');
+      const fJogos = document.getElementById('filterJogos');
 
-      if (tab === 'projetos') {
-        navP.className = 'px-5 py-2 rounded-xl text-white bg-brand-600 transition-all flex items-center gap-2';
-        navJ.className = 'px-5 py-2 rounded-xl text-slate-400 hover:text-white transition-all flex items-center gap-2';
-        heroP.className = 'flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2 tab-active';
-        heroJ.className = 'flex-1 py-3 px-4 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center justify-center gap-2';
-        
-        document.getElementById('tabBadge').innerText = 'Aba Ativa: Design de Produto';
-        document.getElementById('tabTitle').innerText = 'Estudos de Caso de Produto (SaaS, HealthTech & IA)';
-        document.getElementById('tabSubtitle').innerText = 'Metodologia: 1. Desafio de Produto • 2. Abordagem de Design • 3. Impacto & Métricas';
+      [fTodos, fProd, fJogos].forEach(b => {
+        b.className = 'px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all';
+      });
+
+      if (category === 'todos') {
+        fTodos.className = 'px-4 py-2 rounded-lg text-white tab-pill-active transition-all';
+      } else if (category === 'produto') {
+        fProd.className = 'px-4 py-2 rounded-lg text-white tab-pill-active transition-all';
       } else {
-        navJ.className = 'px-5 py-2 rounded-xl text-white bg-brand-600 transition-all flex items-center gap-2';
-        navP.className = 'px-5 py-2 rounded-xl text-slate-400 hover:text-white transition-all flex items-center gap-2';
-        heroJ.className = 'flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2 tab-active';
-        heroP.className = 'flex-1 py-3 px-4 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center justify-center gap-2';
-
-        document.getElementById('tabBadge').innerText = 'Aba Ativa: Game Design & Experiências 3D';
-        document.getElementById('tabTitle').innerText = 'Game UI/UX, Direção de Arte & Imersão 3D (Com Embed)';
-        document.getElementById('tabSubtitle').innerText = 'Jogue direto pelo navegador via Embed ou acesse o deploy oficial na Vercel';
+        fJogos.className = 'px-4 py-2 rounded-lg text-white tab-pill-active transition-all';
       }
 
-      renderCards();
+      renderProjectsList();
     }
 
-    function renderCards() {
-      const container = document.getElementById('cardsGrid');
-      const items = portfolioData[activeTab];
-      const isGames = activeTab === 'jogos';
+    // Renderiza a lista de projetos em formato de linhas conforme o Sketch 1
+    // [descrição do projeto ............................ Botão para acessar]
+    function renderProjectsList() {
+      const container = document.getElementById('projectsListContainer');
+      const filtered = projectsData.filter(p => {
+        if (currentFilter === 'todos') return true;
+        return p.type === currentFilter;
+      });
 
-      container.innerHTML = items.map(item => `
-        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+      container.innerHTML = filtered.map(p => `
+        <div class="sketch-row p-5 sm:p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 group">
           
-          <div>
-            <!-- Image Preview Box -->
-            <div class="relative w-full aspect-video bg-dark-900 overflow-hidden border-b border-white/5 cursor-pointer" onclick="openModal('${item.id}')">
-              <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-              <div class="absolute inset-0 bg-gradient-to-t from-dark-950/90 via-transparent to-transparent"></div>
-              
-              <div class="absolute top-4 left-4 flex items-center gap-2">
-                <span class="text-xs font-mono font-medium px-3 py-1 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-brand-300">
-                  ${item.badge}
-                </span>
-                ${isGames ? `
-                  <span class="text-xs font-mono font-medium px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 flex items-center gap-1">
-                    <i data-lucide="play" class="w-3 h-3 fill-current"></i>
-                    Embed Jogável
-                  </span>
-                ` : ''}
-              </div>
-
-              <!-- Top right actions -->
-              <div class="absolute top-4 right-4 flex items-center gap-2">
-                ${item.vercelUrl ? `
-                  <a href="${item.vercelUrl}" target="_blank" rel="noopener noreferrer" 
-                     class="px-2.5 py-1 rounded-lg bg-dark-950/80 backdrop-blur-md border border-white/10 text-white text-xs font-mono flex items-center gap-1.5 hover:bg-white/20 transition-all"
-                     title="Abrir na Vercel" onclick="event.stopPropagation()">
-                    <span class="font-bold">▲</span>
-                    <span>Vercel</span>
-                  </a>
-                ` : ''}
-
-                ${item.githubUrl ? `
-                  <a href="${item.githubUrl}" target="_blank" rel="noopener noreferrer" 
-                     class="w-8 h-8 rounded-lg bg-dark-950/80 backdrop-blur-md border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors"
-                     title="Ver no GitHub" onclick="event.stopPropagation()">
-                    <i data-lucide="github" class="w-4 h-4"></i>
-                  </a>
-                ` : ''}
-              </div>
+          <div class="flex-1 pr-0 md:pr-6">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-brand-300">
+                ${p.badge}
+              </span>
+              <span class="text-xs text-slate-500 font-mono">
+                ${p.type === 'produto' ? 'Design de Produto' : 'Jogo & 3D'}
+              </span>
             </div>
 
-            <!-- Content Area -->
-            <div class="p-6 sm:p-8">
-              <div class="mb-5">
-                <h3 class="text-2xl font-display font-bold text-white group-hover:text-brand-300 transition-colors mb-1 cursor-pointer" onclick="openModal('${item.id}')">
-                  ${item.title}
-                </h3>
-                <p class="text-sm text-slate-400 font-medium">${item.subtitle}</p>
-              </div>
+            <h3 class="text-lg sm:text-xl font-display font-bold text-white group-hover:text-brand-300 transition-colors mb-1 cursor-pointer" onclick="openProjectDetail('${p.id}')">
+              ${p.title}
+            </h3>
 
-              <!-- Executive Summary -->
-              <p class="text-sm text-slate-300 leading-relaxed mb-6 bg-white/[0.02] p-4 rounded-xl border border-white/5">
-                <strong class="text-white block font-display text-xs uppercase tracking-wider mb-1">Visão Geral de Produto:</strong>
-                ${item.resumo}
-              </p>
-
-              <!-- 3-Pillar Case Study Structure: Desafio, Abordagem, Resultado -->
-              <div class="space-y-4 mb-6">
-                <!-- 1. Desafio -->
-                <div class="flex items-start gap-3">
-                  <div class="w-6 h-6 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center text-xs case-number shrink-0 mt-0.5">
-                    1
-                  </div>
-                  <div>
-                    <span class="text-xs font-display font-bold text-slate-200 block uppercase tracking-wider">O Desafio do Usuário &amp; Negócio</span>
-                    <p class="text-xs text-slate-400 leading-relaxed">${item.desafio}</p>
-                  </div>
-                </div>
-
-                <!-- 2. Abordagem -->
-                <div class="flex items-start gap-3">
-                  <div class="w-6 h-6 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center text-xs case-number shrink-0 mt-0.5">
-                    2
-                  </div>
-                  <div>
-                    <span class="text-xs font-display font-bold text-slate-200 block uppercase tracking-wider">A Abordagem de Design &amp; UX</span>
-                    <p class="text-xs text-slate-400 leading-relaxed">${item.abordagem}</p>
-                  </div>
-                </div>
-
-                <!-- 3. Resultado -->
-                <div class="flex items-start gap-3">
-                  <div class="w-6 h-6 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs case-number shrink-0 mt-0.5">
-                    3
-                  </div>
-                  <div>
-                    <span class="text-xs font-display font-bold text-slate-200 block uppercase tracking-wider">Impacto &amp; Métricas de Usabilidade</span>
-                    <p class="text-xs text-slate-400 leading-relaxed">${item.resultado}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              ${p.descricaoLinha}
+            </p>
           </div>
 
-          <!-- Card Footer: Tags & Buttons -->
-          <div class="px-6 sm:px-8 pb-6 pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-wrap gap-1.5">
-              ${item.techs.slice(0, 3).map(t => `
-                <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-slate-300">
-                  ${t}
-                </span>
-              `).join('')}
-            </div>
+          <div class="shrink-0 flex items-center gap-2 pt-2 md:pt-0 border-t md:border-t-0 border-white/5">
+            ${p.vercelUrl ? `
+              <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
+                 class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-mono flex items-center gap-1.5 transition-all"
+                 title="Abrir na Vercel">
+                <span class="font-bold">▲</span>
+                <span class="hidden sm:inline">Vercel</span>
+              </a>
+            ` : ''}
 
-            <div class="flex items-center gap-2">
-              ${isGames ? `
-                <button onclick="openModal('${item.id}', true)" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-cyan-600/30 transition-all">
-                  <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
-                  <span>Jogar Embed</span>
-                </button>
-              ` : ''}
-
-              <button onclick="openModal('${item.id}')" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-200 hover:text-white flex items-center gap-1.5 transition-all">
-                <span>Ver Case Completo</span>
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </button>
-            </div>
+            <button onclick="openProjectDetail('${p.id}')" 
+                    class="px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold flex items-center gap-2 shadow-lg shadow-brand-600/25 transition-all">
+              <span>${p.type === 'jogos' ? 'Jogar & Ver Case' : 'Acessar Case'}</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
           </div>
 
-        </article>
+        </div>
       `).join('');
 
       lucide.createIcons();
     }
 
-    // Modal com Detalhes de Design e Embed para Jogos
-    function openModal(id, autoPlay = false) {
-      const allItems = [...portfolioData.projetos, ...portfolioData.jogos];
-      const item = allItems.find(p => p.id === id);
-      if (!item) return;
+    // Navegação para a Tela de Detalhe Expandido (Sketch 2)
+    function openProjectDetail(id) {
+      const p = projectsData.find(item => item.id === id);
+      if (!p) return;
 
-      const isGame = portfolioData.jogos.some(g => g.id === id);
-      const modalBody = document.getElementById('modalBody');
+      // Preenche os dados do cabeçalho do detalhe
+      document.getElementById('detailBadge').innerText = p.badge;
+      document.getElementById('detailTitle').innerText = p.title;
+      document.getElementById('detailSubtitle').innerText = p.subtitle;
 
-      let embedSection = '';
-      if (isGame) {
-        const playableSource = item.embedUrl || item.vercelUrl;
-        embedSection = `
-          <div class="mb-8">
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-xs font-display font-bold uppercase tracking-wider text-white">Player / Embed Interativo</span>
-              </div>
-              <div class="flex items-center gap-2">
-                ${item.vercelUrl ? `
-                  <a href="${item.vercelUrl}" target="_blank" rel="noopener noreferrer" 
-                     class="px-3 py-1.5 rounded-lg bg-dark-950 border border-white/10 text-white hover:text-cyan-400 text-xs font-mono flex items-center gap-1.5 transition-colors">
-                    <span class="font-bold">▲</span>
-                    <span>Jogar na Vercel</span>
-                    <i data-lucide="external-link" class="w-3 h-3"></i>
-                  </a>
-                ` : ''}
-              </div>
+      // Preenche os 3 Blocos Estruturados (Desafio, Abordagem, Resultado)
+      document.getElementById('detailDesafioText').innerText = p.desafio;
+      document.getElementById('detailAbordagemText').innerText = p.abordagem;
+      document.getElementById('detailResultadoText').innerText = p.resultado;
+
+      // Preenche as tags
+      document.getElementById('detailTechsList').innerHTML = p.techs.map(t => `
+        <span class="text-xs font-mono px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">
+          ${t}
+        </span>
+      `).join('');
+
+      // Top Links (Vercel e GitHub)
+      const topLinks = document.getElementById('detailTopLinks');
+      let linksHtml = '';
+      if (p.vercelUrl) {
+        linksHtml += `
+          <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
+             class="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-mono flex items-center gap-1.5 transition-colors">
+            <span class="font-bold">▲</span>
+            <span>Abrir na Vercel</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+        `;
+      }
+      if (p.githubUrl) {
+        linksHtml += `
+          <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" 
+             class="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-medium flex items-center gap-1.5 transition-colors">
+            <i data-lucide="github" class="w-3.5 h-3.5"></i>
+            <span>GitHub</span>
+          </a>
+        `;
+      }
+      topLinks.innerHTML = linksHtml;
+
+      // Preenche o Media Container no topo do detalhe
+      const mediaContainer = document.getElementById('detailMediaContainer');
+      const isGame = p.type === 'jogos';
+      const playableSource = p.embedUrl || p.vercelUrl;
+
+      if (isGame && playableSource) {
+        mediaContainer.innerHTML = `
+          <div class="p-4 bg-dark-950 border-b border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="text-xs font-mono font-bold uppercase text-slate-300">Player Interativo no Navegador</span>
             </div>
-
-            <!-- Game Viewport Frame -->
-            <div id="gameViewportContainer" class="game-frame relative aspect-video w-full flex items-center justify-center">
-              ${playableSource ? `
-                <div id="placeholderPlay" class="absolute inset-0 flex flex-col items-center justify-center bg-dark-900/90 p-6 text-center z-10 ${autoPlay ? 'hidden' : ''}">
-                  <img src="${item.image}" alt="Preview" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" />
-                  <div class="relative z-10">
-                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 transition-transform" onclick="startPlay('${playableSource}')">
-                      <i data-lucide="play" class="w-8 h-8 fill-current ml-1"></i>
-                    </div>
-                    <h4 class="text-lg font-display font-bold text-white mb-1">Carregar Jogo no Navegador</h4>
-                    <p class="text-xs text-slate-400 max-w-sm mb-4">Clique para iniciar o embed interativo com controles diretos na tela.</p>
-                    <button onclick="startPlay('${playableSource}')" class="px-5 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-lg shadow-cyan-600/30">
-                      Iniciar Partida
-                    </button>
-                  </div>
+            <button onclick="toggleFullscreenEmbed()" class="text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1">
+              <i data-lucide="maximize" class="w-3.5 h-3.5"></i>
+              <span>Tela Cheia</span>
+            </button>
+          </div>
+          
+          <div id="embedViewport" class="relative aspect-video w-full bg-black flex items-center justify-center">
+            <div id="embedCover" class="absolute inset-0 flex flex-col items-center justify-center bg-dark-900/95 p-6 text-center z-10">
+              <img src="${p.image}" alt="Preview" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" />
+              <div class="relative z-10">
+                <div class="w-16 h-16 rounded-2xl bg-brand-500/20 border border-brand-500/40 text-brand-400 flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 transition-transform" onclick="runGameEmbed('${playableSource}')">
+                  <i data-lucide="play" class="w-8 h-8 fill-current ml-1"></i>
                 </div>
-
-                <iframe id="gameIframe" src="${autoPlay ? playableSource : 'about:blank'}" class="w-full h-full border-0" allow="fullscreen; autoplay; gamepad"></iframe>
-              ` : `
-                <div class="p-8 text-center text-slate-400">
-                  <i data-lucide="gamepad" class="w-12 h-12 mx-auto mb-3 opacity-40"></i>
-                  <p class="text-sm font-medium text-white mb-1">Deploy na Vercel em Sincronização</p>
-                  <p class="text-xs">Este protótipo está sendo preparado para o deploy interativo online.</p>
-                </div>
-              `}
+                <h4 class="text-xl font-display font-bold text-white mb-1">Carregar Jogo Interativo</h4>
+                <p class="text-xs text-slate-400 max-w-sm mb-4">Clique para rodar o build no navegador com controles diretos de teclado e mouse.</p>
+                <button onclick="runGameEmbed('${playableSource}')" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-lg shadow-brand-600/30">
+                  Iniciar Partida
+                </button>
+              </div>
             </div>
 
-            <div class="flex items-center justify-between text-[11px] font-mono text-slate-500 mt-2">
-              <span>Use o mouse e teclado para interagir com o jogo.</span>
-              <button onclick="toggleFullscreen()" class="hover:text-slate-300 flex items-center gap-1">
-                <i data-lucide="maximize" class="w-3.5 h-3.5"></i>
-                <span>Tela Cheia</span>
-              </button>
-            </div>
+            <iframe id="gameIframe" src="about:blank" class="w-full h-full border-0" allow="fullscreen; autoplay; gamepad"></iframe>
+          </div>
+        `;
+      } else {
+        mediaContainer.innerHTML = `
+          <div class="relative aspect-video w-full bg-dark-950 overflow-hidden">
+            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover" />
           </div>
         `;
       }
 
-      modalBody.innerHTML = `
-        <div class="mb-4">
-          
-          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-            <span class="text-xs font-mono font-medium px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300">
-              ${item.badge}
-            </span>
+      // Alterna as visualizações
+      document.getElementById('homeView').classList.add('hidden');
+      document.getElementById('projectDetailView').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            <div class="flex items-center gap-2">
-              ${item.vercelUrl ? `
-                <a href="${item.vercelUrl}" target="_blank" rel="noopener noreferrer" 
-                   class="px-3.5 py-1.5 rounded-xl bg-dark-950 border border-white/10 text-white hover:text-cyan-400 text-xs font-mono flex items-center gap-1.5 transition-colors">
-                  <span class="font-bold">▲</span>
-                  <span>Abrir Link Vercel</span>
-                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                </a>
-              ` : ''}
-
-              ${item.githubUrl ? `
-                <a href="${item.githubUrl}" target="_blank" rel="noopener noreferrer" 
-                   class="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-medium flex items-center gap-1.5 transition-colors">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                  <span>GitHub</span>
-                </a>
-              ` : ''}
-            </div>
-          </div>
-
-          <h2 class="text-3xl font-display font-bold text-white mb-1">${item.title}</h2>
-          <p class="text-slate-400 text-sm mb-6">${item.subtitle}</p>
-
-          <!-- Embed para jogos -->
-          ${embedSection}
-
-          <!-- Resumo -->
-          <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/10 mb-6">
-            <span class="text-xs font-display font-bold uppercase tracking-wider text-white block mb-2">Visão Geral de Produto</span>
-            <p class="text-sm text-slate-300 leading-relaxed">${item.resumo}</p>
-          </div>
-
-          <!-- Deep Dive 1, 2, 3 -->
-          <div class="space-y-4 mb-8">
-            <div class="p-4 rounded-xl bg-red-500/5 border border-red-500/15">
-              <div class="flex items-center gap-2 mb-1.5">
-                <span class="w-5 h-5 rounded-md bg-red-500/20 text-red-400 font-display font-bold text-xs flex items-center justify-center">1</span>
-                <span class="text-sm font-display font-bold text-white uppercase tracking-wider">O Desafio do Usuário &amp; Negócio</span>
-              </div>
-              <p class="text-sm text-slate-300 leading-relaxed">${item.desafio}</p>
-            </div>
-
-            <div class="p-4 rounded-xl bg-brand-500/5 border border-brand-500/15">
-              <div class="flex items-center gap-2 mb-1.5">
-                <span class="w-5 h-5 rounded-md bg-brand-500/20 text-brand-400 font-display font-bold text-xs flex items-center justify-center">2</span>
-                <span class="text-sm font-display font-bold text-white uppercase tracking-wider">A Abordagem de Design &amp; UX</span>
-              </div>
-              <p class="text-sm text-slate-300 leading-relaxed">${item.abordagem}</p>
-            </div>
-
-            <div class="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/15">
-              <div class="flex items-center gap-2 mb-1.5">
-                <span class="w-5 h-5 rounded-md bg-emerald-500/20 text-emerald-400 font-display font-bold text-xs flex items-center justify-center">3</span>
-                <span class="text-sm font-display font-bold text-white uppercase tracking-wider">Impacto &amp; Métricas de Usabilidade</span>
-              </div>
-              <p class="text-sm text-slate-300 leading-relaxed">${item.resultado}</p>
-            </div>
-          </div>
-
-          <div class="mb-4">
-            <span class="text-xs font-mono uppercase tracking-wider text-slate-400 block mb-2">Disciplinas &amp; Competências</span>
-            <div class="flex flex-wrap gap-2">
-              ${item.techs.map(t => `
-                <span class="text-xs font-mono px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-200">${t}</span>
-              `).join('')}
-            </div>
-          </div>
-        </div>
-      `;
-
-      const modal = document.getElementById('detailModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      // Atualiza URL hash para compartilhamento
+      window.location.hash = '/projeto/' + p.id;
       lucide.createIcons();
     }
 
-    window.startPlay = function(url) {
+    function runGameEmbed(url) {
       const iframe = document.getElementById('gameIframe');
-      const placeholder = document.getElementById('placeholderPlay');
-      if (iframe && placeholder) {
+      const cover = document.getElementById('embedCover');
+      if (iframe && cover) {
         iframe.src = url;
-        placeholder.classList.add('hidden');
+        cover.classList.add('hidden');
       }
-    };
+    }
 
-    window.toggleFullscreen = function() {
-      const container = document.getElementById('gameViewportContainer');
-      if (!container) return;
+    function toggleFullscreenEmbed() {
+      const viewport = document.getElementById('embedViewport');
+      if (!viewport) return;
       if (!document.fullscreenElement) {
-        container.requestFullscreen().catch(err => console.log(err));
+        viewport.requestFullscreen().catch(err => console.log(err));
       } else {
         document.exitFullscreen();
       }
-    };
-
-    function closeModal() {
-      const modal = document.getElementById('detailModal');
-      const iframe = document.getElementById('gameIframe');
-      if (iframe) iframe.src = 'about:blank';
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
     }
 
-    document.getElementById('detailModal').addEventListener('click', (e) => {
-      if (e.target === document.getElementById('detailModal')) closeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
+    // Volta para a View Home
+    function showHomeView() {
+      const iframe = document.getElementById('gameIframe');
+      if (iframe) iframe.src = 'about:blank'; // Pausa qualquer jogo ativo
+
+      document.getElementById('projectDetailView').classList.add('hidden');
+      document.getElementById('homeView').classList.remove('hidden');
+      window.location.hash = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    // Suporte ao botão voltar do navegador (Back button)
+    window.addEventListener('popstate', () => {
+      const hash = window.location.hash;
+      if (hash && hash.startsWith('#/projeto/')) {
+        const id = hash.replace('#/projeto/', '');
+        openProjectDetail(id);
+      } else {
+        showHomeView();
+      }
     });
 
-    // Início
-    renderCards();
+    // Inicialização
+    if (window.location.hash && window.location.hash.startsWith('#/projeto/')) {
+      const id = window.location.hash.replace('#/projeto/', '');
+      openProjectDetail(id);
+    } else {
+      renderProjectsList();
+    }
+
+    lucide.createIcons();
   </script>
 </body>
 </html>
