@@ -377,6 +377,11 @@
 
     </div>
 
+    <!-- 3. Link / Botão para Acessar o Projeto (Especial para Jogos e Projetos Online) -->
+    <div id="detailBottomActionContainer" class="mb-12">
+      <!-- Injetado dinamicamente via JS -->
+    </div>
+
     <!-- Tags e Botão Voltar no rodapé do detalhe -->
     <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div id="detailTechsList" class="flex flex-wrap gap-2">
@@ -766,6 +771,61 @@
         `;
       }
 
+      // Preenche o Bloco de Ação no Final (Destaque para Jogos com Link de Acesso)
+      const bottomAction = document.getElementById('detailBottomActionContainer');
+      if (isGame) {
+        bottomAction.innerHTML = `
+          <div class="sketch-row p-6 sm:p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 border border-brand-500/30 bg-gradient-to-r from-brand-900/30 via-dark-850 to-cyan-900/20 shadow-xl shadow-brand-950/50">
+            <div class="flex items-center gap-4 text-center md:text-left">
+              <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mx-auto md:mx-0 shadow-lg shadow-cyan-500/20">
+                <i data-lucide="gamepad-2" class="w-7 h-7"></i>
+              </div>
+              <div>
+                <span class="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 block mb-1">Link de Acesso ao Projeto</span>
+                <h4 class="text-xl font-display font-bold text-white">Pronto para jogar ${p.title}?</h4>
+                <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Acesse o deploy oficial na Vercel ou utilize o player interativo direto no topo.</p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0">
+              ${p.vercelUrl ? `
+                <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
+                   class="flex-1 md:flex-initial px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-600/35 transition-all">
+                  <span class="font-bold">▲</span>
+                  <span>Acessar Projeto na Vercel</span>
+                  <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+              ` : ''}
+
+              ${playableSource ? `
+                <button onclick="scrollToGameEmbed()" class="flex-1 md:flex-initial px-5 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
+                  <i data-lucide="play" class="w-4 h-4 text-cyan-400 fill-current"></i>
+                  <span>Jogar no Topo</span>
+                </button>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      } else if (p.vercelUrl) {
+        bottomAction.innerHTML = `
+          <div class="sketch-row p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 border border-white/10">
+            <div>
+              <span class="text-xs font-mono font-bold uppercase tracking-wider text-brand-400 block mb-1">Acessar Produto Online</span>
+              <h4 class="text-lg font-display font-bold text-white">Visualizar ${p.title} em Produção</h4>
+              <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Explore a versão online do produto publicada na nuvem.</p>
+            </div>
+            <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
+               class="px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-600/35 transition-all">
+              <span class="font-bold">▲</span>
+              <span>Acessar Projeto na Vercel</span>
+              <i data-lucide="external-link" class="w-4 h-4"></i>
+            </a>
+          </div>
+        `;
+      } else {
+        bottomAction.innerHTML = '';
+      }
+
       // Alterna as visualizações
       document.getElementById('homeView').classList.add('hidden');
       document.getElementById('projectDetailView').classList.remove('hidden');
@@ -794,6 +854,18 @@
         document.exitFullscreen();
       }
     }
+
+    window.scrollToGameEmbed = function() {
+      const media = document.getElementById('detailMediaContainer');
+      if (media) {
+        media.scrollIntoView({ behavior: 'smooth' });
+        const cover = document.getElementById('embedCover');
+        if (cover && !cover.classList.contains('hidden')) {
+          const btn = cover.querySelector('button');
+          if (btn) btn.click();
+        }
+      }
+    };
 
     // Volta para a View Home
     function showHomeView() {
