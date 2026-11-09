@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undertale 3D - Ruínas & Batalha Frenética</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <style>*{box-sizing:border-box;-webkit-user-select:none;user-select:none;margin:0;padding:0}body,html{color:#fff;background-color:#000;width:100%;height:100%;font-family:"Press Start 2P",monospace,sans-serif;overflow:hidden}#game-container{background:#000;width:100vw;height:100vh;position:relative;overflow:hidden}#battle-canvas{z-index:1;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges;display:block;position:absolute;top:0;left:0}.crt-overlay{pointer-events:none;z-index:5;background:radial-gradient(circle,#0000 65%,#000000bf 100%) 0 0/100% 100%,linear-gradient(#12101000 50%,#00000047 50%) 0 0/100% 4px;width:100%;height:100%;position:absolute;top:0;left:0}#screen-hurt-flash{pointer-events:none;opacity:0;z-index:6;background:#f009;width:100%;height:100%;transition:opacity 80ms ease-out;position:absolute;top:0;left:0}#encounter-alert{color:red;text-shadow:0 0 20px red,4px 4px #000;z-index:25;font-size:80px;font-weight:700;animation:.4s infinite alternate alertBounce;display:none;position:absolute;top:28%;left:50%;transform:translate(-50%,-50%)}@keyframes alertBounce{0%{transform:translate(-50%,-50%)scale(1)}to{transform:translate(-50%,-50%)scale(1.3)}}#top-bar{z-index:10;color:#aaa;text-shadow:2px 2px #000;justify-content:space-between;align-items:center;font-size:11px;display:flex;position:absolute;top:15px;left:20px;right:20px}.retro-btn{color:#fff;cursor:pointer;background:#111;border:2px solid #555;outline:none;padding:8px 12px;font-family:"Press Start 2P",monospace;font-size:10px;transition:all .15s}.retro-btn:hover{color:#fa0;border-color:#fa0}#overworld-hud{color:#e0d4ff;z-index:10;text-align:center;background:#000000d9;border:3px solid #7c4dff;padding:12px 24px;font-size:12px;line-height:1.6;display:none;position:absolute;bottom:25px;left:50%;transform:translate(-50%);box-shadow:0 0 15px #7c4dff66}#overworld-hud b{color:#ff0}#overworld-textbox{color:#fff;z-index:20;cursor:pointer;background:#000000f2;border:4px solid #fff;width:760px;max-width:90vw;padding:22px 26px;font-family:VT323,monospace;font-size:28px;line-height:1.4;display:none;position:absolute;bottom:50px;left:50%;transform:translate(-50%);box-shadow:0 0 20px #000c}#overworld-textbox .hint{color:#888;text-align:right;margin-top:15px;font-family:"Press Start 2P",monospace;font-size:10px;display:block}#fp-soul{z-index:4;pointer-events:none;opacity:.95;filter:drop-shadow(0 0 12px #ff0000f2);flex-direction:column;justify-content:center;align-items:center;display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}#fp-soul .heart{color:red;font-size:30px;animation:.8s ease-in-out infinite heartbeat}#fp-soul .crosshair-ring{border:2px dashed #fff9;border-radius:50%;width:56px;height:56px;position:absolute}@keyframes heartbeat{0%,to{transform:scale(1)}50%{transform:scale(1.24)}}#enemy-speech-bubble{color:#000;z-index:8;background:#fff;border:4px solid #000;border-radius:12px;min-width:280px;max-width:420px;padding:14px 18px;font-family:VT323,monospace;font-size:26px;line-height:1.25;display:none;position:absolute;top:15%;left:54%;box-shadow:4px 4px #333}#enemy-speech-bubble:after{content:"";border:16px solid #0000;border-top-color:#fff;border-bottom:0 solid #fff;width:0;display:block;position:absolute;bottom:-16px;left:25px}.damage-popup{color:#f33;text-shadow:3px 3px #000;z-index:12;font-family:"Press Start 2P",monospace;font-size:38px;animation:.8s ease-out forwards floatUp;display:none;position:absolute;top:24%;left:50%;transform:translate(-50%)}.damage-popup.critical{color:#fe0;font-size:46px}.damage-popup.miss{color:#aaa;font-size:26px}@keyframes floatUp{0%{opacity:0;transform:translate(-50%)scale(.7)}20%{opacity:1;transform:translate(-50%,-20px)scale(1.2)}to{opacity:0;transform:translate(-50%,-60px)scale(1)}}#arena-mode-indicator{color:#f33;z-index:9;text-align:center;letter-spacing:1px;background:#000000e6;border:3px solid red;width:540px;max-width:90vw;padding:12px 24px;font-size:13px;display:none;position:absolute;top:75px;left:50%;transform:translate(-50%);box-shadow:0 0 20px #f009}#arena-mode-indicator .timer-row{color:#fff;justify-content:space-between;align-items:center;margin-top:8px;font-size:11px;display:flex}#dodge-timer-bar{background:#300;border:2px solid #fff;flex:1;height:12px;margin-right:12px;position:relative}#dodge-timer-fill{background:#0fc;width:100%;height:100%;transition:width 50ms linear}#dodge-seconds{color:#0fc;font-weight:700}#arena-mode-indicator .hints{color:#fc0;margin-top:8px;font-size:10px;display:block}#battle-ui-layer{z-index:10;flex-direction:column;align-items:center;width:100%;padding-bottom:15px;transition:opacity .2s;display:none;position:absolute;bottom:0;left:0}#main-battle-box{background:#000000f0;border:5px solid #fff;flex-direction:column;justify-content:center;width:820px;max-width:94vw;height:150px;margin-bottom:12px;padding:18px 24px;display:flex;position:relative;overflow:hidden}#narrator-box{color:#fff;font-family:VT323,monospace;font-size:28px;line-height:1.6}#menu-content{grid-gap:12px 30px;grid-template-columns:1fr 1fr;width:100%;font-size:16px;display:none}.menu-item-row{cursor:pointer;align-items:center;padding:4px 6px;transition:color .1s;display:flex}.menu-item-row.selected{color:#ff0}.menu-item-row .heart-icon{color:red;margin-right:12px;font-size:18px}#player-status-bar{justify-content:flex-start;align-items:center;width:820px;max-width:94vw;margin-bottom:12px;font-size:13px;display:flex}.status-group{align-items:center;margin-right:25px;display:flex}.hp-label{margin-right:8px;font-family:"Press Start 2P",monospace;font-size:10px}.hp-bar-outer{background:#c00000;border:2px solid #000;width:130px;height:18px;margin-right:12px;position:relative}.hp-bar-inner{background:#ff0;width:100%;height:100%;transition:width .2s ease-out}#action-buttons-row{grid-template-columns:repeat(4,1fr);gap:16px;width:820px;max-width:94vw;display:grid}.btn-battle{color:#e77600;cursor:pointer;letter-spacing:1px;background:#000;border:3px solid #e77600;outline:none;justify-content:center;align-items:center;padding:12px 8px;font-family:"Press Start 2P",monospace;font-size:14px;transition:all .1s;display:flex}.btn-battle:hover,.btn-battle.selected{color:#ff0;background:#251800;border-color:#ff0;box-shadow:0 0 10px #ff06}.btn-battle .btn-heart{color:red;margin-right:8px;font-size:16px;display:none}.btn-battle.selected .btn-heart{display:inline-block}.fight-gauge-overlay{z-index:20;background:#000000b3;flex-direction:column;justify-content:center;align-items:center;width:100%;height:100%;display:flex;position:absolute;top:0;left:0}.fight-target-box{background:#000;border:4px solid #fff;justify-content:center;align-items:center;width:580px;height:140px;display:flex;position:relative;overflow:hidden;box-shadow:0 0 25px #fff3}.target-oval{border:4px solid #ffffffb3;border-radius:50%;justify-content:center;align-items:center;width:85%;height:70%;display:flex;position:relative}.target-center-line{background:red;width:6px;height:100%;box-shadow:0 0 8px red}.strike-bar{background:#fff;width:14px;height:100%;transition:background .1s;position:absolute;top:0;left:0%;box-shadow:0 0 10px #fff}.strike-bar.struck{background:#ff0;box-shadow:0 0 20px #ff0}.gauge-hint{color:#888;font-size:9px;position:absolute;bottom:6px}.fullscreen-modal{z-index:30;text-align:center;background:#000;flex-direction:column;justify-content:center;align-items:center;width:100%;height:100%;padding:30px;display:flex;position:absolute;top:0;left:0}.game-over-heart{color:red;margin-bottom:25px;font-size:55px;display:flex}.game-over-quote{color:#fff;max-width:650px;margin-bottom:35px;font-family:VT323,monospace;font-size:32px;line-height:1.4}@media (width<=768px){#action-buttons-row{grid-template-columns:1fr 1fr;gap:8px}.btn-battle{padding:10px 4px;font-size:11px}#main-battle-box{height:120px;padding:10px 14px}#narrator-box{font-size:22px}.fight-target-box{width:90vw}}</style>
+  <script type="module" crossorigin src="/assets/index-CtpenI7d.js"></script>
+</head>
+<body>
+  <div id="game-container">
+    <!-- WebGL 3D Canvas -->
+    <canvas id="battle-canvas"></canvas>
+
+    <!-- Retro CRT & Vignette Filter -->
+    <div class="crt-overlay"></div>
+
+    <!-- Screen Flash -->
+    <div id="screen-hurt-flash"></div>
+
+    <!-- Encounter Exclamation Mark ! -->
+    <div id="encounter-alert">!</div>
+
+    <!-- First-Person Diegetic SOUL Center Crosshair -->
+    <div id="fp-soul">
+      <div class="crosshair-ring"></div>
+      <div class="heart">❤</div>
+    </div>
+
+    <!-- Top Status Bar -->
+    <div id="top-bar">
+      <div>UNDERTALE 3D: AS RUÍNAS DO SUBSOLO</div>
+      <div>
+        <button id="btn-mute" class="retro-btn">🔊 ÁUDIO: ON</button>
+      </div>
+    </div>
+
+    <!-- Overworld Guide Banner -->
+    <div id="overworld-hud">
+      <b>[W, A, S, D]</b> Mover &nbsp;|&nbsp; <b>[Mouse / Setas]</b> Olhar &nbsp;|&nbsp; <b>[E / Z]</b> Interagir (Estrela de SAVE / Placas / Baús)
+    </div>
+
+    <!-- Overworld Interaction Textbox -->
+    <div id="overworld-textbox">
+      <div id="overworld-dialogue-text"></div>
+      <span class="hint">[ Clique ou pressione E / Z para continuar ]</span>
+    </div>
+
+    <!-- Monster Speech Bubble -->
+    <div id="enemy-speech-bubble">
+      <div id="enemy-speech-text"></div>
+    </div>
+
+    <!-- Floating Damage Output -->
+    <div id="damage-popup" class="damage-popup"></div>
+
+    <!-- Arena Dodge Mode Indicator Banner with Countdown -->
+    <div id="arena-mode-indicator">
+      <div>TURNO DE DEFESA: ESQUIVE DOS ATAQUES!</div>
+      <div class="timer-row">
+        <div id="dodge-timer-bar">
+          <div id="dodge-timer-fill"></div>
+        </div>
+        <span id="dodge-seconds">5.5s</span>
+      </div>
+      <span class="hints">[W, A, S, D] Esquivar | [ESPAÇO] Pular | [C] Agachar | AZUL: Pare | LARANJA: Mova-se</span>
+    </div>
+
+    <!-- Fight Timing Minigame Container -->
+    <div id="gauge-container"></div>
+
+    <!-- Bottom Undertale Battle UI Layer -->
+    <div id="battle-ui-layer">
+      <!-- Main Battle Box / Dialogue Area -->
+      <div id="main-battle-box">
+        <div id="narrator-box">
+          <div id="narrator-text"></div>
+        </div>
+        <div id="menu-content"></div>
+      </div>
+
+      <!-- Player Status Bar -->
+      <div id="player-status-bar">
+        <div class="status-group">
+          <span id="hud-player-name" style="font-weight: bold; margin-right: 15px;">FRISK</span>
+          <span>LV <span id="hud-player-lv">1</span></span>
+        </div>
+        <div class="status-group">
+          <span class="hp-label">HP</span>
+          <div class="hp-bar-outer">
+            <div id="hud-hp-fill" class="hp-bar-inner"></div>
+          </div>
+          <span id="hud-hp-text">20 / 20</span>
+        </div>
+      </div>
+
+      <!-- 4 Action Buttons -->
+      <div id="action-buttons-row">
+        <button class="btn-battle selected" id="btn-fight" data-index="0">
+          <span class="btn-heart">❤</span>FIGHT
+        </button>
+        <button class="btn-battle" id="btn-act" data-index="1">
+          <span class="btn-heart">❤</span>ACT
+        </button>
+        <button class="btn-battle" id="btn-item" data-index="2">
+          <span class="btn-heart">❤</span>ITEM
+        </button>
+        <button class="btn-battle" id="btn-mercy" data-index="3">
+          <span class="btn-heart">❤</span>MERCY
+        </button>
+      </div>
+    </div>
+
+    <!-- Start Game Modal -->
+    <div id="start-overlay" class="fullscreen-modal" style="background: rgba(0,0,0,0.94); cursor: pointer;">
+      <h1 style="color: #ff0000; font-size: 26px; margin-bottom: 20px; letter-spacing: 2px;">UNDERTALE 3D</h1>
+      <h2 style="color: #ffff00; font-size: 14px; margin-bottom: 30px;">AS RUÍNAS DO SUBSOLO</h2>
+      <div style="font-family: 'VT323', monospace; font-size: 24px; max-width: 650px; line-height: 1.5; color: #ccc; margin-bottom: 35px;">
+        • <b>EXPLORE AS RUÍNAS</b>: Corredores de tijolos roxos, tochas, placas e estrelas de SAVE em 1ª Pessoa.<br/><br/>
+        • <b>TURNO 1 (MENU)</b>: Use <b>[W, A, S, D]</b> exclusivamente para escolher FIGHT, ACT, ITEM ou MERCY.<br/><br/>
+        • <b>TURNO 2 (DEFESA)</b>: O menu se recolhe e o modo de ação ativa! Use <b>[W, A, S, D]</b> para desviar dos projéteis em 3D!<br/><br/>
+        • <b>MECÂNICAS CLÁSSICAS</b>: Ataques azuis (fique parado) e laranjas (continue correndo)!
+      </div>
+      <button class="retro-btn" style="font-size: 14px; padding: 14px 28px; border-color: #ffff00; color: #ffff00;">
+        CLIQUE OU PRESSIONE UMA TECLA PARA EXPLORAR
+      </button>
+    </div>
+
+    <!-- Victory Overlay -->
+    <div id="win-overlay" class="fullscreen-modal" style="display: none; background: rgba(0, 0, 0, 0.95);">
+      <h1 id="win-title" style="font-size: 32px; margin-bottom: 25px;">VOCÊ VENCEU!</h1>
+      <div id="win-desc" class="game-over-quote"></div>
+      <button id="btn-win-restart" class="retro-btn" style="font-size: 13px; padding: 12px 24px; border-color: #ffff00; color: #ffff00;">
+        CONTINUAR EXPLORANDO AS RUÍNAS
+      </button>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="game-over-overlay" class="fullscreen-modal" style="display: none;">
+      <div class="game-over-heart">
+        <span id="broken-heart-left">💔</span>
+      </div>
+      <h1 style="color: #fff; font-size: 30px; margin-bottom: 25px; letter-spacing: 2px;">GAME OVER</h1>
+      <div class="game-over-quote">
+        "Você não pode desistir agora...<br/>
+        Frisk! Mantenha sua determinação!"
+      </div>
+      <button id="btn-restart" class="retro-btn" style="font-size: 13px; padding: 12px 24px; border-color: #ff0000; color: #ff0000;">
+        TENTAR NOVAMENTE
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>
