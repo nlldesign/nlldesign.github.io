@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NLL DESIGN | Creative Developer & Technical Designer</title>
+  <meta name="description" content="Portfólio de Lucas / NLL Design — Desenvolvimento de jogos 3D, aplicações web modernas, saúde digital e automações inteligentes." />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  
+  <!-- Google Fonts: Space Grotesk & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+            },
+            dark: {
+              950: '#07080c',
+              900: '#0c0e14',
+              850: '#11141c',
+              800: '#171b26',
+              700: '#222838',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #07080c;
+      color: #f1f5f9;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(236, 72, 153, 0.05) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    .glass-card {
+      background: rgba(17, 20, 28, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(139, 92, 246, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(124, 58, 237, 0.25);
+    }
+
+    .glow-tag {
+      background: rgba(124, 58, 237, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #c4b5fd;
+    }
+
+    .glow-gradient {
+      background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 50%, #f472b6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-brand-500 selection:text-white">
+
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-dark-950/80 border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center font-display font-bold text-lg text-white shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform">
+          N
+        </div>
+        <div>
+          <span class="font-display font-bold text-lg tracking-tight text-white block">NLL DESIGN</span>
+          <span class="text-xs text-slate-400 font-mono">Lucas Nellucci</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#projetos" class="hover:text-white transition-colors">Projetos</a>
+        <a href="#skills" class="hover:text-white transition-colors">Especialidades</a>
+        <a href="#sobre" class="hover:text-white transition-colors">Sobre</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/nlldesign" target="_blank" rel="noopener noreferrer" 
+           class="px-4 py-2 rounded-xl text-sm font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center gap-2 transition-all">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">GitHub</span>
+        </a>
+        <a href="mailto:nellucci.design@gmail.com" 
+           class="px-4 py-2 rounded-xl text-sm font-medium bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/30 flex items-center gap-2 transition-all">
+          <i data-lucide="mail" class="w-4 h-4"></i>
+          <span>Contato</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-6 pt-24 pb-16 relative">
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300 text-xs font-mono font-medium mb-6">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Creative Developer & Technical Designer
+      </div>
+      
+      <h1 class="text-4xl sm:text-6xl font-display font-bold tracking-tight text-white leading-tight mb-6">
+        Construindo <span class="glow-gradient">mundos 3D</span>, produtos digitais & automações de alto impacto.
+      </h1>
+
+      <p class="text-lg text-slate-400 leading-relaxed mb-10">
+        Desenvolvedor e designer focado na interseção entre <strong>tecnologia gráfica (WebGL/Three.js)</strong>, 
+        <strong>engenharia de software moderna (React, Next.js, Supabase)</strong> e <strong>sistemas inteligentes de automação</strong>.
+      </p>
+
+      <!-- Quick Metrics -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/10">
+        <div>
+          <div class="text-3xl font-display font-bold text-white">10+</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider font-mono mt-1">Projetos Ativos</div>
+        </div>
+        <div>
+          <div class="text-3xl font-display font-bold text-cyan-400">3D / WebGL</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider font-mono mt-1">Imersão & Games</div>
+        </div>
+        <div>
+          <div class="text-3xl font-display font-bold text-brand-400">Full-Stack</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider font-mono mt-1">React, Next & Cloud</div>
+        </div>
+        <div>
+          <div class="text-3xl font-display font-bold text-pink-400">IA & Bots</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider font-mono mt-1">Scraping & Copilots</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Showcase / Projects Section -->
+  <section id="projetos" class="max-w-7xl mx-auto px-6 py-16">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div>
+        <h2 class="text-3xl font-display font-bold text-white tracking-tight mb-2">Showcase de Projetos</h2>
+        <p class="text-slate-400 text-sm">Explore jogos 3D, aplicações de saúde digital, automações e dashboards interativos.</p>
+      </div>
+
+      <!-- Controls: Filters & Search -->
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="relative">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+          <input type="text" id="searchInput" placeholder="Buscar projeto ou tecnologia..." 
+                 class="pl-9 pr-4 py-2 rounded-xl bg-dark-850 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-500 w-56 transition-colors" />
+        </div>
+
+        <div class="flex items-center p-1 rounded-xl bg-dark-850 border border-white/10 text-xs font-medium">
+          <button class="filter-btn px-3 py-1.5 rounded-lg text-white bg-brand-600 transition-all" data-category="all">Todos</button>
+          <button class="filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all" data-category="games">Games 3D</button>
+          <button class="filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all" data-category="saude">Saúde & Hábitos</button>
+          <button class="filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all" data-category="automacao">Automação & IA</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects Grid -->
+    <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Cards rendered via JS -->
+    </div>
+  </section>
+
+  <!-- Skills / Tech Stack Section -->
+  <section id="skills" class="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <h2 class="text-3xl font-display font-bold text-white tracking-tight mb-3">Stack Tecnológica</h2>
+      <p class="text-slate-400 text-sm">Ferramentas e frameworks utilizados na criação de interfaces ricas, motores gráficos e pipelines inteligentes.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- 3D & Graphics -->
+      <div class="glass-card p-6 rounded-2xl">
+        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center mb-5">
+          <i data-lucide="box" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-lg font-display font-semibold text-white mb-2">3D, WebGL & Games</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Desenvolvimento de ambientes imersivos, shaders, iluminação dinâmica e controles de câmera no navegador.</p>
+        <div class="flex flex-wrap gap-2 text-xs font-mono">
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">Three.js</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">WebGL</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">HTML5 Canvas</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">Game Math</span>
+        </div>
+      </div>
+
+      <!-- Modern Web & Architecture -->
+      <div class="glass-card p-6 rounded-2xl">
+        <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center mb-5">
+          <i data-lucide="code-2" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-lg font-display font-semibold text-white mb-2">Frontend & Full-Stack</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Aplicações web ultra-rápidas, reativas e com arquiteturas escaláveis em cloud e bancos relacionais.</p>
+        <div class="flex flex-wrap gap-2 text-xs font-mono">
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">React</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">Next.js</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">TypeScript</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">Supabase</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">Tailwind CSS</span>
+        </div>
+      </div>
+
+      <!-- Automation & Generative AI -->
+      <div class="glass-card p-6 rounded-2xl">
+        <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center mb-5">
+          <i data-lucide="bot" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-lg font-display font-semibold text-white mb-2">Automação & IA</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Agentes autônomos, web scrapers headless, pipelines de dados e integração com LLMs de última geração.</p>
+        <div class="flex flex-wrap gap-2 text-xs font-mono">
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">Puppeteer</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">Google Gemini API</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">Docker</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">Node.js</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Bio Section -->
+  <section id="sobre" class="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
+    <div class="glass-card p-8 md:p-12 rounded-3xl relative overflow-hidden">
+      <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-brand-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-3xl">
+        <h2 class="text-3xl font-display font-bold text-white tracking-tight mb-6">Sobre o NLL Design</h2>
+        
+        <p class="text-slate-300 leading-relaxed mb-6">
+          Com raízes em <strong>design visual</strong> e forte paixão por <strong>desenvolvimento de software</strong>, 
+          crio soluções que unem estética refinada, imersão interativa e código eficiente.
+        </p>
+
+        <p class="text-slate-400 leading-relaxed mb-8 text-sm">
+          Acredito que o futuro da web é espacial, inteligente e gamificado — seja criando ferramentas clínicas para pessoas com dor crônica, 
+          motores 3D interativos em navegadores, ou robôs para automação de processos complexos de prospecção comercial.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="https://github.com/nlldesign" target="_blank" rel="noopener noreferrer" 
+             class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white text-sm font-medium flex items-center gap-2 transition-all">
+            <i data-lucide="github" class="w-4 h-4"></i>
+            <span>Ver perfil no GitHub</span>
+          </a>
+          <a href="mailto:nellucci.design@gmail.com" 
+             class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-sm font-medium flex items-center gap-2 shadow-lg shadow-brand-600/25 transition-all">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+            <span>Iniciar uma conversa</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 py-12 text-center text-xs text-slate-500 font-mono">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>© 2026 NLL DESIGN (Lucas Nellucci). Todos os direitos reservados.</div>
+      <div class="flex items-center gap-6">
+        <a href="https://github.com/nlldesign" class="hover:text-slate-300 transition-colors">GitHub</a>
+        <a href="mailto:nellucci.design@gmail.com" class="hover:text-slate-300 transition-colors">nellucci.design@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Detalhes do Projeto -->
+  <div id="projectModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="glass-card max-w-2xl w-full p-6 sm:p-8 rounded-3xl border border-white/15 max-h-[90vh] overflow-y-auto relative animate-in fade-in zoom-in-95 duration-200">
+      <button id="closeModalBtn" class="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div id="modalContent">
+        <!-- Injetado dinamicamente via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts: Data & Render -->
+  <script>
+    const projects = [
+      {
+        id: 'fibrocare',
+        title: 'FibroCare (FibroTracker)',
+        category: 'saude',
+        icon: 'activity',
+        badgeColor: 'emerald',
+        headline: 'Monitoramento Cíclico & Mapa Corporal para Fibromialgia',
+        description: 'Aplicativo clínico e mobile-first projetado para pacientes com Fibromialgia. Conta com mapeamento anatômico interativo de dor, previsão inteligente de crises em 24h–48h e relatórios de acompanhamento baseados nos critérios do American College of Rheumatology (ACR).',
+        techs: ['React', 'Vite', 'Supabase', 'PostgreSQL', 'Tailwind CSS'],
+        githubUrl: 'https://github.com/nlldesign/Fibrotracker',
+        status: 'Nuvem / Supabase Ativo'
+      },
+      {
+        id: 'mapleads',
+        title: 'MapLeads',
+        category: 'automacao',
+        icon: 'target',
+        badgeColor: 'amber',
+        headline: 'Caçador de Leads Frios no Google Maps com Anti-Duplicidade',
+        description: 'Sistema completo em Node.js e Puppeteer com interface web moderna para prospecção em escala. Permite busca em lote por múltiplas cidades e nichos de mercado, com controle de contexto em planilha para evitar duplicidade de contatos.',
+        techs: ['Node.js', 'Puppeteer', 'Express', 'Docker', 'Web Scraping'],
+        githubUrl: 'https://github.com/nlldesign/Mapleads',
+        status: 'Automação B2B'
+      },
+      {
+        id: 'swam-invasion',
+        title: 'Swam Invasion (Colony Survivor)',
+        category: 'games',
+        icon: 'swords',
+        badgeColor: 'cyan',
+        headline: 'Action Survivor contra Enxames Massivos de Inimigos',
+        description: 'Jogo frenético no estilo Survivors-like rodando inteiramente em HTML5 Canvas e JavaScript puro. Apresenta centenas de inimigos simultâneos na tela, árvores de upgrades dinâmicas e cálculo de física vetorial otimizado.',
+        techs: ['HTML5 Canvas', 'JavaScript', 'Vector Math', 'Game Loop'],
+        githubUrl: 'https://github.com/nlldesign/Swam-invasion',
+        status: 'Protótipo Jogável'
+      },
+      {
+        id: 'corpo-seco',
+        title: 'Corpo Seco: A Maldição do Vale',
+        category: 'games',
+        icon: 'ghost',
+        badgeColor: 'purple',
+        headline: 'Suspense e Terror Psicológico 3D em Primeira Pessoa',
+        description: 'Experiência 3D imersiva desenvolvida em Three.js, React e TypeScript. O jogador explora uma floresta amaldiçoada onde cada passo fora do caminho de luz atrai entidades das sombras, com sonoplastia binaural e iluminação volumétrica.',
+        techs: ['Three.js', 'React', 'TypeScript', 'Vite', 'Audio Spatial'],
+        githubUrl: null,
+        status: 'Jogo 3D WebGL'
+      },
+      {
+        id: 'undertale-3d',
+        title: 'Undertale 3D: Ruínas & Batalha',
+        category: 'games',
+        icon: 'heart',
+        badgeColor: 'red',
+        headline: 'Recriação Tridimensional & Arena de Combate em Tempo Real',
+        description: 'Adaptação tridimensional interativa do universo clássico de Undertale. Recria o cenário icônico das Ruínas com física de colisão, iluminação customizada e um sistema de batalha em tempo real dentro da clássica moldura de combate.',
+        techs: ['Three.js', 'Vite', 'JavaScript', 'WebGL Shaders'],
+        githubUrl: null,
+        status: 'Adaptação 3D'
+      },
+      {
+        id: 'habit-rpg',
+        title: 'Habit RPG Tracker',
+        category: 'saude',
+        icon: 'shield',
+        badgeColor: 'blue',
+        headline: 'Dashboard de Hábitos Gamificado com Economia RPG',
+        description: 'Plataforma para produtividade diária que transforma metas em uma jornada de RPG. Inclui sistema de pontos de vida (HP), experiência (XP), moedas de recompensa, bloco de notas integrado e esquemas SQL para rastreamento de finanças.',
+        techs: ['Next.js', 'PostgreSQL', 'Tailwind CSS', 'SQL Schemas'],
+        githubUrl: null,
+        status: 'Dashboard Gamificado'
+      },
+      {
+        id: 'pepe-oracle',
+        title: 'Pepe Design Oracle',
+        category: 'automacao',
+        icon: 'sparkles',
+        badgeColor: 'pink',
+        headline: 'Copiloto Criativo de Design com Google Gemini AI',
+        description: 'Aplicação web que une direção de arte com inteligência artificial generativa. Utiliza os modelos multimodais da Google Gemini API para análise de estética, geração de paletas conceituais e orientação criativa em tempo real.',
+        techs: ['React', 'Google Gemini API', 'TypeScript', 'Vite'],
+        githubUrl: null,
+        status: 'IA Generativa'
+      },
+      {
+        id: 'biopunk-idle',
+        title: 'Biopunk Idle (Rádio Esperança 3D)',
+        category: 'games',
+        icon: 'radio',
+        badgeColor: 'cyan',
+        headline: 'Idle Management 3D em Cenário Distópico',
+        description: 'Jogo incremental temático com rádio pirata atmosférica, estética biopunk e renderização de sprites e partículas 3D. Focado em progressão mecânica de longo prazo e narração ambiental envolvente.',
+        techs: ['Three.js', 'JavaScript', 'Web Audio API', 'Sprites 3D'],
+        githubUrl: null,
+        status: 'Idle Game 3D'
+      },
+      {
+        id: 'jobhunter-ai',
+        title: 'JobHunter AI',
+        category: 'automacao',
+        icon: 'briefcase',
+        badgeColor: 'amber',
+        headline: 'Copiloto de Vagas & Currículos com Fórmula Google XYZ',
+        description: 'Ferramenta de automação para busca cirúrgica de vagas e tailoring de currículos. Analisa requisitos técnicos de vagas e reescreve realizações profissionais seguindo a metodologia Google XYZ ("Alcancei [X], medido por [Y], fazendo [Z]").',
+        techs: ['Node.js', 'Express', 'Career Ops', 'Executável Windows'],
+        githubUrl: null,
+        status: 'Automação Profissional'
+      },
+      {
+        id: 'pizzarun',
+        title: 'PizzaRun 2.0',
+        category: 'games',
+        icon: 'pizza',
+        badgeColor: 'orange',
+        headline: 'Aplicação Web Interativa com Analytics',
+        description: 'Projeto moderno estruturado em Next.js e Tailwind CSS, combinando gamificação e geração de relatórios de desempenho analíticos com arquitetura modular de componentes.',
+        techs: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+        githubUrl: null,
+        status: 'Web App'
+      },
+      {
+        id: 'token-tracker',
+        title: 'Token Tracker (Antigravity Plugin)',
+        category: 'automacao',
+        icon: 'gauge',
+        badgeColor: 'indigo',
+        headline: 'Monitor de Consumo e Custos de IA em Tempo Real',
+        description: 'Customização e sidecar para o ecossistema Antigravity 2.0. Monitora métricas de streaming de tokens de LLM, calcula projeções financeiras de consumo de API e alerta sobre saturação de contexto.',
+        techs: ['TypeScript', 'Antigravity SDK', 'Sidecar Plugin'],
+        githubUrl: null,
+        status: 'Developer Tool'
+      }
+    ];
+
+    const projectsGrid = document.getElementById('projectsGrid');
+    const searchInput = document.getElementById('searchInput');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectModal = document.getElementById('projectModal');
+    const modalContent = document.getElementById('modalContent');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    function renderProjects() {
+      const filtered = projects.filter(p => {
+        const matchesCategory = currentCategory === 'all' || p.category === currentCategory;
+        const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              p.headline.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              p.techs.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        projectsGrid.innerHTML = `
+          <div class="col-span-full py-16 text-center text-slate-500">
+            <i data-lucide="search-x" class="w-10 h-10 mx-auto mb-3 opacity-50"></i>
+            <p class="text-sm">Nenhum projeto encontrado para os filtros selecionados.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      projectsGrid.innerHTML = filtered.map(p => `
+        <div class="glass-card p-6 rounded-2xl flex flex-col justify-between group cursor-pointer" onclick="openModal('${p.id}')">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-400 group-hover:text-cyan-400 transition-colors">
+                <i data-lucide="${p.icon}" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xs font-mono font-medium px-2.5 py-1 rounded-full glow-tag">
+                ${p.status}
+              </span>
+            </div>
+
+            <h3 class="text-xl font-display font-semibold text-white group-hover:text-brand-300 transition-colors mb-2">
+              ${p.title}
+            </h3>
+
+            <p class="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-2">
+              ${p.headline}
+            </p>
+          </div>
+
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-5">
+              ${p.techs.slice(0, 3).map(t => `
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">${t}</span>
+              `).join('')}
+              ${p.techs.length > 3 ? `<span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-400">+${p.techs.length - 3}</span>` : ''}
+            </div>
+
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-medium text-slate-400 group-hover:text-white transition-colors">
+              <span class="flex items-center gap-1.5">
+                Ver detalhes
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+              </span>
+              ${p.githubUrl ? `<i data-lucide="github" class="w-4 h-4 text-slate-500 hover:text-white"></i>` : ''}
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    // Modal
+    window.openModal = function(id) {
+      const p = projects.find(item => item.id === id);
+      if (!p) return;
+
+      modalContent.innerHTML = `
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-2xl bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center">
+            <i data-lucide="${p.icon}" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-xs font-mono uppercase tracking-wider text-brand-400">${p.status}</span>
+            <h2 class="text-2xl font-display font-bold text-white">${p.title}</h2>
+          </div>
+        </div>
+
+        <p class="text-base text-slate-300 font-medium mb-4 leading-snug">
+          ${p.headline}
+        </p>
+
+        <p class="text-sm text-slate-400 leading-relaxed mb-6">
+          ${p.description}
+        </p>
+
+        <div class="mb-6">
+          <div class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Tecnologias Utilizadas</div>
+          <div class="flex flex-wrap gap-2">
+            ${p.techs.map(t => `
+              <span class="text-xs font-mono px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-200">${t}</span>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 pt-6 border-t border-white/10">
+          ${p.githubUrl ? `
+            <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" 
+               class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-sm font-medium flex items-center gap-2 transition-all shadow-lg shadow-brand-600/30">
+              <i data-lucide="github" class="w-4 h-4"></i>
+              <span>Acessar Repositório</span>
+            </a>
+          ` : `
+            <div class="text-xs text-slate-500 font-mono italic">
+              Código fonte gerenciado localmente no workspace.
+            </div>
+          `}
+        </div>
+      `;
+
+      projectModal.classList.remove('hidden');
+      projectModal.classList.add('flex');
+      lucide.createIcons();
+    };
+
+    function closeModal() {
+      projectModal.classList.add('hidden');
+      projectModal.classList.remove('flex');
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+    projectModal.addEventListener('click', (e) => {
+      if (e.target === projectModal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Filters
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-brand-600', 'text-white');
+          b.classList.add('text-slate-400');
+        });
+        btn.classList.add('bg-brand-600', 'text-white');
+        btn.classList.remove('text-slate-400');
+        currentCategory = btn.dataset.category;
+        renderProjects();
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderProjects();
+    });
+
+    // Initial render
+    renderProjects();
+  </script>
+</body>
+</html>
