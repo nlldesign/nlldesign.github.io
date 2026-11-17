@@ -398,6 +398,16 @@
 
       <!-- Direita: Controles (Tema Claro/Escuro + Redes) -->
       <div class="flex items-center gap-3 justify-self-end">
+        <!-- Seletor Global de Idioma [ pt | en ] -->
+        <div class="inline-flex items-center p-0.5 rounded-full bg-[var(--surface)] border border-[var(--line)] text-xs font-mono shadow-sm">
+          <button onclick="setGlobalLang('pt')" id="headerLangBtnPt" class="px-2.5 py-1 rounded-full transition-all duration-200 bg-[var(--inv-bg)] text-[var(--inv-ink)] font-semibold text-[11px]" aria-label="Português">
+            pt
+          </button>
+          <button onclick="setGlobalLang('en')" id="headerLangBtnEn" class="px-2.5 py-1 rounded-full transition-all duration-200 text-[var(--muted)] hover:text-[var(--ink)] text-[11px]" aria-label="English">
+            en
+          </button>
+        </div>
+
         <button onclick="toggleTheme()" class="tag-pill cursor-pointer text-xs" title="Alternar tema claro/escuro">
           <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent)] animate-pulse"></span>
           <span id="themeToggleText">modo claro</span>
@@ -420,6 +430,10 @@
       <button onclick="scrollToSobre()" id="mobNavSobre" class="nav-link py-1 px-3 text-xs" data-active="false">sobre</button>
       <button onclick="showView('jogos')" id="mobNavJogos" class="nav-link py-1 px-3 text-xs" data-active="false">jogos &amp; 3d</button>
       <button onclick="showView('contato')" id="mobNavContato" class="nav-link py-1 px-3 text-xs" data-active="false">contato</button>
+      <div class="inline-flex items-center p-0.5 rounded-full bg-[var(--surface)] border border-[var(--line)] text-[10px] font-mono shadow-sm ml-1">
+        <button onclick="setGlobalLang('pt')" id="mobLangBtnPt" class="px-2 py-0.5 rounded-full bg-[var(--inv-bg)] text-[var(--inv-ink)] font-semibold">pt</button>
+        <button onclick="setGlobalLang('en')" id="mobLangBtnEn" class="px-2 py-0.5 rounded-full text-[var(--muted)]">en</button>
+      </div>
     </div>
   </header>
 
@@ -432,12 +446,12 @@
     <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20 anim-fade-in">
       <div class="tag-pill mb-5">
         <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
-        <span>portfólio de produto</span>
+        <span id="heroPortTag">portfólio de produto</span>
       </div>
-      <h1 class="text-4xl sm:text-6xl font-medium tracking-tight leading-[1.1] mb-5 text-[var(--ink)]">
+      <h1 id="heroPortTitle" class="text-4xl sm:text-6xl font-medium tracking-tight leading-[1.1] mb-5 text-[var(--ink)]">
         trabalhos que começam <em class="font-serif-accent italic text-[var(--accent)]">em uma pergunta.</em>
       </h1>
-      <p class="text-base sm:text-lg text-[var(--muted)] max-w-2xl mx-auto leading-relaxed font-light">
+      <p id="heroPortSubtitle" class="text-base sm:text-lg text-[var(--muted)] max-w-2xl mx-auto leading-relaxed font-light">
         navegue pelos estudos de caso de produto, escolha um e veja o processo inteiro: o problema de negócio, a arquitetura e o que mudou no resultado.
       </p>
     </div>
@@ -581,9 +595,9 @@
     <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20 anim-fade-in">
       <div class="tag-pill mb-5">
         <i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-cyan-400"></i>
-        <span>jogos &amp; 3d interativo</span>
+        <span id="heroJogosTag">jogos &amp; 3d interativo</span>
       </div>
-      <h1 class="text-4xl sm:text-6xl font-medium tracking-tight leading-[1.1] mb-5 text-[var(--ink)]">
+      <h1 id="heroJogosTitle" class="text-4xl sm:text-6xl font-medium tracking-tight leading-[1.1] mb-5 text-[var(--ink)]">
         jogos, spatial ux e <em class="font-serif-accent italic text-cyan-400">sensorial 3d.</em>
       </h1>
       <p class="text-base sm:text-lg text-[var(--muted)] max-w-2xl mx-auto leading-relaxed font-light">
@@ -689,7 +703,7 @@
       
       <!-- Desafio -->
       <div class="case-block-row">
-        <div class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] pt-1">
+        <div id="caseLabelDesafio" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] pt-1">
           desafio
         </div>
         <div>
@@ -701,7 +715,7 @@
 
       <!-- Abordagem -->
       <div class="case-block-row">
-        <div class="text-xs font-mono uppercase tracking-wider text-[var(--accent)] pt-1">
+        <div id="caseLabelAbordagem" class="text-xs font-mono uppercase tracking-wider text-[var(--accent)] pt-1">
           abordagem
         </div>
         <div>
@@ -713,7 +727,7 @@
 
       <!-- Resultado -->
       <div class="case-block-row">
-        <div class="text-xs font-mono uppercase tracking-wider text-emerald-400 pt-1">
+        <div id="caseLabelResultado" class="text-xs font-mono uppercase tracking-wider text-emerald-400 pt-1">
           resultado
         </div>
         <div>
@@ -733,7 +747,7 @@
     <!-- Banner Invertido de Próximo Case (Idêntico a luccas.social.br) -->
     <div id="caseNextBanner" class="rounded-[32px] p-8 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6" style="background: var(--inv-bg); color: var(--inv-ink);">
       <div>
-        <span class="text-xs font-mono opacity-60 block mb-1">próximo case</span>
+        <span id="nextCaseLabel" class="text-xs font-mono opacity-60 block mb-1">próximo case</span>
         <h3 id="nextCaseTitle" class="text-xl sm:text-2xl font-medium">nome do próximo case</h3>
       </div>
       <button onclick="goToNextCase()" class="px-6 py-2.5 rounded-full text-xs font-medium font-mono uppercase tracking-wider transition-all hover:scale-105" style="background: var(--inv-ink); color: var(--inv-bg);">
@@ -771,217 +785,541 @@
 
   <script>
     // Catálogo 100% autêntico e separado
-    const portfolioProjects = [
-      {
-        id: 'plano-saude',
-        category: 'trabalho',
-        tag: 'cro &amp; ux',
-        num: '01',
-        title: 'alteração no fluxo de simulação de planos de saúde',
-        subtitle: 'associação cartão cristão • redesenho e otimização de conversão',
-        summary: 'redesenho completo do fluxo de simulação da associação cartão cristão, eliminando atritos funcionais e alavancando as taxas de conversão de leads no site.',
-        image: 'assets/framer-plano-saude-cover.jpg',
-        metrics: [
-          { val: '+30%', label: 'aumento na conversão de leads' },
-          { val: '-45%', label: 'tempo médio de cotação' },
-          { val: '100%', label: 'campos com validação inline' }
-        ],
-        desafio: 'a solicitação surgiu após o antigo fluxo apresentar problemas de funcionalidade que impediam os usuários de realizar simulações de planos, resultando em uma diminuição nas conversões provenientes do site. era fundamental resolver esses problemas para melhorar a experiência do usuário e recuperar as taxas de conversão com agilidade.',
-        abordagem: 'optei por seguir para um padrão de interface coeso e direto, com campos de preenchimento limpos e arquitetura de passos guiados. organizando a informação com feedback imediato de valores, eliminamos dúvidas cognitivas e facilitamos a manutenção contínua.',
-        resultado: 'as melhorias implementadas resultaram em um aumento considerável na taxa de conversão do site, corrigindo deficiências históricas do fluxo e fortalecendo a captação de novos associados.',
-        techs: ['ux design', 'cro', 'figma', 'wireframing'],
-        figmaUrl: null,
-        siteUrl: 'https://www.associacaocartaocristao.com.br/assistencia-medica.html',
-        behanceUrl: 'https://www.behance.net/gallery/137906687/Simulacao-de-novos-Associados-Cartao-Cristao',
-        gallery: [
-          { src: 'assets/framer/Fluxo-de-compras_8_GTX0kJEmjq2vIBhrdXL5C0U.png', title: 'landing page desktop e tela inicial do simulador' },
-          { src: 'assets/framer/Fluxo-de-compras_9_4oCyiR01SRCSZjUX1T9vp7tqI.png', title: 'etapa interativa do questionário de saúde' },
-          { src: 'assets/framer/Fluxo-de-compras_10_GI6BtzXn5TV0v9j5YXZQ6yrmic.png', title: 'formulário direto de cotação e captação de lead' },
-          { src: 'assets/framer/Fluxo-de-compras_7_VDfxUlMtf4U23kRo0HmjvNgXRg.png', title: 'etapa final de proposta com valor e adesão' }
-        ]
-      },
+    const siteTranslations = {
+      pt: {
+        navPortfolio: "portfólio",
+        navSobre: "sobre",
+        navJogos: "jogos &amp; 3d",
+        navContato: "contato",
+        roleSubtitle: "ux &amp; product designer",
+        themeLight: "modo claro",
+        themeDark: "modo escuro",
 
-      {
-        id: 'bom-vizinho',
-        category: 'trabalho',
-        tag: 'e-commerce ux',
-        num: '02',
-        title: 'supermercado bom vizinho',
-        subtitle: 'presença digital própria, benchmarking e design system no figma',
-        summary: 'estratégia de imersão e prototipação no figma para criar a presença online própria de uma rede de 20 anos, garantindo autonomia sobre a marca.',
-        image: 'assets/framer-bom-vizinho-cover.jpg',
-        metrics: [
-          { val: '20 anos', label: 'tradição da rede no varejo' },
-          { val: '2 canais', label: 'retirada e entrega domiciliar' },
-          { val: '100%', label: 'componentizado no figma' }
-        ],
-        desafio: 'o supermercado bom vizinho dependia exclusivamente de plataformas terceirizadas de entrega. isso limitava severamente a autonomia sobre a marca, a experiência do cliente e a capacidade de fidelização direta.',
-        abordagem: 'o processo foi estruturado em três etapas: imersão, ideação e prototipação. documentamos personas no notion, realizamos benchmarking detalhado de referências do setor no figma e desenvolvemos um design system modular com componentes reutilizáveis para compra e entrega.',
-        resultado: 'entrega de um protótipo de alta fidelidade que proporcionou uma experiência de compra online fluida, permitindo ao supermercado planejar seu canal direto com controle sobre campanhas e dados de clientes.',
-        techs: ['ux research', 'design system', 'figma', 'benchmarking'],
-        figmaUrl: null,
-        siteUrl: null,
-        behanceUrl: null,
-        gallery: [
-          { src: 'assets/framer/home_14_DsvmVgOAemE4JIt5vN1qOFGMPQA.jpg', title: 'estudo de caso: mercado bom vizinho' },
-          { src: 'assets/framer/home_13_SQzClZVbj1uonpNR1P2BdqW1gY.png', title: 'wireframes de storefront e catálogo mobile' },
-          { src: 'assets/framer/Bom-vizinho_3_8w2SGKDTbKNASI7M0qeaAKo2z5s.png', title: 'painel semântico, benchmarking e wireframes desktop' }
-        ]
-      },
+        heroPortTag: "portfólio de produto",
+        heroPortTitle: 'trabalhos que começam <em class="font-serif-accent italic text-[var(--accent)]">em uma pergunta.</em>',
+        heroPortSubtitle: "navegue pelos estudos de caso de produto, escolha um e veja o processo inteiro: o problema de negócio, a arquitetura e o que mudou no resultado.",
+        openCaseBtn: "abrir case",
 
-      {
-        id: 'cbanco',
-        category: 'trabalho',
-        tag: 'fintech app',
-        num: '03',
-        title: 'estudo de caso: cbanco',
-        subtitle: 'estrutura bancária, prototipação avançada &amp; style guide no figma',
-        summary: 'estudo da arquitetura de um aplicativo bancário moderno com foco na organização de recursos e criação de style guide de fácil consulta para design e engenharia.',
-        image: 'assets/framer-cbanco-cover.png',
-        metrics: [
-          { val: '1 hub', label: 'unificação de saldos e extratos' },
-          { val: '0 atrito', label: 'clareza numérica e contrastes' },
-          { val: 'figma', label: 'protótipo interativo completo' }
-        ],
-        desafio: 'aplicativos financeiros necessitam transmitir extrema segurança e simplicidade simultaneamente. o desafio era reformular o fluxo antigo de extrato, cartões e transferências em uma interface limpa e padronizada.',
-        abordagem: 'mapeamento do fluxo antigo e reconstrução da arquitetura no figma. criação de um style guide consistente com tipografia legível para números, contrastes acessíveis e componentes atômicos prontos para desenvolvimento.',
-        resultado: 'interface bancária moderna com redução da carga cognitiva em operações de rotina e biblioteca padronizada de componentes pronta para desenvolvimento no figma.',
-        techs: ['fintech ux', 'style guide', 'figma', 'arquitetura de informação'],
-        figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2154-4209&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2154%3A4209&show-proto-sidebar=1',
-        siteUrl: null,
-        behanceUrl: null,
-        gallery: [
-          { src: 'assets/framer/cbanco_1_w9B2VOpmE5M3KT8QVwk42MpcHTE.png', title: 'website desktop e arquitetura institucional' },
-          { src: 'assets/framer/cbanco_3_bsidmwZXZ65pLxB8ROqHEFIoD8c.png', title: '4 telas mobile: login, cadastro, open finance e dashboard' },
-          { src: 'assets/framer/cbanco_2_jrilSX6PEgcvKF6pqAQWcS9KhE.png', title: 'style guide & biblioteca de componentes no figma' },
-          { src: 'assets/framer/cbanco_4_krSlJ2n5urqBJU1C9Z7kTdejjSc.png', title: 'fluxo antigo: rascunhos no caderno e telas anteriores' }
-        ]
-      },
+        heroJogosTag: "jogos &amp; 3d interativo",
+        heroJogosTitle: 'jogos, spatial ux e <em class="font-serif-accent italic text-cyan-400">sensorial 3d.</em>',
+        heroJogosSubtitle: "experiências imersivas em three.js, áudio diegético e interfaces de jogos criadas para web.",
+        playGameBtn: "jogar no navegador",
+        gamePlayerHeader: "player de jogo interativo",
+        gameFullscreen: "tela cheia",
+        gameStartBtn: "iniciar jogo no navegador",
+        gameControlsHint: "controles diretos via teclado e mouse",
 
-      {
-        id: 'intern',
-        category: 'trabalho',
-        tag: 'enterprise ux',
-        num: '04',
-        title: 'estudo de caso: intern gestão de times',
-        subtitle: 'plataforma corporativa, comunicação interna &amp; treinamentos',
-        summary: 'rede social corporativa com foco em treinamento de colaboradores, espelho de ponto, holerite e comunicação integrada entre equipes.',
-        image: 'assets/framer-intern-cover.png',
-        metrics: [
-          { val: '100%', label: 'centralização de rotinas de rh' },
-          { val: 'gamified', label: 'módulos de capacitação interna' },
-          { val: 'figma', label: 'protótipo navegável mobile' }
-        ],
-        desafio: 'sistemas internos de rh e intranet costumam ser descentralizados e visualmente desestimulantes, gerando atrasos em envio de ponto e baixa leitura de comunicados corporativos.',
-        abordagem: 'criação de um hub centralizado com estética amigável. guia de estilo intuitivo integrando holerite, marcação de ponto, cardápio e treinamentos gamificados para fácil consulta por gestores e colaboradores.',
-        resultado: 'melhoria na comunicação interna, unificação dos pontos de contato do colaborador com a empresa e navegação sem ruídos operacionais.',
-        techs: ['enterprise ux', 'ex design', 'figma', 'ui design'],
-        figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2211-5714&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2211%3A5714&show-proto-sidebar=1',
-        siteUrl: null,
-        behanceUrl: null,
-        gallery: [
-          { src: 'assets/framer/intern_1_k7XuUK8a3NSNh4RCb6b4iQOwejI.png', title: '10 telas mobile do app corporativo (feed, chat, perfil e treinamentos)' },
-          { src: 'assets/framer/intern_2_N2wAqYWAsNq6keAihvfLfgXUlA.png', title: 'biblioteca de componentes e style guide no figma' },
-          { src: 'assets/framer/intern_3_Y597s7LZ2lE1lQEXdGU40lznLA0.png', title: 'fluxo antigo da intranet e telas preliminares' }
-        ]
+        contatoTag: "vamos conversar",
+        contatoTitle: "tem um desafio de produto, usabilidade ou dados?",
+        contatoSubtitle: "estou disponível para projetos estratégicos de produto, consultorias de cro ou posições desafiadoras.",
+        contatoEmail: "mandar um email",
+        contatoLinkedin: "conectar no linkedin",
+        contatoBehance: "ver behance",
+        contatoLocation: "são paulo, brasil • disponível globalmente (remoto / híbrido)",
+
+        backToPortfolio: "voltar ao portfólio",
+        backToGames: "voltar aos jogos",
+        viewFigma: "ver no figma ↗",
+        openVercel: "abrir na vercel ↗",
+        officialSite: "site oficial ↗",
+        labelDesafio: "desafio",
+        labelAbordagem: "abordagem",
+        labelResultado: "resultado",
+        galleryTitle: "evidências visuais &amp; telas",
+        nextCaseLabel: "próximo case",
+        nextCaseBtn: "abrir case →",
+        lightboxHint: "clique para ampliar a imagem",
+
+        footerCopyright: "lucas nellucci • produto, neurociência &amp; dados",
+        footerBackToTop: "voltar ao topo ↑"
+      },
+      en: {
+        navPortfolio: "portfolio",
+        navSobre: "about",
+        navJogos: "games &amp; 3d",
+        navContato: "contact",
+        roleSubtitle: "data-driven ux &amp; product designer",
+        themeLight: "light mode",
+        themeDark: "dark mode",
+
+        heroPortTag: "product design portfolio",
+        heroPortTitle: 'work that begins <em class="font-serif-accent italic text-[var(--accent)]">with a question.</em>',
+        heroPortSubtitle: "explore end-to-end product design case studies: business bottlenecks, information architecture, behavioral neuroscience, and measurable conversion lift.",
+        openCaseBtn: "open case",
+
+        heroJogosTag: "games &amp; interactive 3d",
+        heroJogosTitle: 'games, spatial ux &amp; <em class="font-serif-accent italic text-cyan-400">3d sensory design.</em>',
+        heroJogosSubtitle: "immersive three.js experiments, diegetic audio, and web-native game interfaces built for browser performance.",
+        playGameBtn: "play in browser",
+        gamePlayerHeader: "interactive game player",
+        gameFullscreen: "fullscreen",
+        gameStartBtn: "launch game in browser",
+        gameControlsHint: "direct keyboard & mouse controls",
+
+        contatoTag: "let's talk",
+        contatoTitle: "have a product, usability, or data challenge?",
+        contatoSubtitle: "open for strategic product design roles, cro consulting, and high-impact design challenges.",
+        contatoEmail: "send an email",
+        contatoLinkedin: "connect on linkedin",
+        contatoBehance: "view behance",
+        contatoLocation: "são paulo, brazil • globally available (remote / hybrid)",
+
+        backToPortfolio: "back to portfolio",
+        backToGames: "back to games",
+        viewFigma: "view on figma ↗",
+        openVercel: "open on vercel ↗",
+        officialSite: "official website ↗",
+        labelDesafio: "challenge",
+        labelAbordagem: "approach",
+        labelResultado: "outcome",
+        galleryTitle: "visual deliverables &amp; screens",
+        nextCaseLabel: "next case",
+        nextCaseBtn: "open case →",
+        lightboxHint: "click to expand image",
+
+        footerCopyright: "lucas nellucci • product, neuroscience &amp; data",
+        footerBackToTop: "back to top ↑"
       }
-    ];
+    };
 
-    const gameProjects = [
-      {
-        id: 'corpo-seco',
-        category: 'jogos',
-        tag: '3d diegetic ui',
-        num: '01',
-        title: 'corpo seco: a maldição do vale',
-        subtitle: 'game ui/ux • suspense 3d &amp; interface diegética na mata',
-        summary: 'jogo 3d em three.js. a lanterna, a névoa e o som espacial comunicam o perigo ao jogador sem poluição de tela ou hud intrusivo.',
-        image: 'assets/corpo-seco-hero.png',
-        metrics: [
-          { val: '60 fps', label: 'renderização contínua webgl' },
-          { val: 'zero hud', label: 'interface 100% diegética' },
-          { val: 'three.js', label: 'iluminação volumétrica' }
-        ],
-        desafio: 'manter o jogador informado sobre seu estado e recursos em um jogo 3d tenso sem quebrar a imersão com barras flutuantes na tela.',
-        abordagem: 'integração de todos os indicadores no próprio mundo: o feixe da lanterna indica a energia, aberrações cromáticas e áudio binaural avisam sobre a aproximação da criatura.',
-        resultado: 'experiência imersiva rodando direto no navegador a 60 fps, alcançando alto impacto sensorial.',
-        techs: ['three.js', 'diegetic ui', 'sound design', 'webgl'],
-        vercelUrl: 'https://corpo-seco.vercel.app',
-        embedUrl: 'games/corpo-seco/index.html',
-        gallery: []
-      },
+    const portfolioProjectsData = {
+      pt: [
+        {
+          id: 'plano-saude',
+          category: 'trabalho',
+          tag: 'cro &amp; ux',
+          num: '01',
+          title: 'alteração no fluxo de simulação de planos de saúde',
+          subtitle: 'associação cartão cristão • redesenho e otimização de conversão',
+          summary: 'redesenho completo do fluxo de simulação da associação cartão cristão, eliminando atritos funcionais e alavancando as taxas de conversão de leads no site.',
+          image: 'assets/framer-plano-saude-cover.jpg',
+          metrics: [
+            { val: '+30%', label: 'aumento na conversão de leads' },
+            { val: '-45%', label: 'tempo médio de cotação' },
+            { val: '100%', label: 'campos com validação inline' }
+          ],
+          desafio: 'a solicitação surgiu após o antigo fluxo apresentar problemas de funcionalidade que impediam os usuários de realizar simulações de planos, resultando em uma diminuição nas conversões provenientes do site. era fundamental resolver esses problemas para melhorar a experiência do usuário e recuperar as taxas de conversão com agilidade.',
+          abordagem: 'optei por seguir para um padrão de interface coeso e direto, com campos de preenchimento limpos e arquitetura de passos guiados. organizando a informação com feedback imediato de valores, eliminamos dúvidas cognitivas e facilitamos a manutenção contínua.',
+          resultado: 'as melhorias implementadas resultaram em um aumento considerável na taxa de conversão do site, corrigindo deficiências históricas do fluxo e fortalecendo a captação de novos associados.',
+          techs: ['ux design', 'cro', 'figma', 'wireframing'],
+          figmaUrl: null,
+          siteUrl: 'https://www.associacaocartaocristao.com.br/assistencia-medica.html',
+          behanceUrl: 'https://www.behance.net/gallery/137906687/Simulacao-de-novos-Associados-Cartao-Cristao',
+          gallery: [
+            { src: 'assets/framer/Fluxo-de-compras_8_GTX0kJEmjq2vIBhrdXL5C0U.png', title: 'landing page desktop e tela inicial do simulador' },
+            { src: 'assets/framer/Fluxo-de-compras_9_4oCyiR01SRCSZjUX1T9vp7tqI.png', title: 'etapa interativa do questionário de saúde' },
+            { src: 'assets/framer/Fluxo-de-compras_10_GI6BtzXn5TV0v9j5YXZQ6yrmic.png', title: 'formulário direto de cotação e captação de lead' },
+            { src: 'assets/framer/Fluxo-de-compras_7_VDfxUlMtf4U23kRo0HmjvNgXRg.png', title: 'etapa final de proposta com valor e adesão' }
+          ]
+        },
 
-      {
-        id: 'undertale-3d',
-        category: 'jogos',
-        tag: 'spatial ui',
-        num: '02',
-        title: 'undertale 3d: ruínas &amp; arena',
-        subtitle: 'spatial ux • transposição de câmera 2d para espaço 3d',
-        summary: 'adaptação tridimensional transpondo mecânicas clássicas de combate bullet-hell e exploração de ruínas em tempo real.',
-        image: 'assets/undertale-preview.svg',
-        metrics: [
-          { val: '3d real', label: 'física de colisão de projéteis' },
-          { val: '60 fps', label: 'combate espacial em arena' },
-          { val: 'webgl', label: 'transposição visual 2d/3d' }
-        ],
-        desafio: 'preservar a precisão geométrica do clássico combate "bullet hell" ao transferir a câmera top-down 2d para perspectiva espacial 3d.',
-        abordagem: 'design de arena suspensa com cálculo angular de câmera que mantém a leitura de projéteis clara, com iluminação focal na alma e feedback visual de dano.',
-        resultado: 'navegação fluida e combate ágil que respeita o design original com perspectiva espacial inovadora.',
-        techs: ['spatial ui', 'level design 3d', 'webgl'],
-        vercelUrl: 'https://undertale-3d.vercel.app',
-        embedUrl: 'games/undertale-3d/index.html',
-        gallery: []
-      },
+        {
+          id: 'bom-vizinho',
+          category: 'trabalho',
+          tag: 'e-commerce ux',
+          num: '02',
+          title: 'supermercado bom vizinho',
+          subtitle: 'presença digital própria, benchmarking e design system no figma',
+          summary: 'estratégia de imersão e prototipação no figma para criar a presença online própria de uma rede de 20 anos, garantindo autonomia sobre a marca.',
+          image: 'assets/framer-bom-vizinho-cover.jpg',
+          metrics: [
+            { val: '20 anos', label: 'tradição da rede no varejo' },
+            { val: '2 canais', label: 'retirada e entrega domiciliar' },
+            { val: '100%', label: 'componentizado no figma' }
+          ],
+          desafio: 'o supermercado bom vizinho dependia exclusivamente de plataformas terceirizadas de entrega. isso limitava severamente a autonomia sobre a marca, a experiência do cliente e a capacidade de fidelização direta.',
+          abordagem: 'o processo foi estruturado em três etapas: imersão, ideação e prototipação. documentamos personas no notion, realizamos benchmarking detalhado de referências do setor no figma e desenvolvemos um design system modular com componentes reutilizáveis para compra e entrega.',
+          resultado: 'entrega de um protótipo de alta fidelidade que proporcionou uma experiência de compra online fluida, permitindo ao supermercado planejar seu canal direto com controle sobre campanhas e dados de clientes.',
+          techs: ['ux research', 'design system', 'figma', 'benchmarking'],
+          figmaUrl: null,
+          siteUrl: null,
+          behanceUrl: null,
+          gallery: [
+            { src: 'assets/framer/home_14_DsvmVgOAemE4JIt5vN1qOFGMPQA.jpg', title: 'estudo de caso: mercado bom vizinho' },
+            { src: 'assets/framer/home_13_SQzClZVbj1uonpNR1P2BdqW1gY.png', title: 'wireframes de storefront e catálogo mobile' },
+            { src: 'assets/framer/Bom-vizinho_3_8w2SGKDTbKNASI7M0qeaAKo2z5s.png', title: 'painel semântico, benchmarking e wireframes desktop' }
+          ]
+        },
 
-      {
-        id: 'swam-invasion',
-        category: 'jogos',
-        tag: 'canvas 2d',
-        num: '03',
-        title: 'swam invasion (colony survivor)',
-        subtitle: 'visual hierarchy • clareza visual sob alta densidade',
-        summary: 'jogo arcade com mais de 1.000 entidades simultâneas em tela. foco de design em contraste visual e leitura rápida de decisões.',
-        image: 'assets/swam-invasion-preview.svg',
-        metrics: [
-          { val: '+1000', label: 'entidades simultâneas' },
-          { val: '60 fps', label: 'renderização fluida em canvas' },
-          { val: 'game feel', label: 'recompensa e upgrades' }
-        ],
-        desafio: 'garantir que o jogador tome decisões instantâneas no meio de centenas de inimigos sem sentir que a tela está ilegível ou injusta.',
-        abordagem: 'hierarquia visual estrita por valor de cor e iluminação: o jogador tem aura de alto contraste ciano, projéteis possuem brilho luminescente e rotas de fuga permanecem visíveis.',
-        resultado: 'jogabilidade intensa e legibilidade constante mesmo nos estágios de densidade máxima.',
-        techs: ['canvas 2d', 'game feel', 'visual hierarchy'],
-        vercelUrl: 'https://swam-invasion.vercel.app',
-        embedUrl: 'games/swam-invasion/index.html',
-        gallery: []
-      },
+        {
+          id: 'cbanco',
+          category: 'trabalho',
+          tag: 'fintech app',
+          num: '03',
+          title: 'estudo de caso: cbanco',
+          subtitle: 'estrutura bancária, prototipação avançada &amp; style guide no figma',
+          summary: 'estudo da arquitetura de um aplicativo bancário moderno com foco na organização de recursos e criação de style guide de fácil consulta para design e engenharia.',
+          image: 'assets/framer-cbanco-cover.png',
+          metrics: [
+            { val: '1 hub', label: 'unificação de saldos e extratos' },
+            { val: '0 atrito', label: 'clareza numérica e contrastes' },
+            { val: 'figma', label: 'protótipo interativo completo' }
+          ],
+          desafio: 'aplicativos financeiros necessitam transmitir extrema segurança e simplicidade simultaneamente. o desafio era reformular o fluxo antigo de extrato, cartões e transferências em uma interface limpa e padronizada.',
+          abordagem: 'mapeamento do fluxo antigo e reconstrução da arquitetura no figma. criação de um style guide consistente com tipografia legível para números, contrastes acessíveis e componentes atômicos prontos para desenvolvimento.',
+          resultado: 'interface bancária moderna com redução da carga cognitiva em operações de rotina e biblioteca padronizada de componentes pronta para desenvolvimento no figma.',
+          techs: ['fintech ux', 'style guide', 'figma', 'arquitetura de informação'],
+          figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2154-4209&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2154%3A4209&show-proto-sidebar=1',
+          siteUrl: null,
+          behanceUrl: null,
+          gallery: [
+            { src: 'assets/framer/cbanco_1_w9B2VOpmE5M3KT8QVwk42MpcHTE.png', title: 'website desktop e arquitetura institucional' },
+            { src: 'assets/framer/cbanco_3_bsidmwZXZ65pLxB8ROqHEFIoD8c.png', title: '4 telas mobile: login, cadastro, open finance e dashboard' },
+            { src: 'assets/framer/cbanco_2_jrilSX6PEgcvKF6pqAQWcS9KhE.png', title: 'style guide & biblioteca de componentes no figma' },
+            { src: 'assets/framer/cbanco_4_krSlJ2n5urqBJU1C9Z7kTdejjSc.png', title: 'fluxo antigo: rascunhos no caderno e telas anteriores' }
+          ]
+        },
 
-      {
-        id: 'biopunk-idle',
-        category: 'jogos',
-        tag: 'tactile ui',
-        num: '04',
-        title: 'biopunk idle (rádio esperança 3d)',
-        subtitle: 'sensory ux • narrativa ambiental e interface analógica',
-        summary: 'jogo incremental temático com rádio pirata atmosférica, estética biopunk e sintonizadores analógicos de áudio e tanques biológicos.',
-        image: 'assets/biopunk-preview.svg',
-        metrics: [
-          { val: 'web audio', label: 'frequências e estática analógica' },
-          { val: 'tactile', label: 'knobs e botões físicos' },
-          { val: '3d idle', label: 'economia de recursos' }
-        ],
-        desafio: 'evitar que um jogo idle se torne uma planilha fria e criar vínculo emocional através de ambientação estética analógica.',
-        abordagem: 'criação de botões táteis analógicos, sons de estática e frequências de rádio via web audio api e representação volumétrica de recursos em tanques 3d.',
-        resultado: 'experiência com atmosfera singular e prazer sensorial de operar uma rádio clandestina.',
-        techs: ['web audio api', 'tactile ui', 'world building'],
-        vercelUrl: 'https://biopunk-idle.vercel.app',
-        embedUrl: 'games/bio-horde/index.html',
-        gallery: []
-      }
-    ];
+        {
+          id: 'intern',
+          category: 'trabalho',
+          tag: 'enterprise ux',
+          num: '04',
+          title: 'estudo de caso: intern gestão de times',
+          subtitle: 'plataforma corporativa, comunicação interna &amp; treinamentos',
+          summary: 'rede social corporativa com foco em treinamento de colaboradores, espelho de ponto, holerite e comunicação integrada entre equipes.',
+          image: 'assets/framer-intern-cover.png',
+          metrics: [
+            { val: '100%', label: 'centralização de rotinas de rh' },
+            { val: 'gamified', label: 'módulos de capacitação interna' },
+            { val: 'figma', label: 'protótipo navegável mobile' }
+          ],
+          desafio: 'sistemas internos de rh e intranet costumam ser descentralizados e visualmente desestimulantes, gerando atrasos em envio de ponto e baixa leitura de comunicados corporativos.',
+          abordagem: 'criação de um hub centralizado com estética amigável. guia de estilo intuitivo integrando holerite, marcação de ponto, cardápio e treinamentos gamificados para fácil consulta por gestores e colaboradores.',
+          resultado: 'melhoria na comunicação interna, unificação dos pontos de contato do colaborador com a empresa e navegação sem ruídos operacionais.',
+          techs: ['enterprise ux', 'ex design', 'figma', 'ui design'],
+          figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2211-5714&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2211%3A5714&show-proto-sidebar=1',
+          siteUrl: null,
+          behanceUrl: null,
+          gallery: [
+            { src: 'assets/framer/intern_1_k7XuUK8a3NSNh4RCb6b4iQOwejI.png', title: '10 telas mobile do app corporativo (feed, chat, perfil e treinamentos)' },
+            { src: 'assets/framer/intern_2_N2wAqYWAsNq6keAihvfLfgXUlA.png', title: 'biblioteca de componentes e style guide no figma' },
+            { src: 'assets/framer/intern_3_Y597s7LZ2lE1lQEXdGU40lznLA0.png', title: 'fluxo antigo da intranet e telas preliminares' }
+          ]
+        }
+      ],
+      en: [
+        {
+          id: 'plano-saude',
+          category: 'trabalho',
+          tag: 'cro &amp; ux',
+          num: '01',
+          title: 'health plan simulation funnel optimization',
+          subtitle: 'associação cartão cristão • funnel redesign &amp; cro optimization',
+          summary: 'complete redesign of the health plan simulation funnel, eliminating usability friction and significantly boosting lead conversion rates on the website.',
+          image: 'assets/framer-plano-saude-cover.jpg',
+          metrics: [
+            { val: '+30%', label: 'lead conversion lift' },
+            { val: '-45%', label: 'quote completion time' },
+            { val: '100%', label: 'inline validated inputs' }
+          ],
+          desafio: 'the request arose after the legacy simulation funnel presented functionality issues that prevented prospective users from completing quotes, causing an immediate drop in online conversions. resolving these pain points was critical to restoring trust and increasing acquisition.',
+          abordagem: 'established a cohesive, user-friendly interface pattern with simplified input steps and guided progression. clear dynamic pricing feedback removed cognitive hesitation and streamlined lead qualification.',
+          resultado: 'the implemented improvements drove a substantial increase in website conversion rates, resolving historical funnel flaws and strengthening user onboarding.',
+          techs: ['ux design', 'cro', 'figma', 'wireframing'],
+          figmaUrl: null,
+          siteUrl: 'https://www.associacaocartaocristao.com.br/assistencia-medica.html',
+          behanceUrl: 'https://www.behance.net/gallery/137906687/Simulacao-de-novos-Associados-Cartao-Cristao',
+          gallery: [
+            { src: 'assets/framer/Fluxo-de-compras_8_GTX0kJEmjq2vIBhrdXL5C0U.png', title: 'desktop landing page and entry quotation screen' },
+            { src: 'assets/framer/Fluxo-de-compras_9_4oCyiR01SRCSZjUX1T9vp7tqI.png', title: 'interactive health assessment step' },
+            { src: 'assets/framer/Fluxo-de-compras_10_GI6BtzXn5TV0v9j5YXZQ6yrmic.png', title: 'streamlined lead capture form' },
+            { src: 'assets/framer/Fluxo-de-compras_7_VDfxUlMtf4U23kRo0HmjvNgXRg.png', title: 'final proposal and membership confirmation' }
+          ]
+        },
 
+        {
+          id: 'bom-vizinho',
+          category: 'trabalho',
+          tag: 'e-commerce ux',
+          num: '02',
+          title: 'bom vizinho supermarket',
+          subtitle: 'direct-to-consumer e-commerce, benchmarking &amp; figma design system',
+          summary: 'research and prototyping in figma to create a direct-to-consumer digital presence for a 20-year retail brand, regaining brand independence and customer retention.',
+          image: 'assets/framer-bom-vizinho-cover.jpg',
+          metrics: [
+            { val: '20 yrs', label: 'retail brand heritage' },
+            { val: '2 channels', label: 'in-store pickup &amp; delivery' },
+            { val: '100%', label: 'figma component system' }
+          ],
+          desafio: 'bom vizinho supermarket relied exclusively on third-party delivery apps. this severely limited their brand independence, customer experience control, and direct retention capabilities.',
+          abordagem: 'structured the project across discovery, ideation, and prototyping. documented personas in notion, conducted comprehensive competitor benchmarking in figma, and developed a modular atomic design system for seamless catalog browsing and checkout.',
+          resultado: 'delivered a high-fidelity interactive prototype enabling the supermarket to launch its direct digital channel with full ownership over promotions and customer relationships.',
+          techs: ['ux research', 'design system', 'figma', 'benchmarking'],
+          figmaUrl: null,
+          siteUrl: null,
+          behanceUrl: null,
+          gallery: [
+            { src: 'assets/framer/home_14_DsvmVgOAemE4JIt5vN1qOFGMPQA.jpg', title: 'case study: bom vizinho supermarket' },
+            { src: 'assets/framer/home_13_SQzClZVbj1uonpNR1P2BdqW1gY.png', title: 'mobile storefront and catalog wireframes' },
+            { src: 'assets/framer/Bom-vizinho_3_8w2SGKDTbKNASI7M0qeaAKo2z5s.png', title: 'semantic moodboard, benchmarking and desktop wireframes' }
+          ]
+        },
+
+        {
+          id: 'cbanco',
+          category: 'trabalho',
+          tag: 'fintech app',
+          num: '03',
+          title: 'case study: cbanco',
+          subtitle: 'digital banking architecture, advanced prototyping &amp; style guide',
+          summary: 'redesign of a modern banking app architecture, reducing operational anxiety and delivering a clear design system for engineering teams.',
+          image: 'assets/framer-cbanco-cover.png',
+          metrics: [
+            { val: '1 hub', label: 'unified accounts &amp; cards' },
+            { val: '0 friction', label: 'high contrast &amp; legibility' },
+            { val: 'figma', label: 'interactive design prototype' }
+          ],
+          desafio: 'financial applications demand absolute clarity, error prevention, and immediate feedback. the challenge was overhauling the legacy transaction and account management flows into an intuitive, accessible interface.',
+          abordagem: 'audited legacy user flows and restructured information architecture in figma. created an atomic style guide with high-contrast numerical typography, accessible color ratios, and component tokens.',
+          resultado: 'modern banking UI minimizing cognitive load during frequent transfers and providing developers with a structured, reusable component library.',
+          techs: ['fintech ux', 'style guide', 'figma', 'information architecture'],
+          figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2154-4209&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2154%3A4209&show-proto-sidebar=1',
+          siteUrl: null,
+          behanceUrl: null,
+          gallery: [
+            { src: 'assets/framer/cbanco_1_w9B2VOpmE5M3KT8QVwk42MpcHTE.png', title: 'desktop website architecture and hero' },
+            { src: 'assets/framer/cbanco_3_bsidmwZXZ65pLxB8ROqHEFIoD8c.png', title: '4 mobile screens: login, onboarding, open finance and dashboard' },
+            { src: 'assets/framer/cbanco_2_jrilSX6PEgcvKF6pqAQWcS9KhE.png', title: 'ui style guide &amp; component library in figma' },
+            { src: 'assets/framer/cbanco_4_krSlJ2n5urqBJU1C9Z7kTdejjSc.png', title: 'legacy iteration: sketchbook wireframes and prior screens' }
+          ]
+        },
+
+        {
+          id: 'intern',
+          category: 'trabalho',
+          tag: 'enterprise ux',
+          num: '04',
+          title: 'case study: intern team management',
+          subtitle: 'enterprise intranet, internal communication &amp; gamified training',
+          summary: 'unified enterprise portal for employee performance, internal communication, payroll access, and gamified corporate training.',
+          image: 'assets/framer-intern-cover.png',
+          metrics: [
+            { val: '100%', label: 'centralized hr workflows' },
+            { val: 'gamified', label: 'employee training modules' },
+            { val: 'figma', label: 'interactive mobile prototype' }
+          ],
+          desafio: 'legacy enterprise intranet systems were fragmented and visually uninspiring, causing delays in timesheet submission and low engagement with internal announcements.',
+          abordagem: 'designed a centralized mobile hub with an approachable interface. consolidated timesheet logging, paystubs, dining menu, and gamified learning into clear, unified navigation modules.',
+          resultado: 'enhanced employee engagement, unified daily touchpoints, and eliminated administrative friction for team leaders and staff.',
+          techs: ['enterprise ux', 'ex design', 'figma', 'ui design'],
+          figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2211-5714&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2211%3A5714&show-proto-sidebar=1',
+          siteUrl: null,
+          behanceUrl: null,
+          gallery: [
+            { src: 'assets/framer/intern_1_k7XuUK8a3NSNh4RCb6b4iQOwejI.png', title: '10 mobile app screens (feed, chat, employee profile and training)' },
+            { src: 'assets/framer/intern_2_N2wAqYWAsNq6keAihvfLfgXUlA.png', title: 'component library and design system in figma' },
+            { src: 'assets/framer/intern_3_Y597s7LZ2lE1lQEXdGU40lznLA0.png', title: 'legacy intranet flow and preliminary wireframes' }
+          ]
+        }
+      ]
+    };
+
+    const gameProjectsData = {
+      pt: [
+        {
+          id: 'corpo-seco',
+          category: 'jogos',
+          tag: '3d diegetic ui',
+          num: '01',
+          title: 'corpo seco: a maldição do vale',
+          subtitle: 'terror folclórico brasileiro • interface diegética, lanterna e inventário 3d',
+          summary: 'experiência atmosférica de terror em primeira pessoa baseada no folclore brasileiro. interface sem hud tradicional: sanidade e itens comunicados através de iluminação e áudio.',
+          image: 'assets/corpo-seco-hero.png',
+          metrics: [
+            { val: 'three.js', label: 'renderização 3d em tempo real' },
+            { val: 'diegetic', label: 'interface zero-hud imersiva' },
+            { val: '60 fps', label: 'otimização para navegadores' }
+          ],
+          desafio: 'transmitir tensão psicológica em um jogo web 3d sem poluir a visão do jogador com barras de vida ou menus artificiais.',
+          abordagem: 'utilização de interface diegética: a respiração do personagem indica exaustão, o tremor da lanterna comunica pavor e o inventário é inspecionado diretamente no espaço tridimensional.',
+          resultado: 'imersão profunda de horror e alta taxa de retenção por sessão em navegadores desktop.',
+          techs: ['three.js', 'webgl', 'spatial audio', 'diegetic ui'],
+          vercelUrl: 'https://corpo-seco.vercel.app',
+          embedUrl: 'games/corpo-seco/index.html',
+          gallery: []
+        },
+
+        {
+          id: 'undertale-3d',
+          category: 'jogos',
+          tag: 'three.js &amp; shaders',
+          num: '02',
+          title: 'undertale 3d: ruínas &amp; arena',
+          subtitle: 'recriação espacial do clássico indie • shaders nostálgicos e combate em arena',
+          summary: 'tributo tridimensional reimaginando a entrada das ruínas e o sistema de batalha em caixa de contenção com estética retrô.',
+          image: 'assets/undertale-preview.svg',
+          metrics: [
+            { val: 'camera', label: 'transição suave 3d para batalha 2d' },
+            { val: 'pixel shader', label: 'fidelidade estética nostálgica' },
+            { val: 'low latency', label: 'controles precisos de esquiva' }
+          ],
+          desafio: 'traduzir a essência 2d de undertale para um espaço 3d sem descaracterizar a sensibilidade emocional da obra original.',
+          abordagem: 'câmera isométrica fluida para exploração das ruínas e transição cinematográfica para o plano de combate, mantendo as mecânicas originais de desvio.',
+          resultado: 'experiência aclamada pela precisão de movimento e fidelidade sensorial ao clássico.',
+          techs: ['three.js', 'custom shaders', 'game design'],
+          vercelUrl: 'https://undertale-3d.vercel.app',
+          embedUrl: 'games/undertale-3d/index.html',
+          gallery: []
+        },
+
+        {
+          id: 'swam-invasion',
+          category: 'jogos',
+          tag: 'arcade shooter',
+          num: '03',
+          title: 'swam invasion',
+          subtitle: 'arcade espacial retrô com física vetorial e combate em tempo real',
+          summary: 'jogo de ação com controles fluidos, combate espacial vetorial, partículas e trilha sonora sintetizada.',
+          image: 'assets/swam-invasion-preview.svg',
+          metrics: [
+            { val: 'canvas 2d', label: 'renderização com partículas' },
+            { val: 'arcade', label: 'mecânica de reflexos rápidos' },
+            { val: 'game loop', label: 'física de inércia espacial' }
+          ],
+          desafio: 'garantir resposta imediata de teclado e sensação de peso nas acelerações da nave em telas de alta taxa de atualização.',
+          abordagem: 'motor físico personalizado em canvas puro calculando inércia, fricção e colisão de projéteis com micro-explosões de partículas.',
+          resultado: 'jogabilidade viciante de estilo arcade com ciclo de reinício instantâneo.',
+          techs: ['html5 canvas', 'game physics', 'arcade ui'],
+          vercelUrl: 'https://swam-invasion.vercel.app',
+          embedUrl: 'games/swam-invasion/index.html',
+          gallery: []
+        },
+
+        {
+          id: 'biopunk-idle',
+          category: 'jogos',
+          tag: 'interactive fiction',
+          num: '04',
+          title: 'biopunk idle &amp; radio',
+          subtitle: 'gestão analógica de recursos, rádio pirata e sintetizadores sonoros',
+          summary: 'jogo incremental temático com rádio pirata atmosférica, estética biopunk e sintonizadores analógicos de áudio e tanques biológicos.',
+          image: 'assets/biopunk-preview.svg',
+          metrics: [
+            { val: 'web audio', label: 'frequências e estática analógica' },
+            { val: 'tactile', label: 'knobs e botões físicos' },
+            { val: '3d idle', label: 'economia de recursos' }
+          ],
+          desafio: 'evitar que um jogo idle se torne uma planilha fria e criar vínculo emocional através de ambientação estética analógica.',
+          abordagem: 'criação de botões táteis analógicos, sons de estática e frequências de rádio via web audio api e representação volumétrica de recursos em tanques 3d.',
+          resultado: 'experiência com atmosfera singular e prazer sensorial de operar uma rádio clandestina.',
+          techs: ['web audio api', 'tactile ui', 'world building'],
+          vercelUrl: 'https://biopunk-idle.vercel.app',
+          embedUrl: 'games/bio-horde/index.html',
+          gallery: []
+        }
+      ],
+      en: [
+        {
+          id: 'corpo-seco',
+          category: 'jogos',
+          tag: '3d diegetic ui',
+          num: '01',
+          title: 'corpo seco: curse of the valley',
+          subtitle: 'brazilian folk horror • diegetic interface, 3d flashlight and spatial audio',
+          summary: 'atmospheric first-person psychological horror based on brazilian folklore. zero traditional hud: sanity, stamina and items communicated entirely through lighting and audio cues.',
+          image: 'assets/corpo-seco-hero.png',
+          metrics: [
+            { val: 'three.js', label: 'real-time 3d webgl rendering' },
+            { val: 'diegetic', label: 'immersive zero-hud interface' },
+            { val: '60 fps', label: 'optimized for desktop browsers' }
+          ],
+          desafio: 'conveying dread and psychological tension in a browser 3d experience without cluttering the viewport with artificial health bars or floating menus.',
+          abordagem: 'implemented a purely diegetic ui: character breathing signals exhaustion, flashlight flickering indicates terror, and inventory items are inspected directly within 3d space.',
+          resultado: 'deep narrative immersion and high session retention across desktop browsers.',
+          techs: ['three.js', 'webgl', 'spatial audio', 'diegetic ui'],
+          vercelUrl: 'https://corpo-seco.vercel.app',
+          embedUrl: 'games/corpo-seco/index.html',
+          gallery: []
+        },
+
+        {
+          id: 'undertale-3d',
+          category: 'jogos',
+          tag: 'three.js &amp; shaders',
+          num: '02',
+          title: 'undertale 3d: ruins &amp; battle box',
+          subtitle: 'spatial recreation of the indie masterpiece • custom retro shaders &amp; arena combat',
+          summary: 'a 3d web tribute reimagining the ruins entrance and bullet-hell containment box combat with nostalgic pixel shaders.',
+          image: 'assets/undertale-preview.svg',
+          metrics: [
+            { val: 'camera', label: 'seamless 3d to 2d arena transition' },
+            { val: 'pixel shader', label: 'authentic retro visual fidelity' },
+            { val: 'low latency', label: 'tight, responsive dodge controls' }
+          ],
+          desafio: 'translating undertale\'s 2d pixel identity into 3d space while preserving the emotional intimacy and responsiveness of the original masterpiece.',
+          abordagem: 'fluid isometric camera for ruins exploration paired with a cinematic zoom into the battle plane, maintaining original dodging dynamics and sound design.',
+          resultado: 'celebrated by players for its movement precision and sensory tribute to the classic indie title.',
+          techs: ['three.js', 'custom shaders', 'game design'],
+          vercelUrl: 'https://undertale-3d.vercel.app',
+          embedUrl: 'games/undertale-3d/index.html',
+          gallery: []
+        },
+
+        {
+          id: 'swam-invasion',
+          category: 'jogos',
+          tag: 'arcade shooter',
+          num: '03',
+          title: 'swam invasion',
+          subtitle: 'retro space arcade shooter with vector physics &amp; real-time particles',
+          summary: 'fast-paced action game with fluid momentum, vector space combat, explosive particle effects, and an energetic synth soundtrack.',
+          image: 'assets/swam-invasion-preview.svg',
+          metrics: [
+            { val: 'canvas 2d', label: 'high-performance particle engine' },
+            { val: 'arcade', label: 'fast reflex gameplay loop' },
+            { val: 'inertia', label: 'space momentum physics' }
+          ],
+          desafio: 'ensuring zero-lag keyboard inputs and a tactile feeling of ship momentum on high-refresh-rate displays.',
+          abordagem: 'custom lightweight physics engine in pure html5 canvas calculating inertia, drag, and projectile collisions with micro-particle sparks.',
+          resultado: 'addictive arcade-style gameplay with instant restart loops and high replay value.',
+          techs: ['html5 canvas', 'game physics', 'arcade ui'],
+          vercelUrl: 'https://swam-invasion.vercel.app',
+          embedUrl: 'games/swam-invasion/index.html',
+          gallery: []
+        },
+
+        {
+          id: 'biopunk-idle',
+          category: 'jogos',
+          tag: 'interactive fiction',
+          num: '04',
+          title: 'biopunk idle &amp; pirate radio',
+          subtitle: 'tactile analog resource management, radio frequencies and audio synthesizers',
+          summary: 'atmospheric incremental game featuring a clandestine pirate radio station, biopunk visual identity, tactile audio tuners, and biological incubation tanks.',
+          image: 'assets/biopunk-preview.svg',
+          metrics: [
+            { val: 'web audio', label: 'analog radio static &amp; filters' },
+            { val: 'tactile', label: 'physical knobs and toggle switches' },
+            { val: '3d idle', label: 'volumetric resource economics' }
+          ],
+          desafio: 'preventing an incremental idle game from feeling like a sterile spreadsheet and creating emotional attachment through tactile analog immersion.',
+          abordagem: 'crafted physical-feeling skeuomorphic toggles, radio static frequencies via the web audio api, and volumetric 3d resource tanks.',
+          resultado: 'evocative atmospheric depth with the tactile satisfaction of operating a clandestine transmitter.',
+          techs: ['web audio api', 'tactile ui', 'world building'],
+          vercelUrl: 'https://biopunk-idle.vercel.app',
+          embedUrl: 'games/bio-horde/index.html',
+          gallery: []
+        }
+      ]
+    };
+
+    // Estado do idioma global (persistido no localStorage)
+    let currentGlobalLang = localStorage.getItem('nlldesign-lang') || 'pt';
+
+    function getPortfolioProjects() {
+      return portfolioProjectsData[currentGlobalLang] || portfolioProjectsData.pt;
+    }
+
+    function getGameProjects() {
+      return gameProjectsData[currentGlobalLang] || gameProjectsData.pt;
+    }
+
+    // Variáveis de compatibilidade
+    let portfolioProjects = getPortfolioProjects();
+    let gameProjects = getGameProjects();
     let currentCardIndex = 0;
+
     // Dicionário Bilíngue da Seção Sobre (Perfil Oficial LinkedIn)
     const sobreTranslations = {
       pt: {
@@ -1070,37 +1408,169 @@
       }
     };
 
-    let currentSobreLang = 'pt';
+    // Função Mestra de Internacionalização Global [ pt | en ]
+    function setGlobalLang(lang) {
+      if (!siteTranslations[lang]) return;
+      currentGlobalLang = lang;
+      localStorage.setItem('nlldesign-lang', lang);
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
 
-    function setSobreLang(lang) {
-      if (!sobreTranslations[lang]) return;
-      currentSobreLang = lang;
-      trackDataLayer('select_language', { language: lang, section: 'sobre' });
+      portfolioProjects = getPortfolioProjects();
+      gameProjects = getGameProjects();
 
-      const btnPt = document.getElementById('langBtnPt');
-      const btnEn = document.getElementById('langBtnEn');
-      if (lang === 'pt') {
-        btnPt.className = 'px-3 py-1 rounded-full transition-all duration-200 bg-[var(--inv-bg)] text-[var(--inv-ink)] font-semibold shadow-sm';
-        btnEn.className = 'px-3 py-1 rounded-full transition-all duration-200 text-[var(--muted)] hover:text-[var(--ink)]';
-      } else {
-        btnEn.className = 'px-3 py-1 rounded-full transition-all duration-200 bg-[var(--inv-bg)] text-[var(--inv-ink)] font-semibold shadow-sm';
-        btnPt.className = 'px-3 py-1 rounded-full transition-all duration-200 text-[var(--muted)] hover:text-[var(--ink)]';
+      // Atualiza estilo dos botões do switcher [ pt | en ] em todas as instâncias
+      const activeClass = 'px-2.5 py-1 rounded-full transition-all duration-200 bg-[var(--inv-bg)] text-[var(--inv-ink)] font-semibold text-[11px] shadow-sm';
+      const inactiveClass = 'px-2.5 py-1 rounded-full transition-all duration-200 text-[var(--muted)] hover:text-[var(--ink)] text-[11px]';
+
+      ['headerLangBtn', 'mobLangBtn', 'langBtn'].forEach(prefix => {
+        const pt = document.getElementById(prefix + 'Pt');
+        const en = document.getElementById(prefix + 'En');
+        if (pt && en) {
+          if (lang === 'pt') {
+            pt.className = activeClass;
+            en.className = inactiveClass;
+          } else {
+            en.className = activeClass;
+            pt.className = inactiveClass;
+          }
+        }
+      });
+
+      const t = siteTranslations[lang];
+
+      // 1. Navegação
+      const navPort = document.getElementById('navLinkPortfolio');
+      const mobPort = document.getElementById('mobNavPortfolio');
+      if (navPort) navPort.innerHTML = t.navPortfolio;
+      if (mobPort) mobPort.innerHTML = t.navPortfolio;
+
+      const navSob = document.getElementById('navLinkSobre');
+      const mobSob = document.getElementById('mobNavSobre');
+      if (navSob) navSob.innerHTML = t.navSobre;
+      if (mobSob) mobSob.innerHTML = t.navSobre;
+
+      const navJog = document.getElementById('navLinkJogos');
+      const mobJog = document.getElementById('mobNavJogos');
+      if (navJog) navJog.innerHTML = t.navJogos;
+      if (mobJog) mobJog.innerHTML = t.navJogos;
+
+      const navCont = document.getElementById('navLinkContato');
+      const mobCont = document.getElementById('mobNavContato');
+      if (navCont) navCont.innerHTML = t.navContato;
+      if (mobCont) mobCont.innerHTML = t.navContato;
+
+      // 2. Hero Portfólio
+      const hPortTag = document.getElementById('heroPortTag');
+      if (hPortTag) hPortTag.innerHTML = t.heroPortTag;
+
+      const hPortTitle = document.getElementById('heroPortTitle');
+      if (hPortTitle) hPortTitle.innerHTML = t.heroPortTitle;
+
+      const hPortSub = document.getElementById('heroPortSubtitle');
+      if (hPortSub) hPortSub.innerHTML = t.heroPortSubtitle;
+
+      // 3. Hero Jogos
+      const hJogTag = document.getElementById('heroJogosTag');
+      if (hJogTag) hJogTag.innerHTML = t.heroJogosTag;
+
+      const hJogTitle = document.getElementById('heroJogosTitle');
+      if (hJogTitle) hJogTitle.innerHTML = t.heroJogosTitle;
+
+      const hJogSub = document.getElementById('heroJogosSubtitle');
+      if (hJogSub) hJogSub.innerHTML = t.heroJogosSubtitle;
+
+      // 4. Seção Sobre
+      updateSobreSection(lang);
+
+      // 5. Seção Contato
+      const cTag = document.getElementById('contatoTag');
+      if (cTag) cTag.innerHTML = t.contatoTag;
+
+      const cTitle = document.getElementById('contatoTitle');
+      if (cTitle) cTitle.innerHTML = t.contatoTitle;
+
+      const cSub = document.getElementById('contatoSubtitle');
+      if (cSub) cSub.innerHTML = t.contatoSubtitle;
+
+      const cEmail = document.getElementById('contatoEmailText');
+      if (cEmail) cEmail.innerHTML = t.contatoEmail;
+
+      const cLk = document.getElementById('contatoLinkedinText');
+      if (cLk) cLk.innerHTML = t.contatoLinkedin;
+
+      const cBe = document.getElementById('contatoBehanceText');
+      if (cBe) cBe.innerHTML = t.contatoBehance;
+
+      const cLoc = document.getElementById('contatoLocationText');
+      if (cLoc) cLoc.innerHTML = t.contatoLocation;
+
+      // 6. Labels do Estudo de Caso
+      const lDesafio = document.getElementById('caseLabelDesafio');
+      if (lDesafio) lDesafio.innerHTML = t.labelDesafio;
+
+      const lAbord = document.getElementById('caseLabelAbordagem');
+      if (lAbord) lAbord.innerHTML = t.labelAbordagem;
+
+      const lRes = document.getElementById('caseLabelResultado');
+      if (lRes) lRes.innerHTML = t.labelResultado;
+
+      const lGal = document.getElementById('caseGalleryTitle');
+      if (lGal) lGal.innerHTML = t.galleryTitle;
+
+      const lNext = document.getElementById('nextCaseLabel');
+      if (lNext) lNext.innerHTML = t.nextCaseLabel;
+
+      const bNext = document.getElementById('nextCaseBtn');
+      if (bNext) bNext.innerHTML = t.nextCaseBtn;
+
+      // 7. Rodapé
+      const fCopy = document.getElementById('footerCopyright');
+      if (fCopy) fCopy.innerHTML = t.footerCopyright;
+
+      const fTop = document.getElementById('footerBackToTop');
+      if (fTop) fTop.innerHTML = t.footerBackToTop;
+
+      // Re-renderiza a tela ativa para aplicar as traduções nos cards ou no case aberto
+      setGlobalLang(currentGlobalLang);
+      renderGamesGrid();
+
+      if (activeCaseId) {
+        openCaseStudy(activeCaseId);
       }
 
-      const container = document.getElementById('sobreContentContainer');
-      container.style.opacity = '0';
+      // Rastreamento no GTM / GA4
+      trackDataLayer('select_language', { language: lang, scope: 'global' });
+    }
 
-      setTimeout(() => {
-        const t = sobreTranslations[lang];
-        document.getElementById('sobreTag').innerHTML = t.tag;
-        document.getElementById('sobreHeading').innerHTML = t.title;
-        document.getElementById('sobreLead').innerHTML = t.lead;
-        
-        document.getElementById('sobreSkills').innerHTML = t.skills.map(s => `<span class="tag-pill">${s}</span>`).join('');
-        document.getElementById('sobreBio').innerHTML = t.paragraphs.map(p => `<p>${p}</p>`).join('');
-        document.getElementById('sobreProcessLabel').innerText = t.processHeading;
+    // Helper retrocompatível para a seção sobre
+    function setSobreLang(lang) {
+      setGlobalLang(lang);
+    }
 
-        document.getElementById('sobreProcessSteps').innerHTML = t.steps.map(st => `
+    function updateSobreSection(lang) {
+      const t = sobreTranslations[lang];
+      if (!t) return;
+      const sTag = document.getElementById('sobreTag');
+      if (sTag) sTag.innerHTML = t.tag;
+
+      const sHead = document.getElementById('sobreHeading');
+      if (sHead) sHead.innerHTML = t.title;
+
+      const sLead = document.getElementById('sobreLead');
+      if (sLead) sLead.innerHTML = t.lead;
+
+      const sSkills = document.getElementById('sobreSkills');
+      if (sSkills) sSkills.innerHTML = t.skills.map(s => `<span class="tag-pill">${s}</span>`).join('');
+
+      const sBio = document.getElementById('sobreBio');
+      if (sBio) sBio.innerHTML = t.paragraphs.map(p => `<p>${p}</p>`).join('');
+
+      const sProcLab = document.getElementById('sobreProcessLabel');
+      if (sProcLab) sProcLab.innerText = t.processHeading;
+
+      const sSteps = document.getElementById('sobreProcessSteps');
+      if (sSteps) {
+        sSteps.innerHTML = t.steps.map(st => `
           <div class="step-card p-6 sm:p-7 group">
             <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">${st.num}</div>
             <h3 class="text-xl font-medium text-[var(--ink)] mb-2">${st.title}</h3>
@@ -1109,13 +1579,16 @@
             </p>
           </div>
         `).join('');
+      }
 
-        document.getElementById('sobreCtaTitle').innerText = t.ctaTitle;
-        document.getElementById('sobreCtaSubtitle').innerText = t.ctaSubtitle;
-        document.getElementById('sobreCtaBtn').innerText = t.ctaBtn;
+      const ctaT = document.getElementById('sobreCtaTitle');
+      if (ctaT) ctaT.innerText = t.ctaTitle;
 
-        container.style.opacity = '1';
-      }, 150);
+      const ctaSub = document.getElementById('sobreCtaSubtitle');
+      if (ctaSub) ctaSub.innerText = t.ctaSubtitle;
+
+      const ctaB = document.getElementById('sobreCtaBtn');
+      if (ctaB) ctaB.innerText = t.ctaBtn;
     }
 
     
@@ -1253,7 +1726,7 @@
             </div>
 
             <button class="btn-pill-primary shrink-0 self-start sm:self-auto text-xs flex items-center gap-1.5">
-              <span>abrir case</span>
+              <span>${siteTranslations[currentGlobalLang].openCaseBtn}</span>
               <i data-lucide="arrow-right" class="card-arrow-icon w-3.5 h-3.5"></i>
             </button>
           </div>
@@ -1360,7 +1833,8 @@
       document.getElementById('viewCaseStudy').classList.remove('hidden');
 
       // Atualiza texto de voltar
-      document.getElementById('caseBackLabel').innerText = item.category === 'jogos' ? 'voltar aos jogos' : 'voltar ao portfólio';
+      const tLang = siteTranslations[currentGlobalLang] || siteTranslations.pt;
+      document.getElementById('caseBackLabel').innerText = item.category === 'jogos' ? tLang.backToGames : tLang.backToPortfolio;
 
       // Textos principais
       document.getElementById('caseBadge').innerHTML = item.tag;
@@ -1458,7 +1932,7 @@
       const galSection = document.getElementById('caseGallerySection');
       if (item.gallery && item.gallery.length > 0) {
         galSection.innerHTML = `
-          <span class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-4">evidências visuais &amp; telas</span>
+          <span id="caseGalleryTitle" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-4">evidências visuais &amp; telas</span>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             ${item.gallery.map(img => `
               <div onclick="openLightbox('${img.src}', '${img.title}')" class="portfolio-card overflow-hidden cursor-pointer group">
