@@ -9,10 +9,10 @@
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
   
-  <!-- Google Fonts: Bricolage Grotesque (Headings), Urbanist (Body), Italiana (Serif/KPIs) -->
+  <!-- Google Fonts: Syne (Headings), Plus Jakarta Sans (Body), Instrument Serif (Editorial / KPIs), JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Italiana&family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -21,38 +21,38 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    /* Design Tokens fiéis a luccas.social.br */
+    /* Design Tokens: Midnight Obsidian Violet & Editorial Luxury */
     :root {
-      --bg: #f8f3f0;
-      --ink: #191512;
-      --muted: #736a63;
+      --bg: #f8f6fc;
+      --ink: #120e21;
+      --muted: #6e6782;
       --surface: #ffffff;
-      --line: rgba(25, 21, 18, 0.1);
-      --dome: rgba(198, 152, 196, 0.3);
+      --line: rgba(80, 40, 140, 0.1);
+      --dome: rgba(168, 85, 247, 0.18);
       --chip: #ffffff;
-      --shadow: 0 18px 46px rgba(21, 23, 28, 0.08);
-      --inv-bg: #1b1518;
-      --inv-ink: #f6efea;
-      --accent: #b8735c;
-      --font-heading: "Bricolage Grotesque", sans-serif;
-      --font-body: "Urbanist", sans-serif;
-      --font-serif: "Italiana", serif;
+      --shadow: 0 18px 46px rgba(50, 20, 90, 0.06);
+      --inv-bg: #120e21;
+      --inv-ink: #f8f6fc;
+      --accent: #7c3aed;
+      --font-heading: "Syne", sans-serif;
+      --font-body: "Plus Jakarta Sans", sans-serif;
+      --font-serif: "Instrument Serif", serif;
       --font-mono: "JetBrains Mono", monospace;
       color-scheme: light;
     }
 
     :root[data-theme="dark"] {
-      --bg: #100e0d;
-      --ink: #f3efeb;
-      --muted: #a09890;
-      --surface: #181614;
-      --line: rgba(255, 255, 255, 0.12);
-      --dome: rgba(198, 152, 196, 0.24);
-      --chip: #221f1d;
-      --shadow: 0 18px 46px rgba(0, 0, 0, 0.45);
-      --inv-bg: #f2ede8;
-      --inv-ink: #16130f;
-      --accent: #d99878;
+      --bg: #09070f;
+      --ink: #f5f2fa;
+      --muted: #9b93ab;
+      --surface: #130f1f;
+      --line: rgba(190, 160, 255, 0.12);
+      --dome: rgba(147, 51, 234, 0.28);
+      --chip: #191429;
+      --shadow: 0 20px 50px rgba(4, 2, 10, 0.7);
+      --inv-bg: #f3effc;
+      --inv-ink: #0f0a1c;
+      --accent: #c084fc;
       color-scheme: dark;
     }
 
@@ -144,7 +144,7 @@
       width: 100%;
       max-width: 1100px;
       height: 480px;
-      background: radial-gradient(ellipse 65% 55% at 50% 0%, var(--dome) 0%, transparent 75%);
+      background: radial-gradient(ellipse 65% 55% at 50% 0%, var(--dome) 0%, rgba(99, 102, 241, 0.12) 45%, transparent 75%);
       pointer-events: none;
       z-index: 0;
       animation: domePulse 14s ease-in-out infinite alternate;
@@ -264,7 +264,7 @@
     .portfolio-card:hover {
       transform: translateY(-8px);
       border-color: color-mix(in srgb, var(--ink) 30%, transparent);
-      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px color-mix(in srgb, var(--ink) 12%, transparent);
+      box-shadow: 0 28px 60px rgba(4, 2, 10, 0.8), 0 0 24px rgba(168, 85, 247, 0.15), 0 0 0 1px rgba(192, 132, 252, 0.3);
     }
 
     .card-cover-img {
