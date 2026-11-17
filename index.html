@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NLL DESIGN | Lucas Nellucci • Product Designer</title>
-  <meta name="description" content="Portfólio de Lucas Nellucci (NLL Design) — Product Designer especializado em Design de Produto, UI/UX, Design Systems e Game UI/UX." />
+  <title>NLL DESIGN | Lucas Nellucci • UX &amp; Product Designer</title>
+  <meta name="description" content="Portfólio de Lucas Nellucci — UX & Product Designer formado em Design Gráfico com pós em UX e Neurociência. Especialista em estratégias de produto, UI/UX, Design Systems e Prototipagem." />
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
@@ -40,9 +40,9 @@
               bg: '#0a0b10',
               card: '#131620',
               cardHover: '#181d2a',
-              row: '#1a1f2c',
+              row: '#151924',
               border: 'rgba(255, 255, 255, 0.08)',
-              borderHover: 'rgba(168, 85, 247, 0.35)',
+              borderHover: 'rgba(168, 85, 247, 0.4)',
               textMuted: '#94a3b8'
             }
           }
@@ -56,8 +56,8 @@
       background-color: #0a0b10;
       color: #f1f5f9;
       background-image: 
-        radial-gradient(at 0% 0%, rgba(147, 51, 234, 0.08) 0px, transparent 40%),
-        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.06) 0px, transparent 40%);
+        radial-gradient(at 0% 0%, rgba(147, 51, 234, 0.1) 0px, transparent 45%),
+        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.07) 0px, transparent 45%);
       background-attachment: fixed;
     }
 
@@ -112,8 +112,8 @@
           N
         </div>
         <div>
-          <span class="font-display font-bold text-sm sm:text-base tracking-tight text-white block">NLL DESIGN</span>
-          <span class="text-[11px] sm:text-xs text-slate-400 font-mono">Lucas Nellucci</span>
+          <span class="font-display font-bold text-sm sm:text-base tracking-tight text-white block">LUCAS NELLUCCI</span>
+          <span class="text-[11px] sm:text-xs text-slate-400 font-mono">UX &amp; Product Designer</span>
         </div>
       </a>
 
@@ -124,14 +124,29 @@
         <a href="#projetos" onclick="showHomeView();" class="hover:text-white transition-colors">Todos os Projetos</a>
       </nav>
 
-      <!-- Direita: Botões de contato + e-mail -->
-      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-        <a href="https://github.com/nlldesign" target="_blank" rel="noopener noreferrer" 
-           class="p-2 sm:px-3.5 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center gap-1.5 transition-all"
-           title="Ver perfil no GitHub">
-          <i data-lucide="github" class="w-4 h-4"></i>
-          <span class="hidden sm:inline">GitHub</span>
+      <!-- Direita: Botões de contato + e-mail + redes (LinkedIn & Behance) -->
+      <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" 
+           class="p-2 sm:px-3 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 hover:text-white flex items-center gap-1.5 transition-all"
+           title="LinkedIn de Lucas Nellucci">
+          <i data-lucide="linkedin" class="w-4 h-4 text-blue-400"></i>
+          <span class="hidden lg:inline">LinkedIn</span>
         </a>
+
+        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" 
+           class="p-2 sm:px-3 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 hover:text-white flex items-center gap-1.5 transition-all"
+           title="Behance de Lucas Nellucci">
+          <i data-lucide="layout" class="w-4 h-4 text-cyan-400"></i>
+          <span class="hidden lg:inline">Behance</span>
+        </a>
+
+        <a href="https://github.com/nlldesign" target="_blank" rel="noopener noreferrer" 
+           class="p-2 sm:px-3 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 hover:text-white flex items-center gap-1.5 transition-all"
+           title="GitHub nlldesign">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span class="hidden lg:inline">GitHub</span>
+        </a>
+
         <a href="mailto:nellucci.design@gmail.com" 
            class="px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/30 flex items-center gap-1.5 transition-all">
           <i data-lucide="mail" class="w-4 h-4"></i>
@@ -148,27 +163,71 @@
   <main id="homeView" class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-1 w-full">
 
     <!-- SEÇÃO 1: CARROSSEL / 3 CARDS DE DESTAQUE NO TOPO -->
-    <!-- Sketch: [Card Esquerda] [Card Centro: Imagem + Resumo rápido sobre o case de sucesso] [Card Direita] -->
-    <section id="destaques" class="mb-20">
-      <div class="flex items-center justify-between mb-6">
+    <!-- Sketch 1: [Card Esquerda] [Card Centro: Imagem + Resumo rápido sobre o case de sucesso] [Card Direita] -->
+    <section id="destaques" class="mb-14 sm:mb-20">
+      <div class="flex items-center justify-between mb-5 sm:mb-6">
         <div>
           <span class="text-xs font-mono uppercase tracking-wider text-brand-400 font-semibold block mb-1">Casos de Sucesso em Destaque</span>
-          <h2 class="text-2xl font-display font-bold text-white tracking-tight">Projetos Selecionados</h2>
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-white tracking-tight">Projetos Selecionados</h2>
         </div>
         <div class="text-xs text-slate-500 font-mono hidden sm:block">
-          Clique no card para abrir o estudo completo
+          Deslize ou clique no card para abrir o estudo completo
         </div>
       </div>
 
-      <!-- Grid com 3 Cards em Destaque conforme o wireframe (Carrossel com snap no mobile, grid no desktop) -->
-      <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-6 px-6 no-scrollbar md:mx-0 md:px-0 md:grid md:grid-cols-3 md:gap-6">
+      <!-- Grid com 3 Cards em Destaque conforme o wireframe (Carrossel com snap no mobile, grid 3 colunas no desktop) -->
+      <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 no-scrollbar md:mx-0 md:px-0 md:grid md:grid-cols-3 md:gap-6">
         
-        <!-- Destaque 1: FibroCare -->
+        <!-- Destaque 1: Simulação de Planos (Associação Cartão Cristão) -->
+        <div onclick="openProjectDetail('plano-saude')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group w-[82vw] sm:w-[70vw] md:w-auto shrink-0 snap-center">
+          <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
+            <img src="assets/framer-plano-saude-detail.png" alt="Simulação de Planos de Saúde" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-emerald-400">
+              Conversão &amp; UX
+            </div>
+          </div>
+          <div class="p-5 sm:p-6">
+            <h3 class="font-display font-bold text-base sm:text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
+              Simulação de Planos de Saúde
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+              Resumo rápido sobre o case de sucesso: Redesenho completo do fluxo de cotação da Associação Cartão Cristão, eliminando atritos funcionais e alavancando as taxas de conversão de leads no site.
+            </p>
+            <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+              <span>Ver case detalhado</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destaque 2: Supermercado Bom Vizinho (E-commerce UX) -->
+        <div onclick="openProjectDetail('bom-vizinho')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group w-[82vw] sm:w-[70vw] md:w-auto shrink-0 snap-center">
+          <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
+            <img src="assets/framer-bom-vizinho.png" alt="Supermercado Bom Vizinho" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-cyan-400">
+              E-commerce &amp; Discovery
+            </div>
+          </div>
+          <div class="p-5 sm:p-6">
+            <h3 class="font-display font-bold text-base sm:text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
+              Supermercado Bom Vizinho
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+              Resumo rápido sobre o case de sucesso: Estratégia de imersão e prototipação no Figma para criar a presença online própria de uma rede de 20 anos, garantindo autonomia de marca e compras online.
+            </p>
+            <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+              <span>Ver case detalhado</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destaque 3: FibroCare (HealthTech UX) -->
         <div onclick="openProjectDetail('fibrocare')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group w-[82vw] sm:w-[70vw] md:w-auto shrink-0 snap-center">
           <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
             <img src="assets/fibrocare-preview.svg" alt="FibroCare" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-emerald-400">
-              HealthTech UX
+            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-purple-400">
+              HealthTech &amp; Supabase
             </div>
           </div>
           <div class="p-5 sm:p-6">
@@ -176,54 +235,10 @@
               FibroCare (FibroTracker)
             </h3>
             <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
-              Resumo rápido sobre o case de sucesso: Plataforma de saúde para monitoramento de dor crônica com mapa anatômico dos 18 pontos do ACR e predição de crises em 24h–48h.
+              Resumo rápido sobre o case de sucesso: Plataforma para monitoramento de dor crônica com mapa anatômico interativo dos 18 pontos do ACR e predição de crises em 24h–48h para reduzir ansiedade.
             </p>
             <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
               <span>Ver case detalhado</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </div>
-          </div>
-        </div>
-
-        <!-- Destaque 2: Habit RPG Tracker -->
-        <div onclick="openProjectDetail('habit-rpg')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group w-[82vw] sm:w-[70vw] md:w-auto shrink-0 snap-center">
-          <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
-            <img src="assets/habit-rpg-preview.svg" alt="Habit RPG" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-purple-400">
-              Behavioral Design
-            </div>
-          </div>
-          <div class="p-5 sm:p-6">
-            <h3 class="font-display font-bold text-base sm:text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
-              Habit RPG Tracker
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
-              Resumo rápido sobre o case de sucesso: Design comportamental aplicado a rotinas diárias e finanças, elevando a retenção através de loops de recompensa tangíveis.
-            </p>
-            <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
-              <span>Ver case detalhado</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </div>
-          </div>
-        </div>
-
-        <!-- Destaque 3: Corpo Seco (Game UI/UX) -->
-        <div onclick="openProjectDetail('corpo-seco')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group w-[82vw] sm:w-[70vw] md:w-auto shrink-0 snap-center">
-          <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
-            <img src="assets/corpo-seco-hero.png" alt="Corpo Seco" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-cyan-400">
-              3D &amp; Diegetic UI
-            </div>
-          </div>
-          <div class="p-5 sm:p-6">
-            <h3 class="font-display font-bold text-base sm:text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
-              Corpo Seco: A Maldição
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
-              Resumo rápido sobre o case de sucesso: Jogo 3D de terror e suspense na mata com Three.js. Design sem barras de vida (UI diegética) onde a luz e a névoa guiam o jogador.
-            </p>
-            <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
-              <span>Jogar embed &amp; ver case</span>
               <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </div>
           </div>
@@ -232,7 +247,7 @@
       </div>
     </section>
 
-    <!-- SEÇÃO 2: APRESENTANDO-ME (Bloco grande conforme o sketch) -->
+    <!-- SEÇÃO 2: APRESENTANDO-ME (Bloco grande conforme o sketch com a bio real do Framer) -->
     <section id="apresentacao" class="mb-14 sm:mb-20">
       <div class="text-center mb-5 sm:mb-6">
         <h2 class="text-xl sm:text-2xl font-display font-bold text-white tracking-tight">Apresentando-me</h2>
@@ -241,37 +256,37 @@
       <div class="sketch-card p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl relative overflow-hidden">
         <div class="max-w-3xl mx-auto">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300 text-xs font-mono font-medium mb-5 sm:mb-6">
-            Lucas Nellucci • Product Designer &amp; Design Strategist
+            Lucas Nellucci • UX &amp; Product Designer
           </div>
 
           <h3 class="text-xl sm:text-3xl font-display font-bold text-white mb-5 sm:mb-6 leading-snug">
-            Transformando complexidade em clareza, usabilidade e experiências digitais memoráveis.
+            Sou UX Designer, formado em Design Gráfico com pós em UX e em fase de conclusão da pós em Neurociência do Desenvolvimento.
           </h3>
 
           <p class="text-sm sm:text-base text-slate-300 leading-relaxed mb-5 sm:mb-6">
-            Sou designer de produto com atuação completa desde a descoberta do problema (Product Discovery, pesquisa qualitativa e arquitetura de informação) até a execução de alta fidelidade em <strong>UI Design</strong>, <strong>Design Systems</strong> e <strong>Prototipagem Interativa</strong>.
+            Atuo na criação de estratégias de produto, análise de dados e acompanhamento de métricas para otimizar continuamente a experiência do usuário. Desenvolvo briefings, arquitetura de informação, wireframes e protótipos de alta fidelidade no Figma, buscando soluções inovadoras e consistentes.
           </p>
 
           <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6 sm:mb-8">
-            Minha abordagem une psicologia cognitiva, design comportamental e domínio prático de tecnologia (React, Three.js, Canvas), garantindo que cada decisão de design seja viável, acessível (WCAG) e voltada para gerar impacto real de negócio e satisfação do usuário.
+            Atualmente atuo como <strong>UX Designer na EasyChange</strong>. Minha trajetória profissional inclui passagens como <strong>Designer Instrucional na Neogrid</strong>, <strong>Web Designer na Associação Cartão Cristão do Brasil</strong> e <strong>Estagiário em UX/UI na Nesta</strong>.
           </p>
 
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-white/10 text-center sm:text-left">
-            <div class="p-2 sm:p-0 bg-white/[0.02] sm:bg-transparent rounded-xl">
-              <div class="text-[11px] font-mono text-slate-500 uppercase">Foco Primário</div>
-              <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">Design de Produto</div>
+            <div class="p-2.5 sm:p-0 bg-white/[0.02] sm:bg-transparent rounded-xl">
+              <div class="text-[11px] font-mono text-slate-500 uppercase">Atuação Atual</div>
+              <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">EasyChange • UX</div>
             </div>
-            <div class="p-2 sm:p-0 bg-white/[0.02] sm:bg-transparent rounded-xl">
-              <div class="text-[11px] font-mono text-slate-500 uppercase">Metodologia</div>
-              <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">Discovery &amp; HFE</div>
+            <div class="p-2.5 sm:p-0 bg-white/[0.02] sm:bg-transparent rounded-xl">
+              <div class="text-[11px] font-mono text-slate-500 uppercase">Especialização</div>
+              <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">UX &amp; Neurociência</div>
             </div>
-            <div class="p-2 sm:p-0 bg-white/[0.02] sm:bg-transparent rounded-xl">
-              <div class="text-[11px] font-mono text-slate-500 uppercase">Sistemas</div>
-              <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">Design Systems</div>
+            <div class="p-2.5 sm:p-0 bg-white/[0.02] sm:bg-transparent rounded-xl">
+              <div class="text-[11px] font-mono text-slate-500 uppercase">Competências</div>
+              <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">Figma &amp; Prototipagem</div>
             </div>
-            <div class="p-2 sm:p-0 bg-white/[0.02] sm:bg-transparent rounded-xl">
-              <div class="text-[11px] font-mono text-slate-500 uppercase">Especialidade</div>
-              <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">Behavioral UX &amp; 3D</div>
+            <div class="p-2.5 sm:p-0 bg-white/[0.02] sm:bg-transparent rounded-xl">
+              <div class="text-[11px] font-mono text-slate-500 uppercase">Experiência</div>
+              <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">Neogrid • Cartão Cristão</div>
             </div>
           </div>
         </div>
@@ -283,18 +298,18 @@
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
         <div>
           <h2 class="text-xl sm:text-2xl font-display font-bold text-white tracking-tight">Projetos</h2>
-          <p class="text-slate-400 text-xs sm:text-sm mt-1">Lista completa de produtos digitais, ferramentas e jogos interativos.</p>
+          <p class="text-slate-400 text-xs sm:text-sm mt-1">Estudos de caso de UX, produtos digitais, design systems e jogos interativos.</p>
         </div>
 
         <!-- Seletor de Categoria: Projetos vs Jogos -->
         <div class="flex items-center p-1 rounded-xl bg-dark-850 border border-white/10 text-xs font-medium overflow-x-auto max-w-full no-scrollbar">
           <button onclick="filterList('todos')" id="filterTodos" class="px-3.5 sm:px-4 py-2 rounded-lg text-white tab-pill-active transition-all shrink-0">Todos</button>
-          <button onclick="filterList('produto')" id="filterProduto" class="px-3.5 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all shrink-0">Design de Produto</button>
+          <button onclick="filterList('produto')" id="filterProduto" class="px-3.5 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all shrink-0">Design de Produto &amp; UX</button>
           <button onclick="filterList('jogos')" id="filterJogos" class="px-3.5 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all shrink-0">Jogos &amp; 3D</button>
         </div>
       </div>
 
-      <!-- Container da Lista de Linhas conforme o Sketch -->
+      <!-- Container da Lista de Linhas conforme o Sketch 1 -->
       <!-- [descrição do projeto ............................ Botão para acessar] -->
       <div id="projectsListContainer" class="space-y-4">
         <!-- Renderizado dinamicamente via JS -->
@@ -407,25 +422,96 @@
   <!-- FOOTER RESUMIDO (Conforme Sketch) -->
   <footer class="border-t border-white/10 py-10 text-center text-xs text-slate-500 font-mono">
     <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div>© 2026 NLL DESIGN • Lucas Nellucci. Product Design &amp; Creative Direction.</div>
+      <div>© 2026 Lucas Nellucci (NLL DESIGN). UX &amp; Product Designer.</div>
       <div class="flex items-center gap-6">
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" class="hover:text-slate-300 transition-colors">LinkedIn</a>
+        <a href="https://www.behance.net/lucasnellucci" target="_blank" class="hover:text-slate-300 transition-colors">Behance</a>
         <a href="https://github.com/nlldesign" target="_blank" class="hover:text-slate-300 transition-colors">GitHub</a>
-        <a href="mailto:nellucci.design@gmail.com" class="hover:text-slate-300 transition-colors">nellucci.design@gmail.com</a>
+        <a href="mailto:nellucci.design@gmail.com" class="hover:text-slate-300 transition-colors">Email</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // Catálogo unificado com metadados para Home e Projeto Expandido
+    // Catálogo unificado com cases do Framer original + cases desenvolvidos
     const projectsData = [
+      // 1. Case Framer: Simulação de Planos de Saúde
+      {
+        id: 'plano-saude',
+        title: 'Alteração no Fluxo de Simulação de Planos',
+        subtitle: 'Associação Cartão Cristão • UX, Otimização de Conversão e Wireframes',
+        type: 'produto',
+        badge: 'Conversão &amp; UX',
+        image: 'assets/framer-plano-saude-detail.png',
+        descricaoLinha: 'Redesenho completo do fluxo de simulação de planos da Associação Cartão Cristão, corrigindo falhas de usabilidade e recuperando a geração de leads.',
+        desafio: 'A solicitação surgiu após o antigo fluxo apresentar problemas de funcionalidade que impediam os usuários de realizar simulações de planos, resultando em uma diminuição nas conversões provenientes do site. O desafio consistia em desenvolver um layout simples, claro e objetivo que pudesse ser implementado com agilidade para estancar a perda de potenciais clientes e resguardar a reputação da marca.',
+        abordagem: 'Adotei uma estratégia focada em consistência e rapidez: defini um padrão visual coeso para os campos de preenchimento, reduzindo atritos cognitivos e etapas desnecessárias no formulário. A arquitetura de informação foi reorganizada para guiar o usuário passo a passo com feedback imediato de cotação, permitindo fácil manutenção e testes ágeis.',
+        resultado: 'As melhorias implementadas resultaram em um aumento considerável na taxa de conversão do site, corrigindo deficiências históricas do fluxo e fortalecendo a captação de novos associados.',
+        techs: ['UX Design', 'Taxa de Conversão (CRO)', 'Figma', 'Wireframing', 'UI Design'],
+        githubUrl: null,
+        vercelUrl: 'https://www.associacaocartaocristao.com.br/assistencia-medica.html',
+        embedUrl: null
+      },
+      // 2. Case Framer: Bom Vizinho
+      {
+        id: 'bom-vizinho',
+        title: 'Estudo de Caso: Supermercado Bom Vizinho',
+        subtitle: 'E-commerce Próprio, Imersão &amp; Design System no Figma',
+        type: 'produto',
+        badge: 'E-commerce &amp; Discovery',
+        image: 'assets/framer-bom-vizinho.png',
+        descricaoLinha: 'Projeto de UX para levar um supermercado tradicional de 20 anos para o ambiente digital com autonomia de marca e compras online.',
+        desafio: 'O Supermercado Bom Vizinho, com mais de duas décadas de atuação, não possuía site próprio e dependia exclusivamente de plataformas terceirizadas de entrega. Isso limitava severamente a autonomia sobre a marca, a experiência do cliente e a capacidade de fidelização, além de gerar dependência de intermediários em um mercado altamente competitivo.',
+        abordagem: 'O processo de resolução foi estruturado em três etapas: Imersão, Ideação e Prototipação. No Notion, documentei os requisitos e personas. No Figma, realizei benchmarking detalhado de referências (Amazon, iFood, Magazine Luiza, Nagumo) e desenvolvi um Design System modular com componentes reutilizáveis, desenhando wireframes completos para entrega em domicílio e retirada na loja.',
+        resultado: 'Entrega de um protótipo de alta fidelidade que proporcionou uma experiência de compra online fluida, permitindo ao supermercado planejar seu canal direto de vendas com controle total sobre dados de clientes e campanhas.',
+        techs: ['UX Research', 'Design System', 'Figma', 'Benchmarking', 'E-commerce UX'],
+        githubUrl: null,
+        vercelUrl: null,
+        embedUrl: null
+      },
+      // 3. Case Framer: Cbanco
+      {
+        id: 'cbanco',
+        title: 'Estudo de Caso: Cbanco (Fintech App)',
+        subtitle: 'Estrutura Bancária, Prototipação Avançada &amp; Style Guide',
+        type: 'produto',
+        badge: 'Fintech UX',
+        image: 'assets/framer-cbanco-detail.png',
+        descricaoLinha: 'Estudo da arquitetura de um aplicativo bancário moderno com foco na organização de recursos e criação de style guide consistente para design e dev.',
+        desafio: 'Aplicativos financeiros necessitam transmitir extrema segurança e simplicidade simultaneamente. O desafio era reformular o fluxo antigo de extrato, cartões e transferências em uma interface limpa e padronizada que facilitasse tanto a vida do usuário quanto a implementação pelos desenvolvedores.',
+        abordagem: 'Mapeamento do fluxo antigo e reconstrução da arquitetura no Figma. Criação de um style guide consistente, documentado e de fácil consulta, com tipografia legível para números, contrastes acessíveis e componentes atômicos para saldos, extratos e transações.',
+        resultado: 'Interface bancária moderna com redução da carga cognitiva em operações de rotina e biblioteca padronizada de componentes pronta para desenvolvimento.',
+        techs: ['Fintech UX', 'Style Guide', 'Figma', 'Arquitetura de Informação'],
+        githubUrl: null,
+        vercelUrl: null,
+        embedUrl: null
+      },
+      // 4. Case Framer: Intern Gestão de Times
+      {
+        id: 'intern',
+        title: 'Estudo de Caso: Intern (Gestão de Times &amp; Intranet)',
+        subtitle: 'Plataforma Corporativa, Comunicação Interna &amp; Treinamentos',
+        type: 'produto',
+        badge: 'Enterprise UX',
+        image: 'assets/framer-intern-detail.png',
+        descricaoLinha: 'Rede social corporativa com foco em treinamento de colaboradores, espelho de ponto, holerite e comunicação integrada entre equipes.',
+        desafio: 'Sistemas internos de RH e intranet costumam ser descentralizados, complexos e visualmente desestimulantes, fazendo com que colaboradores percam prazos de envio de ponto e comunicados importantes.',
+        abordagem: 'Criação de um hub centralizado com estética de rede social amigável. Guia de estilo intuitivo integrando holerite, marcação de ponto, cardápio do refeitório e módulos de treinamento gamificados, garantindo facilidade de consulta para gestores e colaboradores.',
+        resultado: 'Melhoria na comunicação interna, unificação dos pontos de contato do colaborador com a empresa e navegação eficiente sem ruídos operacionais.',
+        techs: ['Enterprise UX', 'Employee Experience (EX)', 'Figma', 'UI Design'],
+        githubUrl: null,
+        vercelUrl: null,
+        embedUrl: null
+      },
+      // 5. FibroCare
       {
         id: 'fibrocare',
         title: 'FibroCare (FibroTracker)',
-        subtitle: 'HealthTech • Mapa Anatômico de Dor & Predição de Crises',
+        subtitle: 'HealthTech • Mapa Anatômico de Dor &amp; Predição de Crises',
         type: 'produto',
         badge: 'HealthTech UX',
         image: 'assets/fibrocare-preview.svg',
-        descricaoLinha: 'Aplicativo clínico para pacientes com Fibromialgia. Mapa anatômico interativo dos 18 tender points do ACR e predição de crises em 24h–48h para reduzir a ansiedade de antecipação.',
+        descricaoLinha: 'Aplicativo clínico para pacientes com Fibromialgia. Mapa anatômico interativo dos 18 tender points do ACR e predição de crises em 24h–48h.',
         desafio: 'Pacientes com dores crônicas relatam grande dificuldade em expressar a localização, intensidade e evolução da dor durante consultas médicas rápidas. Sem um histórico objetivo e estruturado, os reumatologistas enfrentam barreiras para ajustar medicamentos, gerando frustração contínua e subdiagnóstico de fatores desencadeantes.',
         abordagem: 'Concepção de uma interface mobile-first com baixa carga cognitiva e dark mode calmante. Mapeamento interativo dos 18 pontos anatômicos do ACR (American College of Rheumatology) com toques rápidos, associado a um algoritmo de correlação que analisa sono e clima para projetar a probabilidade de crise em 24h a 48h.',
         resultado: 'Redução significativa do tempo de relato em consultório médico, maior adesão diária aos registros de sintomas e empoderamento do paciente, que passa a ter previsibilidade sobre suas crises com relatórios exportáveis.',
@@ -434,6 +520,7 @@
         vercelUrl: null,
         embedUrl: null
       },
+      // 6. Habit RPG Tracker
       {
         id: 'habit-rpg',
         title: 'Habit RPG Tracker',
@@ -450,10 +537,11 @@
         vercelUrl: null,
         embedUrl: null
       },
+      // 7. MapLeads
       {
         id: 'mapleads',
         title: 'MapLeads',
-        subtitle: 'B2B SaaS • Workflow UX & Prevenção Ativa de Erros',
+        subtitle: 'B2B SaaS • Workflow UX &amp; Prevenção Ativa de Erros',
         type: 'produto',
         badge: 'B2B Workflow',
         image: 'assets/mapleads-preview.svg',
@@ -466,60 +554,30 @@
         vercelUrl: 'https://mapleads-psi.vercel.app',
         embedUrl: null
       },
+      // 8. Social Media & Comunicação Digital (Framer)
       {
-        id: 'pepe-oracle',
-        title: 'Pepe Design Oracle',
-        subtitle: 'Human-AI Interaction • Co-Piloto de Direção de Arte',
+        id: 'social-media',
+        title: 'Comunicação Digital &amp; Social Media',
+        subtitle: 'Associação Cartão Cristão e Parceiros • Criação de Peças e Gestão',
         type: 'produto',
-        badge: 'AI Product Design',
-        image: 'assets/pepe-oracle-preview.svg',
-        descricaoLinha: 'Interface de co-criação estética para designers e criativos orientando a inteligência artificial generativa na criação de paletas e diretrizes visuais.',
-        desafio: 'Interagir com modelos avançados de IA através de caixas de chat de texto comum é contra-intuitivo para designers visuais, resultando em respostas conceituais vagas e falta de controle sobre cores e proporções.',
-        abordagem: 'Criação de affordances visuais de entrada (sliders de contraste, cartões de intenção de humor e seletor de épocas estilísticas) que estruturam o prompt nos bastidores e orientam a Google Gemini API a devolver paletas harmônicas e regras de composição aplicadas.',
-        resultado: 'Aceleração de até 3 vezes na fase inicial de ideação e benchmarking estético para novos produtos digitais e interfaces de marca.',
-        techs: ['Human-AI Interaction', 'Prompt Design', 'Design Generativo', 'Creative Tooling'],
+        badge: 'Marketing &amp; Design Gráfico',
+        image: 'assets/framer-social-media.png',
+        descricaoLinha: 'Criação de identidade visual e peças de comunicação digital para redes sociais (Instagram, Facebook, LinkedIn) e relatórios de performance.',
+        desafio: 'Manter a consistência de marca e engajamento em múltiplos canais digitais para a Associação Cartão Cristão e sua rede de parceiros, com frequentes campanhas de saúde e benefícios.',
+        abordagem: 'Criação de um sistema de templates gráficos no Figma e Photoshop, alinhando tom de voz, paletas de cores institucionais e chamadas de ação (CTAs) orientadas a conversão em mídias sociais.',
+        resultado: 'Mais de dois anos de produção contínua com elevação no alcance orgânico e padronização visual completa das marcas parceiras.',
+        techs: ['Design Gráfico', 'Social Media', 'Photoshop', 'Identidade Visual', 'Marketing Digital'],
         githubUrl: null,
         vercelUrl: null,
         embedUrl: null
       },
-      {
-        id: 'jobhunter-ai',
-        title: 'JobHunter AI',
-        subtitle: 'Career Operations • Análise de Vagas e Fórmula Google XYZ',
-        type: 'produto',
-        badge: 'Information Architecture',
-        image: 'assets/jobhunter-preview.svg',
-        descricaoLinha: 'Plataforma para profissionais técnicos visualizarem gaps de competência frente a vagas do mercado e reescreverem suas realizações com foco em métricas de impacto.',
-        desafio: 'Candidatos altamente qualificados são eliminados precocemente por softwares de triagem ou recrutadores devido a currículos descritivos que não evidenciam métricas de impacto claras.',
-        abordagem: 'Design de um dashboard de compatibilidade com visualização de requisitos atendidos e sugestão assistida de reescrita na fórmula Google XYZ ("Realizou X, medido por Y, através de Z").',
-        resultado: 'Elevação de 4.2x na conversão de currículos para entrevistas técnicas através de clareza visual e adequação precisa aos requisitos de mercado.',
-        techs: ['Information Architecture', 'User Guidance', 'Clareza Cognitiva', 'Career Ops'],
-        githubUrl: null,
-        vercelUrl: null,
-        embedUrl: null
-      },
-      {
-        id: 'token-tracker',
-        title: 'Token Tracker (Antigravity Plugin)',
-        subtitle: 'Developer Experience (DX) • Telemetria e Monitoramento de Custos',
-        type: 'produto',
-        badge: 'DX Design',
-        image: 'assets/token-tracker-preview.svg',
-        descricaoLinha: 'Design de painel lateral (sidecar) para desenvolvedores acompanharem consumo de tokens, custos de API e limite de contexto sem quebrar o fluxo de foco.',
-        desafio: 'Desenvolvedores que usam IA perdem a visibilidade dos custos cumulativos e sofrem interrupções abruptas por esgotamento súbito da janela de contexto durante sessões de codificação.',
-        abordagem: 'Construção de medidores circulares com zonas de risco intuitivas por cor, dados essenciais condensados em uma linha e alertas visuais periféricos e não-intrusivos.',
-        resultado: 'Previsibilidade orçamentária total e eliminação de quebras no raciocínio do desenvolvedor durante sessões longas de engenharia.',
-        techs: ['Developer Experience (DX)', 'Data Visualization', 'Minimal UI', 'Dark Mode'],
-        githubUrl: null,
-        vercelUrl: null,
-        embedUrl: null
-      },
+      // 9. Jogos: Corpo Seco
       {
         id: 'corpo-seco',
         title: 'Corpo Seco: A Maldição do Vale',
-        subtitle: 'Game UI/UX • Atmosfera de Terror 3D & UI Diegética',
+        subtitle: 'Game UI/UX • Atmosfera de Terror 3D &amp; UI Diegética',
         type: 'jogos',
-        badge: '3D & Diegetic UI',
+        badge: '3D &amp; Diegetic UI',
         image: 'assets/corpo-seco-hero.png',
         descricaoLinha: 'Jogo 3D de terror e suspense na mata. Foco em UI diegética sem barras flutuantes na tela: a lanterna, a névoa e o som espacial comunicam o perigo ao jogador.',
         desafio: 'Manter o jogador informado sobre seu estado e recursos em um jogo 3D tenso sem quebrar a imersão com barras de vida, ícones flutuantes ou poluição de tela.',
@@ -530,9 +588,10 @@
         vercelUrl: 'https://corpo-seco.vercel.app',
         embedUrl: 'games/corpo-seco/index.html'
       },
+      // 10. Jogos: Undertale 3D
       {
         id: 'undertale-3d',
-        title: 'Undertale 3D: Ruínas & Arena',
+        title: 'Undertale 3D: Ruínas &amp; Arena',
         subtitle: 'Spatial UX • Transposição de Câmera 2D para Espaço 3D',
         type: 'jogos',
         badge: 'Spatial UI 3D',
@@ -546,6 +605,7 @@
         vercelUrl: 'https://undertale-3d.vercel.app',
         embedUrl: 'games/undertale-3d/index.html'
       },
+      // 11. Jogos: Swam Invasion
       {
         id: 'swam-invasion',
         title: 'Swam Invasion (Colony Survivor)',
@@ -562,6 +622,7 @@
         vercelUrl: 'https://swam-invasion.vercel.app',
         embedUrl: 'games/swam-invasion/index.html'
       },
+      // 12. Jogos: Biopunk Idle
       {
         id: 'biopunk-idle',
         title: 'Biopunk Idle (Rádio Esperança 3D)',
@@ -577,38 +638,6 @@
         githubUrl: null,
         vercelUrl: 'https://biopunk-idle.vercel.app',
         embedUrl: null
-      },
-      {
-        id: 'pizzarun',
-        title: 'PizzaRun 2.0',
-        subtitle: 'Fast-Paced UI • Cronômetros e Telemetria Esportiva',
-        type: 'jogos',
-        badge: 'Sports UI',
-        image: 'assets/pizzarun-preview.svg',
-        descricaoLinha: 'Aplicação web ágil combinando entrega contra o tempo e painéis analíticos pós-corrida com alta legibilidade.',
-        desafio: 'Comunicar urgência de tempo sem sobrecarregar a visão periférica do usuário durante o trajeto.',
-        abordagem: 'Design de contadores esportivos em tipografia de alto impacto e telas de resultado que resumem eficiência em frações de segundo.',
-        resultado: 'Feedback imediato e alta satisfação visual em partidas rápidas.',
-        techs: ['Sports UI', 'Performance Telemetry', 'Mobile-First Design'],
-        githubUrl: null,
-        vercelUrl: 'https://pizzarun2.vercel.app',
-        embedUrl: null
-      },
-      {
-        id: 'bio-horde',
-        title: 'Bio Horde 98',
-        subtitle: 'Retro Aesthetics • Restrição de Paleta e Nostalgia Arcade',
-        type: 'jogos',
-        badge: 'Retro UX',
-        image: 'assets/bio-horde-preview.svg',
-        descricaoLinha: 'Ação arcade retrô anos 90 com paleta de cores restrita e mecânicas de sobrevivência contra hordas em ondas.',
-        desafio: 'Recriar a sensação visual autêntica dos fliperamas dos anos 90 em telas de alta resolução contemporâneas.',
-        abordagem: 'Uso de paleta de cores limitada deliberada, contrastes saturados e tipografia monospaçada, evocando a textura de tubos CRT.',
-        resultado: 'Design nostálgico com apelo direto para apreciadores de clássicos arcade.',
-        techs: ['Retro UI', 'Color Constraints', 'Pixel Aesthetics'],
-        githubUrl: null,
-        vercelUrl: 'https://bio-horde-98.vercel.app',
-        embedUrl: 'games/bio-horde/index.html'
       }
     ];
 
@@ -622,15 +651,15 @@
       const fJogos = document.getElementById('filterJogos');
 
       [fTodos, fProd, fJogos].forEach(b => {
-        b.className = 'px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all';
+        b.className = 'px-3.5 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all shrink-0';
       });
 
       if (category === 'todos') {
-        fTodos.className = 'px-4 py-2 rounded-lg text-white tab-pill-active transition-all';
+        fTodos.className = 'px-3.5 sm:px-4 py-2 rounded-lg text-white tab-pill-active transition-all shrink-0';
       } else if (category === 'produto') {
-        fProd.className = 'px-4 py-2 rounded-lg text-white tab-pill-active transition-all';
+        fProd.className = 'px-3.5 sm:px-4 py-2 rounded-lg text-white tab-pill-active transition-all shrink-0';
       } else {
-        fJogos.className = 'px-4 py-2 rounded-lg text-white tab-pill-active transition-all';
+        fJogos.className = 'px-3.5 sm:px-4 py-2 rounded-lg text-white tab-pill-active transition-all shrink-0';
       }
 
       renderProjectsList();
@@ -654,7 +683,7 @@
                 ${p.badge}
               </span>
               <span class="text-xs text-slate-500 font-mono">
-                ${p.type === 'produto' ? 'Design de Produto' : 'Jogo &amp; 3D'}
+                ${p.type === 'produto' ? 'Design de Produto &amp; UX' : 'Jogo &amp; 3D'}
               </span>
             </div>
 
@@ -671,9 +700,9 @@
             ${p.vercelUrl ? `
               <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
                  class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-mono flex items-center justify-center gap-1.5 transition-all shrink-0"
-                 title="Abrir na Vercel">
+                 title="Abrir Projeto">
                 <span class="font-bold">▲</span>
-                <span class="inline">Vercel</span>
+                <span class="inline">Acessar</span>
               </a>
             ` : ''}
 
@@ -696,7 +725,7 @@
       if (!p) return;
 
       // Preenche os dados do cabeçalho do detalhe
-      document.getElementById('detailBadge').innerText = p.badge;
+      document.getElementById('detailBadge').innerHTML = p.badge;
       document.getElementById('detailTitle').innerText = p.title;
       document.getElementById('detailSubtitle').innerText = p.subtitle;
 
@@ -720,7 +749,7 @@
           <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
              class="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-mono flex items-center gap-1.5 transition-colors">
             <span class="font-bold">▲</span>
-            <span>Abrir na Vercel</span>
+            <span>Acessar Projeto</span>
             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
           </a>
         `;
@@ -743,7 +772,7 @@
 
       if (isGame && playableSource) {
         mediaContainer.innerHTML = `
-          <div class="p-4 bg-dark-950 border-b border-white/10 flex items-center justify-between">
+          <div class="p-3.5 sm:p-4 bg-dark-950 border-b border-white/10 flex items-center justify-between">
             <div class="flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
               <span class="text-xs font-mono font-bold uppercase text-slate-300">Player Interativo no Navegador</span>
@@ -758,10 +787,10 @@
             <div id="embedCover" class="absolute inset-0 flex flex-col items-center justify-center bg-dark-900/95 p-6 text-center z-10">
               <img src="${p.image}" alt="Preview" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" />
               <div class="relative z-10">
-                <div class="w-16 h-16 rounded-2xl bg-brand-500/20 border border-brand-500/40 text-brand-400 flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 transition-transform" onclick="runGameEmbed('${playableSource}')">
-                  <i data-lucide="play" class="w-8 h-8 fill-current ml-1"></i>
+                <div class="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-brand-500/20 border border-brand-500/40 text-brand-400 flex items-center justify-center mx-auto mb-3 sm:mb-4 cursor-pointer hover:scale-110 transition-transform" onclick="runGameEmbed('${playableSource}')">
+                  <i data-lucide="play" class="w-7 sm:w-8 h-7 sm:h-8 fill-current ml-1"></i>
                 </div>
-                <h4 class="text-xl font-display font-bold text-white mb-1">Carregar Jogo Interativo</h4>
+                <h4 class="text-lg sm:text-xl font-display font-bold text-white mb-1">Carregar Jogo Interativo</h4>
                 <p class="text-xs text-slate-400 max-w-sm mb-4">Clique para rodar o build no navegador com controles diretos de teclado e mouse.</p>
                 <button onclick="runGameEmbed('${playableSource}')" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-lg shadow-brand-600/30">
                   Iniciar Partida
@@ -780,26 +809,26 @@
         `;
       }
 
-      // Preenche o Bloco de Ação no Final (Destaque para Jogos com Link de Acesso)
+      // Preenche o Bloco de Ação no Final (Destaque para Acessar o Projeto)
       const bottomAction = document.getElementById('detailBottomActionContainer');
       if (isGame) {
         bottomAction.innerHTML = `
-          <div class="sketch-row p-6 sm:p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 border border-brand-500/30 bg-gradient-to-r from-brand-900/30 via-dark-850 to-cyan-900/20 shadow-xl shadow-brand-950/50">
+          <div class="sketch-row p-5 sm:p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 border border-brand-500/30 bg-gradient-to-r from-brand-900/30 via-dark-850 to-cyan-900/20 shadow-xl shadow-brand-950/50">
             <div class="flex items-center gap-4 text-center md:text-left">
-              <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mx-auto md:mx-0 shadow-lg shadow-cyan-500/20">
-                <i data-lucide="gamepad-2" class="w-7 h-7"></i>
+              <div class="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mx-auto md:mx-0 shadow-lg shadow-cyan-500/20">
+                <i data-lucide="gamepad-2" class="w-6 sm:w-7 h-6 sm:h-7"></i>
               </div>
               <div>
-                <span class="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 block mb-1">Link de Acesso ao Projeto</span>
-                <h4 class="text-xl font-display font-bold text-white">Pronto para jogar ${p.title}?</h4>
+                <span class="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 block mb-0.5 sm:mb-1">Link de Acesso ao Projeto</span>
+                <h4 class="text-lg sm:text-xl font-display font-bold text-white">Pronto para jogar ${p.title}?</h4>
                 <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Acesse o deploy oficial na Vercel ou utilize o player interativo direto no topo.</p>
               </div>
             </div>
 
-            <div class="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0">
+            <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 w-full md:w-auto shrink-0">
               ${p.vercelUrl ? `
                 <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
-                   class="flex-1 md:flex-initial px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-600/35 transition-all">
+                   class="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-600/35 transition-all">
                   <span class="font-bold">▲</span>
                   <span>Acessar Projeto na Vercel</span>
                   <i data-lucide="external-link" class="w-4 h-4"></i>
@@ -807,7 +836,7 @@
               ` : ''}
 
               ${playableSource ? `
-                <button onclick="scrollToGameEmbed()" class="flex-1 md:flex-initial px-5 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
+                <button onclick="scrollToGameEmbed()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
                   <i data-lucide="play" class="w-4 h-4 text-cyan-400 fill-current"></i>
                   <span>Jogar no Topo</span>
                 </button>
@@ -817,16 +846,16 @@
         `;
       } else if (p.vercelUrl) {
         bottomAction.innerHTML = `
-          <div class="sketch-row p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 border border-white/10">
+          <div class="sketch-row p-5 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6 border border-white/10">
             <div>
-              <span class="text-xs font-mono font-bold uppercase tracking-wider text-brand-400 block mb-1">Acessar Produto Online</span>
-              <h4 class="text-lg font-display font-bold text-white">Visualizar ${p.title} em Produção</h4>
-              <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Explore a versão online do produto publicada na nuvem.</p>
+              <span class="text-xs font-mono font-bold uppercase tracking-wider text-brand-400 block mb-1">Acessar Projeto Online</span>
+              <h4 class="text-base sm:text-lg font-display font-bold text-white">Visualizar ${p.title} em Produção</h4>
+              <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Explore a versão online do produto publicada na web.</p>
             </div>
             <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
-               class="px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-600/35 transition-all">
+               class="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-600/35 transition-all shrink-0">
               <span class="font-bold">▲</span>
-              <span>Acessar Projeto na Vercel</span>
+              <span>Acessar Projeto</span>
               <i data-lucide="external-link" class="w-4 h-4"></i>
             </a>
           </div>
