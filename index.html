@@ -194,6 +194,110 @@
     .anim-delay-3 { animation-delay: 0.36s; }
     .anim-delay-4 { animation-delay: 0.48s; }
 
+    
+    /* ======================================================= */
+    /* TRANSIÇÕES GLOBAIS DE TEMA E CORES FLUÍDAS              */
+    /* ======================================================= */
+    body, .site-nav, .portfolio-card, .step-card, .btn-pill-primary, .btn-pill-secondary, .tag-pill, .carousel-control-btn, .lang-pill-container, #caseNextBanner, .case-block-row {
+      transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                  color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Animação de entrada suave das telas principais */
+    @keyframes viewSlideEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.995);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .view-screen:not(.hidden) {
+      animation: viewSlideEntrance 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Scroll Reveal para elementos entrarem em cascata fluida */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Spotlight sutil que segue o cursor nos cards */
+    .portfolio-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(550px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), color-mix(in srgb, var(--accent) 14%, transparent), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .portfolio-card:hover::after {
+      opacity: 1;
+    }
+
+    /* Header Nav Flutuante com Sombra Suave no Scroll */
+    .site-nav {
+      transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .site-nav.nav-scrolled {
+      background: color-mix(in srgb, var(--bg) 94%, transparent);
+      border-bottom-color: color-mix(in srgb, var(--line) 150%, transparent);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Nav Link refinado com pílula de fundo suave */
+    .nav-link {
+      background: transparent;
+      border: none;
+      padding: 6px 14px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 999px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .nav-link:hover {
+      color: var(--ink);
+      background: color-mix(in srgb, var(--ink) 6%, transparent);
+      transform: translateY(-1px);
+    }
+    .nav-link[data-active="true"] {
+      color: var(--ink);
+      background: color-mix(in srgb, var(--ink) 9%, transparent);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 12%, transparent);
+      font-weight: 600;
+    }
+
+    /* Transição suave do modal Lightbox */
+    #lightboxModal {
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #lightboxModal:not(.hidden) {
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    #lightboxModal .lightbox-img-wrapper {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: viewSlideEntrance 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
     /* Ambient Dome com pulso suave */
     .dome-glow {
       position: absolute;
@@ -321,7 +425,7 @@
     }
 
     .portfolio-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-8px) scale(1.008);
       border-color: color-mix(in srgb, var(--ink) 30%, transparent);
       box-shadow: 0 28px 60px rgba(4, 2, 10, 0.8), 0 0 24px rgba(168, 85, 247, 0.15), 0 0 0 1px rgba(192, 132, 252, 0.3);
     }
@@ -577,7 +681,7 @@
         </div>
 
         <!-- Trajetória e Perfil Profissional Baseados no Perfil Oficial -->
-        <div id="sobreBio" class="space-y-6 text-base sm:text-lg text-[var(--muted)] leading-relaxed font-light mb-16">
+        <div id="sobreBio" class="space-y-6 text-base sm:text-lg text-[var(--muted)] leading-relaxed font-light mb-16 reveal-on-scroll">
           <p>
             adoto uma abordagem multidisciplinar que conecta dados qualitativos e quantitativos, ferramentas de inteligência artificial e insights comportamentais para compreender profundamente as necessidades reais dos usuários e alinhá-las aos objetivos estratégicos das organizações.
           </p>
@@ -590,7 +694,7 @@
         </div>
 
         <!-- Metodologia de Trabalho (Passos Numerados com Instrument Serif) -->
-        <div class="mb-16">
+        <div class="mb-16 reveal-on-scroll">
           <span id="sobreProcessLabel" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-5">processo de trabalho</span>
           
           <div id="sobreProcessSteps" class="space-y-4">
@@ -623,7 +727,7 @@
         </div>
 
         <!-- CTA Final do Sobre -->
-        <div class="pt-8 border-t border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="pt-8 border-t border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 reveal-on-scroll">
           <div>
             <h3 id="sobreCtaTitle" class="text-xl sm:text-2xl font-medium text-[var(--ink)]">tem um desafio de produto com ux no meio?</h3>
             <p id="sobreCtaSubtitle" class="text-sm text-[var(--muted)] mt-1 font-light">bora conversar e construir juntos.</p>
@@ -657,7 +761,7 @@
     </div>
 
     <!-- Grid de Jogos -->
-    <div id="gamesGridContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto anim-fade-in anim-delay-1">
+    <div id="gamesGridContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
       <!-- Injetado dinamicamente via JS -->
     </div>
 
@@ -668,7 +772,7 @@
   <!-- ================================================================= -->
   <main id="viewContato" class="view-screen hidden flex-1 w-full flex items-center justify-center py-20 px-6 sm:px-12 relative z-10 anim-fade-in" style="background: var(--inv-bg); color: var(--inv-ink);">
     
-    <div class="max-w-2xl mx-auto text-center">
+    <div class="max-w-2xl mx-auto text-center reveal-on-scroll">
       
       <!-- Mark Central -->
       <div class="w-12 h-12 mx-auto mb-6 flex items-center justify-center">
@@ -1701,6 +1805,77 @@
     let activeCaseId = null;
     let currentCategory = 'trabalho';
 
+    
+    // Sistema de Revelação Fluida no Scroll (Intersection Observer)
+    function initScrollReveal() {
+      if (!('IntersectionObserver' in window)) return;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -30px 0px'
+      });
+
+      document.querySelectorAll('.reveal-on-scroll:not(.revealed)').forEach((el, index) => {
+        el.style.setProperty('--reveal-delay', `${(index % 4) * 75}ms`);
+        observer.observe(el);
+      });
+    }
+
+    // Efeito Spotlight Dinâmico que segue o cursor nos cards
+    function initCardSpotlight() {
+      document.addEventListener('mousemove', (e) => {
+        const cards = document.querySelectorAll('.portfolio-card');
+        cards.forEach(card => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      }, { passive: true });
+    }
+
+    // Sincronização do Carrossel ao arrastar ou rolar com touchpad/mobile
+    function initCarouselScrollSync() {
+      const track = document.getElementById('carouselTrack');
+      if (!track || !('IntersectionObserver' in window)) return;
+      const cards = track.querySelectorAll('article');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+            const index = Array.from(cards).indexOf(entry.target);
+            if (index !== -1 && index !== currentCardIndex) {
+              currentCardIndex = index;
+              renderDots();
+              updateCounter();
+            }
+          }
+        });
+      }, {
+        root: track,
+        threshold: 0.6
+      });
+      cards.forEach(card => observer.observe(card));
+    }
+
+    // Header com efeito de elevação no scroll
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.site-nav');
+      if (header) {
+        if (window.scrollY > 20) {
+          header.classList.add('nav-scrolled');
+        } else {
+          header.classList.remove('nav-scrolled');
+        }
+      }
+    }, { passive: true });
+
     // Roteamento SPA entre Telas Dedicadas (NÃO LP!)
     function showView(viewId) {
       // Pausa qualquer jogo ativo
@@ -1742,7 +1917,8 @@
         trackGA4PageView('#/contato', 'Contato · Lucas Nellucci');
       }
 
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      initScrollReveal();
       lucide.createIcons();
     }
 
@@ -1821,6 +1997,8 @@
       `).join('');
 
       updateCounter();
+      initCarouselScrollSync();
+      initScrollReveal();
       lucide.createIcons();
     }
 
@@ -1862,7 +2040,7 @@
     function renderGamesGrid() {
       const container = document.getElementById('gamesGridContainer');
       container.innerHTML = gameProjects.map((g, idx) => `
-        <article class="portfolio-card overflow-hidden flex flex-col justify-between group cursor-pointer" onclick="openCaseStudy('${g.id}')">
+        <article class="portfolio-card reveal-on-scroll overflow-hidden flex flex-col justify-between group cursor-pointer" onclick="openCaseStudy('${g.id}')">
           <div class="relative h-[220px] sm:h-[260px] w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
             <img src="${g.image}" alt="${g.title}" class="card-cover-img w-full h-full object-cover" />
             <div class="absolute top-4 left-4 tag-pill backdrop-blur-md bg-[var(--surface)]/80 text-xs text-cyan-400">
@@ -1896,6 +2074,7 @@
         </article>
       `).join('');
 
+      initScrollReveal();
       lucide.createIcons();
     }
 
@@ -2037,7 +2216,8 @@
       document.getElementById('nextCaseTitle').innerHTML = nextItem.title;
 
       window.location.hash = '#/case/' + id;
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      initScrollReveal();
       lucide.createIcons();
     }
 
@@ -2134,6 +2314,8 @@
     setGlobalLang(currentGlobalLang, false);
     window.addEventListener('popstate', handleRouting);
     handleRouting();
+    initCardSpotlight();
+    initScrollReveal();
     lucide.createIcons();
   </script>
 </body>
