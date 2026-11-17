@@ -15,7 +15,58 @@
   
   <!-- Favicon: Monograma Transparente NLL Design (Adaptativo para abas escuras e claras) -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36' fill='none'><style>path{stroke:%23f5f2fa}circle{stroke:%23c084fc}@media(prefers-color-scheme:light){path{stroke:%23120e21}circle{stroke:%237c3aed}}</style><circle cx='18' cy='18' r='16' stroke='%23c084fc' stroke-width='2' stroke-dasharray='3 2.5'/><path d='M11 25L11 11L25 25L25 11' stroke='%23f5f2fa' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36' fill='none'><style>path{stroke:%23f5f2fa}circle{stroke:%23c084fc}@media(prefers-color-scheme:light){path{stroke:%23120e21}circle{stroke:%237c3aed}}
+    /* Switcher Global de Idioma [ pt | en ] Estilo Pílula Fiel */
+    .lang-pill-container {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      border-radius: 9999px;
+      background: #100c1c;
+      border: 1px solid #231d34;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+    [data-theme="light"] .lang-pill-container {
+      background: #eee8e0;
+      border: 1px solid #dcd3c7;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+    .lang-pill-btn {
+      padding: 3px 12px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: #7d7790;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      line-height: 1.25;
+      border: none;
+      background: transparent;
+      user-select: none;
+    }
+    .lang-pill-btn:hover {
+      color: #d1cbe5;
+    }
+    [data-theme="light"] .lang-pill-btn {
+      color: #78716c;
+    }
+    [data-theme="light"] .lang-pill-btn:hover {
+      color: #1c1917;
+    }
+    .lang-pill-btn.active {
+      background: #ffffff !important;
+      color: #0b0814 !important;
+      font-weight: 600 !important;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    }
+    [data-theme="light"] .lang-pill-btn.active {
+      background: #18151f !important;
+      color: #ffffff !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+  </style><circle cx='18' cy='18' r='16' stroke='%23c084fc' stroke-width='2' stroke-dasharray='3 2.5'/><path d='M11 25L11 11L25 25L25 11' stroke='%23f5f2fa' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/></svg>">
   
   <!-- Google Fonts: Syne (Headings), Plus Jakarta Sans (Body), Instrument Serif (Editorial / KPIs), JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -376,7 +427,7 @@
         </svg>
         <div class="flex flex-col">
           <span class="font-medium text-[15px] tracking-tight leading-none text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">lucas nellucci</span>
-          <span class="text-[11.5px] text-[var(--muted)] font-mono mt-0.5">ux &amp; product designer</span>
+          <span id="headerRoleSubtitle" class="text-[11.5px] text-[var(--muted)] font-mono mt-0.5">ux &amp; product designer</span>
         </div>
       </a>
 
@@ -397,13 +448,13 @@
       </nav>
 
       <!-- Direita: Controles (Tema Claro/Escuro + Redes) -->
-      <div class="flex items-center gap-3 justify-self-end">
+      <div class="flex items-center gap-2 lg:gap-2.5 justify-self-end whitespace-nowrap shrink-0">
         <!-- Seletor Global de Idioma [ pt | en ] -->
-        <div class="inline-flex items-center p-0.5 rounded-full bg-[var(--surface)] border border-[var(--line)] text-xs font-mono shadow-sm">
-          <button onclick="setGlobalLang('pt')" id="headerLangBtnPt" class="px-2.5 py-1 rounded-full transition-all duration-200 bg-[var(--inv-bg)] text-[var(--inv-ink)] font-semibold text-[11px]" aria-label="Português">
+        <div class="lang-pill-container" role="group" aria-label="Idioma">
+          <button onclick="setGlobalLang('pt')" id="headerLangBtnPt" class="lang-pill-btn active" aria-label="Português">
             pt
           </button>
-          <button onclick="setGlobalLang('en')" id="headerLangBtnEn" class="px-2.5 py-1 rounded-full transition-all duration-200 text-[var(--muted)] hover:text-[var(--ink)] text-[11px]" aria-label="English">
+          <button onclick="setGlobalLang('en')" id="headerLangBtnEn" class="lang-pill-btn" aria-label="English">
             en
           </button>
         </div>
@@ -413,11 +464,11 @@
           <span id="themeToggleText">modo claro</span>
         </button>
 
-        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'header')" class="tag-pill hidden lg:inline-flex text-xs">
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'header')" class="tag-pill hidden xl:inline-flex text-xs">
           linkedin ↗
         </a>
 
-        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'header')" class="tag-pill hidden lg:inline-flex text-xs">
+        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'header')" class="tag-pill hidden xl:inline-flex text-xs">
           behance ↗
         </a>
       </div>
@@ -430,9 +481,9 @@
       <button onclick="scrollToSobre()" id="mobNavSobre" class="nav-link py-1 px-3 text-xs" data-active="false">sobre</button>
       <button onclick="showView('jogos')" id="mobNavJogos" class="nav-link py-1 px-3 text-xs" data-active="false">jogos &amp; 3d</button>
       <button onclick="showView('contato')" id="mobNavContato" class="nav-link py-1 px-3 text-xs" data-active="false">contato</button>
-      <div class="inline-flex items-center p-0.5 rounded-full bg-[var(--surface)] border border-[var(--line)] text-[10px] font-mono shadow-sm ml-1">
-        <button onclick="setGlobalLang('pt')" id="mobLangBtnPt" class="px-2 py-0.5 rounded-full bg-[var(--inv-bg)] text-[var(--inv-ink)] font-semibold">pt</button>
-        <button onclick="setGlobalLang('en')" id="mobLangBtnEn" class="px-2 py-0.5 rounded-full text-[var(--muted)]">en</button>
+      <div class="lang-pill-container ml-1" role="group" aria-label="Idioma">
+        <button onclick="setGlobalLang('pt')" id="mobLangBtnPt" class="lang-pill-btn active" aria-label="Português">pt</button>
+        <button onclick="setGlobalLang('en')" id="mobLangBtnEn" class="lang-pill-btn" aria-label="English">en</button>
       </div>
     </div>
   </header>
@@ -600,7 +651,7 @@
       <h1 id="heroJogosTitle" class="text-4xl sm:text-6xl font-medium tracking-tight leading-[1.1] mb-5 text-[var(--ink)]">
         jogos, spatial ux e <em class="font-serif-accent italic text-cyan-400">sensorial 3d.</em>
       </h1>
-      <p class="text-base sm:text-lg text-[var(--muted)] max-w-2xl mx-auto leading-relaxed font-light">
+      <p id="heroJogosSubtitle" class="text-base sm:text-lg text-[var(--muted)] max-w-2xl mx-auto leading-relaxed font-light">
         experiências interativas desenvolvidas para navegador. explore os desafios de game feel, feedback sensorial e interface diegética, ou jogue direto na tela.
       </p>
     </div>
@@ -627,29 +678,30 @@
         </svg>
       </div>
 
-      <h1 class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-5">
+      <h1 id="contatoTitle" class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-5">
         vamos construir sua experiência de produto juntos?
       </h1>
 
-      <p class="text-base sm:text-lg opacity-80 max-w-lg mx-auto mb-10 font-light">
+      <p id="contatoSubtitle" class="text-base sm:text-lg opacity-80 max-w-lg mx-auto mb-10 font-light">
         conte mais sobre o desafio de design, interface ou produto e vamos juntos!
       </p>
 
       <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
-        <a href="mailto:nellucci.design@gmail.com" onclick="trackOutboundClick('email', this.href, 'contact_panel')" class="px-7 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105" style="background: var(--inv-ink); color: var(--inv-bg);">
-          enviar mensagem ↗
+        <a href="mailto:nellucci.design@gmail.com" onclick="trackOutboundClick('email', this.href, 'contact_panel')" class="px-7 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105 inline-flex items-center gap-1.5" style="background: var(--inv-ink); color: var(--inv-bg);">
+          <span id="contatoEmailText">enviar mensagem ↗</span>
         </a>
-        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'contact_panel')" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
-          linkedin ↗
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'contact_panel')" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105 inline-flex items-center gap-1.5" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
+          <span id="contatoLinkedinText">linkedin ↗</span>
         </a>
-        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'contact_panel')" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
-          behance ↗
+        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'contact_panel')" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105 inline-flex items-center gap-1.5" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
+          <span id="contatoBehanceText">behance ↗</span>
         </a>
       </div>
 
-      <span class="text-xs font-mono opacity-60">
-        nellucci.design@gmail.com
-      </span>
+      <div class="flex flex-col items-center gap-2">
+        <span class="text-xs font-mono opacity-60">nellucci.design@gmail.com</span>
+        <span id="contatoLocationText" class="text-xs font-mono opacity-50">são paulo, brasil • disponível globalmente (remoto / híbrido)</span>
+      </div>
 
     </div>
 
@@ -750,7 +802,7 @@
         <span id="nextCaseLabel" class="text-xs font-mono opacity-60 block mb-1">próximo case</span>
         <h3 id="nextCaseTitle" class="text-xl sm:text-2xl font-medium">nome do próximo case</h3>
       </div>
-      <button onclick="goToNextCase()" class="px-6 py-2.5 rounded-full text-xs font-medium font-mono uppercase tracking-wider transition-all hover:scale-105" style="background: var(--inv-ink); color: var(--inv-bg);">
+      <button onclick="goToNextCase()" id="nextCaseBtn" class="px-6 py-2.5 rounded-full text-xs font-medium font-mono uppercase tracking-wider transition-all hover:scale-105" style="background: var(--inv-ink); color: var(--inv-bg);">
         abrir case →
       </button>
     </div>
@@ -773,7 +825,7 @@
   <!-- RODAPÉ MINIMALISTA (Idêntico ao luccas.social.br) -->
   <footer class="border-t border-[var(--line)] py-8 text-xs text-[var(--muted)] font-mono relative z-10">
     <div class="max-w-[1240px] mx-auto px-6 sm:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div>© 2026 · portfólio de produto e ux</div>
+      <div id="footerCopyright">© 2026 · lucas nellucci • produto, neurociência &amp; dados</div>
       <div class="flex items-center gap-6">
         <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" onclick="trackOutboundClick('linkedin', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">linkedin</a>
         <a href="https://www.behance.net/lucasnellucci" target="_blank" onclick="trackOutboundClick('behance', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">behance</a>
@@ -802,7 +854,7 @@
 
         heroJogosTag: "jogos &amp; 3d interativo",
         heroJogosTitle: 'jogos, spatial ux e <em class="font-serif-accent italic text-cyan-400">sensorial 3d.</em>',
-        heroJogosSubtitle: "experiências imersivas em three.js, áudio diegético e interfaces de jogos criadas para web.",
+        heroJogosSubtitle: "experiências interativas desenvolvidas para navegador. explore os desafios de game feel, feedback sensorial e interface diegética, ou jogue direto na tela.",
         playGameBtn: "jogar no navegador",
         gamePlayerHeader: "player de jogo interativo",
         gameFullscreen: "tela cheia",
@@ -810,11 +862,11 @@
         gameControlsHint: "controles diretos via teclado e mouse",
 
         contatoTag: "vamos conversar",
-        contatoTitle: "tem um desafio de produto, usabilidade ou dados?",
-        contatoSubtitle: "estou disponível para projetos estratégicos de produto, consultorias de cro ou posições desafiadoras.",
-        contatoEmail: "mandar um email",
-        contatoLinkedin: "conectar no linkedin",
-        contatoBehance: "ver behance",
+        contatoTitle: "vamos construir sua experiência de produto juntos?",
+        contatoSubtitle: "conte mais sobre o desafio de design, interface ou produto e vamos juntos!",
+        contatoEmail: "enviar mensagem ↗",
+        contatoLinkedin: "linkedin ↗",
+        contatoBehance: "behance ↗",
         contatoLocation: "são paulo, brasil • disponível globalmente (remoto / híbrido)",
 
         backToPortfolio: "voltar ao portfólio",
@@ -830,7 +882,7 @@
         nextCaseBtn: "abrir case →",
         lightboxHint: "clique para ampliar a imagem",
 
-        footerCopyright: "lucas nellucci • produto, neurociência &amp; dados",
+        footerCopyright: "© 2026 · lucas nellucci • produto, neurociência &amp; dados",
         footerBackToTop: "voltar ao topo ↑"
       },
       en: {
@@ -849,19 +901,19 @@
 
         heroJogosTag: "games &amp; interactive 3d",
         heroJogosTitle: 'games, spatial ux &amp; <em class="font-serif-accent italic text-cyan-400">3d sensory design.</em>',
-        heroJogosSubtitle: "immersive three.js experiments, diegetic audio, and web-native game interfaces built for browser performance.",
+        heroJogosSubtitle: "browser-native interactive experiences. explore game feel, sensory feedback, and diegetic ui challenges, or play directly on screen.",
         playGameBtn: "play in browser",
         gamePlayerHeader: "interactive game player",
         gameFullscreen: "fullscreen",
         gameStartBtn: "launch game in browser",
         gameControlsHint: "direct keyboard & mouse controls",
 
-        contatoTag: "let's talk",
-        contatoTitle: "have a product, usability, or data challenge?",
-        contatoSubtitle: "open for strategic product design roles, cro consulting, and high-impact design challenges.",
-        contatoEmail: "send an email",
-        contatoLinkedin: "connect on linkedin",
-        contatoBehance: "view behance",
+        contatoTag: "let's connect",
+        contatoTitle: "shall we build your product experience together?",
+        contatoSubtitle: "tell me more about your design, interface, or product challenge and let's create impact together!",
+        contatoEmail: "send message ↗",
+        contatoLinkedin: "linkedin ↗",
+        contatoBehance: "behance ↗",
         contatoLocation: "são paulo, brazil • globally available (remote / hybrid)",
 
         backToPortfolio: "back to portfolio",
@@ -877,7 +929,7 @@
         nextCaseBtn: "open case →",
         lightboxHint: "click to expand image",
 
-        footerCopyright: "lucas nellucci • product, neuroscience &amp; data",
+        footerCopyright: "© 2026 · lucas nellucci • product, neuroscience &amp; data",
         footerBackToTop: "back to top ↑"
       }
     };
@@ -1408,141 +1460,169 @@
       }
     };
 
-    // Função Mestra de Internacionalização Global [ pt | en ]
-    function setGlobalLang(lang) {
-      if (!siteTranslations[lang]) return;
-      currentGlobalLang = lang;
-      localStorage.setItem('nlldesign-lang', lang);
-      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-
-      portfolioProjects = getPortfolioProjects();
-      gameProjects = getGameProjects();
-
-      // Atualiza estilo dos botões do switcher [ pt | en ] em todas as instâncias
-      const activeClass = 'px-2.5 py-1 rounded-full transition-all duration-200 bg-[var(--inv-bg)] text-[var(--inv-ink)] font-semibold text-[11px] shadow-sm';
-      const inactiveClass = 'px-2.5 py-1 rounded-full transition-all duration-200 text-[var(--muted)] hover:text-[var(--ink)] text-[11px]';
-
-      ['headerLangBtn', 'mobLangBtn', 'langBtn'].forEach(prefix => {
-        const pt = document.getElementById(prefix + 'Pt');
-        const en = document.getElementById(prefix + 'En');
-        if (pt && en) {
-          if (lang === 'pt') {
-            pt.className = activeClass;
-            en.className = inactiveClass;
-          } else {
-            en.className = activeClass;
-            pt.className = inactiveClass;
-          }
-        }
-      });
-
-      const t = siteTranslations[lang];
-
-      // 1. Navegação
-      const navPort = document.getElementById('navLinkPortfolio');
-      const mobPort = document.getElementById('mobNavPortfolio');
-      if (navPort) navPort.innerHTML = t.navPortfolio;
-      if (mobPort) mobPort.innerHTML = t.navPortfolio;
-
-      const navSob = document.getElementById('navLinkSobre');
-      const mobSob = document.getElementById('mobNavSobre');
-      if (navSob) navSob.innerHTML = t.navSobre;
-      if (mobSob) mobSob.innerHTML = t.navSobre;
-
-      const navJog = document.getElementById('navLinkJogos');
-      const mobJog = document.getElementById('mobNavJogos');
-      if (navJog) navJog.innerHTML = t.navJogos;
-      if (mobJog) mobJog.innerHTML = t.navJogos;
-
-      const navCont = document.getElementById('navLinkContato');
-      const mobCont = document.getElementById('mobNavContato');
-      if (navCont) navCont.innerHTML = t.navContato;
-      if (mobCont) mobCont.innerHTML = t.navContato;
-
-      // 2. Hero Portfólio
-      const hPortTag = document.getElementById('heroPortTag');
-      if (hPortTag) hPortTag.innerHTML = t.heroPortTag;
-
-      const hPortTitle = document.getElementById('heroPortTitle');
-      if (hPortTitle) hPortTitle.innerHTML = t.heroPortTitle;
-
-      const hPortSub = document.getElementById('heroPortSubtitle');
-      if (hPortSub) hPortSub.innerHTML = t.heroPortSubtitle;
-
-      // 3. Hero Jogos
-      const hJogTag = document.getElementById('heroJogosTag');
-      if (hJogTag) hJogTag.innerHTML = t.heroJogosTag;
-
-      const hJogTitle = document.getElementById('heroJogosTitle');
-      if (hJogTitle) hJogTitle.innerHTML = t.heroJogosTitle;
-
-      const hJogSub = document.getElementById('heroJogosSubtitle');
-      if (hJogSub) hJogSub.innerHTML = t.heroJogosSubtitle;
-
-      // 4. Seção Sobre
-      updateSobreSection(lang);
-
-      // 5. Seção Contato
-      const cTag = document.getElementById('contatoTag');
-      if (cTag) cTag.innerHTML = t.contatoTag;
-
-      const cTitle = document.getElementById('contatoTitle');
-      if (cTitle) cTitle.innerHTML = t.contatoTitle;
-
-      const cSub = document.getElementById('contatoSubtitle');
-      if (cSub) cSub.innerHTML = t.contatoSubtitle;
-
-      const cEmail = document.getElementById('contatoEmailText');
-      if (cEmail) cEmail.innerHTML = t.contatoEmail;
-
-      const cLk = document.getElementById('contatoLinkedinText');
-      if (cLk) cLk.innerHTML = t.contatoLinkedin;
-
-      const cBe = document.getElementById('contatoBehanceText');
-      if (cBe) cBe.innerHTML = t.contatoBehance;
-
-      const cLoc = document.getElementById('contatoLocationText');
-      if (cLoc) cLoc.innerHTML = t.contatoLocation;
-
-      // 6. Labels do Estudo de Caso
-      const lDesafio = document.getElementById('caseLabelDesafio');
-      if (lDesafio) lDesafio.innerHTML = t.labelDesafio;
-
-      const lAbord = document.getElementById('caseLabelAbordagem');
-      if (lAbord) lAbord.innerHTML = t.labelAbordagem;
-
-      const lRes = document.getElementById('caseLabelResultado');
-      if (lRes) lRes.innerHTML = t.labelResultado;
-
-      const lGal = document.getElementById('caseGalleryTitle');
-      if (lGal) lGal.innerHTML = t.galleryTitle;
-
-      const lNext = document.getElementById('nextCaseLabel');
-      if (lNext) lNext.innerHTML = t.nextCaseLabel;
-
-      const bNext = document.getElementById('nextCaseBtn');
-      if (bNext) bNext.innerHTML = t.nextCaseBtn;
-
-      // 7. Rodapé
-      const fCopy = document.getElementById('footerCopyright');
-      if (fCopy) fCopy.innerHTML = t.footerCopyright;
-
-      const fTop = document.getElementById('footerBackToTop');
-      if (fTop) fTop.innerHTML = t.footerBackToTop;
-
-      // Re-renderiza a tela ativa para aplicar as traduções nos cards ou no case aberto
-      setGlobalLang(currentGlobalLang);
-      renderGamesGrid();
-
-      if (activeCaseId) {
-        openCaseStudy(activeCaseId);
+    // Helper de texto do botão de alternância de tema
+    function updateThemeToggleText() {
+      const root = document.documentElement;
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      const t = siteTranslations[currentGlobalLang] || siteTranslations.pt;
+      const el = document.getElementById('themeToggleText');
+      if (el) {
+        el.innerText = isDark ? t.themeLight : t.themeDark;
       }
-
-      // Rastreamento no GTM / GA4
-      trackDataLayer('select_language', { language: lang, scope: 'global' });
     }
 
-    // Helper retrocompatível para a seção sobre
+    // Função Mestra de Internacionalização Global [ pt | en ]
+    let isChangingLang = false;
+    function setGlobalLang(lang, shouldTrack = true) {
+      if (isChangingLang || !siteTranslations[lang]) return;
+      isChangingLang = true;
+
+      try {
+        currentGlobalLang = lang;
+        localStorage.setItem('nlldesign-lang', lang);
+        document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+        document.title = lang === 'pt' 
+          ? 'lucas nellucci · ux & product designer guiado por dados' 
+          : 'lucas nellucci · data-driven ux & product designer';
+
+        portfolioProjects = getPortfolioProjects();
+        gameProjects = getGameProjects();
+
+        // 1. Atualiza visual do switcher [ pt | en ]
+        ['headerLangBtn', 'mobLangBtn', 'langBtn'].forEach(prefix => {
+          const pt = document.getElementById(prefix + 'Pt');
+          const en = document.getElementById(prefix + 'En');
+          if (pt && en) {
+            if (lang === 'pt') {
+              pt.classList.add('active');
+              en.classList.remove('active');
+            } else {
+              en.classList.add('active');
+              pt.classList.remove('active');
+            }
+          }
+        });
+
+        const t = siteTranslations[lang];
+
+        // 2. Header & Navegação
+        const hRole = document.getElementById('headerRoleSubtitle');
+        if (hRole) hRole.innerHTML = t.roleSubtitle;
+
+        updateThemeToggleText();
+
+        const navPort = document.getElementById('navLinkPortfolio');
+        const mobPort = document.getElementById('mobNavPortfolio');
+        if (navPort) navPort.innerHTML = t.navPortfolio;
+        if (mobPort) mobPort.innerHTML = t.navPortfolio;
+
+        const navSob = document.getElementById('navLinkSobre');
+        const mobSob = document.getElementById('mobNavSobre');
+        if (navSob) navSob.innerHTML = t.navSobre;
+        if (mobSob) mobSob.innerHTML = t.navSobre;
+
+        const navJog = document.getElementById('navLinkJogos');
+        const mobJog = document.getElementById('mobNavJogos');
+        if (navJog) navJog.innerHTML = t.navJogos;
+        if (mobJog) mobJog.innerHTML = t.navJogos;
+
+        const navCont = document.getElementById('navLinkContato');
+        const mobCont = document.getElementById('mobNavContato');
+        if (navCont) navCont.innerHTML = t.navContato;
+        if (mobCont) mobCont.innerHTML = t.navContato;
+
+        // 3. Hero Portfólio
+        const hPortTag = document.getElementById('heroPortTag');
+        if (hPortTag) hPortTag.innerHTML = t.heroPortTag;
+
+        const hPortTitle = document.getElementById('heroPortTitle');
+        if (hPortTitle) hPortTitle.innerHTML = t.heroPortTitle;
+
+        const hPortSub = document.getElementById('heroPortSubtitle');
+        if (hPortSub) hPortSub.innerHTML = t.heroPortSubtitle;
+
+        // 4. Hero Jogos
+        const hJogTag = document.getElementById('heroJogosTag');
+        if (hJogTag) hJogTag.innerHTML = t.heroJogosTag;
+
+        const hJogTitle = document.getElementById('heroJogosTitle');
+        if (hJogTitle) hJogTitle.innerHTML = t.heroJogosTitle;
+
+        const hJogSub = document.getElementById('heroJogosSubtitle');
+        if (hJogSub) hJogSub.innerHTML = t.heroJogosSubtitle;
+
+        // 5. Seção Sobre
+        updateSobreSection(lang);
+
+        // 6. Seção Contato
+        const cTag = document.getElementById('contatoTag');
+        if (cTag) cTag.innerHTML = t.contatoTag;
+
+        const cTitle = document.getElementById('contatoTitle');
+        if (cTitle) cTitle.innerHTML = t.contatoTitle;
+
+        const cSub = document.getElementById('contatoSubtitle');
+        if (cSub) cSub.innerHTML = t.contatoSubtitle;
+
+        const cEmail = document.getElementById('contatoEmailText');
+        if (cEmail) cEmail.innerHTML = t.contatoEmail;
+
+        const cLk = document.getElementById('contatoLinkedinText');
+        if (cLk) cLk.innerHTML = t.contatoLinkedin;
+
+        const cBe = document.getElementById('contatoBehanceText');
+        if (cBe) cBe.innerHTML = t.contatoBehance;
+
+        const cLoc = document.getElementById('contatoLocationText');
+        if (cLoc) cLoc.innerHTML = t.contatoLocation;
+
+        // 7. Labels do Estudo de Caso
+        const lBack = document.getElementById('caseBackLabel');
+        if (lBack) lBack.innerText = currentCategory === 'jogos' ? t.backToGames : t.backToPortfolio;
+
+        const lDesafio = document.getElementById('caseLabelDesafio');
+        if (lDesafio) lDesafio.innerHTML = t.labelDesafio;
+
+        const lAbord = document.getElementById('caseLabelAbordagem');
+        if (lAbord) lAbord.innerHTML = t.labelAbordagem;
+
+        const lRes = document.getElementById('caseLabelResultado');
+        if (lRes) lRes.innerHTML = t.labelResultado;
+
+        const lGal = document.getElementById('caseGalleryTitle');
+        if (lGal) lGal.innerHTML = t.galleryTitle;
+
+        const lNext = document.getElementById('nextCaseLabel');
+        if (lNext) lNext.innerHTML = t.nextCaseLabel;
+
+        const bNext = document.getElementById('nextCaseBtn');
+        if (bNext) bNext.innerHTML = t.nextCaseBtn;
+
+        // 8. Rodapé
+        const fCopy = document.getElementById('footerCopyright');
+        if (fCopy) fCopy.innerHTML = t.footerCopyright;
+
+        const fTop = document.getElementById('footerBackToTop');
+        if (fTop) fTop.innerHTML = t.footerBackToTop;
+
+        // 9. Re-renderiza carrossel de portfólio e grid de jogos com os novos dados
+        renderPortfolioCarousel();
+        renderGamesGrid();
+
+        // 10. Se houver um estudo de caso aberto, atualiza seus dados
+        if (activeCaseId) {
+          openCaseStudy(activeCaseId);
+        }
+
+        // 11. Dispara evento no GTM / GA4 quando for clique do usuário
+        if (shouldTrack) {
+          trackDataLayer('select_language', { language: lang, scope: 'global' });
+        }
+      } finally {
+        isChangingLang = false;
+      }
+    }
+
     function setSobreLang(lang) {
       setGlobalLang(lang);
     }
@@ -1806,7 +1886,7 @@
             <div class="pt-4 border-t border-[var(--line)] flex items-center justify-between">
               <span class="text-xs font-mono text-cyan-400 flex items-center gap-1.5">
                 <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
-                jogar no navegador
+                ${(siteTranslations[currentGlobalLang] || siteTranslations.pt).playGameBtn}
               </span>
               <span class="text-xs text-[var(--muted)] group-hover:translate-x-1.5 transition-transform duration-200">
                 →
@@ -1865,21 +1945,21 @@
       if (item.figmaUrl) {
         linksHtml += `
           <a href="${item.figmaUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('figma_prototype', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)]">
-            <span>ver no figma ↗</span>
+            <span>${tLang.viewFigma}</span>
           </a>
         `;
       }
       if (item.vercelUrl) {
         linksHtml += `
           <a href="${item.vercelUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('vercel_app', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)] text-cyan-400">
-            <span>abrir na vercel ↗</span>
+            <span>${tLang.openVercel}</span>
           </a>
         `;
       }
       if (item.siteUrl) {
         linksHtml += `
           <a href="${item.siteUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('official_site', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)]">
-            <span>site oficial ↗</span>
+            <span>${tLang.officialSite}</span>
           </a>
         `;
       }
@@ -1895,11 +1975,11 @@
           <div class="p-3 bg-[var(--surface)] border-b border-[var(--line)] flex items-center justify-between text-xs font-mono">
             <span class="text-cyan-400 flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-              player de jogo interativo
+              ${tLang.gamePlayerHeader}
             </span>
             <button onclick="toggleFullscreenEmbed()" class="text-[var(--muted)] hover:text-[var(--ink)] flex items-center gap-1">
               <i data-lucide="maximize" class="w-3.5 h-3.5"></i>
-              tela cheia
+              ${tLang.gameFullscreen}
             </button>
           </div>
           <div id="embedViewport" class="relative aspect-video w-full bg-black flex items-center justify-center">
@@ -1907,9 +1987,9 @@
               <img src="${item.image}" alt="Preview" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none" />
               <div class="relative z-10">
                 <button onclick="runGameEmbed('${playableSource}')" class="btn-pill-primary mb-2 text-xs">
-                  iniciar jogo no navegador
+                  ${tLang.gameStartBtn}
                 </button>
-                <p class="text-xs text-[var(--muted)]">controles diretos via teclado e mouse</p>
+                <p class="text-xs text-[var(--muted)]">${tLang.gameControlsHint}</p>
               </div>
             </div>
             <iframe id="gameIframe" src="about:blank" class="w-full h-full border-0" allow="fullscreen; autoplay; gamepad"></iframe>
@@ -1921,7 +2001,7 @@
             <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-[1.015] transition-transform duration-500" />
             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
               <span class="tag-pill text-xs bg-black/80 text-white border-white/20">
-                clique para ampliar a imagem
+                ${tLang.lightboxHint}
               </span>
             </div>
           </div>
@@ -1932,7 +2012,7 @@
       const galSection = document.getElementById('caseGallerySection');
       if (item.gallery && item.gallery.length > 0) {
         galSection.innerHTML = `
-          <span id="caseGalleryTitle" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-4">evidências visuais &amp; telas</span>
+          <span id="caseGalleryTitle" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-4">${tLang.galleryTitle}</span>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             ${item.gallery.map(img => `
               <div onclick="openLightbox('${img.src}', '${img.title}')" class="portfolio-card overflow-hidden cursor-pointer group">
@@ -2021,8 +2101,8 @@
       const isDark = root.getAttribute('data-theme') === 'dark';
       const newTheme = isDark ? 'light' : 'dark';
       root.setAttribute('data-theme', newTheme);
-      document.getElementById('themeToggleText').innerText = isDark ? 'modo escuro' : 'modo claro';
       localStorage.setItem('pf-theme', newTheme);
+      updateThemeToggleText();
     }
 
     // Inicialização do Tema
@@ -2030,8 +2110,8 @@
       const saved = localStorage.getItem('pf-theme');
       if (saved) {
         document.documentElement.setAttribute('data-theme', saved);
-        document.getElementById('themeToggleText').innerText = saved === 'dark' ? 'modo claro' : 'modo escuro';
       }
+      updateThemeToggleText();
     })();
 
     // Roteador de Hash
@@ -2051,6 +2131,7 @@
       }
     }
 
+    setGlobalLang(currentGlobalLang, false);
     window.addEventListener('popstate', handleRouting);
     handleRouting();
     lucide.createIcons();
