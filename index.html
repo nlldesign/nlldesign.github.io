@@ -101,8 +101,10 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
 
-  <!-- TOP BAR (Header exatamente como o sketch) -->
-  <!-- Esquerda: Logo + nome | Centro: Projetos, Sobre e outros projetos | Direita: Botões de contato + e-mail -->
+  <!-- ========================================== -->
+  <!-- TOP BAR (Exatamente como no Sketch)        -->
+  <!-- Esquerda: Logo + nome | Centro: Menu | Direita: Contato + Redes -->
+  <!-- ========================================== -->
   <header class="sticky top-0 z-50 backdrop-blur-md bg-sketch-bg/90 border-b border-white/10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between py-3">
       
@@ -121,10 +123,10 @@
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
         <a href="#destaques" onclick="showHomeView();" class="hover:text-white transition-colors">Destaques</a>
         <a href="#apresentacao" onclick="showHomeView();" class="hover:text-white transition-colors">Sobre mim</a>
-        <a href="#projetos" onclick="showHomeView();" class="hover:text-white transition-colors">Todos os Projetos</a>
+        <a href="#projetos" onclick="showHomeView();" class="hover:text-white transition-colors">Projetos</a>
       </nav>
 
-      <!-- Direita: Botões de contato + e-mail + redes (LinkedIn & Behance) -->
+      <!-- Direita: Botões de contato + redes sociais oficiais -->
       <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
         <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" 
            class="p-2 sm:px-3 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 hover:text-white flex items-center gap-1.5 transition-all"
@@ -158,12 +160,12 @@
   </header>
 
   <!-- ========================================== -->
-  <!-- VIEW 1: HOME (Baseada fielmente no Sketch 1) -->
+  <!-- VIEW 1: HOME (Fiel ao Sketch 1)            -->
   <!-- ========================================== -->
   <main id="homeView" class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-1 w-full">
 
-    <!-- SEÇÃO 1: CARROSSEL / 3 CARDS DE DESTAQUE NO TOPO -->
-    <!-- Sketch 1: [Card Esquerda] [Card Centro: Imagem + Resumo rápido sobre o case de sucesso] [Card Direita] -->
+    <!-- SEÇÃO 1: 3 CARDS DE DESTAQUE NO TOPO (Carrossel com Snap no mobile) -->
+    <!-- Sketch 1: [Card Esquerda] [Card Centro: Imagem + Resumo rápido] [Card Direita] -->
     <section id="destaques" class="mb-14 sm:mb-20">
       <div class="flex items-center justify-between mb-5 sm:mb-6">
         <div>
@@ -171,19 +173,19 @@
           <h2 class="text-xl sm:text-2xl font-display font-bold text-white tracking-tight">Projetos Selecionados</h2>
         </div>
         <div class="text-xs text-slate-500 font-mono hidden sm:block">
-          Deslize ou clique no card para abrir o estudo completo
+          Clique no card para abrir o estudo de caso completo
         </div>
       </div>
 
-      <!-- Grid com 3 Cards em Destaque conforme o wireframe (Carrossel com snap no mobile, grid 3 colunas no desktop) -->
+      <!-- Grid com 3 Cards em Destaque (Framer) -->
       <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 no-scrollbar md:mx-0 md:px-0 md:grid md:grid-cols-3 md:gap-6">
         
         <!-- Destaque 1: Simulação de Planos (Associação Cartão Cristão) -->
         <div onclick="openProjectDetail('plano-saude')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group w-[82vw] sm:w-[70vw] md:w-auto shrink-0 snap-center">
-          <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
+          <div class="relative aspect-video w-full bg-slate-900 overflow-hidden border-b border-white/5">
             <img src="assets/framer-plano-saude-detail.png" alt="Simulação de Planos de Saúde" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-emerald-400">
-              Conversão &amp; UX
+            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-emerald-400">
+              Conversão &amp; CRO
             </div>
           </div>
           <div class="p-5 sm:p-6">
@@ -191,7 +193,7 @@
               Simulação de Planos de Saúde
             </h3>
             <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
-              Resumo rápido sobre o case de sucesso: Redesenho completo do fluxo de cotação da Associação Cartão Cristão, eliminando atritos funcionais e alavancando as taxas de conversão de leads no site.
+              Redesenho completo do fluxo de simulação e cotação para a Associação Cartão Cristão, eliminando atritos de usabilidade e alavancando as taxas de conversão de novos associados.
             </p>
             <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
               <span>Ver case detalhado</span>
@@ -202,10 +204,10 @@
 
         <!-- Destaque 2: Supermercado Bom Vizinho (E-commerce UX) -->
         <div onclick="openProjectDetail('bom-vizinho')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group w-[82vw] sm:w-[70vw] md:w-auto shrink-0 snap-center">
-          <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
+          <div class="relative aspect-video w-full bg-slate-900 overflow-hidden border-b border-white/5">
             <img src="assets/framer-bom-vizinho.png" alt="Supermercado Bom Vizinho" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-cyan-400">
-              E-commerce &amp; Discovery
+            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-cyan-400">
+              E-commerce &amp; Design System
             </div>
           </div>
           <div class="p-5 sm:p-6">
@@ -213,7 +215,7 @@
               Supermercado Bom Vizinho
             </h3>
             <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
-              Resumo rápido sobre o case de sucesso: Estratégia de imersão e prototipação no Figma para criar a presença online própria de uma rede de 20 anos, garantindo autonomia de marca e compras online.
+              Estratégia de imersão, benchmarking e prototipação no Figma para criar a presença online própria de uma rede de 20 anos, garantindo autonomia sobre a marca e compras online.
             </p>
             <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
               <span>Ver case detalhado</span>
@@ -222,20 +224,20 @@
           </div>
         </div>
 
-        <!-- Destaque 3: FibroCare (HealthTech UX) -->
-        <div onclick="openProjectDetail('fibrocare')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group w-[82vw] sm:w-[70vw] md:w-auto shrink-0 snap-center">
-          <div class="relative aspect-video w-full bg-dark-900 overflow-hidden border-b border-white/5">
-            <img src="assets/fibrocare-preview.svg" alt="FibroCare" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-dark-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-purple-400">
-              HealthTech &amp; Supabase
+        <!-- Destaque 3: Cbanco (Fintech UX) -->
+        <div onclick="openProjectDetail('cbanco')" class="sketch-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group w-[82vw] sm:w-[70vw] md:w-auto shrink-0 snap-center">
+          <div class="relative aspect-video w-full bg-slate-900 overflow-hidden border-b border-white/5">
+            <img src="assets/framer-cbanco-detail.png" alt="Cbanco" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-purple-400">
+              Fintech &amp; Prototipação
             </div>
           </div>
           <div class="p-5 sm:p-6">
             <h3 class="font-display font-bold text-base sm:text-lg text-white group-hover:text-brand-300 transition-colors mb-2">
-              FibroCare (FibroTracker)
+              Cbanco (App Bancário)
             </h3>
             <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
-              Resumo rápido sobre o case de sucesso: Plataforma para monitoramento de dor crônica com mapa anatômico interativo dos 18 pontos do ACR e predição de crises em 24h–48h para reduzir ansiedade.
+              Estudo da arquitetura de um aplicativo bancário moderno com foco na organização de recursos e criação de style guide consistente para designers e desenvolvedores no Figma.
             </p>
             <div class="text-xs font-semibold text-brand-400 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
               <span>Ver case detalhado</span>
@@ -298,14 +300,14 @@
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
         <div>
           <h2 class="text-xl sm:text-2xl font-display font-bold text-white tracking-tight">Projetos</h2>
-          <p class="text-slate-400 text-xs sm:text-sm mt-1">Estudos de caso de UX, produtos digitais, design systems e jogos interativos.</p>
+          <p class="text-slate-400 text-xs sm:text-sm mt-1">Estudos de caso de UX, design de produtos, design systems e identidade visual.</p>
         </div>
 
-        <!-- Seletor de Categoria: Projetos vs Jogos -->
-        <div class="flex items-center p-1 rounded-xl bg-dark-850 border border-white/10 text-xs font-medium overflow-x-auto max-w-full no-scrollbar">
-          <button onclick="filterList('todos')" id="filterTodos" class="px-3.5 sm:px-4 py-2 rounded-lg text-white tab-pill-active transition-all shrink-0">Todos</button>
-          <button onclick="filterList('produto')" id="filterProduto" class="px-3.5 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all shrink-0">Design de Produto &amp; UX</button>
-          <button onclick="filterList('jogos')" id="filterJogos" class="px-3.5 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all shrink-0">Jogos &amp; 3D</button>
+        <!-- Seletor de Categoria -->
+        <div class="flex items-center p-1 rounded-xl bg-slate-900/80 border border-white/10 text-xs font-medium overflow-x-auto max-w-full no-scrollbar">
+          <button onclick="filterList('todos')" id="filterTodos" class="px-3.5 sm:px-4 py-2 rounded-lg text-white tab-pill-active transition-all shrink-0">Todos (5)</button>
+          <button onclick="filterList('produto')" id="filterProduto" class="px-3.5 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all shrink-0">Design de Produto &amp; UX (4)</button>
+          <button onclick="filterList('branding')" id="filterBranding" class="px-3.5 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all shrink-0">Social Media &amp; Branding (1)</button>
         </div>
       </div>
 
@@ -331,7 +333,7 @@
       </button>
 
       <div id="detailTopLinks" class="flex items-center gap-2 flex-wrap">
-        <!-- Links de Vercel e GitHub injetados dinamicamente -->
+        <!-- Links de Figma, Behance e Site injetados dinamicamente -->
       </div>
     </div>
 
@@ -350,10 +352,10 @@
       </p>
     </div>
 
-    <!-- 1. IMAGEM GRANDE NO TOPO (Ou Embed Player se for jogo) -->
+    <!-- 1. IMAGEM GRANDE NO TOPO -->
     <!-- Sketch 2: Bloco superior cinza [Imagem] -->
     <div id="detailMediaContainer" class="sketch-card rounded-2xl sm:rounded-3xl overflow-hidden mb-8 sm:mb-12 border border-white/10">
-      <!-- Imagem ou Player de Jogo injetado dinamicamente -->
+      <!-- Imagem principal injetada dinamicamente -->
     </div>
 
     <!-- 2. ESTRUTURA DOS 3 BLOCOS (Desafio, Abordagem, Resultado) -->
@@ -401,7 +403,12 @@
 
     </div>
 
-    <!-- 3. Link / Botão para Acessar o Projeto (Especial para Jogos e Projetos Online) -->
+    <!-- 3. GALERIA VISUAL COMPLETA COM TODAS AS IMAGENS DO CASE -->
+    <div id="detailGallerySection" class="mb-12">
+      <!-- Injetado dinamicamente via JS -->
+    </div>
+
+    <!-- 4. Link / Botão para Acessar o Projeto (Figma / Behance / Site) -->
     <div id="detailBottomActionContainer" class="mb-10 sm:mb-12">
       <!-- Injetado dinamicamente via JS -->
     </div>
@@ -419,6 +426,19 @@
 
   </main>
 
+  <!-- ==================================================== -->
+  <!-- MODAL LIGHTBOX DE IMAGEM                             -->
+  <!-- ==================================================== -->
+  <div id="lightboxModal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4" onclick="closeLightbox()">
+    <div class="relative max-w-6xl max-h-[92vh] flex flex-col items-center" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute -top-12 right-0 p-2 text-white/80 hover:text-white bg-white/10 rounded-full transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <img id="lightboxImage" src="" alt="Ampliação" class="max-w-full max-h-[85vh] object-contain rounded-xl border border-white/10 shadow-2xl" />
+      <p id="lightboxCaption" class="text-xs text-slate-300 font-mono mt-3 text-center"></p>
+    </div>
+  </div>
+
   <!-- FOOTER RESUMIDO (Conforme Sketch) -->
   <footer class="border-t border-white/10 py-10 text-center text-xs text-slate-500 font-mono">
     <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -433,43 +453,55 @@
   </footer>
 
   <script>
-    // Catálogo unificado com cases do Framer original + cases desenvolvidos
+    // Catálogo 100% autêntico baseado nos projetos do portfólio Framer
     const projectsData = [
-      // 1. Case Framer: Simulação de Planos de Saúde
+      // 1. Simulação de Planos de Saúde (Associação Cartão Cristão)
       {
         id: 'plano-saude',
-        title: 'Alteração no Fluxo de Simulação de Planos',
+        title: 'Alteração no Fluxo de Simulação de Planos de Saúde',
         subtitle: 'Associação Cartão Cristão • UX, Otimização de Conversão e Wireframes',
         type: 'produto',
-        badge: 'Conversão &amp; UX',
+        badge: 'Conversão &amp; CRO',
         image: 'assets/framer-plano-saude-detail.png',
-        descricaoLinha: 'Redesenho completo do fluxo de simulação de planos da Associação Cartão Cristão, corrigindo falhas de usabilidade e recuperando a geração de leads.',
-        desafio: 'A solicitação surgiu após o antigo fluxo apresentar problemas de funcionalidade que impediam os usuários de realizar simulações de planos, resultando em uma diminuição nas conversões provenientes do site. O desafio consistia em desenvolver um layout simples, claro e objetivo que pudesse ser implementado com agilidade para estancar a perda de potenciais clientes e resguardar a reputação da marca.',
+        descricaoLinha: 'Redesenho completo do fluxo de simulação da Associação Cartão Cristão, eliminando atritos de usabilidade e recuperando a geração de leads.',
+        desafio: 'A solicitação surgiu após o antigo fluxo apresentar problemas de funcionalidade que impediam os usuários de realizar simulações de planos, resultando em uma diminuição nas conversões provenientes do site. O desafio consistia em desenvolver um layout simples e objetivo que pudesse ser implementado rapidamente para estancar a perda de potenciais clientes e resguardar a reputação da marca.',
         abordagem: 'Adotei uma estratégia focada em consistência e rapidez: defini um padrão visual coeso para os campos de preenchimento, reduzindo atritos cognitivos e etapas desnecessárias no formulário. A arquitetura de informação foi reorganizada para guiar o usuário passo a passo com feedback imediato de cotação, permitindo fácil manutenção e testes ágeis.',
         resultado: 'As melhorias implementadas resultaram em um aumento considerável na taxa de conversão do site, corrigindo deficiências históricas do fluxo e fortalecendo a captação de novos associados.',
         techs: ['UX Design', 'Taxa de Conversão (CRO)', 'Figma', 'Wireframing', 'UI Design'],
-        githubUrl: null,
-        vercelUrl: 'https://www.associacaocartaocristao.com.br/assistencia-medica.html',
-        embedUrl: null
+        figmaUrl: null,
+        behanceUrl: 'https://www.behance.net/gallery/137906687/Simulacao-de-novos-Associados-Cartao-Cristao',
+        siteUrl: 'https://www.associacaocartaocristao.com.br/assistencia-medica.html',
+        gallery: [
+          { src: 'assets/framer/Fluxo-de-compras_7_VDfxUlMtf4U23kRo0HmjvNgXRg.png', title: 'Fluxo Geral e Tela de Entrada da Simulação' },
+          { src: 'assets/framer/Fluxo-de-compras_8_GTX0kJEmjq2vIBhrdXL5C0U.png', title: 'Telas Comparativas de Planos e Valores' },
+          { src: 'assets/framer/Fluxo-de-compras_9_4oCyiR01SRCSZjUX1T9vp7tqI.png', title: 'Formulário Redesenhado e Otimizado' },
+          { src: 'assets/framer/Fluxo-de-compras_10_GI6BtzXn5TV0v9j5YXZQ6yrmic.png', title: 'Etapa de Conclusão e Envio do Lead' }
+        ]
       },
-      // 2. Case Framer: Bom Vizinho
+
+      // 2. Supermercado Bom Vizinho
       {
         id: 'bom-vizinho',
         title: 'Estudo de Caso: Supermercado Bom Vizinho',
         subtitle: 'E-commerce Próprio, Imersão &amp; Design System no Figma',
         type: 'produto',
-        badge: 'E-commerce &amp; Discovery',
+        badge: 'E-commerce &amp; Design System',
         image: 'assets/framer-bom-vizinho.png',
         descricaoLinha: 'Projeto de UX para levar um supermercado tradicional de 20 anos para o ambiente digital com autonomia de marca e compras online.',
         desafio: 'O Supermercado Bom Vizinho, com mais de duas décadas de atuação, não possuía site próprio e dependia exclusivamente de plataformas terceirizadas de entrega. Isso limitava severamente a autonomia sobre a marca, a experiência do cliente e a capacidade de fidelização, além de gerar dependência de intermediários em um mercado altamente competitivo.',
         abordagem: 'O processo de resolução foi estruturado em três etapas: Imersão, Ideação e Prototipação. No Notion, documentei os requisitos e personas. No Figma, realizei benchmarking detalhado de referências (Amazon, iFood, Magazine Luiza, Nagumo) e desenvolvi um Design System modular com componentes reutilizáveis, desenhando wireframes completos para entrega em domicílio e retirada na loja.',
         resultado: 'Entrega de um protótipo de alta fidelidade que proporcionou uma experiência de compra online fluida, permitindo ao supermercado planejar seu canal direto de vendas com controle total sobre dados de clientes e campanhas.',
         techs: ['UX Research', 'Design System', 'Figma', 'Benchmarking', 'E-commerce UX'],
-        githubUrl: null,
-        vercelUrl: null,
-        embedUrl: null
+        figmaUrl: null,
+        behanceUrl: null,
+        siteUrl: null,
+        gallery: [
+          { src: 'assets/framer/Bom-vizinho_3_8w2SGKDTbKNASI7M0qeaAKo2z5s.png', title: 'Painel Semântico, Design System e Wireframes' },
+          { src: 'assets/framer/home_10_KMKkXlL2VmQ0JkOMAkshjnt5v0Y.jpg', title: 'Identidade Visual e Layout Digital do Supermercado' }
+        ]
       },
-      // 3. Case Framer: Cbanco
+
+      // 3. Cbanco
       {
         id: 'cbanco',
         title: 'Estudo de Caso: Cbanco (Fintech App)',
@@ -480,13 +512,20 @@
         descricaoLinha: 'Estudo da arquitetura de um aplicativo bancário moderno com foco na organização de recursos e criação de style guide consistente para design e dev.',
         desafio: 'Aplicativos financeiros necessitam transmitir extrema segurança e simplicidade simultaneamente. O desafio era reformular o fluxo antigo de extrato, cartões e transferências em uma interface limpa e padronizada que facilitasse tanto a vida do usuário quanto a implementação pelos desenvolvedores.',
         abordagem: 'Mapeamento do fluxo antigo e reconstrução da arquitetura no Figma. Criação de um style guide consistente, documentado e de fácil consulta, com tipografia legível para números, contrastes acessíveis e componentes atômicos para saldos, extratos e transações.',
-        resultado: 'Interface bancária moderna com redução da carga cognitiva em operações de rotina e biblioteca padronizada de componentes pronta para desenvolvimento.',
-        techs: ['Fintech UX', 'Style Guide', 'Figma', 'Arquitetura de Informação'],
-        githubUrl: null,
-        vercelUrl: null,
-        embedUrl: null
+        resultado: 'Interface bancária moderna com redução da carga cognitiva em operações de rotina e biblioteca padronizada de componentes pronta para desenvolvimento no Figma.',
+        techs: ['Fintech UX', 'Style Guide', 'Figma', 'Arquitetura de Informação', 'Design System'],
+        figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2154-4209&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2154%3A4209&show-proto-sidebar=1',
+        behanceUrl: null,
+        siteUrl: null,
+        gallery: [
+          { src: 'assets/framer/cbanco_1_w9B2VOpmE5M3KT8QVwk42MpcHTE.png', title: 'Comparativo: Fluxo Antigo vs Nova Arquitetura' },
+          { src: 'assets/framer/cbanco_2_jrilSX6PEgcvKF6pqAQWcS9KhE.png', title: 'Style Guide & Componentes de UI' },
+          { src: 'assets/framer/cbanco_3_bsidmwZXZ65pLxB8ROqHEFIoD8c.png', title: 'Telas Mobile de Saldo, Extrato e Cartões' },
+          { src: 'assets/framer/cbanco_4_krSlJ2n5urqBJU1C9Z7kTdejjSc.png', title: 'Fluxo de Transferência e Feedback' }
+        ]
       },
-      // 4. Case Framer: Intern Gestão de Times
+
+      // 4. Intern Gestão de Times
       {
         id: 'intern',
         title: 'Estudo de Caso: Intern (Gestão de Times &amp; Intranet)',
@@ -498,146 +537,47 @@
         desafio: 'Sistemas internos de RH e intranet costumam ser descentralizados, complexos e visualmente desestimulantes, fazendo com que colaboradores percam prazos de envio de ponto e comunicados importantes.',
         abordagem: 'Criação de um hub centralizado com estética de rede social amigável. Guia de estilo intuitivo integrando holerite, marcação de ponto, cardápio do refeitório e módulos de treinamento gamificados, garantindo facilidade de consulta para gestores e colaboradores.',
         resultado: 'Melhoria na comunicação interna, unificação dos pontos de contato do colaborador com a empresa e navegação eficiente sem ruídos operacionais.',
-        techs: ['Enterprise UX', 'Employee Experience (EX)', 'Figma', 'UI Design'],
-        githubUrl: null,
-        vercelUrl: null,
-        embedUrl: null
+        techs: ['Enterprise UX', 'Employee Experience (EX)', 'Figma', 'UI Design', 'Style Guide'],
+        figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2211-5714&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2211%3A5714&show-proto-sidebar=1',
+        behanceUrl: null,
+        siteUrl: null,
+        gallery: [
+          { src: 'assets/framer/intern_1_k7XuUK8a3NSNh4RCb6b4iQOwejI.png', title: 'Visão Geral do Hub da Intranet e Feed' },
+          { src: 'assets/framer/intern_2_N2wAqYWAsNq6keAihvfLfgXUlA.png', title: 'Módulo Mobile de Marcação de Ponto e RH' },
+          { src: 'assets/framer/intern_3_Y597s7LZ2lE1lQEXdGU40lznLA0.png', title: 'Guia de Estilo da Interface e Tipografia' }
+        ]
       },
-      // 5. FibroCare
-      {
-        id: 'fibrocare',
-        title: 'FibroCare (FibroTracker)',
-        subtitle: 'HealthTech • Mapa Anatômico de Dor &amp; Predição de Crises',
-        type: 'produto',
-        badge: 'HealthTech UX',
-        image: 'assets/fibrocare-preview.svg',
-        descricaoLinha: 'Aplicativo clínico para pacientes com Fibromialgia. Mapa anatômico interativo dos 18 tender points do ACR e predição de crises em 24h–48h.',
-        desafio: 'Pacientes com dores crônicas relatam grande dificuldade em expressar a localização, intensidade e evolução da dor durante consultas médicas rápidas. Sem um histórico objetivo e estruturado, os reumatologistas enfrentam barreiras para ajustar medicamentos, gerando frustração contínua e subdiagnóstico de fatores desencadeantes.',
-        abordagem: 'Concepção de uma interface mobile-first com baixa carga cognitiva e dark mode calmante. Mapeamento interativo dos 18 pontos anatômicos do ACR (American College of Rheumatology) com toques rápidos, associado a um algoritmo de correlação que analisa sono e clima para projetar a probabilidade de crise em 24h a 48h.',
-        resultado: 'Redução significativa do tempo de relato em consultório médico, maior adesão diária aos registros de sintomas e empoderamento do paciente, que passa a ter previsibilidade sobre suas crises com relatórios exportáveis.',
-        techs: ['Product Design', 'UI/UX', 'HealthTech UX', 'Design System', 'Acessibilidade WCAG'],
-        githubUrl: 'https://github.com/nlldesign/Fibrotracker',
-        vercelUrl: null,
-        embedUrl: null
-      },
-      // 6. Habit RPG Tracker
-      {
-        id: 'habit-rpg',
-        title: 'Habit RPG Tracker',
-        subtitle: 'Behavioral UX • Gamificação e Loops de Consistência Pessoal',
-        type: 'produto',
-        badge: 'Behavioral Design',
-        image: 'assets/habit-rpg-preview.svg',
-        descricaoLinha: 'Design de produto comportamental que converte rotinas diárias e finanças em uma jornada de RPG tangível com economia de recompensas reais.',
-        desafio: 'Mais de 80% dos usuários de aplicativos tradicionais de hábitos abandonam a ferramenta em menos de duas semanas. A falta de estímulos visuais imediatos e a estrutura árida em forma de listas de afazeres desmotivam a consistência a longo prazo.',
-        abordagem: 'Aplicação dos princípios do Hook Model e design comportamental: a saúde da consistência é representada por uma barra de HP visível, as vitórias diárias geram XP com micro-animações táteis e as moedas de ouro (GP) acumuladas desbloqueiam recompensas reais cadastradas pelo próprio usuário.',
-        resultado: 'Aumento expressivo na retenção da rotina diária e redução do atrito psicológico na gestão de tarefas e controle financeiro integrado.',
-        techs: ['Behavioral UX', 'Gamification Design', 'Micro-interações', 'Economia de Produto'],
-        githubUrl: null,
-        vercelUrl: null,
-        embedUrl: null
-      },
-      // 7. MapLeads
-      {
-        id: 'mapleads',
-        title: 'MapLeads',
-        subtitle: 'B2B SaaS • Workflow UX &amp; Prevenção Ativa de Erros',
-        type: 'produto',
-        badge: 'B2B Workflow',
-        image: 'assets/mapleads-preview.svg',
-        descricaoLinha: 'Interface de prospecção comercial de alta densidade no Google Maps com busca em lote por nichos e bloqueio anti-duplicidade transparente.',
-        desafio: 'Operações de prospecção outbound gastam horas minerando dados de empresas em mapas de forma manual. Ferramentas existentes são excessivamente técnicas, confusas e frequentemente geram cadastros repetidos que queimam a reputação do domínio de vendas.',
-        abordagem: 'Desenvolvimento de uma interface operacional guiada em 3 etapas simples (nicho, região e validação). Visualização em radar que exibe o progresso em tempo real e tabela inteligente com badges visuais de status (WhatsApp verificado, sem duplicata) e sanitização automática de telefones.',
-        resultado: 'Extração e qualificação de mais de 1.400 empresas por hora com zero contatos duplicados, dispensando qualquer treinamento prévio para a equipe de vendas.',
-        techs: ['B2B SaaS UX', 'Data Density Design', 'Error Prevention', 'Dashboard UX'],
-        githubUrl: 'https://github.com/nlldesign/Mapleads',
-        vercelUrl: 'https://mapleads-psi.vercel.app',
-        embedUrl: null
-      },
-      // 8. Social Media & Comunicação Digital (Framer)
+
+      // 5. Social Media & Comunicação Digital
       {
         id: 'social-media',
         title: 'Comunicação Digital &amp; Social Media',
         subtitle: 'Associação Cartão Cristão e Parceiros • Criação de Peças e Gestão',
-        type: 'produto',
-        badge: 'Marketing &amp; Design Gráfico',
+        type: 'branding',
+        badge: 'Social Media &amp; Branding',
         image: 'assets/framer-social-media.png',
-        descricaoLinha: 'Criação de identidade visual e peças de comunicação digital para redes sociais (Instagram, Facebook, LinkedIn) e relatórios de performance.',
-        desafio: 'Manter a consistência de marca e engajamento em múltiplos canais digitais para a Associação Cartão Cristão e sua rede de parceiros, com frequentes campanhas de saúde e benefícios.',
-        abordagem: 'Criação de um sistema de templates gráficos no Figma e Photoshop, alinhando tom de voz, paletas de cores institucionais e chamadas de ação (CTAs) orientadas a conversão em mídias sociais.',
-        resultado: 'Mais de dois anos de produção contínua com elevação no alcance orgânico e padronização visual completa das marcas parceiras.',
-        techs: ['Design Gráfico', 'Social Media', 'Photoshop', 'Identidade Visual', 'Marketing Digital'],
-        githubUrl: null,
-        vercelUrl: null,
-        embedUrl: null
-      },
-      // 9. Jogos: Corpo Seco
-      {
-        id: 'corpo-seco',
-        title: 'Corpo Seco: A Maldição do Vale',
-        subtitle: 'Game UI/UX • Atmosfera de Terror 3D &amp; UI Diegética',
-        type: 'jogos',
-        badge: '3D &amp; Diegetic UI',
-        image: 'assets/corpo-seco-hero.png',
-        descricaoLinha: 'Jogo 3D de terror e suspense na mata. Foco em UI diegética sem barras flutuantes na tela: a lanterna, a névoa e o som espacial comunicam o perigo ao jogador.',
-        desafio: 'Manter o jogador informado sobre seu estado e recursos em um jogo 3D tenso sem quebrar a imersão com barras de vida, ícones flutuantes ou poluição de tela.',
-        abordagem: 'Integração de todos os indicadores no próprio mundo: o feixe da lanterna indica a energia restante, aberrações cromáticas e áudio binaural avisam sobre a proximidade da criatura, e o caminho seguro é revelado por contraste de iluminação da mata.',
-        resultado: 'Experiência imersiva rodando a 60 FPS diretamente no navegador, alcançando alto impacto emocional através de um design limpo e puramente sensorial.',
-        techs: ['Game UI/UX', 'Diegetic UI', 'Three.js 3D', 'Psicologia das Cores', 'Sound Design'],
-        githubUrl: null,
-        vercelUrl: 'https://corpo-seco.vercel.app',
-        embedUrl: 'games/corpo-seco/index.html'
-      },
-      // 10. Jogos: Undertale 3D
-      {
-        id: 'undertale-3d',
-        title: 'Undertale 3D: Ruínas &amp; Arena',
-        subtitle: 'Spatial UX • Transposição de Câmera 2D para Espaço 3D',
-        type: 'jogos',
-        badge: 'Spatial UI 3D',
-        image: 'assets/undertale-preview.svg',
-        descricaoLinha: 'Adaptação tridimensional interativa do universo de Undertale, transpondo mecânicas clássicas de combate e exploração de ruínas com física de colisão.',
-        desafio: 'Preservar a precisão geométrica do clássico combate "bullet hell" ao transferir a câmera de cima (top-down 2D) para uma perspectiva 3D em tempo real.',
-        abordagem: 'Design de arena suspensa com cálculo angular de câmera que mantém a leitura de projéteis clara, com iluminação focal na alma vermelha e feedback de dano imediato.',
-        resultado: 'Navegação fluida e combate ágil que respeita o design original com perspectiva espacial inovadora.',
-        techs: ['Spatial UI', 'Level Design 3D', 'Game Feel', 'Feedback Visual'],
-        githubUrl: null,
-        vercelUrl: 'https://undertale-3d.vercel.app',
-        embedUrl: 'games/undertale-3d/index.html'
-      },
-      // 11. Jogos: Swam Invasion
-      {
-        id: 'swam-invasion',
-        title: 'Swam Invasion (Colony Survivor)',
-        subtitle: 'Visual Hierarchy • Clareza Visual sob Alta Densidade',
-        type: 'jogos',
-        badge: 'Canvas Game Feel',
-        image: 'assets/swam-invasion-preview.svg',
-        descricaoLinha: 'Jogo arcade frenético com mais de 1.000 entidades simultâneas em tela. Foco de design em contraste visual e leitura rápida de decisões e upgrades.',
-        desafio: 'Garantir que o jogador tome decisões estratégicas instantâneas em meio a centenas de inimigos sem sentir que a tela está ilegível ou injusta.',
-        abordagem: 'Hierarquia visual estrita por valor de cor e iluminação: o jogador tem aura de alto contraste ciano, projéteis possuem brilho luminescente e inimigos seguem paletas que não ofuscam caminhos de fuga.',
-        resultado: 'Jogabilidade intensa com 60 FPS constantes e legibilidade impecável mesmo nos estágios finais de densidade máxima.',
-        techs: ['Visual Hierarchy', 'Game Feel', 'Canvas 2D', 'Reward Loops'],
-        githubUrl: 'https://github.com/nlldesign/Swam-invasion',
-        vercelUrl: 'https://swam-invasion.vercel.app',
-        embedUrl: 'games/swam-invasion/index.html'
-      },
-      // 12. Jogos: Biopunk Idle
-      {
-        id: 'biopunk-idle',
-        title: 'Biopunk Idle (Rádio Esperança 3D)',
-        subtitle: 'Sensory UX • Narrativa Ambiental e UI Analógica Tátil',
-        type: 'jogos',
-        badge: 'Tactile UI',
-        image: 'assets/biopunk-preview.svg',
-        descricaoLinha: 'Jogo incremental temático com rádio pirata atmosférica, estética biopunk e sintonizadores analógicos de áudio e tanques biológicos.',
-        desafio: 'Evitar que um jogo idle se torne uma planilha fria e criar vínculo emocional através de ambientação estética marcante.',
-        abordagem: 'Criação de botões e knobs analógicos táteis, sons de estática e frequências de rádio via Web Audio API e representação volumétrica de recursos em tanques 3D.',
-        resultado: 'Retenção duradoura impulsionada pela atmosfera singular e pela sensação prazerosa de operar uma rádio clandestina.',
-        techs: ['Tactile UI', 'World Building', 'Soundscape Design', 'Identidade Visual'],
-        githubUrl: null,
-        vercelUrl: 'https://biopunk-idle.vercel.app',
-        embedUrl: null
+        descricaoLinha: 'Criação de identidade visual e peças de comunicação digital para redes sociais (Instagram, Facebook, LinkedIn) e relatórios de performance para múltiplos parceiros.',
+        desafio: 'Ao longo de dois anos como Web Designer, a Associação Cartão Cristão e seus parceiros enfrentavam o desafio de manter alto engajamento e consistência visual contínua para marcas e segmentos diversos (saúde, odontologia, veterinária, educação e comunidade).',
+        abordagem: 'Criação de um sistema de templates gráficos no Figma e Photoshop, unificando a voz visual e paletas de cada submarca: Instituto Cartão Cristão, Cartão Cristão Odonto, Cartão Cristão PET, Clube de Saúde São Mateus, Laboratório Melior, Colégio Paulo Monteiro, Clube da Comunidade Alcidio Monteiro e Collisbloco.',
+        resultado: 'Mais de dois anos de produção contínua com elevação substancial no alcance orgânico, padronização visual das peças e agilidade no fluxo diário de publicação.',
+        techs: ['Design Gráfico', 'Social Media', 'Photoshop', 'Identidade Visual', 'Marketing Digital', 'Figma'],
+        figmaUrl: null,
+        behanceUrl: 'https://www.behance.net/lucasnellucci',
+        siteUrl: null,
+        gallery: [
+          { src: 'assets/framer/social-media_7_dzpes7047JLwMTB827dPxmFKO8A.png', title: 'Campanhas de Saúde & Prevenção' },
+          { src: 'assets/framer/social-media_8_vNTaCTysJ6TqIjKlrUME51yEthc.png', title: 'Cartão Cristão Odonto & Benefícios' },
+          { src: 'assets/framer/social-media_10_K0vZr2puFJXrIIwrG79VRjBMHA.png', title: 'Cartão Cristão PET' },
+          { src: 'assets/framer/social-media_11_DA0zhWL3VQsUQ7UINafYYGp1YJE.png', title: 'Colégio Paulo Monteiro' },
+          { src: 'assets/framer/social-media_14_5UsyhNNh3InSIo5xqXDzmCvxDA.png', title: 'Laboratório Melior' },
+          { src: 'assets/framer/social-media_16_FuOEDLBtFrfPRJINPREIdwHdyw.png', title: 'Clube de Saúde São Mateus' },
+          { src: 'assets/framer/social-media_22_FSIq2G8B1kNzfcJgA40LN2Ho2Uk.png', title: 'Peças de Engajamento Instagram' },
+          { src: 'assets/framer/social-media_27_Kui6eGBWUlCcGHXVXLLKsKHavw.png', title: 'Comunicação Visual e Campanhas' },
+          { src: 'assets/framer/social-media_35_BHhO0QO6o5QTlug6POSwnaBpTwA.png', title: 'Posts Institucionais e Parcerias' },
+          { src: 'assets/framer/social-media_44_o6NlxTdeMHyzFcVdAMyuSuK23P0.png', title: 'Divulgações de Serviços Médicos' },
+          { src: 'assets/framer/social-media_46_VsEDt5hUqyKXv4KJBpQkYAT8ejo.png', title: 'Artes Promocionais e Banners' },
+          { src: 'assets/framer/social-media_50_utUhUkNRBMG8B63TrPT73JOXVts.png', title: 'Campanhas Sazonais e Eventos' }
+        ]
       }
     ];
 
@@ -648,10 +588,10 @@
 
       const fTodos = document.getElementById('filterTodos');
       const fProd = document.getElementById('filterProduto');
-      const fJogos = document.getElementById('filterJogos');
+      const fBrand = document.getElementById('filterBranding');
 
-      [fTodos, fProd, fJogos].forEach(b => {
-        b.className = 'px-3.5 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all shrink-0';
+      [fTodos, fProd, fBrand].forEach(b => {
+        if (b) b.className = 'px-3.5 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all shrink-0';
       });
 
       if (category === 'todos') {
@@ -659,7 +599,7 @@
       } else if (category === 'produto') {
         fProd.className = 'px-3.5 sm:px-4 py-2 rounded-lg text-white tab-pill-active transition-all shrink-0';
       } else {
-        fJogos.className = 'px-3.5 sm:px-4 py-2 rounded-lg text-white tab-pill-active transition-all shrink-0';
+        fBrand.className = 'px-3.5 sm:px-4 py-2 rounded-lg text-white tab-pill-active transition-all shrink-0';
       }
 
       renderProjectsList();
@@ -683,7 +623,7 @@
                 ${p.badge}
               </span>
               <span class="text-xs text-slate-500 font-mono">
-                ${p.type === 'produto' ? 'Design de Produto &amp; UX' : 'Jogo &amp; 3D'}
+                ${p.type === 'produto' ? 'Design de Produto &amp; UX' : 'Social Media &amp; Branding'}
               </span>
             </div>
 
@@ -697,18 +637,27 @@
           </div>
 
           <div class="shrink-0 flex items-center gap-2 pt-3 sm:pt-0 border-t sm:border-t-0 border-white/5 w-full sm:w-auto">
-            ${p.vercelUrl ? `
-              <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
+            ${p.figmaUrl ? `
+              <a href="${p.figmaUrl}" target="_blank" rel="noopener noreferrer" 
+                 class="px-3.5 py-2.5 rounded-xl bg-purple-950/40 hover:bg-purple-900/50 border border-purple-500/30 text-purple-300 text-xs font-mono flex items-center justify-center gap-1.5 transition-all shrink-0"
+                 title="Abrir Protótipo no Figma">
+                <i data-lucide="figma" class="w-3.5 h-3.5"></i>
+                <span class="inline">Figma</span>
+              </a>
+            ` : ''}
+
+            ${p.siteUrl ? `
+              <a href="${p.siteUrl}" target="_blank" rel="noopener noreferrer" 
                  class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-mono flex items-center justify-center gap-1.5 transition-all shrink-0"
-                 title="Abrir Projeto">
-                <span class="font-bold">▲</span>
-                <span class="inline">Acessar</span>
+                 title="Abrir Site">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                <span class="inline">Site</span>
               </a>
             ` : ''}
 
             <button onclick="openProjectDetail('${p.id}')" 
                     class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-lg shadow-brand-600/25 transition-all">
-              <span>${p.type === 'jogos' ? 'Jogar &amp; Ver Case' : 'Acessar Case'}</span>
+              <span>Acessar Case</span>
               <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
           </div>
@@ -724,140 +673,147 @@
       const p = projectsData.find(item => item.id === id);
       if (!p) return;
 
-      // Preenche os dados do cabeçalho do detalhe
+      // Cabeçalho do detalhe
       document.getElementById('detailBadge').innerHTML = p.badge;
       document.getElementById('detailTitle').innerText = p.title;
       document.getElementById('detailSubtitle').innerText = p.subtitle;
 
-      // Preenche os 3 Blocos Estruturados (Desafio, Abordagem, Resultado)
+      // 3 Blocos Estruturados (Desafio, Abordagem, Resultado)
       document.getElementById('detailDesafioText').innerText = p.desafio;
       document.getElementById('detailAbordagemText').innerText = p.abordagem;
       document.getElementById('detailResultadoText').innerText = p.resultado;
 
-      // Preenche as tags
+      // Tags
       document.getElementById('detailTechsList').innerHTML = p.techs.map(t => `
         <span class="text-xs font-mono px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">
           ${t}
         </span>
       `).join('');
 
-      // Top Links (Vercel e GitHub)
+      // Top Links (Figma, Behance, Site)
       const topLinks = document.getElementById('detailTopLinks');
       let linksHtml = '';
-      if (p.vercelUrl) {
+      if (p.figmaUrl) {
         linksHtml += `
-          <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
-             class="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-mono flex items-center gap-1.5 transition-colors">
-            <span class="font-bold">▲</span>
-            <span>Acessar Projeto</span>
+          <a href="${p.figmaUrl}" target="_blank" rel="noopener noreferrer" 
+             class="px-3.5 py-1.5 rounded-xl bg-purple-950/40 hover:bg-purple-900/50 border border-purple-500/30 text-purple-300 text-xs font-mono flex items-center gap-1.5 transition-colors">
+            <i data-lucide="figma" class="w-3.5 h-3.5"></i>
+            <span>Protótipo no Figma</span>
             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
           </a>
         `;
       }
-      if (p.githubUrl) {
+      if (p.behanceUrl) {
         linksHtml += `
-          <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" 
+          <a href="${p.behanceUrl}" target="_blank" rel="noopener noreferrer" 
              class="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-medium flex items-center gap-1.5 transition-colors">
-            <i data-lucide="github" class="w-3.5 h-3.5"></i>
-            <span>GitHub</span>
+            <i data-lucide="layout" class="w-3.5 h-3.5 text-cyan-400"></i>
+            <span>Behance</span>
+          </a>
+        `;
+      }
+      if (p.siteUrl) {
+        linksHtml += `
+          <a href="${p.siteUrl}" target="_blank" rel="noopener noreferrer" 
+             class="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-mono flex items-center gap-1.5 transition-colors">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            <span>Ver no Ar</span>
           </a>
         `;
       }
       topLinks.innerHTML = linksHtml;
 
-      // Preenche o Media Container no topo do detalhe
+      // Media Container no topo do detalhe (Sketch 2: Imagem Grande no Topo)
       const mediaContainer = document.getElementById('detailMediaContainer');
-      const isGame = p.type === 'jogos';
-      const playableSource = p.embedUrl || p.vercelUrl;
-
-      if (isGame && playableSource) {
-        mediaContainer.innerHTML = `
-          <div class="p-3.5 sm:p-4 bg-dark-950 border-b border-white/10 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span class="text-xs font-mono font-bold uppercase text-slate-300">Player Interativo no Navegador</span>
-            </div>
-            <button onclick="toggleFullscreenEmbed()" class="text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1">
-              <i data-lucide="maximize" class="w-3.5 h-3.5"></i>
-              <span>Tela Cheia</span>
-            </button>
+      mediaContainer.innerHTML = `
+        <div class="relative aspect-video w-full bg-slate-950 overflow-hidden cursor-pointer group" onclick="openLightbox('${p.image}', '${p.title}')">
+          <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+            <span class="text-xs font-mono text-white flex items-center gap-1.5 bg-black/60 px-3 py-1.5 rounded-lg backdrop-blur-md">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i>
+              Clique para ampliar a imagem
+            </span>
           </div>
-          
-          <div id="embedViewport" class="relative aspect-video w-full bg-black flex items-center justify-center">
-            <div id="embedCover" class="absolute inset-0 flex flex-col items-center justify-center bg-dark-900/95 p-6 text-center z-10">
-              <img src="${p.image}" alt="Preview" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" />
-              <div class="relative z-10">
-                <div class="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-brand-500/20 border border-brand-500/40 text-brand-400 flex items-center justify-center mx-auto mb-3 sm:mb-4 cursor-pointer hover:scale-110 transition-transform" onclick="runGameEmbed('${playableSource}')">
-                  <i data-lucide="play" class="w-7 sm:w-8 h-7 sm:h-8 fill-current ml-1"></i>
-                </div>
-                <h4 class="text-lg sm:text-xl font-display font-bold text-white mb-1">Carregar Jogo Interativo</h4>
-                <p class="text-xs text-slate-400 max-w-sm mb-4">Clique para rodar o build no navegador com controles diretos de teclado e mouse.</p>
-                <button onclick="runGameEmbed('${playableSource}')" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-lg shadow-brand-600/30">
-                  Iniciar Partida
-                </button>
-              </div>
-            </div>
+        </div>
+      `;
 
-            <iframe id="gameIframe" src="about:blank" class="w-full h-full border-0" allow="fullscreen; autoplay; gamepad"></iframe>
+      // Galeria de Telas & Evidências Visuais
+      const gallerySection = document.getElementById('detailGallerySection');
+      if (p.gallery && p.gallery.length > 0) {
+        gallerySection.innerHTML = `
+          <div class="mb-5 flex items-center justify-between">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-wider text-brand-400 font-semibold block mb-0.5">Evidências Visuais &amp; Telas</span>
+              <h3 class="text-lg sm:text-xl font-display font-bold text-white">Galeria de Telas e Entregáveis</h3>
+            </div>
+            <span class="text-xs text-slate-500 font-mono hidden sm:inline">Clique para ampliar</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            ${p.gallery.map(item => `
+              <div onclick="openLightbox('${item.src}', '${item.title}')" class="sketch-card rounded-xl overflow-hidden cursor-pointer group flex flex-col justify-between border border-white/5 hover:border-brand-500/40">
+                <div class="aspect-video w-full bg-slate-900 overflow-hidden relative">
+                  <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div class="p-2 rounded-full bg-black/60 backdrop-blur-sm text-white">
+                      <i data-lucide="maximize-2" class="w-4 h-4"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-3 bg-slate-950/60 border-t border-white/5">
+                  <p class="text-xs text-slate-300 font-medium truncate">${item.title}</p>
+                </div>
+              </div>
+            `).join('')}
           </div>
         `;
       } else {
-        mediaContainer.innerHTML = `
-          <div class="relative aspect-video w-full bg-dark-950 overflow-hidden">
-            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover" />
-          </div>
+        gallerySection.innerHTML = '';
+      }
+
+      // Bloco de Ação no Final (Figma / Behance / Site)
+      const bottomAction = document.getElementById('detailBottomActionContainer');
+      let actionButtons = '';
+      if (p.figmaUrl) {
+        actionButtons += `
+          <a href="${p.figmaUrl}" target="_blank" rel="noopener noreferrer" 
+             class="w-full sm:w-auto px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-purple-600/30 transition-all">
+            <i data-lucide="figma" class="w-4 h-4"></i>
+            <span>Explorar Protótipo no Figma</span>
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+        `;
+      }
+      if (p.behanceUrl) {
+        actionButtons += `
+          <a href="${p.behanceUrl}" target="_blank" rel="noopener noreferrer" 
+             class="w-full sm:w-auto px-5 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/30 transition-all">
+            <i data-lucide="layout" class="w-4 h-4"></i>
+            <span>Ver no Behance</span>
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+        `;
+      }
+      if (p.siteUrl) {
+        actionButtons += `
+          <a href="${p.siteUrl}" target="_blank" rel="noopener noreferrer" 
+             class="w-full sm:w-auto px-5 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-600/30 transition-all">
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+            <span>Acessar Site no Ar</span>
+          </a>
         `;
       }
 
-      // Preenche o Bloco de Ação no Final (Destaque para Acessar o Projeto)
-      const bottomAction = document.getElementById('detailBottomActionContainer');
-      if (isGame) {
+      if (actionButtons) {
         bottomAction.innerHTML = `
-          <div class="sketch-row p-5 sm:p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 border border-brand-500/30 bg-gradient-to-r from-brand-900/30 via-dark-850 to-cyan-900/20 shadow-xl shadow-brand-950/50">
-            <div class="flex items-center gap-4 text-center md:text-left">
-              <div class="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mx-auto md:mx-0 shadow-lg shadow-cyan-500/20">
-                <i data-lucide="gamepad-2" class="w-6 sm:w-7 h-6 sm:h-7"></i>
-              </div>
-              <div>
-                <span class="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 block mb-0.5 sm:mb-1">Link de Acesso ao Projeto</span>
-                <h4 class="text-lg sm:text-xl font-display font-bold text-white">Pronto para jogar ${p.title}?</h4>
-                <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Acesse o deploy oficial na Vercel ou utilize o player interativo direto no topo.</p>
-              </div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 w-full md:w-auto shrink-0">
-              ${p.vercelUrl ? `
-                <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
-                   class="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-600/35 transition-all">
-                  <span class="font-bold">▲</span>
-                  <span>Acessar Projeto na Vercel</span>
-                  <i data-lucide="external-link" class="w-4 h-4"></i>
-                </a>
-              ` : ''}
-
-              ${playableSource ? `
-                <button onclick="scrollToGameEmbed()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
-                  <i data-lucide="play" class="w-4 h-4 text-cyan-400 fill-current"></i>
-                  <span>Jogar no Topo</span>
-                </button>
-              ` : ''}
-            </div>
-          </div>
-        `;
-      } else if (p.vercelUrl) {
-        bottomAction.innerHTML = `
-          <div class="sketch-row p-5 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6 border border-white/10">
+          <div class="sketch-row p-5 sm:p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 border border-brand-500/30 bg-gradient-to-r from-brand-900/30 via-slate-900 to-purple-900/20 shadow-xl">
             <div>
-              <span class="text-xs font-mono font-bold uppercase tracking-wider text-brand-400 block mb-1">Acessar Projeto Online</span>
-              <h4 class="text-base sm:text-lg font-display font-bold text-white">Visualizar ${p.title} em Produção</h4>
-              <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Explore a versão online do produto publicada na web.</p>
+              <span class="text-xs font-mono font-bold uppercase tracking-wider text-brand-400 block mb-1">Acessar Entregáveis do Projeto</span>
+              <h4 class="text-lg sm:text-xl font-display font-bold text-white">Pronto para testar o fluxo de ${p.title}?</h4>
+              <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Explore os protótipos interativos, especificações ou o projeto em produção.</p>
             </div>
-            <a href="${p.vercelUrl}" target="_blank" rel="noopener noreferrer" 
-               class="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-600/35 transition-all shrink-0">
-              <span class="font-bold">▲</span>
-              <span>Acessar Projeto</span>
-              <i data-lucide="external-link" class="w-4 h-4"></i>
-            </a>
+            <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto shrink-0">
+              ${actionButtons}
+            </div>
           </div>
         `;
       } else {
@@ -869,47 +825,12 @@
       document.getElementById('projectDetailView').classList.remove('hidden');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      // Atualiza URL hash para compartilhamento
       window.location.hash = '/projeto/' + p.id;
       lucide.createIcons();
     }
 
-    function runGameEmbed(url) {
-      const iframe = document.getElementById('gameIframe');
-      const cover = document.getElementById('embedCover');
-      if (iframe && cover) {
-        iframe.src = url;
-        cover.classList.add('hidden');
-      }
-    }
-
-    function toggleFullscreenEmbed() {
-      const viewport = document.getElementById('embedViewport');
-      if (!viewport) return;
-      if (!document.fullscreenElement) {
-        viewport.requestFullscreen().catch(err => console.log(err));
-      } else {
-        document.exitFullscreen();
-      }
-    }
-
-    window.scrollToGameEmbed = function() {
-      const media = document.getElementById('detailMediaContainer');
-      if (media) {
-        media.scrollIntoView({ behavior: 'smooth' });
-        const cover = document.getElementById('embedCover');
-        if (cover && !cover.classList.contains('hidden')) {
-          const btn = cover.querySelector('button');
-          if (btn) btn.click();
-        }
-      }
-    };
-
     // Volta para a View Home
     function showHomeView() {
-      const iframe = document.getElementById('gameIframe');
-      if (iframe) iframe.src = 'about:blank'; // Pausa qualquer jogo ativo
-
       document.getElementById('projectDetailView').classList.add('hidden');
       document.getElementById('homeView').classList.remove('hidden');
       window.location.hash = '';
@@ -917,7 +838,28 @@
       lucide.createIcons();
     }
 
-    // Suporte ao botão voltar do navegador (Back button)
+    // Lightbox Modal
+    function openLightbox(src, caption) {
+      const modal = document.getElementById('lightboxModal');
+      const img = document.getElementById('lightboxImage');
+      const cap = document.getElementById('lightboxCaption');
+      img.src = src;
+      cap.innerText = caption || '';
+      modal.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightboxModal');
+      modal.classList.add('hidden');
+      document.getElementById('lightboxImage').src = '';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Suporte ao botão voltar do navegador
     window.addEventListener('popstate', () => {
       const hash = window.location.hash;
       if (hash && hash.startsWith('#/projeto/')) {
