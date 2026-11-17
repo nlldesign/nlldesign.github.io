@@ -1,5 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="none">
-  <rect width="36" height="36" rx="9" fill="#09070f"/>
-  <circle cx="18" cy="18" r="14" stroke="#c084fc" stroke-width="1.8" stroke-dasharray="3 2" opacity="0.85"/>
-  <path d="M12 24L12 12L24 24L24 12" stroke="#f5f2fa" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <style>
+    path { stroke: #f5f2fa; }
+    circle { stroke: #c084fc; }
+    @media (prefers-color-scheme: light) {
+      path { stroke: #120e21; }
+      circle { stroke: #7c3aed; }
+    }
+  </style>
+  <circle cx="18" cy="18" r="16" stroke="#c084fc" stroke-width="2" stroke-dasharray="3 2.5"/>
+  <path d="M11 25L11 11L25 25L25 11" stroke="#f5f2fa" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
