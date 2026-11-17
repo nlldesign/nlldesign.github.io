@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR" data-theme="dark" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,7 +47,7 @@
       --muted: #a09890;
       --surface: #181614;
       --line: rgba(255, 255, 255, 0.12);
-      --dome: rgba(198, 152, 196, 0.22);
+      --dome: rgba(198, 152, 196, 0.24);
       --chip: #221f1d;
       --shadow: 0 18px 46px rgba(0, 0, 0, 0.45);
       --inv-bg: #f2ede8;
@@ -68,7 +68,7 @@
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background-color 0.35s ease, color 0.35s ease;
       text-transform: lowercase;
     }
 
@@ -87,11 +87,55 @@
       font-weight: 400;
     }
 
-    .font-mono-code {
-      font-family: var(--font-mono);
+    /* ======================================================= */
+    /* KEYFRAMES & ANIMAÇÕES MODERNAS                          */
+    /* ======================================================= */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    /* Ambient Dome de topo idêntico a luccas.social.br */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes domePulse {
+      0% {
+        opacity: 0.65;
+        transform: translateX(-50%) scale(0.95);
+      }
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.05);
+      }
+      100% {
+        opacity: 0.65;
+        transform: translateX(-50%) scale(0.95);
+      }
+    }
+
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .anim-fade-in {
+      animation: fadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .anim-delay-1 { animation-delay: 0.12s; }
+    .anim-delay-2 { animation-delay: 0.24s; }
+    .anim-delay-3 { animation-delay: 0.36s; }
+    .anim-delay-4 { animation-delay: 0.48s; }
+
+    /* Ambient Dome com pulso suave */
     .dome-glow {
       position: absolute;
       top: 0;
@@ -103,6 +147,7 @@
       background: radial-gradient(ellipse 65% 55% at 50% 0%, var(--dome) 0%, transparent 75%);
       pointer-events: none;
       z-index: 0;
+      animation: domePulse 14s ease-in-out infinite alternate;
     }
 
     /* Header Nav */
@@ -114,6 +159,7 @@
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line);
+      transition: all 0.3s ease;
     }
 
     .nav-link {
@@ -125,12 +171,13 @@
       font-weight: 500;
       cursor: pointer;
       border-radius: 999px;
-      transition: all 0.2s ease;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .nav-link:hover {
       color: var(--ink);
       background: color-mix(in srgb, var(--ink) 6%, transparent);
+      transform: translateY(-1px);
     }
 
     .nav-link[data-active="true"] {
@@ -152,11 +199,15 @@
       align-items: center;
       gap: 6px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .btn-pill-primary:hover {
       opacity: 0.92;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+    }
+    .btn-pill-primary:active {
+      transform: translateY(0);
     }
 
     .btn-pill-secondary {
@@ -171,17 +222,18 @@
       align-items: center;
       gap: 6px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .btn-pill-secondary:hover {
-      border-color: color-mix(in srgb, var(--ink) 30%, transparent);
-      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--ink) 35%, transparent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
     }
 
     .tag-pill {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       padding: 5px 14px;
       border-radius: 999px;
       background: var(--surface);
@@ -189,28 +241,92 @@
       font-size: 12.5px;
       color: var(--muted);
       font-family: var(--font-body);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tag-pill:hover {
+      border-color: color-mix(in srgb, var(--ink) 30%, transparent);
+      color: var(--ink);
+      transform: translateY(-1px);
     }
 
-    /* Cards do Carrossel e do Deck */
+    /* Cards do Carrossel e do Deck com Animação Fluida */
     .portfolio-card {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 32px;
       box-shadow: var(--shadow);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 0.3s ease, 
+                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
     }
 
     .portfolio-card:hover {
-      border-color: color-mix(in srgb, var(--ink) 25%, transparent);
+      transform: translateY(-8px);
+      border-color: color-mix(in srgb, var(--ink) 30%, transparent);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px color-mix(in srgb, var(--ink) 12%, transparent);
     }
 
-    /* Blocos Editoriais (200px 1fr) do Case */
+    .card-cover-img {
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portfolio-card:hover .card-cover-img {
+      transform: scale(1.045);
+    }
+
+    .card-arrow-icon {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portfolio-card:hover .card-arrow-icon {
+      transform: translateX(4px);
+    }
+
+    /* Controles circulares de Carrossel com feedback tátil */
+    .carousel-control-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .carousel-control-btn:hover {
+      transform: scale(1.1);
+      border-color: var(--ink);
+      background: color-mix(in srgb, var(--ink) 8%, transparent);
+    }
+    .carousel-control-btn:active {
+      transform: scale(0.92);
+    }
+
+    /* Cards de Processo com Hover Elegante */
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.3s ease,
+                  box-shadow 0.35s ease;
+    }
+    .step-card:hover {
+      transform: translateY(-4px);
+      border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Blocos Editoriais (180px 1fr) do Case */
     .case-block-row {
       display: grid;
       grid-template-columns: 180px 1fr;
       gap: 36px;
       padding: 32px 0;
       border-bottom: 1px solid var(--line);
+      transition: background-color 0.2s ease;
     }
 
     @media (max-width: 768px) {
@@ -242,26 +358,26 @@
       
       <!-- Esquerda: Brand Mark (Logo SVG + Nome) -->
       <a href="#/portfolio" onclick="showView('portfolio'); return false;" class="flex items-center gap-3 justify-self-start group">
-        <svg class="w-8 h-8 text-[var(--ink)] transition-transform group-hover:scale-105" viewBox="0 0 36 36" fill="none">
+        <svg class="w-8 h-8 text-[var(--ink)] transition-transform group-hover:scale-110 duration-300" viewBox="0 0 36 36" fill="none">
           <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/>
           <path d="M12 24L12 12L24 24L24 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <div class="flex flex-col">
-          <span class="font-medium text-[15px] tracking-tight leading-none text-[var(--ink)]">lucas nellucci</span>
+          <span class="font-medium text-[15px] tracking-tight leading-none text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">lucas nellucci</span>
           <span class="text-[11.5px] text-[var(--muted)] font-mono mt-0.5">ux &amp; product designer</span>
         </div>
       </a>
 
-      <!-- Centro: Links das Telas Principais (Separadas, NÃO Landing Page) -->
+      <!-- Centro: Links das Telas Principais -->
       <nav class="hidden md:flex items-center gap-2">
         <button onclick="showView('portfolio')" id="navLinkPortfolio" class="nav-link" data-active="true">
           portfólio
         </button>
+        <button onclick="scrollToSobre()" id="navLinkSobre" class="nav-link" data-active="false">
+          sobre
+        </button>
         <button onclick="showView('jogos')" id="navLinkJogos" class="nav-link" data-active="false">
           jogos &amp; 3d
-        </button>
-        <button onclick="showView('sobre')" id="navLinkSobre" class="nav-link" data-active="false">
-          sobre
         </button>
         <button onclick="showView('contato')" id="navLinkContato" class="nav-link" data-active="false">
           contato
@@ -270,16 +386,16 @@
 
       <!-- Direita: Controles (Tema Claro/Escuro + Redes) -->
       <div class="flex items-center gap-3 justify-self-end">
-        <button onclick="toggleTheme()" class="tag-pill hover:border-[var(--ink)] cursor-pointer text-xs" title="Alternar tema claro/escuro">
-          <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent)]"></span>
+        <button onclick="toggleTheme()" class="tag-pill cursor-pointer text-xs" title="Alternar tema claro/escuro">
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent)] animate-pulse"></span>
           <span id="themeToggleText">modo claro</span>
         </button>
 
-        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" class="tag-pill hover:border-[var(--ink)] hidden lg:inline-flex text-xs">
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" class="tag-pill hidden lg:inline-flex text-xs">
           linkedin ↗
         </a>
 
-        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" class="tag-pill hover:border-[var(--ink)] hidden lg:inline-flex text-xs">
+        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" class="tag-pill hidden lg:inline-flex text-xs">
           behance ↗
         </a>
       </div>
@@ -289,19 +405,19 @@
     <!-- Navegação Mobile em abas -->
     <div class="md:hidden flex items-center justify-around px-3 py-2 border-t border-[var(--line)] bg-[var(--bg)] text-xs">
       <button onclick="showView('portfolio')" id="mobNavPortfolio" class="nav-link py-1 px-3 text-xs" data-active="true">portfólio</button>
+      <button onclick="scrollToSobre()" id="mobNavSobre" class="nav-link py-1 px-3 text-xs" data-active="false">sobre</button>
       <button onclick="showView('jogos')" id="mobNavJogos" class="nav-link py-1 px-3 text-xs" data-active="false">jogos &amp; 3d</button>
-      <button onclick="showView('sobre')" id="mobNavSobre" class="nav-link py-1 px-3 text-xs" data-active="false">sobre</button>
       <button onclick="showView('contato')" id="mobNavContato" class="nav-link py-1 px-3 text-xs" data-active="false">contato</button>
     </div>
   </header>
 
   <!-- ================================================================= -->
-  <!-- TELA 1: PORTFÓLIO DE TRABALHOS (Idêntico a luccas.social.br/portfolio) -->
+  <!-- TELA 1: PORTFÓLIO DE TRABALHOS + SEÇÃO SOBRE ABAIXO DO CARROSSEL  -->
   <!-- ================================================================= -->
   <main id="viewPortfolio" class="view-screen max-w-[1240px] mx-auto px-6 sm:px-12 py-14 sm:py-20 flex-1 w-full relative z-10">
     
-    <!-- Hero Header do Portfólio -->
-    <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+    <!-- Hero Header do Portfólio (Animado) -->
+    <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20 anim-fade-in">
       <div class="tag-pill mb-5">
         <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
         <span>portfólio de produto</span>
@@ -314,15 +430,15 @@
       </p>
     </div>
 
-    <!-- Carrossel de Cards Centralizados com Snap (Estrutura idêntica a CaseCarousel de luccas.social.br) -->
-    <div class="relative mb-12">
+    <!-- Carrossel de Cards Centralizados com Snap e Animação de Hover -->
+    <div class="relative mb-24 sm:mb-32 anim-fade-in anim-delay-1">
       <div id="carouselTrack" class="flex gap-8 overflow-x-auto snap-x snap-mandatory py-6 px-4 no-scrollbar scroll-smooth">
         <!-- Injetado dinamicamente via JS -->
       </div>
 
       <!-- Controles do Carrossel (Prev / Indicadores / Next) -->
       <div class="flex items-center justify-center gap-6 mt-6">
-        <button onclick="prevCard()" class="w-12 h-12 rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] flex items-center justify-center hover:scale-105 transition-transform" aria-label="Anterior">
+        <button onclick="prevCard()" class="carousel-control-btn" aria-label="Anterior">
           <i data-lucide="arrow-left" class="w-4 h-4"></i>
         </button>
         
@@ -330,7 +446,7 @@
           <!-- Dots injetados via JS -->
         </div>
 
-        <button onclick="nextCard()" class="w-12 h-12 rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] flex items-center justify-center hover:scale-105 transition-transform" aria-label="Próximo">
+        <button onclick="nextCard()" class="carousel-control-btn" aria-label="Próximo">
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
       </div>
@@ -340,6 +456,92 @@
       </div>
     </div>
 
+    <!-- =============================================================== -->
+    <!-- SEÇÃO SOBRE (DIRETAMENTE ABAIXO DO CARROSSEL CONFORME PEDIDO)   -->
+    <!-- =============================================================== -->
+    <section id="sobreSection" class="max-w-[820px] mx-auto pt-16 border-t border-[var(--line)] mb-24 anim-fade-in">
+      
+      <div class="tag-pill mb-6">
+        <span>sobre</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-6 text-[var(--ink)]">
+        entre o comportamento humano e o produto digital, alguém precisa traduzir.
+      </h2>
+
+      <p class="text-lg sm:text-xl text-[var(--muted)] leading-relaxed font-light mb-8">
+        atuo na fronteira entre experiência do usuário e produto: desenho jornadas claras no figma e utilizo neurociência do desenvolvimento e métricas de conversão para validar o que realmente funciona em interface.
+      </p>
+
+      <!-- Skill Pills Interativas -->
+      <div class="flex flex-wrap gap-2.5 mb-14 pb-8 border-b border-[var(--line)]">
+        <span class="tag-pill">figma</span>
+        <span class="tag-pill">design systems</span>
+        <span class="tag-pill">cro &amp; conversão</span>
+        <span class="tag-pill">neurociência cognitiva</span>
+        <span class="tag-pill">wireframing</span>
+        <span class="tag-pill">prototipagem avançada</span>
+      </div>
+
+      <!-- Trajetória em texto corrido (estilo luccas.social.br) -->
+      <div class="space-y-6 text-base sm:text-lg text-[var(--muted)] leading-relaxed font-light mb-16">
+        <p>
+          sou graduado em design gráfico pela unip, com pós-graduação em user experience pela anhembi morumbi e em conclusão da pós em neurociência do desenvolvimento pela descomplica.
+        </p>
+        <p>
+          atualmente atuo como <strong>ux designer na easychange</strong>. minha trajetória profissional inclui passagens como <strong>designer instrucional na neogrid</strong>, <strong>web designer na associação cartão cristão do brasil</strong> e <strong>estagiário em ux/ui na nesta</strong>.
+        </p>
+        <p>
+          me interessa muito menos o layout bonito por si só e mais entender por que ele gera conversão e resolve o problema do usuário sem fricção cognitiva.
+        </p>
+      </div>
+
+      <!-- Processo em 3 Passos Numerados (01, 02, 03 com Italiana Serif e Hover suave) -->
+      <div class="mb-16">
+        <span class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-5">processo de trabalho</span>
+        
+        <div class="space-y-4">
+          
+          <div class="step-card p-6 sm:p-7 group">
+            <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">01</div>
+            <h3 class="text-xl font-medium text-[var(--ink)] mb-2">diagnóstico</h3>
+            <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
+              mapeio gargalos do fluxo atual, entrevisto stakeholders, estudo métricas de rejeição e analiso referências e concorrência.
+            </p>
+          </div>
+
+          <div class="step-card p-6 sm:p-7 group">
+            <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">02</div>
+            <h3 class="text-xl font-medium text-[var(--ink)] mb-2">estrutura</h3>
+            <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
+              reorganizo a arquitetura de informação, desenho wireframes objetivos e estruturo design systems atômicos no figma.
+            </p>
+          </div>
+
+          <div class="step-card p-6 sm:p-7 group">
+            <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">03</div>
+            <h3 class="text-xl font-medium text-[var(--ink)] mb-2">validação</h3>
+            <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
+              valido com testes de usabilidade, meço o impacto em taxas de conversão reais e asseguro fidelidade técnica junto aos desenvolvedores.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CTA Final do Sobre -->
+      <div class="pt-8 border-t border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h3 class="text-xl sm:text-2xl font-medium text-[var(--ink)]">tem um desafio de produto com ux no meio?</h3>
+          <p class="text-sm text-[var(--muted)] mt-1 font-light">bora conversar e construir juntos.</p>
+        </div>
+        <button onclick="showView('contato')" class="btn-pill-primary shrink-0">
+          falar comigo →
+        </button>
+      </div>
+
+    </section>
+
   </main>
 
   <!-- ================================================================= -->
@@ -347,7 +549,7 @@
   <!-- ================================================================= -->
   <main id="viewJogos" class="view-screen hidden max-w-[1240px] mx-auto px-6 sm:px-12 py-14 sm:py-20 flex-1 w-full relative z-10">
     
-    <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+    <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20 anim-fade-in">
       <div class="tag-pill mb-5">
         <i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-cyan-400"></i>
         <span>jogos &amp; 3d interativo</span>
@@ -361,102 +563,16 @@
     </div>
 
     <!-- Grid de Jogos -->
-    <div id="gamesGridContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+    <div id="gamesGridContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto anim-fade-in anim-delay-1">
       <!-- Injetado dinamicamente via JS -->
     </div>
 
   </main>
 
   <!-- ================================================================= -->
-  <!-- TELA 3: SOBRE (Idêntico a luccas.social.br/sobre)                 -->
+  <!-- TELA 3: CONTATO (Invertido em Creme idêntico a luccas.social.br/contato) -->
   <!-- ================================================================= -->
-  <main id="viewSobre" class="view-screen hidden max-w-[780px] mx-auto px-6 sm:px-12 py-16 sm:py-24 flex-1 w-full relative z-10">
-    
-    <div class="tag-pill mb-6">
-      <span>sobre</span>
-    </div>
-
-    <h1 class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-6 text-[var(--ink)]">
-      entre o comportamento humano e o produto digital, alguém precisa traduzir.
-    </h1>
-
-    <p class="text-lg sm:text-xl text-[var(--muted)] leading-relaxed font-light mb-8">
-      atuo na fronteira entre experiência do usuário e produto: desenho jornadas claras no figma e utilizo neurociência do desenvolvimento e métricas de conversão para validar o que realmente funciona em interface.
-    </p>
-
-    <!-- Skill Pills -->
-    <div class="flex flex-wrap gap-2.5 mb-14 pb-8 border-b border-[var(--line)]">
-      <span class="tag-pill">figma</span>
-      <span class="tag-pill">design systems</span>
-      <span class="tag-pill">cro &amp; conversão</span>
-      <span class="tag-pill">neurociência cognitiva</span>
-      <span class="tag-pill">wireframing</span>
-      <span class="tag-pill">prototipagem avançada</span>
-    </div>
-
-    <!-- Trajetória em texto corrido (estilo luccas.social.br) -->
-    <div class="space-y-6 text-base sm:text-lg text-[var(--muted)] leading-relaxed font-light mb-16">
-      <p>
-        sou graduado em design gráfico pela unip, com pós-graduação em user experience pela anhembi morumbi e em conclusão da pós em neurociência do desenvolvimento pela descomplica.
-      </p>
-      <p>
-        atualmente atuo como <strong>ux designer na easychange</strong>. minha trajetória profissional inclui passagens como <strong>designer instrucional na neogrid</strong>, <strong>web designer na associação cartão cristão do brasil</strong> e <strong>estagiário em ux/ui na nesta</strong>.
-      </p>
-      <p>
-        me interessa muito menos o layout bonito por si só e mais entender por que ele gera conversão e resolve o problema do usuário sem fricção.
-      </p>
-    </div>
-
-    <!-- Processo em 3 Passos Numerados (01, 02, 03 com Italiana Serif) -->
-    <div class="mb-16">
-      <span class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-5">processo de trabalho</span>
-      
-      <div class="space-y-4">
-        
-        <div class="portfolio-card p-6 sm:p-7">
-          <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1">01</div>
-          <h3 class="text-xl font-medium text-[var(--ink)] mb-2">diagnóstico</h3>
-          <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
-            mapeio gargalos do fluxo atual, entrevisto stakeholders, estudo métricas de rejeição e analiso referências e concorrência.
-          </p>
-        </div>
-
-        <div class="portfolio-card p-6 sm:p-7">
-          <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1">02</div>
-          <h3 class="text-xl font-medium text-[var(--ink)] mb-2">estrutura</h3>
-          <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
-            reorganizo a arquitetura de informação, desenho wireframes objetivos e estruturo design systems atômicos no figma.
-          </p>
-        </div>
-
-        <div class="portfolio-card p-6 sm:p-7">
-          <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1">03</div>
-          <h3 class="text-xl font-medium text-[var(--ink)] mb-2">validação</h3>
-          <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
-            valido com testes de usabilidade, meço o impacto em taxas de conversão reais e asseguro fidelidade técnica junto aos desenvolvedores.
-          </p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- CTA Final do Sobre -->
-    <div class="pt-8 border-t border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <div>
-        <h3 class="text-xl sm:text-2xl font-medium text-[var(--ink)]">tem um desafio de produto com ux no meio?</h3>
-        <p class="text-sm text-[var(--muted)] mt-1">bora conversar e construir juntos.</p>
-      </div>
-      <button onclick="showView('contato')" class="btn-pill-primary shrink-0">
-        falar comigo →
-      </button>
-    </div>
-
-  </main>
-
-  <!-- ================================================================= -->
-  <!-- TELA 4: CONTATO (Invertido em Creme idêntico a luccas.social.br/contato) -->
-  <!-- ================================================================= -->
-  <main id="viewContato" class="view-screen hidden flex-1 w-full flex items-center justify-center py-20 px-6 sm:px-12 relative z-10" style="background: var(--inv-bg); color: var(--inv-ink);">
+  <main id="viewContato" class="view-screen hidden flex-1 w-full flex items-center justify-center py-20 px-6 sm:px-12 relative z-10 anim-fade-in" style="background: var(--inv-bg); color: var(--inv-ink);">
     
     <div class="max-w-2xl mx-auto text-center">
       
@@ -477,13 +593,13 @@
       </p>
 
       <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
-        <a href="mailto:nellucci.design@gmail.com" class="px-7 py-3 rounded-full font-semibold text-sm transition-all" style="background: var(--inv-ink); color: var(--inv-bg);">
+        <a href="mailto:nellucci.design@gmail.com" class="px-7 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105" style="background: var(--inv-ink); color: var(--inv-bg);">
           enviar mensagem ↗
         </a>
-        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-full text-sm font-medium border transition-all" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
           linkedin ↗
         </a>
-        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-full text-sm font-medium border transition-all" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
+        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
           behance ↗
         </a>
       </div>
@@ -497,13 +613,13 @@
   </main>
 
   <!-- ================================================================= -->
-  <!-- TELA 5: ESTUDO DE CASO INDIVIDUAL (Idêntico a luccas.social.br/portfolio/[case]) -->
+  <!-- TELA 4: ESTUDO DE CASO INDIVIDUAL (Idêntico a luccas.social.br/portfolio/[case]) -->
   <!-- ================================================================= -->
-  <main id="viewCaseStudy" class="view-screen hidden max-w-[1080px] mx-auto px-6 sm:px-12 py-10 sm:py-16 flex-1 w-full relative z-10">
+  <main id="viewCaseStudy" class="view-screen hidden max-w-[1080px] mx-auto px-6 sm:px-12 py-10 sm:py-16 flex-1 w-full relative z-10 anim-fade-in">
     
     <!-- Top Action: Voltar -->
     <div class="mb-8 flex items-center justify-between">
-      <button onclick="navigateBack()" class="tag-pill hover:border-[var(--ink)] cursor-pointer text-xs">
+      <button onclick="navigateBack()" class="tag-pill cursor-pointer text-xs">
         <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
         <span id="caseBackLabel">voltar</span>
       </button>
@@ -591,7 +707,7 @@
         <span class="text-xs font-mono opacity-60 block mb-1">próximo case</span>
         <h3 id="nextCaseTitle" class="text-xl sm:text-2xl font-medium">nome do próximo case</h3>
       </div>
-      <button onclick="goToNextCase()" class="px-6 py-2.5 rounded-full text-xs font-medium font-mono uppercase tracking-wider transition-all" style="background: var(--inv-ink); color: var(--inv-bg);">
+      <button onclick="goToNextCase()" class="px-6 py-2.5 rounded-full text-xs font-medium font-mono uppercase tracking-wider transition-all hover:scale-105" style="background: var(--inv-ink); color: var(--inv-bg);">
         abrir case →
       </button>
     </div>
@@ -880,7 +996,7 @@
       document.querySelectorAll('.view-screen').forEach(el => el.classList.add('hidden'));
 
       // Atualiza botões do header
-      const navs = ['portfolio', 'jogos', 'sobre', 'contato'];
+      const navs = ['portfolio', 'jogos', 'contato'];
       navs.forEach(v => {
         const link = document.getElementById('navLink' + v.charAt(0).toUpperCase() + v.slice(1));
         const mobLink = document.getElementById('mobNav' + v.charAt(0).toUpperCase() + v.slice(1));
@@ -888,6 +1004,12 @@
         if (link) link.setAttribute('data-active', isActive ? 'true' : 'false');
         if (mobLink) mobLink.setAttribute('data-active', isActive ? 'true' : 'false');
       });
+
+      // Trata link do sobre
+      const sobreLink = document.getElementById('navLinkSobre');
+      const mobSobreLink = document.getElementById('mobNavSobre');
+      if (sobreLink) sobreLink.setAttribute('data-active', 'false');
+      if (mobSobreLink) mobSobreLink.setAttribute('data-active', 'false');
 
       if (viewId === 'portfolio') {
         document.getElementById('viewPortfolio').classList.remove('hidden');
@@ -897,9 +1019,6 @@
         document.getElementById('viewJogos').classList.remove('hidden');
         renderGamesGrid();
         window.location.hash = '#/jogos';
-      } else if (viewId === 'sobre') {
-        document.getElementById('viewSobre').classList.remove('hidden');
-        window.location.hash = '#/sobre';
       } else if (viewId === 'contato') {
         document.getElementById('viewContato').classList.remove('hidden');
         window.location.hash = '#/contato';
@@ -909,21 +1028,49 @@
       lucide.createIcons();
     }
 
-    // Renderiza o Carrossel do Portfólio (Estilo CaseCarousel de luccas.social.br)
+    // Rola suavemente até a seção Sobre abaixo do carrossel
+    function scrollToSobre() {
+      // Garante que a tela de portfolio está visível
+      const portfolioView = document.getElementById('viewPortfolio');
+      if (portfolioView.classList.contains('hidden')) {
+        document.querySelectorAll('.view-screen').forEach(el => el.classList.add('hidden'));
+        portfolioView.classList.remove('hidden');
+        renderPortfolioCarousel();
+      }
+
+      // Atualiza estado dos links
+      const sobreLink = document.getElementById('navLinkSobre');
+      const mobSobreLink = document.getElementById('mobNavSobre');
+      const portLink = document.getElementById('navLinkPortfolio');
+      const mobPortLink = document.getElementById('mobNavPortfolio');
+      if (portLink) portLink.setAttribute('data-active', 'false');
+      if (mobPortLink) mobPortLink.setAttribute('data-active', 'false');
+      if (sobreLink) sobreLink.setAttribute('data-active', 'true');
+      if (mobSobreLink) mobSobreLink.setAttribute('data-active', 'true');
+
+      // Rola suavemente
+      const sobreSec = document.getElementById('sobreSection');
+      if (sobreSec) {
+        sobreSec.scrollIntoView({ behavior: 'smooth' });
+      }
+      window.location.hash = '#/sobre';
+    }
+
+    // Renderiza o Carrossel do Portfólio (Estilo CaseCarousel de luccas.social.br com Animações)
     function renderPortfolioCarousel() {
       const track = document.getElementById('carouselTrack');
       track.innerHTML = portfolioProjects.map((p, idx) => `
         <article class="portfolio-card flex-shrink-0 w-[85vw] max-w-[680px] snap-center overflow-hidden flex flex-col justify-between group cursor-pointer" onclick="openCaseStudy('${p.id}')">
           
-          <!-- Top Media Frame com Frosted Chips flutuantes -->
+          <!-- Top Media Frame com Frosted Chips flutuantes e Zoom suave -->
           <div class="relative h-[280px] sm:h-[340px] w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
-            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" />
+            <img src="${p.image}" alt="${p.title}" class="card-cover-img w-full h-full object-cover" />
             
-            <div class="absolute top-4 left-4 tag-pill backdrop-blur-md bg-[var(--surface)]/80 text-xs">
+            <div class="absolute top-4 left-4 tag-pill backdrop-blur-md bg-[var(--surface)]/80 text-xs shadow-sm">
               ${p.tag}
             </div>
 
-            <div class="absolute top-4 right-4 w-10 h-10 rounded-full backdrop-blur-md bg-[var(--surface)]/80 border border-[var(--line)] flex items-center justify-center font-serif-accent text-lg text-[var(--accent)]">
+            <div class="absolute top-4 right-4 w-10 h-10 rounded-full backdrop-blur-md bg-[var(--surface)]/80 border border-[var(--line)] flex items-center justify-center font-serif-accent text-lg text-[var(--accent)] shadow-sm">
               ${p.num}
             </div>
           </div>
@@ -931,7 +1078,7 @@
           <!-- Bottom Body com Título, Resumo e Botão Invertido -->
           <div class="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <div class="flex-1 pr-0 sm:pr-4">
-              <h2 class="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors mb-2">
+              <h2 class="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors duration-300 mb-2">
                 ${p.title}
               </h2>
               <p class="text-sm text-[var(--muted)] leading-relaxed font-light line-clamp-2">
@@ -939,9 +1086,9 @@
               </p>
             </div>
 
-            <button class="btn-pill-primary shrink-0 self-start sm:self-auto text-xs">
+            <button class="btn-pill-primary shrink-0 self-start sm:self-auto text-xs flex items-center gap-1.5">
               <span>abrir case</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              <i data-lucide="arrow-right" class="card-arrow-icon w-3.5 h-3.5"></i>
             </button>
           </div>
 
@@ -951,7 +1098,7 @@
       // Dots
       const dots = document.getElementById('carouselDots');
       dots.innerHTML = portfolioProjects.map((_, idx) => `
-        <button onclick="scrollToCard(${idx})" class="w-2.5 h-2.5 rounded-full transition-all ${idx === currentCardIndex ? 'bg-[var(--ink)] w-6' : 'bg-[var(--line)] hover:bg-[var(--muted)]'}" aria-label="Ir para card ${idx + 1}"></button>
+        <button onclick="scrollToCard(${idx})" class="h-2.5 rounded-full transition-all duration-300 ${idx === currentCardIndex ? 'bg-[var(--ink)] w-7' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)]'}" aria-label="Ir para card ${idx + 1}"></button>
       `).join('');
 
       updateCounter();
@@ -982,7 +1129,7 @@
     function renderDots() {
       const dots = document.getElementById('carouselDots');
       dots.innerHTML = portfolioProjects.map((_, idx) => `
-        <button onclick="scrollToCard(${idx})" class="h-2.5 rounded-full transition-all ${idx === currentCardIndex ? 'bg-[var(--ink)] w-6' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)]'}" aria-label="Ir para card ${idx + 1}"></button>
+        <button onclick="scrollToCard(${idx})" class="h-2.5 rounded-full transition-all duration-300 ${idx === currentCardIndex ? 'bg-[var(--ink)] w-7' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)]'}" aria-label="Ir para card ${idx + 1}"></button>
       `).join('');
     }
 
@@ -990,13 +1137,13 @@
       document.getElementById('carouselCounter').innerText = `${currentCardIndex + 1} / ${portfolioProjects.length}`;
     }
 
-    // Renderiza a Tela de Jogos (Aba Separada)
+    // Renderiza a Tela de Jogos (Aba Separada com Animações)
     function renderGamesGrid() {
       const container = document.getElementById('gamesGridContainer');
       container.innerHTML = gameProjects.map((g, idx) => `
         <article class="portfolio-card overflow-hidden flex flex-col justify-between group cursor-pointer" onclick="openCaseStudy('${g.id}')">
           <div class="relative h-[220px] sm:h-[260px] w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
-            <img src="${g.image}" alt="${g.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <img src="${g.image}" alt="${g.title}" class="card-cover-img w-full h-full object-cover" />
             <div class="absolute top-4 left-4 tag-pill backdrop-blur-md bg-[var(--surface)]/80 text-xs text-cyan-400">
               ${g.tag}
             </div>
@@ -1007,7 +1154,7 @@
 
           <div class="p-6 sm:p-7 flex flex-col justify-between flex-1">
             <div>
-              <h3 class="text-xl sm:text-2xl font-medium text-[var(--ink)] group-hover:text-cyan-400 transition-colors mb-2">
+              <h3 class="text-xl sm:text-2xl font-medium text-[var(--ink)] group-hover:text-cyan-400 transition-colors duration-300 mb-2">
                 ${g.title}
               </h3>
               <p class="text-xs sm:text-sm text-[var(--muted)] leading-relaxed font-light mb-6">
@@ -1020,7 +1167,7 @@
                 <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
                 jogar no navegador
               </span>
-              <span class="text-xs text-[var(--muted)] group-hover:translate-x-1 transition-transform">
+              <span class="text-xs text-[var(--muted)] group-hover:translate-x-1.5 transition-transform duration-200">
                 →
               </span>
             </div>
@@ -1060,7 +1207,7 @@
       const metricsContainer = document.getElementById('caseMetricsRow');
       if (item.metrics && item.metrics.length > 0) {
         metricsContainer.innerHTML = item.metrics.map(m => `
-          <div class="portfolio-card p-5 sm:p-6 text-center sm:text-left">
+          <div class="portfolio-card p-5 sm:p-6 text-center sm:text-left hover:scale-[1.02] transition-transform">
             <div class="font-serif-accent text-3xl sm:text-4xl text-[var(--accent)] mb-1">${m.val}</div>
             <div class="text-xs text-[var(--muted)] font-light leading-snug">${m.label}</div>
           </div>
@@ -1128,7 +1275,7 @@
       } else {
         mediaFrame.innerHTML = `
           <div class="relative aspect-video w-full bg-black cursor-pointer group" onclick="openLightbox('${item.image}', '${item.title}')">
-            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300" />
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-[1.015] transition-transform duration-500" />
             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
               <span class="tag-pill text-xs bg-black/80 text-white border-white/20">
                 clique para ampliar a imagem
@@ -1147,7 +1294,7 @@
             ${item.gallery.map(img => `
               <div onclick="openLightbox('${img.src}', '${img.title}')" class="portfolio-card overflow-hidden cursor-pointer group">
                 <div class="aspect-video w-full bg-black overflow-hidden relative">
-                  <img src="${img.src}" alt="${img.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <img src="${img.src}" alt="${img.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div class="p-3 bg-[var(--surface)] border-t border-[var(--line)] text-xs text-[var(--muted)]">
                   ${img.title}
@@ -1251,7 +1398,7 @@
       } else if (hash.startsWith('#/jogos')) {
         showView('jogos');
       } else if (hash.startsWith('#/sobre')) {
-        showView('sobre');
+        scrollToSobre();
       } else if (hash.startsWith('#/contato')) {
         showView('contato');
       } else {
