@@ -461,83 +461,100 @@
     <!-- =============================================================== -->
     <section id="sobreSection" class="max-w-[820px] mx-auto pt-16 border-t border-[var(--line)] mb-24 anim-fade-in">
       
-      <div class="tag-pill mb-6">
-        <span>sobre</span>
+      <!-- Topo da Seção Sobre com Seletor Bilíngue [ PT | EN ] -->
+      <div class="flex items-center justify-between gap-4 mb-6">
+        <div class="tag-pill">
+          <span id="sobreTag">sobre · perfil &amp; trajetória</span>
+        </div>
+
+        <div class="inline-flex items-center p-1 rounded-full bg-[var(--surface)] border border-[var(--line)] text-xs font-mono shadow-sm">
+          <button onclick="setSobreLang('pt')" id="langBtnPt" class="px-3 py-1 rounded-full transition-all duration-200 bg-[var(--inv-bg)] text-[var(--inv-ink)] font-semibold" aria-label="Português">
+            pt
+          </button>
+          <button onclick="setSobreLang('en')" id="langBtnEn" class="px-3 py-1 rounded-full transition-all duration-200 text-[var(--muted)] hover:text-[var(--ink)]" aria-label="English">
+            en
+          </button>
+        </div>
       </div>
 
-      <h2 class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-6 text-[var(--ink)]">
-        entre o comportamento humano e o produto digital, alguém precisa traduzir.
-      </h2>
+      <div id="sobreContentContainer" class="transition-opacity duration-300">
+        <h2 id="sobreHeading" class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-6 text-[var(--ink)]">
+          entre o comportamento humano e o produto digital, alguém precisa traduzir.
+        </h2>
 
-      <p class="text-lg sm:text-xl text-[var(--muted)] leading-relaxed font-light mb-8">
-        atuo na fronteira entre experiência do usuário e produto: desenho jornadas claras no figma e utilizo neurociência do desenvolvimento e métricas de conversão para validar o que realmente funciona em interface.
-      </p>
-
-      <!-- Skill Pills Interativas -->
-      <div class="flex flex-wrap gap-2.5 mb-14 pb-8 border-b border-[var(--line)]">
-        <span class="tag-pill">figma</span>
-        <span class="tag-pill">design systems</span>
-        <span class="tag-pill">cro &amp; conversão</span>
-        <span class="tag-pill">neurociência cognitiva</span>
-        <span class="tag-pill">wireframing</span>
-        <span class="tag-pill">prototipagem avançada</span>
-      </div>
-
-      <!-- Trajetória em texto corrido (estilo luccas.social.br) -->
-      <div class="space-y-6 text-base sm:text-lg text-[var(--muted)] leading-relaxed font-light mb-16">
-        <p>
-          sou graduado em design gráfico pela unip, com pós-graduação em user experience pela anhembi morumbi e em conclusão da pós em neurociência do desenvolvimento pela descomplica.
+        <p id="sobreLead" class="text-lg sm:text-xl text-[var(--muted)] leading-relaxed font-light mb-8">
+          designer de produto estratégico focado em resultados de negócio, unindo ux, marketing, neurociência aplicada ao comportamento do usuário e o uso avançado de inteligência artificial para otimizar processos e sustentar decisões estratégicas.
         </p>
-        <p>
-          atualmente atuo como <strong>ux designer na easychange</strong>. minha trajetória profissional inclui passagens como <strong>designer instrucional na neogrid</strong>, <strong>web designer na associação cartão cristão do brasil</strong> e <strong>estagiário em ux/ui na nesta</strong>.
-        </p>
-        <p>
-          me interessa muito menos o layout bonito por si só e mais entender por que ele gera conversão e resolve o problema do usuário sem fricção cognitiva.
-        </p>
-      </div>
 
-      <!-- Processo em 3 Passos Numerados (01, 02, 03 com Italiana Serif e Hover suave) -->
-      <div class="mb-16">
-        <span class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-5">processo de trabalho</span>
-        
-        <div class="space-y-4">
+        <!-- Skill Pills Interativas -->
+        <div id="sobreSkills" class="flex flex-wrap gap-2.5 mb-14 pb-8 border-b border-[var(--line)]">
+          <span class="tag-pill">product design</span>
+          <span class="tag-pill">ux research &amp; cro</span>
+          <span class="tag-pill">neurociência cognitiva</span>
+          <span class="tag-pill">inteligência artificial</span>
+          <span class="tag-pill">google analytics &amp; hotjar</span>
+          <span class="tag-pill">microsoft clarity</span>
+          <span class="tag-pill">design systems</span>
+          <span class="tag-pill">figma</span>
+          <span class="tag-pill">scrum &amp; squads ágeis</span>
+        </div>
+
+        <!-- Trajetória e Perfil Profissional Baseados no Perfil Oficial -->
+        <div id="sobreBio" class="space-y-6 text-base sm:text-lg text-[var(--muted)] leading-relaxed font-light mb-16">
+          <p>
+            adoto uma abordagem multidisciplinar que conecta dados qualitativos e quantitativos, ferramentas de inteligência artificial e insights comportamentais para compreender profundamente as necessidades reais dos usuários e alinhá-las aos objetivos estratégicos das organizações.
+          </p>
+          <p>
+            atualmente atuo como <strong>product designer pleno no grupo h2</strong>. minha trajetória profissional inclui atuações como <strong>product marketing manager na blackbox technology &amp; cybersecurity</strong> (orlando, fl), liderando estratégias de usabilidade, engajamento e jornadas de descoberta via seo; <strong>ux designer na easychange</strong>, conectando análise de métricas de tráfego e campanhas a soluções de produto sem fricção; <strong>designer instrucional na neogrid</strong>; <strong>web designer na associação cartão cristão</strong>; e <strong>estágio em ui/ux na nesta</strong>.
+          </p>
+          <p>
+            sou pós-graduado em <strong>user experience</strong> pela universidade anhembi morumbi, pós-graduado em <strong>neurociência do desenvolvimento</strong> pela descomplica faculdade digital, graduado em <strong>design gráfico</strong> pela unip e possuo certificação como <strong>ux lead: métricas de performance e qualidade</strong> pela alura.
+          </p>
+        </div>
+
+        <!-- Metodologia de Trabalho (Passos Numerados com Instrument Serif) -->
+        <div class="mb-16">
+          <span id="sobreProcessLabel" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-5">processo de trabalho</span>
           
-          <div class="step-card p-6 sm:p-7 group">
-            <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">01</div>
-            <h3 class="text-xl font-medium text-[var(--ink)] mb-2">diagnóstico</h3>
-            <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
-              mapeio gargalos do fluxo atual, entrevisto stakeholders, estudo métricas de rejeição e analiso referências e concorrência.
-            </p>
-          </div>
+          <div id="sobreProcessSteps" class="space-y-4">
+            
+            <div class="step-card p-6 sm:p-7 group">
+              <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">01</div>
+              <h3 class="text-xl font-medium text-[var(--ink)] mb-2">diagnóstico &amp; dados</h3>
+              <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
+                cruzo análises quantitativas (ga, hotjar, clarity) com pesquisa qualitativa e benchmarking competitivo para identificar gargalos reais de usabilidade e conversão.
+              </p>
+            </div>
 
-          <div class="step-card p-6 sm:p-7 group">
-            <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">02</div>
-            <h3 class="text-xl font-medium text-[var(--ink)] mb-2">estrutura</h3>
-            <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
-              reorganizo a arquitetura de informação, desenho wireframes objetivos e estruturo design systems atômicos no figma.
-            </p>
-          </div>
+            <div class="step-card p-6 sm:p-7 group">
+              <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">02</div>
+              <h3 class="text-xl font-medium text-[var(--ink)] mb-2">arquitetura &amp; design system</h3>
+              <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
+                estruturo fluxos limpos e jornadas sem fricção cognitiva no figma, aplicando design systems componentizados e protótipos de alta fidelidade para testes.
+              </p>
+            </div>
 
-          <div class="step-card p-6 sm:p-7 group">
-            <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">03</div>
-            <h3 class="text-xl font-medium text-[var(--ink)] mb-2">validação</h3>
-            <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
-              valido com testes de usabilidade, meço o impacto em taxas de conversão reais e asseguro fidelidade técnica junto aos desenvolvedores.
-            </p>
-          </div>
+            <div class="step-card p-6 sm:p-7 group">
+              <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">03</div>
+              <h3 class="text-xl font-medium text-[var(--ink)] mb-2">validação &amp; entrega ágil</h3>
+              <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
+                valido hipóteses em squads com desenvolvedores (scrum), mensuro o impacto em métricas de negócio e garanto evolução contínua com apoio de inteligência artificial.
+              </p>
+            </div>
 
+          </div>
         </div>
-      </div>
 
-      <!-- CTA Final do Sobre -->
-      <div class="pt-8 border-t border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <h3 class="text-xl sm:text-2xl font-medium text-[var(--ink)]">tem um desafio de produto com ux no meio?</h3>
-          <p class="text-sm text-[var(--muted)] mt-1 font-light">bora conversar e construir juntos.</p>
+        <!-- CTA Final do Sobre -->
+        <div class="pt-8 border-t border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h3 id="sobreCtaTitle" class="text-xl sm:text-2xl font-medium text-[var(--ink)]">tem um desafio de produto com ux no meio?</h3>
+            <p id="sobreCtaSubtitle" class="text-sm text-[var(--muted)] mt-1 font-light">bora conversar e construir juntos.</p>
+          </div>
+          <button onclick="showView('contato')" id="sobreCtaBtn" class="btn-pill-primary shrink-0">
+            falar comigo →
+          </button>
         </div>
-        <button onclick="showView('contato')" class="btn-pill-primary shrink-0">
-          falar comigo →
-        </button>
       </div>
 
     </section>
@@ -953,6 +970,141 @@
     ];
 
     let currentCardIndex = 0;
+    // Dicionário Bilíngue da Seção Sobre (Perfil Oficial LinkedIn)
+    const sobreTranslations = {
+      pt: {
+        tag: 'sobre · perfil &amp; trajetória',
+        title: 'entre o comportamento humano e o produto digital, alguém precisa traduzir.',
+        lead: 'designer de produto estratégico focado em resultados de negócio, unindo ux, marketing, neurociência aplicada ao comportamento do usuário e o uso avançado de inteligência artificial para otimizar processos e sustentar decisões estratégicas.',
+        skills: [
+          'product design',
+          'ux research &amp; cro',
+          'neurociência do comportamento',
+          'inteligência artificial',
+          'google analytics &amp; hotjar',
+          'microsoft clarity',
+          'design systems',
+          'figma',
+          'scrum &amp; squads ágeis'
+        ],
+        paragraphs: [
+          'adoto uma abordagem multidisciplinar que conecta dados qualitativos e quantitativos, ferramentas de inteligência artificial e insights comportamentais para compreender profundamente as necessidades reais dos usuários e alinhá-las aos objetivos estratégicos das organizações.',
+          'atualmente atuo como <strong>product designer pleno no grupo h2</strong>. minha trajetória profissional inclui atuações como <strong>product marketing manager na blackbox technology &amp; cybersecurity</strong> (orlando, fl), liderando estratégias de usabilidade, engajamento e jornadas de descoberta via seo; <strong>ux designer na easychange</strong>, conectando análise de métricas de tráfego e campanhas a soluções de produto sem fricção; <strong>designer instrucional na neogrid</strong>; <strong>web designer na associação cartão cristão</strong>; e <strong>estágio em ui/ux na nesta</strong>.',
+          'sou pós-graduado em <strong>user experience</strong> pela universidade anhembi morumbi, pós-graduado em <strong>neurociência do desenvolvimento</strong> pela descomplica faculdade digital, graduado em <strong>design gráfico</strong> pela unip e possuo certificação como <strong>ux lead: métricas de performance e qualidade</strong> pela alura.'
+        ],
+        processHeading: 'processo de trabalho',
+        steps: [
+          {
+            num: '01',
+            title: 'diagnóstico &amp; dados',
+            desc: 'cruzo análises quantitativas (ga, hotjar, clarity) com pesquisa qualitativa e benchmarking competitivo para identificar gargalos reais de usabilidade e conversão.'
+          },
+          {
+            num: '02',
+            title: 'arquitetura &amp; design system',
+            desc: 'estruturo fluxos limpos e jornadas sem fricção cognitiva no figma, aplicando design systems componentizados e protótipos de alta fidelidade para testes.'
+          },
+          {
+            num: '03',
+            title: 'validação &amp; entrega ágil',
+            desc: 'valido hipóteses em squads com desenvolvedores (scrum), mensuro o impacto em métricas de negócio e garanto evolução contínua com apoio de inteligência artificial.'
+          }
+        ],
+        ctaTitle: 'tem um desafio de produto com ux no meio?',
+        ctaSubtitle: 'bora conversar e construir juntos.',
+        ctaBtn: 'falar comigo →'
+      },
+      en: {
+        tag: 'about · profile &amp; background',
+        title: 'between human behavior and digital products, someone needs to translate.',
+        lead: 'strategic product designer focused on business results, combining ux, marketing, neuroscience applied to user behavior, and the advanced use of artificial intelligence to optimize workflows and drive strategic impact.',
+        skills: [
+          'product design',
+          'ux research &amp; cro',
+          'behavioral neuroscience',
+          'artificial intelligence',
+          'google analytics &amp; hotjar',
+          'microsoft clarity',
+          'design systems',
+          'figma',
+          'scrum &amp; agile squads'
+        ],
+        paragraphs: [
+          'i adopt a multidisciplinary approach, combining behavioral insights, qualitative and quantitative data, along with ai tools, to deeply understand user needs and align them with the strategic objectives of organizations.',
+          'currently working as <strong>product designer pl at grupo h2</strong>. my career trajectory includes roles as <strong>product marketing manager at blackbox technology &amp; cybersecurity</strong> (orlando, fl), leading user-centered digital strategies, usability, and seo-driven journeys; <strong>ux designer at easychange</strong>, connecting performance analytics with ux solutions; <strong>instructional designer at neogrid</strong>; <strong>web designer at associação cartão cristão</strong>; and <strong>ui/ux design intern at nesta</strong>.',
+          'i hold a postgraduate degree in <strong>user experience</strong> (universidade anhembi morumbi), a postgraduate degree in <strong>developmental neuroscience</strong> (descomplica faculdade digital), a bachelor\'s degree in <strong>graphic design</strong> (unip), and ux lead certification focused on <strong>tracking performance and quality data</strong> (alura).'
+        ],
+        processHeading: 'work methodology',
+        steps: [
+          {
+            num: '01',
+            title: 'diagnosis &amp; insights',
+            desc: 'combining quantitative analytics (ga, hotjar, clarity) with qualitative user research and market benchmarking to identify real conversion and usability bottlenecks.'
+          },
+          {
+            num: '02',
+            title: 'architecture &amp; design system',
+            desc: 'structuring friction-free journeys and clean user flows in figma, developing scalable atomic design systems and high-fidelity interactive prototypes.'
+          },
+          {
+            num: '03',
+            title: 'validation &amp; agile delivery',
+            desc: 'validating hypotheses within cross-functional agile squads (scrum), measuring real-world business metrics, and driving continuous growth through ai.'
+          }
+        ],
+        ctaTitle: 'have a product or ux challenge in mind?',
+        ctaSubtitle: 'let\'s connect and build something impactful together.',
+        ctaBtn: 'get in touch →'
+      }
+    };
+
+    let currentSobreLang = 'pt';
+
+    function setSobreLang(lang) {
+      if (!sobreTranslations[lang]) return;
+      currentSobreLang = lang;
+
+      const btnPt = document.getElementById('langBtnPt');
+      const btnEn = document.getElementById('langBtnEn');
+      if (lang === 'pt') {
+        btnPt.className = 'px-3 py-1 rounded-full transition-all duration-200 bg-[var(--inv-bg)] text-[var(--inv-ink)] font-semibold shadow-sm';
+        btnEn.className = 'px-3 py-1 rounded-full transition-all duration-200 text-[var(--muted)] hover:text-[var(--ink)]';
+      } else {
+        btnEn.className = 'px-3 py-1 rounded-full transition-all duration-200 bg-[var(--inv-bg)] text-[var(--inv-ink)] font-semibold shadow-sm';
+        btnPt.className = 'px-3 py-1 rounded-full transition-all duration-200 text-[var(--muted)] hover:text-[var(--ink)]';
+      }
+
+      const container = document.getElementById('sobreContentContainer');
+      container.style.opacity = '0';
+
+      setTimeout(() => {
+        const t = sobreTranslations[lang];
+        document.getElementById('sobreTag').innerHTML = t.tag;
+        document.getElementById('sobreHeading').innerHTML = t.title;
+        document.getElementById('sobreLead').innerHTML = t.lead;
+        
+        document.getElementById('sobreSkills').innerHTML = t.skills.map(s => `<span class="tag-pill">${s}</span>`).join('');
+        document.getElementById('sobreBio').innerHTML = t.paragraphs.map(p => `<p>${p}</p>`).join('');
+        document.getElementById('sobreProcessLabel').innerText = t.processHeading;
+
+        document.getElementById('sobreProcessSteps').innerHTML = t.steps.map(st => `
+          <div class="step-card p-6 sm:p-7 group">
+            <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">${st.num}</div>
+            <h3 class="text-xl font-medium text-[var(--ink)] mb-2">${st.title}</h3>
+            <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
+              ${st.desc}
+            </p>
+          </div>
+        `).join('');
+
+        document.getElementById('sobreCtaTitle').innerText = t.ctaTitle;
+        document.getElementById('sobreCtaSubtitle').innerText = t.ctaSubtitle;
+        document.getElementById('sobreCtaBtn').innerText = t.ctaBtn;
+
+        container.style.opacity = '1';
+      }, 150);
+    }
+
     let activeCaseId = null;
     let currentCategory = 'trabalho';
 
