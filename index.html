@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark" class="scroll-smooth">
 <head>
-  <!-- Google Analytics 4 (GA4) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4VC1H636KN"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-4VC1H636KN', {
-      send_page_view: true
-    });
-  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-KFCBG6RB');</script>
+  <!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lucas nellucci · ux &amp; product designer guiado por dados</title>
@@ -358,6 +355,10 @@
   </style>
 </head>
 <body class="relative">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KFCBG6RB"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <div class="dome-glow"></div>
 
@@ -1074,6 +1075,7 @@
     function setSobreLang(lang) {
       if (!sobreTranslations[lang]) return;
       currentSobreLang = lang;
+      trackDataLayer('select_language', { language: lang, section: 'sobre' });
 
       const btnPt = document.getElementById('langBtnPt');
       const btnEn = document.getElementById('langBtnEn');
@@ -1117,15 +1119,21 @@
     }
 
     
-    // Helper de rastreamento de PageView para SPA no GA4
+    // DataLayer Dispatcher para Google Tag Manager (GTM) & GA4
+    window.dataLayer = window.dataLayer || [];
+    function trackDataLayer(eventName, params = {}) {
+      window.dataLayer.push({
+        event: eventName,
+        ...params
+      });
+    }
+
     function trackGA4PageView(path, title) {
-      if (typeof gtag === 'function') {
-        gtag('event', 'page_view', {
-          page_path: path,
-          page_title: title,
-          page_location: window.location.origin + window.location.pathname + path
-        });
-      }
+      trackDataLayer('page_view', {
+        page_path: path,
+        page_title: title,
+        page_location: window.location.origin + window.location.pathname + path
+      });
     }
 
     let activeCaseId = null;
@@ -1334,6 +1342,7 @@
 
       activeCaseId = id;
       currentCategory = item.category;
+      trackDataLayer('view_case_study', { case_id: id, case_title: item.title, case_category: item.category });
 
       // Esconde outras telas e exibe a tela de case study
       document.querySelectorAll('.view-screen').forEach(el => el.classList.add('hidden'));
@@ -1484,6 +1493,7 @@
     }
 
     function runGameEmbed(url) {
+      trackDataLayer('play_game', { game_url: url, case_id: activeCaseId });
       const iframe = document.getElementById('gameIframe');
       const cover = document.getElementById('embedCover');
       if (iframe && cover) {
