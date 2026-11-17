@@ -403,11 +403,11 @@
           <span id="themeToggleText">modo claro</span>
         </button>
 
-        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" class="tag-pill hidden lg:inline-flex text-xs">
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'header')" class="tag-pill hidden lg:inline-flex text-xs">
           linkedin ↗
         </a>
 
-        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" class="tag-pill hidden lg:inline-flex text-xs">
+        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'header')" class="tag-pill hidden lg:inline-flex text-xs">
           behance ↗
         </a>
       </div>
@@ -622,13 +622,13 @@
       </p>
 
       <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
-        <a href="mailto:nellucci.design@gmail.com" class="px-7 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105" style="background: var(--inv-ink); color: var(--inv-bg);">
+        <a href="mailto:nellucci.design@gmail.com" onclick="trackOutboundClick('email', this.href, 'contact_panel')" class="px-7 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105" style="background: var(--inv-ink); color: var(--inv-bg);">
           enviar mensagem ↗
         </a>
-        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'contact_panel')" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
           linkedin ↗
         </a>
-        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
+        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'contact_panel')" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
           behance ↗
         </a>
       </div>
@@ -761,10 +761,10 @@
     <div class="max-w-[1240px] mx-auto px-6 sm:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>© 2026 · portfólio de produto e ux</div>
       <div class="flex items-center gap-6">
-        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" class="hover:text-[var(--ink)] transition-colors">linkedin</a>
-        <a href="https://www.behance.net/lucasnellucci" target="_blank" class="hover:text-[var(--ink)] transition-colors">behance</a>
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" onclick="trackOutboundClick('linkedin', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">linkedin</a>
+        <a href="https://www.behance.net/lucasnellucci" target="_blank" onclick="trackOutboundClick('behance', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">behance</a>
         <a href="https://github.com/nlldesign" target="_blank" class="hover:text-[var(--ink)] transition-colors">github</a>
-        <a href="mailto:nellucci.design@gmail.com" class="hover:text-[var(--ink)] transition-colors">email</a>
+        <a href="mailto:nellucci.design@gmail.com" onclick="trackOutboundClick('email', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">email</a>
       </div>
     </div>
   </footer>
@@ -1128,6 +1128,15 @@
       });
     }
 
+    function trackOutboundClick(channel, url, context = 'general') {
+      trackDataLayer('click_outbound', {
+        channel: channel,
+        link_url: url,
+        click_context: context,
+        page_location: window.location.href
+      });
+    }
+
     function trackGA4PageView(path, title) {
       trackDataLayer('page_view', {
         page_path: path,
@@ -1274,11 +1283,13 @@
     }
 
     function prevCard() {
+      trackDataLayer('carousel_action', { action: 'prev', card_index: currentCardIndex + 1 });
       currentCardIndex = Math.max(0, currentCardIndex - 1);
       scrollToCard(currentCardIndex);
     }
 
     function nextCard() {
+      trackDataLayer('carousel_action', { action: 'next', card_index: currentCardIndex + 1 });
       currentCardIndex = Math.min(portfolioProjects.length - 1, currentCardIndex + 1);
       scrollToCard(currentCardIndex);
     }
@@ -1379,21 +1390,21 @@
       let linksHtml = '';
       if (item.figmaUrl) {
         linksHtml += `
-          <a href="${item.figmaUrl}" target="_blank" rel="noopener noreferrer" class="tag-pill text-xs hover:border-[var(--ink)]">
+          <a href="${item.figmaUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('figma_prototype', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)]">
             <span>ver no figma ↗</span>
           </a>
         `;
       }
       if (item.vercelUrl) {
         linksHtml += `
-          <a href="${item.vercelUrl}" target="_blank" rel="noopener noreferrer" class="tag-pill text-xs hover:border-[var(--ink)] text-cyan-400">
+          <a href="${item.vercelUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('vercel_app', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)] text-cyan-400">
             <span>abrir na vercel ↗</span>
           </a>
         `;
       }
       if (item.siteUrl) {
         linksHtml += `
-          <a href="${item.siteUrl}" target="_blank" rel="noopener noreferrer" class="tag-pill text-xs hover:border-[var(--ink)]">
+          <a href="${item.siteUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('official_site', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)]">
             <span>site oficial ↗</span>
           </a>
         `;
@@ -1503,6 +1514,7 @@
     }
 
     function toggleFullscreenEmbed() {
+      trackDataLayer('toggle_game_fullscreen', { active_case: activeCaseId });
       const viewport = document.getElementById('embedViewport');
       if (!viewport) return;
       if (!document.fullscreenElement) {
