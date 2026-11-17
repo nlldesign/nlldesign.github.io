@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lucas Nellucci · UX &amp; Product Designer • Jogos &amp; 3D</title>
-  <meta name="description" content="Portfólio de Lucas Nellucci — UX & Product Designer. Estudos de caso de produto, design systems, protótipos no Figma e projetos de jogos 3D." />
+  <title>lucas nellucci · ux &amp; product designer guiado por dados</title>
+  <meta name="description" content="lucas nellucci — ux & product designer com base analítica e neurociência: arquitetura de informação, design systems e interfaces validadas por métricas." />
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
   
-  <!-- Google Fonts: Space Grotesk, Inter & Newsreader/Serif para métricas e títulos elegantes como no luccas.social.br -->
+  <!-- Google Fonts: Bricolage Grotesque (Headings), Urbanist (Body), Italiana (Serif/KPIs) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Italiana&family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,512 +20,586 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Space Grotesk', 'sans-serif'],
-            serif: ['Newsreader', 'serif'],
-          },
-          colors: {
-            // Paleta idêntica ao luccas.social.br (dark minimalista com tons quentes e bordas finas)
-            deck: {
-              bg: '#100e0d',
-              surface: '#181513',
-              surfaceHover: '#1f1c19',
-              card: '#161311',
-              cardBorder: 'rgba(255, 255, 255, 0.08)',
-              cardBorderHover: 'rgba(255, 255, 255, 0.2)',
-              text: '#f3efeb',
-              muted: '#8f8780',
-              accent: '#d97706', // tom sutil amber/terracota
-              accentPurple: '#a855f7',
-              cyan: '#06b6d4',
-            }
-          }
-        }
-      }
-    }
-  </script>
-
   <style>
+    /* Design Tokens fiéis a luccas.social.br */
     :root {
+      --bg: #f8f3f0;
+      --ink: #191512;
+      --muted: #736a63;
+      --surface: #ffffff;
+      --line: rgba(25, 21, 18, 0.1);
+      --dome: rgba(198, 152, 196, 0.3);
+      --chip: #ffffff;
+      --shadow: 0 18px 46px rgba(21, 23, 28, 0.08);
+      --inv-bg: #1b1518;
+      --inv-ink: #f6efea;
+      --accent: #b8735c;
+      --font-heading: "Bricolage Grotesque", sans-serif;
+      --font-body: "Urbanist", sans-serif;
+      --font-serif: "Italiana", serif;
+      --font-mono: "JetBrains Mono", monospace;
+      color-scheme: light;
+    }
+
+    :root[data-theme="dark"] {
       --bg: #100e0d;
-      --surface: #181513;
       --ink: #f3efeb;
-      --muted: #8f8780;
-      --line: rgba(255, 255, 255, 0.08);
-      --line-hover: rgba(255, 255, 255, 0.22);
+      --muted: #a09890;
+      --surface: #181614;
+      --line: rgba(255, 255, 255, 0.12);
+      --dome: rgba(198, 152, 196, 0.22);
+      --chip: #221f1d;
+      --shadow: 0 18px 46px rgba(0, 0, 0, 0.45);
+      --inv-bg: #f2ede8;
+      --inv-ink: #16130f;
+      --accent: #d99878;
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
       background-color: var(--bg);
       color: var(--ink);
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      text-transform: lowercase;
     }
 
-    /* Ambient Dome sutil idêntico ao luccas.social.br */
-    .hero-dome {
+    .no-lowercase {
+      text-transform: none !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      letter-spacing: -0.03em;
+    }
+
+    .font-serif-accent {
+      font-family: var(--font-serif);
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    .font-mono-code {
+      font-family: var(--font-mono);
+    }
+
+    /* Ambient Dome de topo idêntico a luccas.social.br */
+    .dome-glow {
       position: absolute;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
       max-width: 1100px;
-      height: 380px;
-      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(198, 152, 196, 0.15) 0%, rgba(16, 14, 13, 0) 100%);
+      height: 480px;
+      background: radial-gradient(ellipse 65% 55% at 50% 0%, var(--dome) 0%, transparent 75%);
       pointer-events: none;
       z-index: 0;
     }
 
-    .deck-card {
+    /* Header Nav */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-link {
+      background: none;
+      border: none;
+      padding: 6px 14px;
+      color: var(--muted);
+      font-size: 14.5px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 999px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--ink);
+      background: color-mix(in srgb, var(--ink) 6%, transparent);
+    }
+
+    .nav-link[data-active="true"] {
+      color: var(--ink);
+      background: color-mix(in srgb, var(--ink) 10%, transparent);
+      border-bottom: 1.5px solid var(--ink);
+    }
+
+    /* Botões Pill idênticos a luccas.social.br */
+    .btn-pill-primary {
+      background: var(--inv-bg);
+      color: var(--inv-ink);
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-pill-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-pill-secondary {
+      background: var(--surface);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-pill-secondary:hover {
+      border-color: color-mix(in srgb, var(--ink) 30%, transparent);
+      transform: translateY(-1px);
+    }
+
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 14px;
+      border-radius: 999px;
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 20px;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .deck-card:hover {
-      border-color: var(--line-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
-    }
-
-    .nav-btn-active {
-      background: rgba(255, 255, 255, 0.1);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-    }
-
-    .nav-btn-inactive {
+      font-size: 12.5px;
       color: var(--muted);
-      border: 1px solid transparent;
-    }
-    .nav-btn-inactive:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.04);
+      font-family: var(--font-body);
     }
 
-    /* Estilo dos blocos Desafio, Abordagem, Resultado */
-    .study-block {
-      background: #141110;
+    /* Cards do Carrossel e do Deck */
+    .portfolio-card {
+      background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .portfolio-card:hover {
+      border-color: color-mix(in srgb, var(--ink) 25%, transparent);
+    }
+
+    /* Blocos Editoriais (200px 1fr) do Case */
+    .case-block-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 36px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    @media (max-width: 768px) {
+      .case-block-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 24px 0;
+      }
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
   </style>
 </head>
-<body class="selection:bg-amber-600/30 selection:text-white relative">
+<body class="relative">
 
-  <div class="hero-dome"></div>
+  <div class="dome-glow"></div>
 
   <!-- ================================================================= -->
-  <!-- NAVEGAÇÃO SUPERIOR (Estrutura idêntica ao luccas.social.br)       -->
-  <!-- Esquerda: Brand | Centro: Menu de Telas | Direita: Contato & Links -->
+  <!-- HEADER / NAVEGAÇÃO SUPERIOR (Grid 3 colunas idêntico ao luccas.social.br) -->
   <!-- ================================================================= -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#100e0d]/90 border-b border-white/[0.08]">
-    <div class="max-w-6xl mx-auto px-4 sm:px-8 h-18 sm:h-20 flex items-center justify-between py-3">
+  <header class="site-nav">
+    <div class="max-w-[1240px] mx-auto px-6 sm:px-12 h-[72px] grid grid-cols-[1fr_auto_1fr] items-center gap-6">
       
-      <!-- Esquerda: Brand / Nome -->
-      <a href="#/trabalhos" onclick="navigate('trabalhos'); return false;" class="flex items-center gap-3 group shrink-0">
-        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-600/80 to-purple-600/80 flex items-center justify-center font-display font-bold text-sm text-white shadow-md">
-          L
-        </div>
+      <!-- Esquerda: Brand Mark (Logo SVG + Nome) -->
+      <a href="#/portfolio" onclick="showView('portfolio'); return false;" class="flex items-center gap-3 justify-self-start group">
+        <svg class="w-8 h-8 text-[var(--ink)] transition-transform group-hover:scale-105" viewBox="0 0 36 36" fill="none">
+          <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/>
+          <path d="M12 24L12 12L24 24L24 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <div class="flex flex-col">
-          <span class="font-display font-semibold text-sm sm:text-base tracking-tight text-white group-hover:text-amber-200 transition-colors">
-            Lucas Nellucci
-          </span>
-          <span class="text-[11px] text-[#8f8780] font-mono leading-none">
-            UX &amp; Product Designer
-          </span>
+          <span class="font-medium text-[15px] tracking-tight leading-none text-[var(--ink)]">lucas nellucci</span>
+          <span class="text-[11.5px] text-[var(--muted)] font-mono mt-0.5">ux &amp; product designer</span>
         </div>
       </a>
 
-      <!-- Centro: Navegação entre Telas (Abas separadas, NÃO Landing Page) -->
-      <nav class="hidden md:flex items-center p-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-sm">
-        <button onclick="navigate('trabalhos')" id="navTrabalhos" class="px-4 py-1.5 rounded-full text-xs font-medium transition-all nav-btn-active">
-          Projetos de Trabalho
+      <!-- Centro: Links das Telas Principais (Separadas, NÃO Landing Page) -->
+      <nav class="hidden md:flex items-center gap-2">
+        <button onclick="showView('portfolio')" id="navLinkPortfolio" class="nav-link" data-active="true">
+          portfólio
         </button>
-        <button onclick="navigate('jogos')" id="navJogos" class="px-4 py-1.5 rounded-full text-xs font-medium transition-all nav-btn-inactive flex items-center gap-1.5">
-          <i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-cyan-400"></i>
-          <span>Jogos &amp; 3D</span>
+        <button onclick="showView('jogos')" id="navLinkJogos" class="nav-link" data-active="false">
+          jogos &amp; 3d
         </button>
-        <button onclick="navigate('sobre')" id="navSobre" class="px-4 py-1.5 rounded-full text-xs font-medium transition-all nav-btn-inactive">
-          Sobre
+        <button onclick="showView('sobre')" id="navLinkSobre" class="nav-link" data-active="false">
+          sobre
         </button>
-        <button onclick="navigate('contato')" id="navContato" class="px-4 py-1.5 rounded-full text-xs font-medium transition-all nav-btn-inactive">
-          Contato
+        <button onclick="showView('contato')" id="navLinkContato" class="nav-link" data-active="false">
+          contato
         </button>
       </nav>
 
-      <!-- Direita: Redes & E-mail -->
-      <div class="flex items-center gap-2 shrink-0">
-        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" 
-           class="p-2 sm:px-3 sm:py-1.5 rounded-full text-xs font-medium bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 hover:text-white flex items-center gap-1.5 transition-all"
-           title="LinkedIn">
-          <i data-lucide="linkedin" class="w-3.5 h-3.5 text-blue-400"></i>
-          <span class="hidden sm:inline text-xs">LinkedIn</span>
+      <!-- Direita: Controles (Tema Claro/Escuro + Redes) -->
+      <div class="flex items-center gap-3 justify-self-end">
+        <button onclick="toggleTheme()" class="tag-pill hover:border-[var(--ink)] cursor-pointer text-xs" title="Alternar tema claro/escuro">
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent)]"></span>
+          <span id="themeToggleText">modo claro</span>
+        </button>
+
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" class="tag-pill hover:border-[var(--ink)] hidden lg:inline-flex text-xs">
+          linkedin ↗
         </a>
 
-        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" 
-           class="p-2 sm:px-3 sm:py-1.5 rounded-full text-xs font-medium bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 hover:text-white flex items-center gap-1.5 transition-all"
-           title="Behance">
-          <i data-lucide="layout" class="w-3.5 h-3.5 text-cyan-400"></i>
-          <span class="hidden sm:inline text-xs">Behance</span>
-        </a>
-
-        <a href="mailto:nellucci.design@gmail.com" 
-           class="px-3 py-1.5 rounded-full text-xs font-medium bg-white text-[#100e0d] hover:bg-slate-200 transition-all font-mono">
-          E-mail
+        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" class="tag-pill hover:border-[var(--ink)] hidden lg:inline-flex text-xs">
+          behance ↗
         </a>
       </div>
 
     </div>
 
-    <!-- Navegação Mobile (Barra inferior sutil de abas no topo) -->
-    <div class="md:hidden flex items-center justify-around px-2 py-2 border-t border-white/[0.05] bg-[#100e0d]/95 text-xs">
-      <button onclick="navigate('trabalhos')" id="mobNavTrabalhos" class="px-3 py-1 rounded-full text-[11px] font-medium nav-btn-active">
-        Trabalhos
-      </button>
-      <button onclick="navigate('jogos')" id="mobNavJogos" class="px-3 py-1 rounded-full text-[11px] font-medium nav-btn-inactive">
-        Jogos &amp; 3D
-      </button>
-      <button onclick="navigate('sobre')" id="mobNavSobre" class="px-3 py-1 rounded-full text-[11px] font-medium nav-btn-inactive">
-        Sobre
-      </button>
-      <button onclick="navigate('contato')" id="mobNavContato" class="px-3 py-1 rounded-full text-[11px] font-medium nav-btn-inactive">
-        Contato
-      </button>
+    <!-- Navegação Mobile em abas -->
+    <div class="md:hidden flex items-center justify-around px-3 py-2 border-t border-[var(--line)] bg-[var(--bg)] text-xs">
+      <button onclick="showView('portfolio')" id="mobNavPortfolio" class="nav-link py-1 px-3 text-xs" data-active="true">portfólio</button>
+      <button onclick="showView('jogos')" id="mobNavJogos" class="nav-link py-1 px-3 text-xs" data-active="false">jogos &amp; 3d</button>
+      <button onclick="showView('sobre')" id="mobNavSobre" class="nav-link py-1 px-3 text-xs" data-active="false">sobre</button>
+      <button onclick="showView('contato')" id="mobNavContato" class="nav-link py-1 px-3 text-xs" data-active="false">contato</button>
     </div>
   </header>
 
   <!-- ================================================================= -->
-  <!-- TELA 1: PROJETOS DE TRABALHO (Separada, estilo luccas.social.br/portfolio) -->
+  <!-- TELA 1: PORTFÓLIO DE TRABALHOS (Idêntico a luccas.social.br/portfolio) -->
   <!-- ================================================================= -->
-  <main id="viewTrabalhos" class="view-panel max-w-5xl mx-auto px-4 sm:px-8 py-10 sm:py-16 flex-1 w-full relative z-10">
+  <main id="viewPortfolio" class="view-screen max-w-[1240px] mx-auto px-6 sm:px-12 py-14 sm:py-20 flex-1 w-full relative z-10">
     
-    <!-- Cabeçalho da Tela -->
-    <div class="mb-10 sm:mb-14 max-w-2xl">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[#8f8780] text-xs font-mono mb-4">
-        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-        Portfólio de Produto &amp; UX
+    <!-- Hero Header do Portfólio -->
+    <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+      <div class="tag-pill mb-5">
+        <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+        <span>portfólio de produto</span>
       </div>
-      <h1 class="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight leading-tight mb-4">
-        Trabalhos focados em experiência e conversão.
+      <h1 class="text-4xl sm:text-6xl font-medium tracking-tight leading-[1.1] mb-5 text-[var(--ink)]">
+        trabalhos que começam <em class="font-serif-accent italic text-[var(--accent)]">em uma pergunta.</em>
       </h1>
-      <p class="text-sm sm:text-base text-[#8f8780] leading-relaxed">
-        Navegue pelos estudos de caso selecionados. Escolha um para explorar o processo completo: o problema de negócio, a arquitetura no Figma e o impacto no resultado.
+      <p class="text-base sm:text-lg text-[var(--muted)] max-w-2xl mx-auto leading-relaxed font-light">
+        navegue pelos estudos de caso de produto, escolha um e veja o processo inteiro: o problema de negócio, a arquitetura e o que mudou no resultado.
       </p>
     </div>
 
-    <!-- Lista de Cards de Trabalho (Estilo limpo do luccas.social.br) -->
-    <div id="trabalhosListContainer" class="space-y-6">
-      <!-- Injetado dinamicamente via JS -->
-    </div>
-
-  </main>
-
-  <!-- ================================================================= -->
-  <!-- TELA 2: PROJETOS DE JOGOS & 3D (Aba 100% Separada dos Trabalhos)  -->
-  <!-- ================================================================= -->
-  <main id="viewJogos" class="view-panel hidden max-w-5xl mx-auto px-4 sm:px-8 py-10 sm:py-16 flex-1 w-full relative z-10">
-    
-    <!-- Cabeçalho da Tela -->
-    <div class="mb-10 sm:mb-14 max-w-2xl">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/20 text-cyan-300 text-xs font-mono mb-4">
-        <i data-lucide="gamepad-2" class="w-3.5 h-3.5"></i>
-        Projetos Experimentais &amp; 3D
+    <!-- Carrossel de Cards Centralizados com Snap (Estrutura idêntica a CaseCarousel de luccas.social.br) -->
+    <div class="relative mb-12">
+      <div id="carouselTrack" class="flex gap-8 overflow-x-auto snap-x snap-mandatory py-6 px-4 no-scrollbar scroll-smooth">
+        <!-- Injetado dinamicamente via JS -->
       </div>
-      <h1 class="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight leading-tight mb-4">
-        Jogos, Spatial UX e WebGL.
-      </h1>
-      <p class="text-sm sm:text-base text-[#8f8780] leading-relaxed">
-        Experiências interativas desenvolvidas para navegador com Three.js e Canvas. Explore os desafios de game feel, UI diegética e feedback sensorial, ou jogue diretamente.
-      </p>
-    </div>
 
-    <!-- Lista de Cards de Jogos -->
-    <div id="jogosListContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Injetado dinamicamente via JS -->
-    </div>
-
-  </main>
-
-  <!-- ================================================================= -->
-  <!-- TELA 3: SOBRE MIM (Separada, estilo luccas.social.br/sobre)        -->
-  <!-- ================================================================= -->
-  <main id="viewSobre" class="view-panel hidden max-w-4xl mx-auto px-4 sm:px-8 py-10 sm:py-16 flex-1 w-full relative z-10">
-    
-    <div class="mb-8">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[#8f8780] text-xs font-mono mb-4">
-        Sobre mim
-      </div>
-      <h1 class="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight leading-snug mb-4">
-        entre o comportamento humano e o produto digital, alguém precisa desenhar a ponte.
-      </h1>
-      <p class="text-base sm:text-lg text-slate-300 leading-relaxed font-light">
-        Sou UX Designer, graduado em Design Gráfico pela UNIP, com pós-graduação em User Experience pela Anhembi Morumbi e em conclusão da pós em Neurociência do Desenvolvimento pela Descomplica.
-      </p>
-    </div>
-
-    <!-- Ferramentas / Chips -->
-    <div class="flex flex-wrap gap-2 mb-10 pb-8 border-b border-white/[0.08]">
-      <span class="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-slate-300">Figma</span>
-      <span class="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-slate-300">Design Systems</span>
-      <span class="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-slate-300">Prototipagem Interativa</span>
-      <span class="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-slate-300">Arquitetura de Informação</span>
-      <span class="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-slate-300">Otimização de Conversão (CRO)</span>
-      <span class="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-slate-300">Neurociência Aplicada</span>
-    </div>
-
-    <!-- Texto Biográfico Detalhado -->
-    <div class="space-y-5 text-sm sm:text-base text-[#8f8780] leading-relaxed mb-12">
-      <p>
-        Atualmente atuo como <strong>UX Designer na EasyChange</strong>, desenhando jornadas de usuário, arquitetura de informação e protótipos de alta fidelidade para produtos digitais. Minha trajetória inclui atuação como <strong>Designer Instrucional na Neogrid</strong>, <strong>Web Designer na Associação Cartão Cristão do Brasil</strong> e <strong>Estagiário em UX/UI na Nesta</strong>.
-      </p>
-      <p>
-        Minha abordagem combina o rigor visual da formação em Design Gráfico com os fundamentos científicos da Neurociência — entendendo como a atenção, a carga cognitiva e a emoção impactam cada clique do usuário em uma interface.
-      </p>
-    </div>
-
-    <!-- Metodologia em 3 Passos (idêntica ao luccas.social.br: 01 Diagnóstico, 02 Estrutura, 03 Validação) -->
-    <div class="mb-12">
-      <span class="text-xs font-mono uppercase tracking-wider text-[#8f8780] block mb-4">Como Abordo Cada Projeto</span>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Controles do Carrossel (Prev / Indicadores / Next) -->
+      <div class="flex items-center justify-center gap-6 mt-6">
+        <button onclick="prevCard()" class="w-12 h-12 rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] flex items-center justify-center hover:scale-105 transition-transform" aria-label="Anterior">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </button>
         
-        <div class="deck-card p-5">
-          <div class="text-amber-500 font-mono text-xs font-bold mb-1">01</div>
-          <h3 class="text-base font-display font-bold text-white mb-1">Diagnóstico</h3>
-          <p class="text-xs text-[#8f8780] leading-relaxed">
-            Mapeio os gargalos do fluxo atual, entrevisto stakeholders e analiso dados de navegação e concorrentes.
-          </p>
+        <div id="carouselDots" class="flex items-center gap-2">
+          <!-- Dots injetados via JS -->
         </div>
 
-        <div class="deck-card p-5">
-          <div class="text-amber-500 font-mono text-xs font-bold mb-1">02</div>
-          <h3 class="text-base font-display font-bold text-white mb-1">Estrutura</h3>
-          <p class="text-xs text-[#8f8780] leading-relaxed">
-            Defino a arquitetura da informação, crio Design System consistente e prototipo interfaces interativas no Figma.
-          </p>
-        </div>
-
-        <div class="deck-card p-5">
-          <div class="text-amber-500 font-mono text-xs font-bold mb-1">03</div>
-          <h3 class="text-base font-display font-bold text-white mb-1">Validação</h3>
-          <p class="text-xs text-[#8f8780] leading-relaxed">
-            Realizo testes de usabilidade, acompanho métricas reais de conversão e garanto a fidelidade na engenharia.
-          </p>
-        </div>
-
+        <button onclick="nextCard()" class="w-12 h-12 rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] flex items-center justify-center hover:scale-105 transition-transform" aria-label="Próximo">
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
       </div>
-    </div>
 
-    <!-- Trajetória Profissional em Linhas -->
-    <div class="pt-8 border-t border-white/[0.08]">
-      <span class="text-xs font-mono uppercase tracking-wider text-[#8f8780] block mb-4">Trajetória Profissional</span>
-      <div class="divide-y divide-white/[0.06] text-sm">
-        <div class="py-3 flex justify-between items-center">
-          <div>
-            <span class="font-medium text-white">EasyChange</span>
-            <span class="text-xs text-[#8f8780] block">UX Designer</span>
-          </div>
-          <span class="text-xs font-mono text-[#8f8780]">Atuação Atual</span>
-        </div>
-        <div class="py-3 flex justify-between items-center">
-          <div>
-            <span class="font-medium text-white">Neogrid</span>
-            <span class="text-xs text-[#8f8780] block">Designer Instrucional</span>
-          </div>
-          <span class="text-xs font-mono text-[#8f8780]">Anterior</span>
-        </div>
-        <div class="py-3 flex justify-between items-center">
-          <div>
-            <span class="font-medium text-white">Associação Cartão Cristão do Brasil</span>
-            <span class="text-xs text-[#8f8780] block">Web Designer (Comunicação Digital &amp; UX)</span>
-          </div>
-          <span class="text-xs font-mono text-[#8f8780]">2 anos</span>
-        </div>
-        <div class="py-3 flex justify-between items-center">
-          <div>
-            <span class="font-medium text-white">Nesta</span>
-            <span class="text-xs text-[#8f8780] block">Estagiário em UX/UI</span>
-          </div>
-          <span class="text-xs font-mono text-[#8f8780]">Início</span>
-        </div>
+      <div id="carouselCounter" class="text-center text-xs font-mono text-[var(--muted)] mt-2">
+        1 / 5
       </div>
     </div>
 
   </main>
 
   <!-- ================================================================= -->
-  <!-- TELA 4: CONTATO (Separada, estilo luccas.social.br/contato)        -->
+  <!-- TELA 2: JOGOS & 3D (Aba 100% Separada dos Trabalhos de Produto)   -->
   <!-- ================================================================= -->
-  <main id="viewContato" class="view-panel hidden max-w-3xl mx-auto px-4 sm:px-8 py-16 flex-1 w-full relative z-10">
-    <div class="mb-10 text-center sm:text-left">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[#8f8780] text-xs font-mono mb-4">
-        Contato
+  <main id="viewJogos" class="view-screen hidden max-w-[1240px] mx-auto px-6 sm:px-12 py-14 sm:py-20 flex-1 w-full relative z-10">
+    
+    <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+      <div class="tag-pill mb-5">
+        <i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-cyan-400"></i>
+        <span>jogos &amp; 3d interativo</span>
       </div>
-      <h1 class="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight mb-4">
+      <h1 class="text-4xl sm:text-6xl font-medium tracking-tight leading-[1.1] mb-5 text-[var(--ink)]">
+        jogos, spatial ux e <em class="font-serif-accent italic text-cyan-400">sensorial 3d.</em>
+      </h1>
+      <p class="text-base sm:text-lg text-[var(--muted)] max-w-2xl mx-auto leading-relaxed font-light">
+        experiências interativas desenvolvidas para navegador. explore os desafios de game feel, feedback sensorial e interface diegética, ou jogue direto na tela.
+      </p>
+    </div>
+
+    <!-- Grid de Jogos -->
+    <div id="gamesGridContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <!-- Injetado dinamicamente via JS -->
+    </div>
+
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- TELA 3: SOBRE (Idêntico a luccas.social.br/sobre)                 -->
+  <!-- ================================================================= -->
+  <main id="viewSobre" class="view-screen hidden max-w-[780px] mx-auto px-6 sm:px-12 py-16 sm:py-24 flex-1 w-full relative z-10">
+    
+    <div class="tag-pill mb-6">
+      <span>sobre</span>
+    </div>
+
+    <h1 class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-6 text-[var(--ink)]">
+      entre o comportamento humano e o produto digital, alguém precisa traduzir.
+    </h1>
+
+    <p class="text-lg sm:text-xl text-[var(--muted)] leading-relaxed font-light mb-8">
+      atuo na fronteira entre experiência do usuário e produto: desenho jornadas claras no figma e utilizo neurociência do desenvolvimento e métricas de conversão para validar o que realmente funciona em interface.
+    </p>
+
+    <!-- Skill Pills -->
+    <div class="flex flex-wrap gap-2.5 mb-14 pb-8 border-b border-[var(--line)]">
+      <span class="tag-pill">figma</span>
+      <span class="tag-pill">design systems</span>
+      <span class="tag-pill">cro &amp; conversão</span>
+      <span class="tag-pill">neurociência cognitiva</span>
+      <span class="tag-pill">wireframing</span>
+      <span class="tag-pill">prototipagem avançada</span>
+    </div>
+
+    <!-- Trajetória em texto corrido (estilo luccas.social.br) -->
+    <div class="space-y-6 text-base sm:text-lg text-[var(--muted)] leading-relaxed font-light mb-16">
+      <p>
+        sou graduado em design gráfico pela unip, com pós-graduação em user experience pela anhembi morumbi e em conclusão da pós em neurociência do desenvolvimento pela descomplica.
+      </p>
+      <p>
+        atualmente atuo como <strong>ux designer na easychange</strong>. minha trajetória profissional inclui passagens como <strong>designer instrucional na neogrid</strong>, <strong>web designer na associação cartão cristão do brasil</strong> e <strong>estagiário em ux/ui na nesta</strong>.
+      </p>
+      <p>
+        me interessa muito menos o layout bonito por si só e mais entender por que ele gera conversão e resolve o problema do usuário sem fricção.
+      </p>
+    </div>
+
+    <!-- Processo em 3 Passos Numerados (01, 02, 03 com Italiana Serif) -->
+    <div class="mb-16">
+      <span class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-5">processo de trabalho</span>
+      
+      <div class="space-y-4">
+        
+        <div class="portfolio-card p-6 sm:p-7">
+          <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1">01</div>
+          <h3 class="text-xl font-medium text-[var(--ink)] mb-2">diagnóstico</h3>
+          <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
+            mapeio gargalos do fluxo atual, entrevisto stakeholders, estudo métricas de rejeição e analiso referências e concorrência.
+          </p>
+        </div>
+
+        <div class="portfolio-card p-6 sm:p-7">
+          <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1">02</div>
+          <h3 class="text-xl font-medium text-[var(--ink)] mb-2">estrutura</h3>
+          <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
+            reorganizo a arquitetura de informação, desenho wireframes objetivos e estruturo design systems atômicos no figma.
+          </p>
+        </div>
+
+        <div class="portfolio-card p-6 sm:p-7">
+          <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1">03</div>
+          <h3 class="text-xl font-medium text-[var(--ink)] mb-2">validação</h3>
+          <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
+            valido com testes de usabilidade, meço o impacto em taxas de conversão reais e asseguro fidelidade técnica junto aos desenvolvedores.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CTA Final do Sobre -->
+    <div class="pt-8 border-t border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <h3 class="text-xl sm:text-2xl font-medium text-[var(--ink)]">tem um desafio de produto com ux no meio?</h3>
+        <p class="text-sm text-[var(--muted)] mt-1">bora conversar e construir juntos.</p>
+      </div>
+      <button onclick="showView('contato')" class="btn-pill-primary shrink-0">
+        falar comigo →
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- TELA 4: CONTATO (Invertido em Creme idêntico a luccas.social.br/contato) -->
+  <!-- ================================================================= -->
+  <main id="viewContato" class="view-screen hidden flex-1 w-full flex items-center justify-center py-20 px-6 sm:px-12 relative z-10" style="background: var(--inv-bg); color: var(--inv-ink);">
+    
+    <div class="max-w-2xl mx-auto text-center">
+      
+      <!-- Mark Central -->
+      <div class="w-12 h-12 mx-auto mb-6 flex items-center justify-center">
+        <svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
+          <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/>
+          <path d="M12 24L12 12L24 24L24 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-5">
         vamos construir sua experiência de produto juntos?
       </h1>
-      <p class="text-base text-[#8f8780] leading-relaxed">
-        Tem um desafio de UX, produto digital ou deseja trocar uma ideia sobre design e tecnologia? Escolha o canal de sua preferência:
+
+      <p class="text-base sm:text-lg opacity-80 max-w-lg mx-auto mb-10 font-light">
+        conte mais sobre o desafio de design, interface ou produto e vamos juntos!
       </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+        <a href="mailto:nellucci.design@gmail.com" class="px-7 py-3 rounded-full font-semibold text-sm transition-all" style="background: var(--inv-ink); color: var(--inv-bg);">
+          enviar mensagem ↗
+        </a>
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-full text-sm font-medium border transition-all" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
+          linkedin ↗
+        </a>
+        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-full text-sm font-medium border transition-all" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
+          behance ↗
+        </a>
+      </div>
+
+      <span class="text-xs font-mono opacity-60">
+        nellucci.design@gmail.com
+      </span>
+
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-      <a href="mailto:nellucci.design@gmail.com" class="deck-card p-6 flex flex-col justify-between group hover:border-amber-500/40">
-        <div>
-          <i data-lucide="mail" class="w-6 h-6 text-amber-400 mb-3"></i>
-          <h3 class="text-base font-display font-bold text-white mb-1">E-mail Direto</h3>
-          <p class="text-xs text-[#8f8780]">nellucci.design@gmail.com</p>
-        </div>
-        <span class="text-xs text-amber-400 font-mono mt-4 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-          Enviar mensagem ↗
-        </span>
-      </a>
-
-      <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" class="deck-card p-6 flex flex-col justify-between group hover:border-blue-500/40">
-        <div>
-          <i data-lucide="linkedin" class="w-6 h-6 text-blue-400 mb-3"></i>
-          <h3 class="text-base font-display font-bold text-white mb-1">LinkedIn</h3>
-          <p class="text-xs text-[#8f8780]">in/lucasnellucci</p>
-        </div>
-        <span class="text-xs text-blue-400 font-mono mt-4 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-          Conectar no LinkedIn ↗
-        </span>
-      </a>
-
-      <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" class="deck-card p-6 flex flex-col justify-between group hover:border-cyan-500/40">
-        <div>
-          <i data-lucide="layout" class="w-6 h-6 text-cyan-400 mb-3"></i>
-          <h3 class="text-base font-display font-bold text-white mb-1">Behance</h3>
-          <p class="text-xs text-[#8f8780]">behance.net/lucasnellucci</p>
-        </div>
-        <span class="text-xs text-cyan-400 font-mono mt-4 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-          Ver portfólio no Behance ↗
-        </span>
-      </a>
-
-      <a href="https://github.com/nlldesign" target="_blank" rel="noopener noreferrer" class="deck-card p-6 flex flex-col justify-between group hover:border-white/40">
-        <div>
-          <i data-lucide="github" class="w-6 h-6 text-white mb-3"></i>
-          <h3 class="text-base font-display font-bold text-white mb-1">GitHub</h3>
-          <p class="text-xs text-[#8f8780]">github.com/nlldesign</p>
-        </div>
-        <span class="text-xs text-white font-mono mt-4 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-          Repositórios e código ↗
-        </span>
-      </a>
-    </div>
   </main>
 
   <!-- ================================================================= -->
-  <!-- TELA 5: PROJETO EXPANDIDO (ESTUDO DE CASO INDIVIDUAL)              -->
-  <!-- Estrutura: Sketch 2 + luccas.social.br/portfolio/[case]           -->
+  <!-- TELA 5: ESTUDO DE CASO INDIVIDUAL (Idêntico a luccas.social.br/portfolio/[case]) -->
   <!-- ================================================================= -->
-  <main id="viewDetail" class="view-panel hidden max-w-4xl mx-auto px-4 sm:px-8 py-8 sm:py-12 flex-1 w-full relative z-10">
+  <main id="viewCaseStudy" class="view-screen hidden max-w-[1080px] mx-auto px-6 sm:px-12 py-10 sm:py-16 flex-1 w-full relative z-10">
     
-    <!-- Botão Voltar -->
-    <div class="mb-6 flex items-center justify-between">
-      <button onclick="navigateBack()" class="px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-xs font-mono text-slate-300 hover:text-white flex items-center gap-1.5 transition-all">
+    <!-- Top Action: Voltar -->
+    <div class="mb-8 flex items-center justify-between">
+      <button onclick="navigateBack()" class="tag-pill hover:border-[var(--ink)] cursor-pointer text-xs">
         <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
-        <span id="detailBackText">Voltar aos projetos</span>
+        <span id="caseBackLabel">voltar</span>
       </button>
 
-      <div id="detailExternalLinks" class="flex items-center gap-2">
+      <div id="caseTopExternalLinks" class="flex items-center gap-2">
         <!-- Links de Figma / Vercel injetados via JS -->
       </div>
     </div>
 
-    <!-- Cabeçalho do Estudo de Caso -->
-    <div class="mb-6">
-      <div class="flex items-center gap-2 mb-2">
-        <span id="detailBadge" class="text-xs font-mono text-amber-400">
-          Categoria
-        </span>
-        <span class="text-xs text-[#8f8780] font-mono">• 2026</span>
+    <!-- Header do Estudo de Caso -->
+    <div class="mb-10 max-w-3xl">
+      <div class="flex items-center gap-2.5 mb-3">
+        <span id="caseBadge" class="tag-pill text-xs">categoria</span>
+        <span class="text-xs font-mono text-[var(--muted)]">• 2026</span>
       </div>
 
-      <h1 id="detailTitle" class="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight mb-2">
-        Título do Projeto
+      <h1 id="caseTitle" class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-4 text-[var(--ink)]">
+        título do case
       </h1>
-      
-      <p id="detailSubtitle" class="text-sm sm:text-base text-[#8f8780] leading-relaxed">
-        Subtítulo do projeto
+
+      <p id="caseSubtitle" class="text-base sm:text-lg text-[var(--muted)] leading-relaxed font-light">
+        subtítulo do case
       </p>
     </div>
 
-    <!-- 1. MÍDIA DE DESTAQUE NO TOPO (Imagem de capa ou Player de Jogo se for Game) -->
-    <!-- Sketch 2: Bloco superior cinza [Imagem] -->
-    <div id="detailMediaContainer" class="deck-card overflow-hidden mb-8 border border-white/[0.08]">
-      <!-- Imagem ou Player injetado via JS -->
+    <!-- Mídia Principal (Frame de 30px radius como no luccas.social.br) -->
+    <div id="caseMediaFrame" class="portfolio-card overflow-hidden mb-12 border border-[var(--line)]">
+      <!-- Injetado via JS -->
     </div>
 
-    <!-- 2. OS TRÊS BLOCOS ESTRUTURADOS (Fiel ao Sketch 2 e ao luccas.social.br) -->
-    <div class="space-y-4 mb-10">
+    <!-- Métricas Chave com Italiana Serif (Estilo luccas.social.br) -->
+    <div id="caseMetricsRow" class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+      <!-- Injetado via JS -->
+    </div>
+
+    <!-- Blocos Editoriais: 01 Desafio, 02 Abordagem, 03 Resultado (Grid 180px 1fr) -->
+    <div class="mb-16 border-t border-[var(--line)]">
       
-      <!-- Bloco 01: Desafio -->
-      <div class="study-block p-6 sm:p-7">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="text-xs font-mono font-bold text-red-400">01</span>
-          <h3 class="text-base font-display font-bold text-white">Desafio</h3>
+      <!-- Desafio -->
+      <div class="case-block-row">
+        <div class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] pt-1">
+          desafio
         </div>
-        <p id="detailDesafioText" class="text-sm sm:text-base text-slate-300 leading-relaxed font-light">
-          Texto do desafio...
-        </p>
+        <div>
+          <p id="caseDesafioText" class="text-base sm:text-lg text-[var(--ink)] leading-relaxed font-light">
+            texto do desafio...
+          </p>
+        </div>
       </div>
 
-      <!-- Bloco 02: Abordagem -->
-      <div class="study-block p-6 sm:p-7">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="text-xs font-mono font-bold text-amber-400">02</span>
-          <h3 class="text-base font-display font-bold text-white">Abordagem</h3>
+      <!-- Abordagem -->
+      <div class="case-block-row">
+        <div class="text-xs font-mono uppercase tracking-wider text-[var(--accent)] pt-1">
+          abordagem
         </div>
-        <p id="detailAbordagemText" class="text-sm sm:text-base text-slate-300 leading-relaxed font-light">
-          Texto da abordagem...
-        </p>
+        <div>
+          <p id="caseAbordagemText" class="text-base sm:text-lg text-[var(--ink)] leading-relaxed font-light">
+            texto da abordagem...
+          </p>
+        </div>
       </div>
 
-      <!-- Bloco 03: Resultado -->
-      <div class="study-block p-6 sm:p-7">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="text-xs font-mono font-bold text-emerald-400">03</span>
-          <h3 class="text-base font-display font-bold text-white">Resultado</h3>
+      <!-- Resultado -->
+      <div class="case-block-row">
+        <div class="text-xs font-mono uppercase tracking-wider text-emerald-400 pt-1">
+          resultado
         </div>
-        <p id="detailResultadoText" class="text-sm sm:text-base text-slate-300 leading-relaxed font-light">
-          Texto do resultado...
-        </p>
+        <div>
+          <p id="caseResultadoText" class="text-base sm:text-lg text-[var(--ink)] leading-relaxed font-light">
+            texto do resultado...
+          </p>
+        </div>
       </div>
 
     </div>
 
-    <!-- 3. GALERIA VISUAL DE TELAS (Para os Trabalhos do Framer) -->
-    <div id="detailGalleryContainer" class="mb-10">
-      <!-- Injetado dinamicamente via JS -->
+    <!-- Galeria Visual de Telas com Lightbox -->
+    <div id="caseGallerySection" class="mb-16">
+      <!-- Injetado via JS -->
     </div>
 
-    <!-- 4. AÇÃO INFERIOR / PRÓXIMO CASE -->
-    <div id="detailBottomAction" class="pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div id="detailTechsPills" class="flex flex-wrap gap-1.5">
-        <!-- Tags injetadas via JS -->
+    <!-- Banner Invertido de Próximo Case (Idêntico a luccas.social.br) -->
+    <div id="caseNextBanner" class="rounded-[32px] p-8 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6" style="background: var(--inv-bg); color: var(--inv-ink);">
+      <div>
+        <span class="text-xs font-mono opacity-60 block mb-1">próximo case</span>
+        <h3 id="nextCaseTitle" class="text-xl sm:text-2xl font-medium">nome do próximo case</h3>
       </div>
-      <button onclick="nextCase()" class="px-4 py-2 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-xs font-mono text-white flex items-center gap-2 transition-all">
-        <span>Próximo case</span>
-        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      <button onclick="goToNextCase()" class="px-6 py-2.5 rounded-full text-xs font-medium font-mono uppercase tracking-wider transition-all" style="background: var(--inv-ink); color: var(--inv-bg);">
+        abrir case →
       </button>
     </div>
 
   </main>
 
   <!-- ================================================================= -->
-  <!-- MODAL LIGHTBOX DE IMAGENS EM ALTA RESOLUÇÃO                       -->
+  <!-- MODAL LIGHTBOX DE IMAGENS                                         -->
   <!-- ================================================================= -->
   <div id="lightboxModal" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4" onclick="closeLightbox()">
     <div class="relative max-w-5xl max-h-[90vh] flex flex-col items-center" onclick="event.stopPropagation()">
@@ -537,159 +611,186 @@
     </div>
   </div>
 
-  <!-- RODAPÉ COMPACTO -->
-  <footer class="border-t border-white/[0.08] py-8 text-center text-xs text-[#8f8780] font-mono relative z-10">
-    <div class="max-w-5xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div>© 2026 Lucas Nellucci · Portfólio de UX e Jogos</div>
-      <div class="flex items-center gap-5 text-xs">
-        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
-        <a href="https://www.behance.net/lucasnellucci" target="_blank" class="hover:text-white transition-colors">Behance</a>
-        <a href="https://github.com/nlldesign" target="_blank" class="hover:text-white transition-colors">GitHub</a>
-        <a href="mailto:nellucci.design@gmail.com" class="hover:text-white transition-colors">Email</a>
+  <!-- RODAPÉ MINIMALISTA (Idêntico ao luccas.social.br) -->
+  <footer class="border-t border-[var(--line)] py-8 text-xs text-[var(--muted)] font-mono relative z-10">
+    <div class="max-w-[1240px] mx-auto px-6 sm:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>© 2026 · portfólio de produto e ux</div>
+      <div class="flex items-center gap-6">
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" class="hover:text-[var(--ink)] transition-colors">linkedin</a>
+        <a href="https://www.behance.net/lucasnellucci" target="_blank" class="hover:text-[var(--ink)] transition-colors">behance</a>
+        <a href="https://github.com/nlldesign" target="_blank" class="hover:text-[var(--ink)] transition-colors">github</a>
+        <a href="mailto:nellucci.design@gmail.com" class="hover:text-[var(--ink)] transition-colors">email</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // Catálogo estrito: separados em 'trabalho' e 'jogos'
-    const catalog = [
-      // ==========================================
-      // TRABALHOS DE UX & PRODUTO (5 cases reais Framer)
-      // ==========================================
+    // Catálogo 100% autêntico e separado
+    const portfolioProjects = [
       {
         id: 'plano-saude',
         category: 'trabalho',
-        badge: 'CRO &amp; UX',
-        title: 'Alteração no Fluxo de Simulação de Planos de Saúde',
-        subtitle: 'Associação Cartão Cristão • Otimização de conversão e simplificação de formulário',
-        summary: 'Redesenho completo do fluxo de simulação da Associação Cartão Cristão, corrigindo falhas funcionais e recuperando as taxas de conversão de novos associados.',
+        tag: 'cro &amp; ux',
+        num: '01',
+        title: 'alteração no fluxo de simulação de planos de saúde',
+        subtitle: 'associação cartão cristão • redesenho e otimização de conversão',
+        summary: 'redesenho completo do fluxo de simulação da associação cartão cristão, eliminando atritos funcionais e alavancando as taxas de conversão de leads no site.',
         image: 'assets/framer-plano-saude-detail.png',
-        desafio: 'A solicitação surgiu após o antigo fluxo apresentar problemas de funcionalidade que impediam os usuários de realizar simulações de planos, resultando em uma diminuição nas conversões provenientes do site. O desafio consistia em desenvolver um layout simples e objetivo que pudesse ser implementado rapidamente para estancar a perda de potenciais clientes e resguardar a reputação da marca.',
-        abordagem: 'Adotei uma estratégia focada em consistência e rapidez: defini um padrão visual coeso para os campos de preenchimento, reduzindo atritos cognitivos e etapas desnecessárias no formulário. A arquitetura de informação foi reorganizada para guiar o usuário passo a passo com feedback imediato de cotação, permitindo fácil manutenção e testes ágeis.',
-        resultado: 'As melhorias implementadas resultaram em um aumento considerável na taxa de conversão do site, corrigindo deficiências históricas do fluxo e fortalecendo a captação de novos associados.',
-        techs: ['UX Design', 'CRO', 'Figma', 'Wireframing'],
+        metrics: [
+          { val: '+30%', label: 'aumento na conversão de leads' },
+          { val: '-45%', label: 'tempo médio de cotação' },
+          { val: '100%', label: 'campos com validação inline' }
+        ],
+        desafio: 'a solicitação surgiu após o antigo fluxo apresentar problemas de funcionalidade que impediam os usuários de realizar simulações de planos, resultando em uma diminuição nas conversões provenientes do site. era fundamental resolver esses problemas para melhorar a experiência do usuário e recuperar as taxas de conversão com agilidade.',
+        abordagem: 'optei por seguir para um padrão de interface coeso e direto, com campos de preenchimento limpos e arquitetura de passos guiados. organizando a informação com feedback imediato de valores, eliminamos dúvidas cognitivas e facilitamos a manutenção contínua.',
+        resultado: 'as melhorias implementadas resultaram em um aumento considerável na taxa de conversão do site, corrigindo deficiências históricas do fluxo e fortalecendo a captação de novos associados.',
+        techs: ['ux design', 'cro', 'figma', 'wireframing'],
         figmaUrl: null,
         siteUrl: 'https://www.associacaocartaocristao.com.br/assistencia-medica.html',
         behanceUrl: 'https://www.behance.net/gallery/137906687/Simulacao-de-novos-Associados-Cartao-Cristao',
         gallery: [
-          { src: 'assets/framer/Fluxo-de-compras_7_VDfxUlMtf4U23kRo0HmjvNgXRg.png', title: 'Fluxo Geral e Tela de Entrada' },
-          { src: 'assets/framer/Fluxo-de-compras_8_GTX0kJEmjq2vIBhrdXL5C0U.png', title: 'Telas Comparativas de Planos' },
-          { src: 'assets/framer/Fluxo-de-compras_9_4oCyiR01SRCSZjUX1T9vp7tqI.png', title: 'Formulário Redesenhado' },
-          { src: 'assets/framer/Fluxo-de-compras_10_GI6BtzXn5TV0v9j5YXZQ6yrmic.png', title: 'Confirmação e Envio de Lead' }
+          { src: 'assets/framer/Fluxo-de-compras_7_VDfxUlMtf4U23kRo0HmjvNgXRg.png', title: 'fluxo geral e tela de entrada da simulação' },
+          { src: 'assets/framer/Fluxo-de-compras_8_GTX0kJEmjq2vIBhrdXL5C0U.png', title: 'telas comparativas de planos e valores' },
+          { src: 'assets/framer/Fluxo-de-compras_9_4oCyiR01SRCSZjUX1T9vp7tqI.png', title: 'formulário simplificado de cotação' },
+          { src: 'assets/framer/Fluxo-de-compras_10_GI6BtzXn5TV0v9j5YXZQ6yrmic.png', title: 'etapa de confirmação e envio do lead' }
         ]
       },
 
       {
         id: 'bom-vizinho',
         category: 'trabalho',
-        badge: 'E-commerce &amp; Design System',
-        title: 'Supermercado Bom Vizinho',
-        subtitle: 'Presença digital própria, benchmarking e Design System no Figma',
-        summary: 'Projeto de UX para levar um supermercado tradicional de 20 anos para o ambiente digital próprio, garantindo autonomia sobre a marca e compras online.',
+        tag: 'e-commerce ux',
+        num: '02',
+        title: 'supermercado bom vizinho',
+        subtitle: 'presença digital própria, benchmarking e design system no figma',
+        summary: 'estratégia de imersão e prototipação no figma para criar a presença online própria de uma rede de 20 anos, garantindo autonomia sobre a marca.',
         image: 'assets/framer-bom-vizinho.png',
-        desafio: 'O Supermercado Bom Vizinho, com mais de duas décadas de atuação, não possuía site próprio e dependia exclusivamente de plataformas terceirizadas de entrega. Isso limitava severamente a autonomia sobre a marca, a experiência do cliente e a capacidade de fidelização, além de gerar dependência de intermediários em um mercado altamente competitivo.',
-        abordagem: 'O processo de resolução foi estruturado em três etapas: Imersão, Ideação e Prototipação. No Notion, documentei os requisitos e personas. No Figma, realizei benchmarking detalhado de referências (Amazon, iFood, Magazine Luiza, Nagumo) e desenvolvi um Design System modular com componentes reutilizáveis, desenhando wireframes completos para entrega em domicílio e retirada na loja.',
-        resultado: 'Entrega de um protótipo de alta fidelidade que proporcionou uma experiência de compra online fluida, permitindo ao supermercado planejar seu canal direto de vendas com controle total sobre dados de clientes e campanhas.',
-        techs: ['UX Research', 'Design System', 'Figma', 'Benchmarking'],
+        metrics: [
+          { val: '20 anos', label: 'tradição da rede no varejo' },
+          { val: '2 canais', label: 'retirada e entrega domiciliar' },
+          { val: '100%', label: 'componentizado no figma' }
+        ],
+        desafio: 'o supermercado bom vizinho dependia exclusivamente de plataformas terceirizadas de entrega. isso limitava severamente a autonomia sobre a marca, a experiência do cliente e a capacidade de fidelização direta.',
+        abordagem: 'o processo foi estruturado em três etapas: imersão, ideação e prototipação. documentamos personas no notion, realizamos benchmarking detalhado de referências do setor no figma e desenvolvemos um design system modular com componentes reutilizáveis para compra e entrega.',
+        resultado: 'entrega de um protótipo de alta fidelidade que proporcionou uma experiência de compra online fluida, permitindo ao supermercado planejar seu canal direto com controle sobre campanhas e dados de clientes.',
+        techs: ['ux research', 'design system', 'figma', 'benchmarking'],
         figmaUrl: null,
         siteUrl: null,
         behanceUrl: null,
         gallery: [
-          { src: 'assets/framer/Bom-vizinho_3_8w2SGKDTbKNASI7M0qeaAKo2z5s.png', title: 'Painel Semântico, Design System e Wireframes' },
-          { src: 'assets/framer/home_10_KMKkXlL2VmQ0JkOMAkshjnt5v0Y.jpg', title: 'Layout Digital e Identidade do Supermercado' }
+          { src: 'assets/framer/Bom-vizinho_3_8w2SGKDTbKNASI7M0qeaAKo2z5s.png', title: 'painel semântico, design system e wireframes' },
+          { src: 'assets/framer/home_10_KMKkXlL2VmQ0JkOMAkshjnt5v0Y.jpg', title: 'layout digital e identidade visual do supermercado' }
         ]
       },
 
       {
         id: 'cbanco',
         category: 'trabalho',
-        badge: 'Fintech UX',
-        title: 'Cbanco (App Bancário)',
-        subtitle: 'Estrutura Bancária, Prototipação Avançada &amp; Style Guide no Figma',
-        summary: 'Estudo da arquitetura de um aplicativo bancário moderno com foco na organização de recursos e criação de style guide consistente para design e dev.',
+        tag: 'fintech app',
+        num: '03',
+        title: 'estudo de caso: cbanco',
+        subtitle: 'estrutura bancária, prototipação avançada &amp; style guide no figma',
+        summary: 'estudo da arquitetura de um aplicativo bancário moderno com foco na organização de recursos e criação de style guide de fácil consulta para design e engenharia.',
         image: 'assets/framer-cbanco-detail.png',
-        desafio: 'Aplicativos financeiros necessitam transmitir extrema segurança e simplicidade simultaneamente. O desafio era reformular o fluxo antigo de extrato, cartões e transferências em uma interface limpa e padronizada que facilitasse tanto a vida do usuário quanto a implementação pelos desenvolvedores.',
-        abordagem: 'Mapeamento do fluxo antigo e reconstrução da arquitetura no Figma. Criação de um style guide consistente, documentado e de fácil consulta, com tipografia legível para números, contrastes acessíveis e componentes atômicos para saldos, extratos e transações.',
-        resultado: 'Interface bancária moderna com redução da carga cognitiva em operações de rotina e biblioteca padronizada de componentes pronta para desenvolvimento no Figma.',
-        techs: ['Fintech UX', 'Style Guide', 'Figma', 'Arquitetura de Informação'],
+        metrics: [
+          { val: '1 hub', label: 'unificação de saldos e extratos' },
+          { val: '0 atrito', label: 'clareza numérica e contrastes' },
+          { val: 'figma', label: 'protótipo interativo completo' }
+        ],
+        desafio: 'aplicativos financeiros necessitam transmitir extrema segurança e simplicidade simultaneamente. o desafio era reformular o fluxo antigo de extrato, cartões e transferências em uma interface limpa e padronizada.',
+        abordagem: 'mapeamento do fluxo antigo e reconstrução da arquitetura no figma. criação de um style guide consistente com tipografia legível para números, contrastes acessíveis e componentes atômicos prontos para desenvolvimento.',
+        resultado: 'interface bancária moderna com redução da carga cognitiva em operações de rotina e biblioteca padronizada de componentes pronta para desenvolvimento no figma.',
+        techs: ['fintech ux', 'style guide', 'figma', 'arquitetura de informação'],
         figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2154-4209&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2154%3A4209&show-proto-sidebar=1',
         siteUrl: null,
         behanceUrl: null,
         gallery: [
-          { src: 'assets/framer/cbanco_1_w9B2VOpmE5M3KT8QVwk42MpcHTE.png', title: 'Comparativo: Fluxo Antigo vs Nova Arquitetura' },
-          { src: 'assets/framer/cbanco_2_jrilSX6PEgcvKF6pqAQWcS9KhE.png', title: 'Style Guide & Componentes de UI' },
-          { src: 'assets/framer/cbanco_3_bsidmwZXZ65pLxB8ROqHEFIoD8c.png', title: 'Telas Mobile de Saldo, Extrato e Cartões' },
-          { src: 'assets/framer/cbanco_4_krSlJ2n5urqBJU1C9Z7kTdejjSc.png', title: 'Fluxo de Transferência e Feedback' }
+          { src: 'assets/framer/cbanco_1_w9B2VOpmE5M3KT8QVwk42MpcHTE.png', title: 'comparativo: fluxo antigo vs nova arquitetura' },
+          { src: 'assets/framer/cbanco_2_jrilSX6PEgcvKF6pqAQWcS9KhE.png', title: 'style guide & componentes de ui' },
+          { src: 'assets/framer/cbanco_3_bsidmwZXZ65pLxB8ROqHEFIoD8c.png', title: 'telas mobile de saldo, extrato e cartões' },
+          { src: 'assets/framer/cbanco_4_krSlJ2n5urqBJU1C9Z7kTdejjSc.png', title: 'fluxo de transferência e feedback' }
         ]
       },
 
       {
         id: 'intern',
         category: 'trabalho',
-        badge: 'Enterprise UX',
-        title: 'Intern (Gestão de Times &amp; Intranet)',
-        subtitle: 'Rede social corporativa, treinamentos gamificados e módulo de RH',
-        summary: 'Plataforma interna corporativa centralizada integrando marcação de ponto, holerite, treinamentos e comunicação entre colaboradores.',
+        tag: 'enterprise ux',
+        num: '04',
+        title: 'estudo de caso: intern gestão de times',
+        subtitle: 'plataforma corporativa, comunicação interna &amp; treinamentos',
+        summary: 'rede social corporativa com foco em treinamento de colaboradores, espelho de ponto, holerite e comunicação integrada entre equipes.',
         image: 'assets/framer-intern-detail.png',
-        desafio: 'Sistemas internos de RH e intranet costumam ser descentralizados, complexos e visualmente desestimulantes, fazendo com que colaboradores percam prazos de envio de ponto e comunicados importantes.',
-        abordagem: 'Criação de um hub centralizado com estética de rede social amigável. Guia de estilo intuitivo integrando holerite, marcação de ponto, cardápio do refeitório e módulos de treinamento gamificados, garantindo facilidade de consulta para gestores e colaboradores.',
-        resultado: 'Melhoria na comunicação interna, unificação dos pontos de contato do colaborador com a empresa e navegação eficiente sem ruídos operacionais.',
-        techs: ['Enterprise UX', 'Figma', 'UI Design', 'Style Guide'],
+        metrics: [
+          { val: '100%', label: 'centralização de rotinas de rh' },
+          { val: 'gamified', label: 'módulos de capacitação interna' },
+          { val: 'figma', label: 'protótipo navegável mobile' }
+        ],
+        desafio: 'sistemas internos de rh e intranet costumam ser descentralizados e visualmente desestimulantes, gerando atrasos em envio de ponto e baixa leitura de comunicados corporativos.',
+        abordagem: 'criação de um hub centralizado com estética amigável. guia de estilo intuitivo integrando holerite, marcação de ponto, cardápio e treinamentos gamificados para fácil consulta por gestores e colaboradores.',
+        resultado: 'melhoria na comunicação interna, unificação dos pontos de contato do colaborador com a empresa e navegação sem ruídos operacionais.',
+        techs: ['enterprise ux', 'ex design', 'figma', 'ui design'],
         figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2211-5714&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2211%3A5714&show-proto-sidebar=1',
         siteUrl: null,
         behanceUrl: null,
         gallery: [
-          { src: 'assets/framer/intern_1_k7XuUK8a3NSNh4RCb6b4iQOwejI.png', title: 'Hub Central da Intranet e Feed' },
-          { src: 'assets/framer/intern_2_N2wAqYWAsNq6keAihvfLfgXUlA.png', title: 'Módulo Mobile de Marcação de Ponto' },
-          { src: 'assets/framer/intern_3_Y597s7LZ2lE1lQEXdGU40lznLA0.png', title: 'Guia de Estilo da Interface e Tipografia' }
+          { src: 'assets/framer/intern_1_k7XuUK8a3NSNh4RCb6b4iQOwejI.png', title: 'visão geral do hub da intranet e feed corporativo' },
+          { src: 'assets/framer/intern_2_N2wAqYWAsNq6keAihvfLfgXUlA.png', title: 'módulo mobile de marcação de ponto e rh' },
+          { src: 'assets/framer/intern_3_Y597s7LZ2lE1lQEXdGU40lznLA0.png', title: 'guia de estilo da interface e tipografia' }
         ]
       },
 
       {
         id: 'social-media',
         category: 'trabalho',
-        badge: 'Social Media &amp; Branding',
-        title: 'Comunicação Digital &amp; Social Media',
-        subtitle: 'Associação Cartão Cristão e Parceiros • Criação de Peças e Gestão',
-        summary: 'Criação contínua de peças e campanhas digitais para múltiplos parceiros (saúde, odontologia, veterinária e educação) durante 2 anos.',
+        tag: 'branding',
+        num: '05',
+        title: 'comunicação digital &amp; social media',
+        subtitle: 'associação cartão cristão e parceiros • criação contínua e relatórios',
+        summary: 'criação de identidade visual e peças de comunicação digital para redes sociais (instagram, facebook, linkedin) e campanhas para mais de 5 parceiros.',
         image: 'assets/framer-social-media.png',
-        desafio: 'Ao longo de dois anos como Web Designer, a Associação Cartão Cristão e seus parceiros enfrentavam o desafio de manter alto engajamento e consistência visual contínua para marcas e segmentos diversos (saúde, odontologia, veterinária, educação e comunidade).',
-        abordagem: 'Criação de um sistema de templates gráficos no Figma e Photoshop, unificando a voz visual e paletas de cada submarca: Instituto Cartão Cristão, Cartão Cristão Odonto, Cartão Cristão PET, Clube de Saúde São Mateus, Laboratório Melior, Colégio Paulo Monteiro, Clube da Comunidade Alcidio Monteiro e Collisbloco.',
-        resultado: 'Mais de dois anos de produção contínua com elevação substancial no alcance orgânico, padronização visual das peças e agilidade no fluxo diário de publicação.',
-        techs: ['Design Gráfico', 'Photoshop', 'Identidade Visual', 'Figma'],
+        metrics: [
+          { val: '2 anos', label: 'gestão contínua de comunicação' },
+          { val: '8 submarcas', label: 'identidades visuais padronizadas' },
+          { val: '+50 peças', label: 'entregas gráficas documentadas' }
+        ],
+        desafio: 'manter o alto engajamento e a coerência visual de múltiplos parceiros e segmentos distintos (saúde, odontologia, veterinária, colégio e comunidade) ao longo de dois anos.',
+        abordagem: 'estruturação de templates ágeis no figma e photoshop, definindo paletas institucionais, tom de voz e chamadas de ação para as submarcas atendidas.',
+        resultado: 'mais de dois anos de produção contínua com elevação substancial no alcance orgânico e padronização visual das peças.',
+        techs: ['design gráfico', 'social media', 'photoshop', 'figma'],
         figmaUrl: null,
         siteUrl: null,
         behanceUrl: 'https://www.behance.net/lucasnellucci',
         gallery: [
-          { src: 'assets/framer/social-media_7_dzpes7047JLwMTB827dPxmFKO8A.png', title: 'Campanhas de Saúde & Prevenção' },
-          { src: 'assets/framer/social-media_8_vNTaCTysJ6TqIjKlrUME51yEthc.png', title: 'Cartão Cristão Odonto' },
-          { src: 'assets/framer/social-media_10_K0vZr2puFJXrIIwrG79VRjBMHA.png', title: 'Cartão Cristão PET' },
-          { src: 'assets/framer/social-media_11_DA0zhWL3VQsUQ7UINafYYGp1YJE.png', title: 'Colégio Paulo Monteiro' },
-          { src: 'assets/framer/social-media_14_5UsyhNNh3InSIo5xqXDzmCvxDA.png', title: 'Laboratório Melior' },
-          { src: 'assets/framer/social-media_16_FuOEDLBtFrfPRJINPREIdwHdyw.png', title: 'Clube de Saúde São Mateus' },
-          { src: 'assets/framer/social-media_22_FSIq2G8B1kNzfcJgA40LN2Ho2Uk.png', title: 'Peças de Engajamento' },
-          { src: 'assets/framer/social-media_27_Kui6eGBWUlCcGHXVXLLKsKHavw.png', title: 'Comunicação Visual' }
+          { src: 'assets/framer/social-media_7_dzpes7047JLwMTB827dPxmFKO8A.png', title: 'campanhas de saúde e prevenção' },
+          { src: 'assets/framer/social-media_8_vNTaCTysJ6TqIjKlrUME51yEthc.png', title: 'cartão cristão odonto' },
+          { src: 'assets/framer/social-media_10_K0vZr2puFJXrIIwrG79VRjBMHA.png', title: 'cartão cristão pet' },
+          { src: 'assets/framer/social-media_11_DA0zhWL3VQsUQ7UINafYYGp1YJE.png', title: 'colégio paulo monteiro' },
+          { src: 'assets/framer/social-media_14_5UsyhNNh3InSIo5xqXDzmCvxDA.png', title: 'laboratório melior' },
+          { src: 'assets/framer/social-media_16_FuOEDLBtFrfPRJINPREIdwHdyw.png', title: 'clube de saúde são mateus' }
         ]
-      },
+      }
+    ];
 
-      // ==========================================
-      // JOGOS & 3D (4 Projetos Interativos)
-      // ==========================================
+    const gameProjects = [
       {
         id: 'corpo-seco',
         category: 'jogos',
-        badge: '3D &amp; Diegetic UI',
-        title: 'Corpo Seco: A Maldição do Vale',
-        subtitle: 'Game UI/UX • Atmosfera de Terror 3D &amp; UI Diegética sem HUD',
-        summary: 'Jogo 3D de suspense na mata com Three.js. A lanterna, a névoa e o som espacial comunicam o perigo ao jogador sem barras flutuantes na tela.',
+        tag: '3d diegetic ui',
+        num: '01',
+        title: 'corpo seco: a maldição do vale',
+        subtitle: 'game ui/ux • suspense 3d &amp; interface diegética na mata',
+        summary: 'jogo 3d em three.js. a lanterna, a névoa e o som espacial comunicam o perigo ao jogador sem poluição de tela ou hud intrusivo.',
         image: 'assets/corpo-seco-hero.png',
-        desafio: 'Manter o jogador informado sobre seu estado e recursos em um jogo 3D tenso sem quebrar a imersão com barras de vida, ícones flutuantes ou poluição de tela.',
-        abordagem: 'Integração de todos os indicadores no próprio mundo: o feixe da lanterna indica a energia restante, aberrações cromáticas e áudio binaural avisam sobre a proximidade da criatura, e o caminho seguro é revelado por contraste de iluminação da mata.',
-        resultado: 'Experiência imersiva rodando a 60 FPS diretamente no navegador, alcançando alto impacto emocional através de um design limpo e puramente sensorial.',
-        techs: ['Three.js', 'Diegetic UI', 'Sound Design', 'WebGL'],
-        figmaUrl: null,
-        siteUrl: null,
-        behanceUrl: null,
+        metrics: [
+          { val: '60 fps', label: 'renderização contínua webgl' },
+          { val: 'zero hud', label: 'interface 100% diegética' },
+          { val: 'three.js', label: 'iluminação volumétrica' }
+        ],
+        desafio: 'manter o jogador informado sobre seu estado e recursos em um jogo 3d tenso sem quebrar a imersão com barras flutuantes na tela.',
+        abordagem: 'integração de todos os indicadores no próprio mundo: o feixe da lanterna indica a energia, aberrações cromáticas e áudio binaural avisam sobre a aproximação da criatura.',
+        resultado: 'experiência imersiva rodando direto no navegador a 60 fps, alcançando alto impacto sensorial.',
+        techs: ['three.js', 'diegetic ui', 'sound design', 'webgl'],
         vercelUrl: 'https://corpo-seco.vercel.app',
         embedUrl: 'games/corpo-seco/index.html',
         gallery: []
@@ -698,18 +799,21 @@
       {
         id: 'undertale-3d',
         category: 'jogos',
-        badge: 'Spatial UI 3D',
-        title: 'Undertale 3D: Ruínas &amp; Arena',
-        subtitle: 'Spatial UX • Transposição de Câmera 2D para Espaço 3D',
-        summary: 'Adaptação tridimensional interativa transpondo mecânicas de combate bullet-hell e exploração de ruínas em tempo real.',
+        tag: 'spatial ui',
+        num: '02',
+        title: 'undertale 3d: ruínas &amp; arena',
+        subtitle: 'spatial ux • transposição de câmera 2d para espaço 3d',
+        summary: 'adaptação tridimensional transpondo mecânicas clássicas de combate bullet-hell e exploração de ruínas em tempo real.',
         image: 'assets/undertale-preview.svg',
-        desafio: 'Preservar a precisão geométrica do clássico combate "bullet hell" ao transferir a câmera de cima (top-down 2D) para uma perspectiva 3D em tempo real.',
-        abordagem: 'Design de arena suspensa com cálculo angular de câmera que mantém a leitura de projéteis clara, com iluminação focal na alma vermelha e feedback de dano imediato.',
-        resultado: 'Navegação fluida e combate ágil que respeita o design original com perspectiva espacial inovadora.',
-        techs: ['Spatial UI', 'Level Design 3D', 'WebGL'],
-        figmaUrl: null,
-        siteUrl: null,
-        behanceUrl: null,
+        metrics: [
+          { val: '3d real', label: 'física de colisão de projéteis' },
+          { val: '60 fps', label: 'combate espacial em arena' },
+          { val: 'webgl', label: 'transposição visual 2d/3d' }
+        ],
+        desafio: 'preservar a precisão geométrica do clássico combate "bullet hell" ao transferir a câmera top-down 2d para perspectiva espacial 3d.',
+        abordagem: 'design de arena suspensa com cálculo angular de câmera que mantém a leitura de projéteis clara, com iluminação focal na alma e feedback visual de dano.',
+        resultado: 'navegação fluida e combate ágil que respeita o design original com perspectiva espacial inovadora.',
+        techs: ['spatial ui', 'level design 3d', 'webgl'],
         vercelUrl: 'https://undertale-3d.vercel.app',
         embedUrl: 'games/undertale-3d/index.html',
         gallery: []
@@ -718,18 +822,21 @@
       {
         id: 'swam-invasion',
         category: 'jogos',
-        badge: 'Canvas Game Feel',
-        title: 'Swam Invasion (Colony Survivor)',
-        subtitle: 'Visual Hierarchy • Clareza Visual sob Alta Densidade',
-        summary: 'Jogo arcade com mais de 1.000 entidades simultâneas em tela. Foco de design em contraste visual e leitura instantânea de decisões.',
+        tag: 'canvas 2d',
+        num: '03',
+        title: 'swam invasion (colony survivor)',
+        subtitle: 'visual hierarchy • clareza visual sob alta densidade',
+        summary: 'jogo arcade com mais de 1.000 entidades simultâneas em tela. foco de design em contraste visual e leitura rápida de decisões.',
         image: 'assets/swam-invasion-preview.svg',
-        desafio: 'Garantir que o jogador tome decisões estratégicas instantâneas em meio a centenas de inimigos sem sentir que a tela está ilegível ou injusta.',
-        abordagem: 'Hierarquia visual estrita por valor de cor e iluminação: o jogador tem aura de alto contraste ciano, projéteis possuem brilho luminescente e inimigos seguem paletas que não ofuscam caminhos de fuga.',
-        resultado: 'Jogabilidade intensa com 60 FPS constantes e legibilidade impecável mesmo nos estágios finais de densidade máxima.',
-        techs: ['Canvas 2D', 'Game Feel', 'Visual Hierarchy'],
-        figmaUrl: null,
-        siteUrl: null,
-        behanceUrl: null,
+        metrics: [
+          { val: '+1000', label: 'entidades simultâneas' },
+          { val: '60 fps', label: 'renderização fluida em canvas' },
+          { val: 'game feel', label: 'recompensa e upgrades' }
+        ],
+        desafio: 'garantir que o jogador tome decisões instantâneas no meio de centenas de inimigos sem sentir que a tela está ilegível ou injusta.',
+        abordagem: 'hierarquia visual estrita por valor de cor e iluminação: o jogador tem aura de alto contraste ciano, projéteis possuem brilho luminescente e rotas de fuga permanecem visíveis.',
+        resultado: 'jogabilidade intensa e legibilidade constante mesmo nos estágios de densidade máxima.',
+        techs: ['canvas 2d', 'game feel', 'visual hierarchy'],
         vercelUrl: 'https://swam-invasion.vercel.app',
         embedUrl: 'games/swam-invasion/index.html',
         gallery: []
@@ -738,67 +845,63 @@
       {
         id: 'biopunk-idle',
         category: 'jogos',
-        badge: 'Tactile UI &amp; Áudio',
-        title: 'Biopunk Idle (Rádio Esperança 3D)',
-        subtitle: 'Sensory UX • Narrativa Ambiental e UI Analógica Tátil',
-        summary: 'Jogo incremental temático com rádio pirata atmosférica, botões analógicos táteis e áudio dinâmico Web Audio API.',
+        tag: 'tactile ui',
+        num: '04',
+        title: 'biopunk idle (rádio esperança 3d)',
+        subtitle: 'sensory ux • narrativa ambiental e interface analógica',
+        summary: 'jogo incremental temático com rádio pirata atmosférica, estética biopunk e sintonizadores analógicos de áudio e tanques biológicos.',
         image: 'assets/biopunk-preview.svg',
-        desafio: 'Evitar que um jogo idle se torne uma planilha fria e criar vínculo emocional através de ambientação estética marcante.',
-        abordagem: 'Criação de botões e knobs analógicos táteis, sons de estática e frequências de rádio via Web Audio API e representação volumétrica de recursos em tanques 3D.',
-        resultado: 'Retenção duradoura impulsionada pela atmosfera singular e pela sensação prazerosa de operar uma rádio clandestina.',
-        techs: ['Web Audio API', 'Tactile UI', 'World Building'],
-        figmaUrl: null,
-        siteUrl: null,
-        behanceUrl: null,
+        metrics: [
+          { val: 'web audio', label: 'frequências e estática analógica' },
+          { val: 'tactile', label: 'knobs e botões físicos' },
+          { val: '3d idle', label: 'economia de recursos' }
+        ],
+        desafio: 'evitar que um jogo idle se torne uma planilha fria e criar vínculo emocional através de ambientação estética analógica.',
+        abordagem: 'criação de botões táteis analógicos, sons de estática e frequências de rádio via web audio api e representação volumétrica de recursos em tanques 3d.',
+        resultado: 'experiência com atmosfera singular e prazer sensorial de operar uma rádio clandestina.',
+        techs: ['web audio api', 'tactile ui', 'world building'],
         vercelUrl: 'https://biopunk-idle.vercel.app',
         embedUrl: 'games/bio-horde/index.html',
         gallery: []
       }
     ];
 
-    let currentCaseId = null;
-    let previousView = 'trabalhos';
+    let currentCardIndex = 0;
+    let activeCaseId = null;
+    let currentCategory = 'trabalho';
 
-    // Roteamento SPA entre Telas (NÃO Landing Page)
-    function navigate(viewName) {
-      // Fecha qualquer iframe em execução
+    // Roteamento SPA entre Telas Dedicadas (NÃO LP!)
+    function showView(viewId) {
+      // Pausa qualquer jogo ativo
       const iframe = document.getElementById('gameIframe');
       if (iframe) iframe.src = 'about:blank';
 
       // Esconde todas as telas
-      document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('.view-screen').forEach(el => el.classList.add('hidden'));
 
-      // Atualiza botões do menu desktop e mobile
-      const views = ['trabalhos', 'jogos', 'sobre', 'contato'];
-      views.forEach(v => {
-        const btnDesk = document.getElementById('nav' + v.charAt(0).toUpperCase() + v.slice(1));
-        const btnMob = document.getElementById('mobNav' + v.charAt(0).toUpperCase() + v.slice(1));
-        if (v === viewName) {
-          if (btnDesk) { btnDesk.className = 'px-4 py-1.5 rounded-full text-xs font-medium transition-all nav-btn-active'; }
-          if (btnMob) { btnMob.className = 'px-3 py-1 rounded-full text-[11px] font-medium nav-btn-active'; }
-        } else {
-          if (btnDesk) { btnDesk.className = 'px-4 py-1.5 rounded-full text-xs font-medium transition-all nav-btn-inactive'; }
-          if (btnMob) { btnMob.className = 'px-3 py-1 rounded-full text-[11px] font-medium nav-btn-inactive'; }
-        }
+      // Atualiza botões do header
+      const navs = ['portfolio', 'jogos', 'sobre', 'contato'];
+      navs.forEach(v => {
+        const link = document.getElementById('navLink' + v.charAt(0).toUpperCase() + v.slice(1));
+        const mobLink = document.getElementById('mobNav' + v.charAt(0).toUpperCase() + v.slice(1));
+        const isActive = v === viewId;
+        if (link) link.setAttribute('data-active', isActive ? 'true' : 'false');
+        if (mobLink) mobLink.setAttribute('data-active', isActive ? 'true' : 'false');
       });
 
-      if (viewName === 'trabalhos') {
-        document.getElementById('viewTrabalhos').classList.remove('hidden');
-        renderTrabalhos();
-        previousView = 'trabalhos';
-        window.location.hash = '#/trabalhos';
-      } else if (viewName === 'jogos') {
+      if (viewId === 'portfolio') {
+        document.getElementById('viewPortfolio').classList.remove('hidden');
+        renderPortfolioCarousel();
+        window.location.hash = '#/portfolio';
+      } else if (viewId === 'jogos') {
         document.getElementById('viewJogos').classList.remove('hidden');
-        renderJogos();
-        previousView = 'jogos';
+        renderGamesGrid();
         window.location.hash = '#/jogos';
-      } else if (viewName === 'sobre') {
+      } else if (viewId === 'sobre') {
         document.getElementById('viewSobre').classList.remove('hidden');
-        previousView = 'sobre';
         window.location.hash = '#/sobre';
-      } else if (viewName === 'contato') {
+      } else if (viewId === 'contato') {
         document.getElementById('viewContato').classList.remove('hidden');
-        previousView = 'contato';
         window.location.hash = '#/contato';
       }
 
@@ -806,48 +909,38 @@
       lucide.createIcons();
     }
 
-    // Renderiza a Tela de Trabalhos (Estilo elegante de cards horizontais do luccas.social.br)
-    function renderTrabalhos() {
-      const container = document.getElementById('trabalhosListContainer');
-      const works = catalog.filter(c => c.category === 'trabalho');
-
-      container.innerHTML = works.map((w, idx) => `
-        <article class="deck-card p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 group cursor-pointer" onclick="openCase('${w.id}')">
+    // Renderiza o Carrossel do Portfólio (Estilo CaseCarousel de luccas.social.br)
+    function renderPortfolioCarousel() {
+      const track = document.getElementById('carouselTrack');
+      track.innerHTML = portfolioProjects.map((p, idx) => `
+        <article class="portfolio-card flex-shrink-0 w-[85vw] max-w-[680px] snap-center overflow-hidden flex flex-col justify-between group cursor-pointer" onclick="openCaseStudy('${p.id}')">
           
-          <div class="flex-1">
-            <div class="flex items-center gap-2 mb-2 font-mono text-xs">
-              <span class="text-amber-500 font-bold">0${idx + 1}</span>
-              <span class="text-[#8f8780]">•</span>
-              <span class="text-[#8f8780]">${w.badge}</span>
+          <!-- Top Media Frame com Frosted Chips flutuantes -->
+          <div class="relative h-[280px] sm:h-[340px] w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
+            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" />
+            
+            <div class="absolute top-4 left-4 tag-pill backdrop-blur-md bg-[var(--surface)]/80 text-xs">
+              ${p.tag}
             </div>
 
-            <h2 class="text-xl sm:text-2xl font-display font-bold text-white group-hover:text-amber-200 transition-colors mb-2">
-              ${w.title}
-            </h2>
-
-            <p class="text-xs sm:text-sm text-[#8f8780] leading-relaxed max-w-2xl mb-4 font-light">
-              ${w.summary}
-            </p>
-
-            <div class="flex flex-wrap gap-2">
-              ${w.techs.map(t => `
-                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.06] text-slate-300">
-                  ${t}
-                </span>
-              `).join('')}
+            <div class="absolute top-4 right-4 w-10 h-10 rounded-full backdrop-blur-md bg-[var(--surface)]/80 border border-[var(--line)] flex items-center justify-center font-serif-accent text-lg text-[var(--accent)]">
+              ${p.num}
             </div>
           </div>
 
-          <div class="shrink-0 flex items-center gap-3 w-full md:w-auto pt-3 md:pt-0 border-t md:border-t-0 border-white/[0.06]">
-            ${w.figmaUrl ? `
-              <span class="text-xs font-mono text-purple-400 bg-purple-950/40 border border-purple-500/20 px-3 py-1.5 rounded-full flex items-center gap-1">
-                <i data-lucide="figma" class="w-3 h-3"></i>
-                Figma
-              </span>
-            ` : ''}
+          <!-- Bottom Body com Título, Resumo e Botão Invertido -->
+          <div class="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+            <div class="flex-1 pr-0 sm:pr-4">
+              <h2 class="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors mb-2">
+                ${p.title}
+              </h2>
+              <p class="text-sm text-[var(--muted)] leading-relaxed font-light line-clamp-2">
+                ${p.summary}
+              </p>
+            </div>
 
-            <button class="px-4 py-2 rounded-full bg-white/[0.08] hover:bg-white text-xs font-mono text-white hover:text-black transition-all flex items-center gap-1.5">
-              <span>Abrir case</span>
+            <button class="btn-pill-primary shrink-0 self-start sm:self-auto text-xs">
+              <span>abrir case</span>
               <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
           </div>
@@ -855,40 +948,79 @@
         </article>
       `).join('');
 
+      // Dots
+      const dots = document.getElementById('carouselDots');
+      dots.innerHTML = portfolioProjects.map((_, idx) => `
+        <button onclick="scrollToCard(${idx})" class="w-2.5 h-2.5 rounded-full transition-all ${idx === currentCardIndex ? 'bg-[var(--ink)] w-6' : 'bg-[var(--line)] hover:bg-[var(--muted)]'}" aria-label="Ir para card ${idx + 1}"></button>
+      `).join('');
+
+      updateCounter();
       lucide.createIcons();
     }
 
-    // Renderiza a Tela de Jogos (Cards dedicados)
-    function renderJogos() {
-      const container = document.getElementById('jogosListContainer');
-      const games = catalog.filter(c => c.category === 'jogos');
+    function scrollToCard(idx) {
+      const track = document.getElementById('carouselTrack');
+      const cards = track.querySelectorAll('article');
+      if (cards[idx]) {
+        cards[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        currentCardIndex = idx;
+        renderDots();
+        updateCounter();
+      }
+    }
 
-      container.innerHTML = games.map((g, idx) => `
-        <article class="deck-card overflow-hidden flex flex-col justify-between group cursor-pointer" onclick="openCase('${g.id}')">
-          <div class="relative aspect-video w-full bg-[#141110] overflow-hidden border-b border-white/[0.08]">
-            <img src="${g.image}" alt="${g.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-            <div class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-cyan-300">
-              ${g.badge}
+    function prevCard() {
+      currentCardIndex = Math.max(0, currentCardIndex - 1);
+      scrollToCard(currentCardIndex);
+    }
+
+    function nextCard() {
+      currentCardIndex = Math.min(portfolioProjects.length - 1, currentCardIndex + 1);
+      scrollToCard(currentCardIndex);
+    }
+
+    function renderDots() {
+      const dots = document.getElementById('carouselDots');
+      dots.innerHTML = portfolioProjects.map((_, idx) => `
+        <button onclick="scrollToCard(${idx})" class="h-2.5 rounded-full transition-all ${idx === currentCardIndex ? 'bg-[var(--ink)] w-6' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)]'}" aria-label="Ir para card ${idx + 1}"></button>
+      `).join('');
+    }
+
+    function updateCounter() {
+      document.getElementById('carouselCounter').innerText = `${currentCardIndex + 1} / ${portfolioProjects.length}`;
+    }
+
+    // Renderiza a Tela de Jogos (Aba Separada)
+    function renderGamesGrid() {
+      const container = document.getElementById('gamesGridContainer');
+      container.innerHTML = gameProjects.map((g, idx) => `
+        <article class="portfolio-card overflow-hidden flex flex-col justify-between group cursor-pointer" onclick="openCaseStudy('${g.id}')">
+          <div class="relative h-[220px] sm:h-[260px] w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
+            <img src="${g.image}" alt="${g.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute top-4 left-4 tag-pill backdrop-blur-md bg-[var(--surface)]/80 text-xs text-cyan-400">
+              ${g.tag}
+            </div>
+            <div class="absolute top-4 right-4 w-10 h-10 rounded-full backdrop-blur-md bg-[var(--surface)]/80 border border-[var(--line)] flex items-center justify-center font-serif-accent text-lg text-cyan-400">
+              ${g.num}
             </div>
           </div>
 
-          <div class="p-6 flex-1 flex flex-col justify-between">
+          <div class="p-6 sm:p-7 flex flex-col justify-between flex-1">
             <div>
-              <div class="text-[11px] font-mono text-cyan-500 font-bold mb-1">0${idx + 1} · JOGO INTERATIVO</div>
-              <h3 class="text-lg sm:text-xl font-display font-bold text-white group-hover:text-cyan-200 transition-colors mb-2">
+              <h3 class="text-xl sm:text-2xl font-medium text-[var(--ink)] group-hover:text-cyan-400 transition-colors mb-2">
                 ${g.title}
               </h3>
-              <p class="text-xs sm:text-sm text-[#8f8780] leading-relaxed mb-4 font-light">
+              <p class="text-xs sm:text-sm text-[var(--muted)] leading-relaxed font-light mb-6">
                 ${g.summary}
               </p>
             </div>
 
-            <div class="pt-4 border-t border-white/[0.06] flex items-center justify-between">
-              <span class="text-xs font-mono text-cyan-400 flex items-center gap-1">
+            <div class="pt-4 border-t border-[var(--line)] flex items-center justify-between">
+              <span class="text-xs font-mono text-cyan-400 flex items-center gap-1.5">
                 <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
-                Jogar no navegador
+                jogar no navegador
               </span>
-              <span class="text-xs text-slate-400 group-hover:translate-x-1 transition-transform">
+              <span class="text-xs text-[var(--muted)] group-hover:translate-x-1 transition-transform">
                 →
               </span>
             </div>
@@ -899,112 +1031,125 @@
       lucide.createIcons();
     }
 
-    // Abre a Tela de Estudo de Caso (Projeto Expandido)
-    function openCase(id) {
-      const item = catalog.find(c => c.id === id);
+    // Abre a Tela de Estudo de Caso (Idêntica a luccas.social.br/portfolio/[case])
+    function openCaseStudy(id) {
+      const item = [...portfolioProjects, ...gameProjects].find(c => c.id === id);
       if (!item) return;
 
-      currentCaseId = id;
+      activeCaseId = id;
+      currentCategory = item.category;
 
-      // Esconde todas as outras telas
-      document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
-      document.getElementById('viewDetail').classList.remove('hidden');
+      // Esconde outras telas e exibe a tela de case study
+      document.querySelectorAll('.view-screen').forEach(el => el.classList.add('hidden'));
+      document.getElementById('viewCaseStudy').classList.remove('hidden');
 
       // Atualiza texto de voltar
-      document.getElementById('detailBackText').innerText = item.category === 'jogos' ? 'Voltar aos jogos' : 'Voltar aos trabalhos';
+      document.getElementById('caseBackLabel').innerText = item.category === 'jogos' ? 'voltar aos jogos' : 'voltar ao portfólio';
 
       // Textos principais
-      document.getElementById('detailBadge').innerHTML = item.badge;
-      document.getElementById('detailTitle').innerText = item.title;
-      document.getElementById('detailSubtitle').innerText = item.subtitle;
+      document.getElementById('caseBadge').innerHTML = item.tag;
+      document.getElementById('caseTitle').innerText = item.title;
+      document.getElementById('caseSubtitle').innerText = item.subtitle;
 
-      // 3 Blocos Estruturados (Desafio, Abordagem, Resultado)
-      document.getElementById('detailDesafioText').innerText = item.desafio;
-      document.getElementById('detailAbordagemText').innerText = item.abordagem;
-      document.getElementById('detailResultadoText').innerText = item.resultado;
+      // Blocos editoriais 180px 1fr
+      document.getElementById('caseDesafioText').innerText = item.desafio;
+      document.getElementById('caseAbordagemText').innerText = item.abordagem;
+      document.getElementById('caseResultadoText').innerText = item.resultado;
 
-      // Links externos no topo
-      const extLinks = document.getElementById('detailExternalLinks');
+      // Métricas chave com Italiana Serif
+      const metricsContainer = document.getElementById('caseMetricsRow');
+      if (item.metrics && item.metrics.length > 0) {
+        metricsContainer.innerHTML = item.metrics.map(m => `
+          <div class="portfolio-card p-5 sm:p-6 text-center sm:text-left">
+            <div class="font-serif-accent text-3xl sm:text-4xl text-[var(--accent)] mb-1">${m.val}</div>
+            <div class="text-xs text-[var(--muted)] font-light leading-snug">${m.label}</div>
+          </div>
+        `).join('');
+      } else {
+        metricsContainer.innerHTML = '';
+      }
+
+      // External links no topo
+      const extLinks = document.getElementById('caseTopExternalLinks');
       let linksHtml = '';
       if (item.figmaUrl) {
         linksHtml += `
-          <a href="${item.figmaUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-1 rounded-full bg-purple-950/50 hover:bg-purple-900/60 border border-purple-500/30 text-purple-300 text-xs font-mono flex items-center gap-1.5 transition-colors">
-            <i data-lucide="figma" class="w-3 h-3"></i>
-            <span>Protótipo no Figma ↗</span>
+          <a href="${item.figmaUrl}" target="_blank" rel="noopener noreferrer" class="tag-pill text-xs hover:border-[var(--ink)]">
+            <span>ver no figma ↗</span>
           </a>
         `;
       }
       if (item.vercelUrl) {
         linksHtml += `
-          <a href="${item.vercelUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-1 rounded-full bg-cyan-950/50 hover:bg-cyan-900/60 border border-cyan-500/30 text-cyan-300 text-xs font-mono flex items-center gap-1.5 transition-colors">
-            <span>Vercel ↗</span>
+          <a href="${item.vercelUrl}" target="_blank" rel="noopener noreferrer" class="tag-pill text-xs hover:border-[var(--ink)] text-cyan-400">
+            <span>abrir na vercel ↗</span>
           </a>
         `;
       }
       if (item.siteUrl) {
         linksHtml += `
-          <a href="${item.siteUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-1 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-xs font-mono text-white flex items-center gap-1.5 transition-colors">
-            <span>Site Oficial ↗</span>
+          <a href="${item.siteUrl}" target="_blank" rel="noopener noreferrer" class="tag-pill text-xs hover:border-[var(--ink)]">
+            <span>site oficial ↗</span>
           </a>
         `;
       }
       extLinks.innerHTML = linksHtml;
 
-      // Mídia de topo: Imagem ou Player
-      const mediaBox = document.getElementById('detailMediaContainer');
+      // Media Frame (Imagem ou Player)
+      const mediaFrame = document.getElementById('caseMediaFrame');
       const isGame = item.category === 'jogos';
       const playableSource = item.embedUrl || item.vercelUrl;
 
       if (isGame && playableSource) {
-        mediaBox.innerHTML = `
-          <div class="p-3 bg-black/60 border-b border-white/[0.08] flex items-center justify-between text-xs font-mono">
+        mediaFrame.innerHTML = `
+          <div class="p-3 bg-[var(--surface)] border-b border-[var(--line)] flex items-center justify-between text-xs font-mono">
             <span class="text-cyan-400 flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-              Player de Jogo no Navegador
+              player de jogo interativo
             </span>
-            <button onclick="toggleFullscreenEmbed()" class="text-[#8f8780] hover:text-white flex items-center gap-1">
+            <button onclick="toggleFullscreenEmbed()" class="text-[var(--muted)] hover:text-[var(--ink)] flex items-center gap-1">
               <i data-lucide="maximize" class="w-3.5 h-3.5"></i>
-              Tela Cheia
+              tela cheia
             </button>
           </div>
           <div id="embedViewport" class="relative aspect-video w-full bg-black flex items-center justify-center">
             <div id="embedCover" class="absolute inset-0 flex flex-col items-center justify-center bg-black/90 p-6 text-center z-10">
-              <img src="${item.image}" alt="Preview" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none" />
+              <img src="${item.image}" alt="Preview" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none" />
               <div class="relative z-10">
-                <button onclick="runGameEmbed('${playableSource}')" class="px-5 py-2.5 rounded-full bg-cyan-600 hover:bg-cyan-500 text-white font-mono text-xs font-bold uppercase tracking-wider mb-2 transition-all">
-                  Iniciar Jogo
+                <button onclick="runGameEmbed('${playableSource}')" class="btn-pill-primary mb-2 text-xs">
+                  iniciar jogo no navegador
                 </button>
-                <p class="text-xs text-[#8f8780]">Controles de teclado e mouse</p>
+                <p class="text-xs text-[var(--muted)]">controles diretos via teclado e mouse</p>
               </div>
             </div>
             <iframe id="gameIframe" src="about:blank" class="w-full h-full border-0" allow="fullscreen; autoplay; gamepad"></iframe>
           </div>
         `;
       } else {
-        mediaBox.innerHTML = `
+        mediaFrame.innerHTML = `
           <div class="relative aspect-video w-full bg-black cursor-pointer group" onclick="openLightbox('${item.image}', '${item.title}')">
-            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform" />
-            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-              <span class="text-xs font-mono text-white bg-black/70 px-3 py-1 rounded-full backdrop-blur-md">
-                Clique para ampliar a imagem
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300" />
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="tag-pill text-xs bg-black/80 text-white border-white/20">
+                clique para ampliar a imagem
               </span>
             </div>
           </div>
         `;
       }
 
-      // Galeria de Telas
-      const galleryBox = document.getElementById('detailGalleryContainer');
+      // Galeria Visual
+      const galSection = document.getElementById('caseGallerySection');
       if (item.gallery && item.gallery.length > 0) {
-        galleryBox.innerHTML = `
-          <span class="text-xs font-mono uppercase tracking-wider text-[#8f8780] block mb-3">Telas &amp; Evidências Visuais</span>
+        galSection.innerHTML = `
+          <span class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-4">evidências visuais &amp; telas</span>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             ${item.gallery.map(img => `
-              <div onclick="openLightbox('${img.src}', '${img.title}')" class="deck-card overflow-hidden cursor-pointer group">
+              <div onclick="openLightbox('${img.src}', '${img.title}')" class="portfolio-card overflow-hidden cursor-pointer group">
                 <div class="aspect-video w-full bg-black overflow-hidden relative">
                   <img src="${img.src}" alt="${img.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                 </div>
-                <div class="p-3 bg-white/[0.02] border-t border-white/[0.06] text-xs text-[#8f8780]">
+                <div class="p-3 bg-[var(--surface)] border-t border-[var(--line)] text-xs text-[var(--muted)]">
                   ${img.title}
                 </div>
               </div>
@@ -1012,19 +1157,34 @@
           </div>
         `;
       } else {
-        galleryBox.innerHTML = '';
+        galSection.innerHTML = '';
       }
 
-      // Tags no rodapé
-      document.getElementById('detailTechsPills').innerHTML = item.techs.map(t => `
-        <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.06] text-slate-300">
-          ${t}
-        </span>
-      `).join('');
+      // Banner de Próximo Case
+      const list = item.category === 'jogos' ? gameProjects : portfolioProjects;
+      const curIdx = list.findIndex(c => c.id === id);
+      const nextItem = list[(curIdx + 1) % list.length];
+      document.getElementById('nextCaseTitle').innerText = nextItem.title;
 
       window.location.hash = '#/case/' + id;
       window.scrollTo({ top: 0, behavior: 'instant' });
       lucide.createIcons();
+    }
+
+    function goToNextCase() {
+      const item = [...portfolioProjects, ...gameProjects].find(c => c.id === activeCaseId);
+      const list = item.category === 'jogos' ? gameProjects : portfolioProjects;
+      const curIdx = list.findIndex(c => c.id === activeCaseId);
+      const nextItem = list[(curIdx + 1) % list.length];
+      openCaseStudy(nextItem.id);
+    }
+
+    function navigateBack() {
+      if (currentCategory === 'jogos') {
+        showView('jogos');
+      } else {
+        showView('portfolio');
+      }
     }
 
     function runGameEmbed(url) {
@@ -1046,23 +1206,6 @@
       }
     }
 
-    function navigateBack() {
-      const currentItem = catalog.find(c => c.id === currentCaseId);
-      if (currentItem && currentItem.category === 'jogos') {
-        navigate('jogos');
-      } else {
-        navigate('trabalhos');
-      }
-    }
-
-    function nextCase() {
-      const currentItem = catalog.find(c => c.id === currentCaseId);
-      const list = catalog.filter(c => c.category === (currentItem ? currentItem.category : 'trabalho'));
-      const idx = list.findIndex(c => c.id === currentCaseId);
-      const nextIdx = (idx + 1) % list.length;
-      openCase(list[nextIdx].id);
-    }
-
     // Lightbox
     function openLightbox(src, cap) {
       document.getElementById('lightboxImage').src = src;
@@ -1080,20 +1223,39 @@
       if (e.key === 'Escape') closeLightbox();
     });
 
+    // Theme Toggle (Modo Claro / Modo Escuro)
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      const newTheme = isDark ? 'light' : 'dark';
+      root.setAttribute('data-theme', newTheme);
+      document.getElementById('themeToggleText').innerText = isDark ? 'modo escuro' : 'modo claro';
+      localStorage.setItem('pf-theme', newTheme);
+    }
+
+    // Inicialização do Tema
+    (function initTheme() {
+      const saved = localStorage.getItem('pf-theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        document.getElementById('themeToggleText').innerText = saved === 'dark' ? 'modo claro' : 'modo escuro';
+      }
+    })();
+
     // Roteador de Hash
     function handleRouting() {
-      const hash = window.location.hash || '#/trabalhos';
+      const hash = window.location.hash || '#/portfolio';
       if (hash.startsWith('#/case/')) {
         const id = hash.replace('#/case/', '');
-        openCase(id);
+        openCaseStudy(id);
       } else if (hash.startsWith('#/jogos')) {
-        navigate('jogos');
+        showView('jogos');
       } else if (hash.startsWith('#/sobre')) {
-        navigate('sobre');
+        showView('sobre');
       } else if (hash.startsWith('#/contato')) {
-        navigate('contato');
+        showView('contato');
       } else {
-        navigate('trabalhos');
+        showView('portfolio');
       }
     }
 
