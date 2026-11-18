@@ -315,6 +315,21 @@
     }
 
     /* Ambient Dome com pulso suave */
+    
+    /* Ambient Orb 2 Flutuante para dar vida e profundidade espacial */
+    .ambient-orb-2 {
+      position: absolute;
+      top: 520px;
+      right: -80px;
+      width: 480px;
+      height: 480px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(99, 102, 241, 0.05) 50%, transparent 75%);
+      pointer-events: none;
+      z-index: 0;
+      animation: floatSoft 11s ease-in-out infinite alternate;
+    }
+
     .dome-glow {
       position: absolute;
       top: 0;
@@ -430,27 +445,130 @@
 
     
     /* ======================================================= */
-    /* CARROSSEL DINÂMICO COVERFLOW & FOCO 3D                  */
+    /* ======================================================= */
+    /* TOP PAGE TRANSITION PROGRESS BAR                       */
+    /* ======================================================= */
+    #topProgressBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      z-index: 99999;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    #topProgressFill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #a855f7, #c084fc, #818cf8);
+      box-shadow: 0 0 14px rgba(168, 85, 247, 0.85);
+      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ======================================================= */
+    /* FULLSCREEN PRELOADER ELEGANTE                           */
+    /* ======================================================= */
+    #sitePreloader {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      overflow: hidden;
+      transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.6s ease;
+    }
+    #sitePreloader.preloader-hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .preloader-glow-orb {
+      position: absolute;
+      width: 440px;
+      height: 440px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%);
+      filter: blur(40px);
+      animation: domePulse 4s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    .preloader-circle-svg {
+      animation: preloaderCircleDraw 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .preloader-path-svg {
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      animation: preloaderCircleDraw 1s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes preloaderCircleDraw {
+      0% { stroke-dashoffset: 106; }
+      100% { stroke-dashoffset: 0; }
+    }
+
+    /* ======================================================= */
+    /* SKELETON SHIMMER EFFECT                                 */
+    /* ======================================================= */
+    @keyframes shimmerWave {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    .skeleton-shimmer {
+      position: relative;
+      overflow: hidden;
+    }
+    .skeleton-shimmer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      transform: translateX(-100%);
+      background: linear-gradient(90deg, transparent, rgba(192, 132, 252, 0.12), transparent);
+      animation: shimmerWave 2s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    /* ======================================================= */
+    /* CARROSSEL COVERFLOW 3D REAL & DRAG PHYSICS              */
     /* ======================================================= */
     #carouselTrack {
       padding-left: calc((100% - min(85vw, 680px)) / 2) !important;
       padding-right: calc((100% - min(85vw, 680px)) / 2) !important;
+      perspective: 1400px;
+      perspective-origin: center center;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
+      cursor: grab;
+      user-select: none;
+    }
+    #carouselTrack.is-dragging {
+      cursor: grabbing !important;
+      scroll-behavior: auto !important;
+      scroll-snap-type: none !important;
     }
 
     .carousel-card {
       scroll-snap-align: center;
+      transform-style: preserve-3d;
       transition: box-shadow 0.35s ease, border-color 0.35s ease;
       will-change: transform, opacity, filter;
       transform-origin: center center;
     }
 
+    .carousel-card .card-cover-img {
+      will-change: transform;
+      transition: transform 0.2s ease-out;
+    }
+
     /* Card Ativo Centralizado */
     .carousel-card.is-active {
-      border-color: rgba(192, 132, 252, 0.45) !important;
-      box-shadow: 0 32px 70px rgba(4, 2, 10, 0.8), 0 0 36px rgba(168, 85, 247, 0.22), 0 0 0 1px rgba(192, 132, 252, 0.35) !important;
+      border-color: rgba(192, 132, 252, 0.55) !important;
+      box-shadow: 0 32px 75px rgba(4, 2, 10, 0.85), 0 0 40px rgba(168, 85, 247, 0.28), 0 0 0 1px rgba(192, 132, 252, 0.45) !important;
       z-index: 10;
     }
 
@@ -462,7 +580,7 @@
     }
 
     .carousel-card:not(.is-active):hover {
-      border-color: rgba(192, 132, 252, 0.25);
+      border-color: rgba(192, 132, 252, 0.3);
     }
 
     /* Cards do Carrossel e do Deck com Animação Fluida */
@@ -568,7 +686,41 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
+  <!-- Top Page Transition Bar -->
+  <div id="topProgressBar">
+    <div id="topProgressFill"></div>
+  </div>
+
+  <!-- Fullscreen Initial Preloader Screen -->
+  <div id="sitePreloader">
+    <div class="preloader-glow-orb"></div>
+    <div class="relative z-10 flex flex-col items-center gap-6">
+      <div class="relative w-14 h-14 flex items-center justify-center">
+        <svg class="w-14 h-14 text-[var(--accent)]" viewBox="0 0 36 36" fill="none">
+          <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="1.5" stroke-dasharray="106" stroke-dashoffset="106" class="preloader-circle-svg"/>
+          <path d="M12 24L12 12L24 24L24 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="preloader-path-svg"/>
+        </svg>
+      </div>
+
+      <div class="flex flex-col items-center text-center">
+        <span class="text-xs uppercase tracking-[0.3em] font-medium text-[var(--ink)] opacity-90">lucas nellucci</span>
+        <span id="preloaderStatusText" class="text-[11px] font-mono text-[var(--muted)] mt-1.5 tracking-wider">carregando experiência...</span>
+      </div>
+
+      <div class="flex flex-col items-center gap-2.5 w-52">
+        <div class="w-full h-[2px] bg-[var(--line)] rounded-full overflow-hidden relative">
+          <div id="preloaderBar" class="h-full bg-gradient-to-r from-[var(--accent)] to-purple-400 w-0 transition-all duration-100 ease-out shadow-[0_0_12px_rgba(168,85,247,0.8)]"></div>
+        </div>
+        <div class="w-full flex justify-between items-center text-[10.5px] font-mono text-[var(--muted)]">
+          <span>PORTFOLIO</span>
+          <span id="preloaderPercent" class="text-[var(--accent)] font-semibold">0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="dome-glow"></div>
+  <div class="ambient-orb-2"></div>
 
   <!-- ================================================================= -->
   <!-- HEADER / NAVEGAÇÃO SUPERIOR (Grid 3 colunas idêntico ao luccas.social.br) -->
@@ -2004,7 +2156,127 @@
     }
 
     
-    // Atualiza classes ativas e estilos de profundidade imediatamente
+    // =======================================================
+    // TOP PROGRESS BAR DE NAVEGAÇÃO
+    // =======================================================
+    let topProgressTimeout = null;
+    function triggerTopProgressBar(midpointCallback) {
+      const bar = document.getElementById('topProgressBar');
+      const fill = document.getElementById('topProgressFill');
+      if (!bar || !fill) {
+        if (midpointCallback) midpointCallback();
+        return;
+      }
+
+      clearTimeout(topProgressTimeout);
+      bar.style.opacity = '1';
+      fill.style.width = '35%';
+
+      setTimeout(() => {
+        fill.style.width = '75%';
+        if (midpointCallback) midpointCallback();
+
+        setTimeout(() => {
+          fill.style.width = '100%';
+          topProgressTimeout = setTimeout(() => {
+            bar.style.opacity = '0';
+            setTimeout(() => { fill.style.width = '0%'; }, 250);
+          }, 200);
+        }, 120);
+      }, 100);
+    }
+
+    // =======================================================
+    // PRELOADER INICIAL COM PROGRESSO DIGITAL
+    // =======================================================
+    function initPreloader() {
+      const preloader = document.getElementById('sitePreloader');
+      const bar = document.getElementById('preloaderBar');
+      const percentEl = document.getElementById('preloaderPercent');
+      const statusEl = document.getElementById('preloaderStatusText');
+      if (!preloader) return;
+
+      const tLang = siteTranslations[currentGlobalLang] || siteTranslations.pt;
+      if (statusEl) statusEl.innerText = tLang.preloaderStatus || 'carregando experiência...';
+
+      let currentPercent = 0;
+      const targetPercent = 100;
+      const startTime = performance.now();
+      const duration = 950; // ms
+
+      function animateCounter(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(1, elapsed / duration);
+        // Easing cúbico suave
+        const ease = 1 - Math.pow(1 - progress, 3);
+        currentPercent = Math.min(100, Math.floor(ease * targetPercent));
+
+        if (percentEl) percentEl.innerText = currentPercent + '%';
+        if (bar) bar.style.width = currentPercent + '%';
+
+        if (progress < 1) {
+          requestAnimationFrame(animateCounter);
+        } else {
+          if (percentEl) percentEl.innerText = '100%';
+          if (bar) bar.style.width = '100%';
+          if (statusEl) statusEl.innerText = tLang.preloaderDone || 'pronto!';
+
+          setTimeout(() => {
+            preloader.classList.add('preloader-hidden');
+            setTimeout(() => {
+              preloader.style.display = 'none';
+            }, 800);
+          }, 140);
+        }
+      }
+      requestAnimationFrame(animateCounter);
+    }
+
+    // =======================================================
+    // DRAG FISÍCO COM MOUSE NO CARROSSEL
+    // =======================================================
+    let carouselIsDragging = false;
+    let carouselStartX = 0;
+    let carouselScrollStart = 0;
+    let carouselHasDragged = false;
+
+    function setupCarouselDrag() {
+      const track = document.getElementById('carouselTrack');
+      if (!track || track._dragAttached) return;
+      track._dragAttached = true;
+
+      track.addEventListener('mousedown', (e) => {
+        if (e.button !== 0 || e.target.closest('button, a')) return;
+        carouselIsDragging = true;
+        carouselHasDragged = false;
+        carouselStartX = e.pageX - track.offsetLeft;
+        carouselScrollStart = track.scrollLeft;
+        track.classList.add('is-dragging');
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!carouselIsDragging) return;
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - carouselStartX) * 1.35;
+        if (Math.abs(walk) > 6) {
+          carouselHasDragged = true;
+        }
+        track.scrollLeft = carouselScrollStart - walk;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!carouselIsDragging) return;
+        carouselIsDragging = false;
+        track.classList.remove('is-dragging');
+        setTimeout(() => {
+          carouselHasDragged = false;
+        }, 80);
+      });
+    }
+
+    // =======================================================
+    // ATUALIZAÇÃO 3D COVERFLOW & PARALLAX CONTÍNUO
+    // =======================================================
     function updateActiveCardClasses(activeIdx) {
       const track = document.getElementById('carouselTrack');
       if (!track) return;
@@ -2012,20 +2284,14 @@
       cards.forEach((c, i) => {
         if (i === activeIdx) {
           c.classList.add('is-active');
-          c.style.transform = 'scale(1)';
-          c.style.opacity = '1';
-          c.style.filter = 'brightness(1)';
         } else {
           c.classList.remove('is-active');
-          c.style.transform = 'scale(0.92)';
-          c.style.opacity = '0.45';
-          c.style.filter = 'brightness(0.65)';
         }
       });
     }
 
-    // Gerenciador de Clique no Card: Centraliza se estiver na lateral, abre o case se já for o ativo
     function onCardClick(idx, id) {
+      if (carouselHasDragged) return; // Se estava arrastando, não clica
       if (idx !== currentCardIndex) {
         scrollToCard(idx);
       } else {
@@ -2033,7 +2299,6 @@
       }
     }
 
-    // Efeito Visual Parallax / Coverflow Dinâmico baseado nas posições visuais reais na tela
     let parallaxTicking = false;
     function updateCarouselParallax() {
       const track = document.getElementById('carouselTrack');
@@ -2042,7 +2307,7 @@
       const trackCenter = trackRect.left + (trackRect.width / 2);
       const cards = track.querySelectorAll('.carousel-card');
       if (!cards.length) return;
-      
+
       let closestIdx = 0;
       let minDistance = Infinity;
 
@@ -2050,25 +2315,36 @@
         const cardRect = card.getBoundingClientRect();
         const cardCenter = cardRect.left + (cardRect.width / 2);
         const distance = Math.abs(trackCenter - cardCenter);
-        const maxDist = 720;
-        const normDist = Math.min(1, distance / maxDist);
+        const delta = cardCenter - trackCenter; // negativo = à esquerda, positivo = à direita
+        const norm = Math.max(-1, Math.min(1, delta / (trackRect.width * 0.75)));
+        const absNorm = Math.abs(norm);
 
-        const scale = 1 - (normDist * 0.08);
-        const opacity = 1 - (normDist * 0.55);
-        const brightness = 1 - (normDist * 0.35);
+        // Curvas físicas de profundidade 3D
+        const scale = 1 - (absNorm * 0.12);
+        const rotateY = norm * -13; // Ângulo de rotação voltado para o centro
+        const translateZ = -100 * absNorm; // Afastamento no eixo Z
+        const opacity = Math.max(0.38, 1 - (absNorm * 0.62));
+        const brightness = Math.max(0.65, 1 - (absNorm * 0.35));
+        const blur = (absNorm * 1.2).toFixed(1);
 
-        card.style.transform = `scale(${scale.toFixed(4)})`;
-        card.style.opacity = opacity.toFixed(4);
-        card.style.filter = `brightness(${brightness.toFixed(4)})`;
+        card.style.transform = `perspective(1400px) translate3d(0, 0, ${translateZ.toFixed(1)}px) rotateY(${rotateY.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
+        card.style.opacity = opacity.toFixed(3);
+        card.style.filter = `brightness(${brightness.toFixed(3)}) blur(${blur}px)`;
+
+        // Parallax interno da imagem do card (efeito de janela em relevo)
+        const coverImg = card.querySelector('.card-cover-img');
+        if (coverImg) {
+          const imgShift = (norm * 26).toFixed(1);
+          coverImg.style.transform = `scale(1.08) translateX(${imgShift}px)`;
+        }
 
         if (distance < minDistance) {
           minDistance = distance;
           closestIdx = idx;
         }
       });
-      console.log('[PARALLAX_RESULT] closestIdx=' + closestIdx + ' currentCardIndex=' + currentCardIndex);
 
-      // Aplica .is-active com certeza absoluta no card mais próximo do centro
+      // Atualiza classes ativas
       cards.forEach((c, i) => {
         if (i === closestIdx) {
           c.classList.add('is-active');
@@ -2077,8 +2353,6 @@
         }
       });
 
-      
-      
       if (closestIdx !== currentCardIndex) {
         currentCardIndex = closestIdx;
         renderDots();
@@ -2086,7 +2360,7 @@
       }
     }
 
-    // Suporte a rolagem com Wheel e listener de scroll nativo
+    // Suporte a Mouse Wheel e Drag
     function setupCarouselWheel() {
       const track = document.getElementById('carouselTrack');
       if (!track || track._wheelAttached) return;
@@ -2108,6 +2382,8 @@
           track.scrollLeft += e.deltaY * 0.85;
         }
       }, { passive: false });
+
+      setupCarouselDrag();
     }
 
 
@@ -2125,6 +2401,7 @@
 
     // Roteamento SPA entre Telas Dedicadas (NÃO LP!)
     function showView(viewId) {
+      triggerTopProgressBar();
       // Pausa qualquer jogo ativo
       const iframe = document.getElementById('gameIframe');
       if (iframe) iframe.src = 'about:blank';
@@ -2351,6 +2628,7 @@
 
     // Abre a Tela de Estudo de Caso (Idêntica a luccas.social.br/portfolio/[case])
     function openCaseStudy(id) {
+      triggerTopProgressBar();
       const item = [...portfolioProjects, ...gameProjects].find(c => c.id === id);
       if (!item) return;
 
@@ -2585,6 +2863,7 @@
     setGlobalLang(currentGlobalLang, false);
     window.addEventListener('popstate', handleRouting);
     handleRouting();
+    initPreloader();
     initCardSpotlight();
     initScrollReveal();
     lucide.createIcons();
