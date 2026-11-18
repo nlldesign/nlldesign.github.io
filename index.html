@@ -428,6 +428,54 @@
       transform: translateY(-1px);
     }
 
+    
+    /* ======================================================= */
+    /* CARROSSEL DINÂMICO COVERFLOW & FOCO 3D                  */
+    /* ======================================================= */
+    #carouselTrack {
+      padding-left: max(20px, calc(50vw - min(42.5vw, 340px) - 20px));
+      padding-right: max(20px, calc(50vw - min(42.5vw, 340px) - 20px));
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      perspective: 1200px;
+    }
+
+    .carousel-card {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.35s ease;
+      will-change: transform, opacity, filter;
+      transform-origin: center center;
+    }
+
+    /* Card Ativo Centralizado */
+    .carousel-card.is-active {
+      transform: scale(1) translateY(0);
+      opacity: 1 !important;
+      filter: brightness(1) !important;
+      border-color: rgba(192, 132, 252, 0.45);
+      box-shadow: 0 32px 70px rgba(4, 2, 10, 0.8), 0 0 36px rgba(168, 85, 247, 0.22), 0 0 0 1px rgba(192, 132, 252, 0.35);
+      z-index: 10;
+    }
+
+    /* Cards Inativos Laterais */
+    .carousel-card:not(.is-active) {
+      transform: scale(0.92) translateY(6px);
+      opacity: 0.45;
+      filter: brightness(0.65) blur(0.3px);
+      z-index: 1;
+    }
+
+    .carousel-card:not(.is-active):hover {
+      opacity: 0.75;
+      transform: scale(0.95) translateY(2px);
+      filter: brightness(0.85);
+      border-color: rgba(192, 132, 252, 0.25);
+    }
+
     /* Cards do Carrossel e do Deck com Animação Fluida */
     .portfolio-card {
       background: var(--surface);
@@ -1965,6 +2013,89 @@
       }, { passive: true });
     }
 
+    
+    // Gerenciador de Clique no Card: Centraliza se estiver na lateral, abre o case se já for o ativo
+    function onCardClick(idx, id) {
+      if (idx !== currentCardIndex) {
+        scrollToCard(idx);
+      } else {
+        openCaseStudy(id);
+      }
+    }
+
+    // Efeito Visual Parallax / Coverflow Dinâmico no Carrossel
+    let parallaxTicking = false;
+    function updateCarouselParallax() {
+      const track = document.getElementById('carouselTrack');
+      if (!track) return;
+      const trackRect = track.getBoundingClientRect();
+      const trackCenter = trackRect.left + trackRect.width / 2;
+      const cards = track.querySelectorAll('.carousel-card');
+      
+      let closestIdx = 0;
+      let minDistance = Infinity;
+
+      cards.forEach((card, idx) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const distance = Math.abs(trackCenter - cardCenter);
+        const maxDist = card.clientWidth * 1.1;
+        const normDist = Math.min(1, distance / maxDist);
+
+        // Interpolação fluida baseada na distância do centro
+        const scale = 1 - (normDist * 0.08);
+        const opacity = 1 - (normDist * 0.55);
+        const brightness = 1 - (normDist * 0.35);
+
+        card.style.transform = `scale(${scale.toFixed(4)})`;
+        card.style.opacity = opacity.toFixed(4);
+        card.style.filter = `brightness(${brightness.toFixed(4)})`;
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIdx = idx;
+        }
+      });
+
+      // Atualiza classe is-active e dots se o card central mudou
+      if (closestIdx !== currentCardIndex) {
+        currentCardIndex = closestIdx;
+        cards.forEach((c, i) => {
+          if (i === currentCardIndex) {
+            c.classList.add('is-active');
+          } else {
+            c.classList.remove('is-active');
+          }
+        });
+        renderDots();
+        updateCounter();
+      }
+    }
+
+    // Suporte a rolagem horizontal suave com a roda do mouse (Wheel Assist)
+    function setupCarouselWheel() {
+      const track = document.getElementById('carouselTrack');
+      if (!track || track._wheelAttached) return;
+      track._wheelAttached = true;
+
+      track.addEventListener('scroll', () => {
+        if (!parallaxTicking) {
+          window.requestAnimationFrame(() => {
+            updateCarouselParallax();
+            parallaxTicking = false;
+          });
+          parallaxTicking = true;
+        }
+      }, { passive: true });
+
+      track.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          track.scrollLeft += e.deltaY * 0.85;
+        }
+      }, { passive: false });
+    }
+
     // Sincronização do Carrossel ao arrastar ou rolar com touchpad/mobile
     function initCarouselScrollSync() {
       const track = document.getElementById('carouselTrack');
@@ -2079,7 +2210,7 @@
     function renderPortfolioCarousel() {
       const track = document.getElementById('carouselTrack');
       track.innerHTML = portfolioProjects.map((p, idx) => `
-        <article class="portfolio-card flex-shrink-0 w-[85vw] max-w-[680px] snap-center overflow-hidden flex flex-col justify-between group cursor-pointer" onclick="openCaseStudy('${p.id}')">
+        <article class="portfolio-card carousel-card flex-shrink-0 w-[85vw] max-w-[680px] snap-center overflow-hidden flex flex-col justify-between group cursor-pointer ${idx === currentCardIndex ? 'is-active' : ''}" onclick="onCardClick(${idx}, '${p.id}')">
           
           <!-- Top Media Frame com Frosted Chips flutuantes e Zoom suave -->
           <div class="relative h-[280px] sm:h-[340px] w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
@@ -2117,11 +2248,13 @@
       // Dots
       const dots = document.getElementById('carouselDots');
       dots.innerHTML = portfolioProjects.map((_, idx) => `
-        <button onclick="scrollToCard(${idx})" class="h-2.5 rounded-full transition-all duration-300 ${idx === currentCardIndex ? 'bg-[var(--ink)] w-7' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)]'}" aria-label="Ir para card ${idx + 1}"></button>
+        <button onclick="scrollToCard(${idx})" class="h-2.5 rounded-full transition-all duration-300 ${idx === currentCardIndex ? 'bg-gradient-to-r from-[var(--accent)] to-purple-400 w-8 shadow-sm shadow-purple-500/30' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)] hover:w-3'}" aria-label="Ir para card ${idx + 1}"></button>
       `).join('');
 
       updateCounter();
       initCarouselScrollSync();
+      setupCarouselWheel();
+      updateCarouselParallax();
       initScrollReveal();
       lucide.createIcons();
     }
@@ -2132,8 +2265,17 @@
       if (cards[idx]) {
         cards[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         currentCardIndex = idx;
+        cards.forEach((c, i) => {
+          if (i === idx) {
+            c.classList.add('is-active');
+          } else {
+            c.classList.remove('is-active');
+          }
+        });
         renderDots();
         updateCounter();
+        setTimeout(updateCarouselParallax, 50);
+        setTimeout(updateCarouselParallax, 200);
       }
     }
 
@@ -2152,7 +2294,7 @@
     function renderDots() {
       const dots = document.getElementById('carouselDots');
       dots.innerHTML = portfolioProjects.map((_, idx) => `
-        <button onclick="scrollToCard(${idx})" class="h-2.5 rounded-full transition-all duration-300 ${idx === currentCardIndex ? 'bg-[var(--ink)] w-7' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)]'}" aria-label="Ir para card ${idx + 1}"></button>
+        <button onclick="scrollToCard(${idx})" class="h-2.5 rounded-full transition-all duration-300 ${idx === currentCardIndex ? 'bg-gradient-to-r from-[var(--accent)] to-purple-400 w-8 shadow-sm shadow-purple-500/30' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)] hover:w-3'}" aria-label="Ir para card ${idx + 1}"></button>
       `).join('');
     }
 
