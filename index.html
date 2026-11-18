@@ -1357,9 +1357,9 @@
           summary: 'redesenho completo do fluxo de simulação da associação cartão cristão, eliminando atritos funcionais e alavancando as taxas de conversão de leads no site.',
           image: 'assets/framer-plano-saude-cover.jpg',
           metrics: [
-            { val: '+30%', label: 'aumento na conversão de leads' },
-            { val: '-45%', label: 'tempo médio de cotação' },
-            { val: '100%', label: 'campos com validação inline' }
+            { val: 'conversão', label: 'recuperação da geração de leads' },
+            { val: 'fluxo ágil', label: 'arquitetura objetiva e consistente' },
+            { val: '100%', label: 'jornada guiada sem atritos' }
           ],
           desafio: 'a solicitação surgiu após o antigo fluxo apresentar problemas de funcionalidade que impediam os usuários de realizar simulações de planos, resultando em uma diminuição nas conversões provenientes do site. era fundamental resolver esses problemas para melhorar a experiência do usuário e recuperar as taxas de conversão com agilidade.',
           abordagem: 'optei por seguir para um padrão de interface coeso e direto, com campos de preenchimento limpos e arquitetura de passos guiados. organizando a informação com feedback imediato de valores, eliminamos dúvidas cognitivas e facilitamos a manutenção contínua.',
@@ -1503,14 +1503,14 @@
           summary: 'complete redesign of the health plan simulation funnel, eliminating usability friction and significantly boosting lead conversion rates on the website.',
           image: 'assets/framer-plano-saude-cover.jpg',
           metrics: [
-            { val: '+30%', label: 'lead conversion lift' },
-            { val: '-45%', label: 'quote completion time' },
-            { val: '100%', label: 'inline validated inputs' }
+            { val: 'conversion', label: 'lead generation recovery' },
+            { val: 'lean flow', label: 'objective &amp; consistent ui' },
+            { val: '100%', label: 'friction-free guided steps' }
           ],
           desafio: 'the request arose after the legacy simulation funnel presented functionality issues that prevented prospective users from completing quotes, causing an immediate drop in online conversions. resolving these pain points was critical to restoring trust and increasing acquisition.',
           abordagem: 'established a cohesive, user-friendly interface pattern with simplified input steps and guided progression. clear dynamic pricing feedback removed cognitive hesitation and streamlined lead qualification.',
           resultado: 'the implemented improvements drove a substantial increase in website conversion rates, resolving historical funnel flaws and strengthening user onboarding.',
-          techs: ['ux design', 'cro', 'figma', 'wireframing'],
+          techs: ['figma', 'notion', 'adobe illustrator', 'microsoft office', 'slack', 'trello'],
           figmaUrl: null,
           siteUrl: 'https://www.associacaocartaocristao.com.br/assistencia-medica.html',
           behanceUrl: 'https://www.behance.net/gallery/137906687/Simulacao-de-novos-Associados-Cartao-Cristao',
@@ -2975,6 +2975,13 @@
         linksHtml += `
           <a href="${item.siteUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('official_site', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)] whitespace-nowrap">
             <span>${tLang.officialSite}</span>
+          </a>
+        `;
+      }
+      if (item.behanceUrl) {
+        linksHtml += `
+          <a href="${item.behanceUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)] whitespace-nowrap">
+            <span>${tLang.viewBehance}</span>
           </a>
         `;
       }
