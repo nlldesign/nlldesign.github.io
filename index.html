@@ -433,8 +433,8 @@
     /* CARROSSEL DINÂMICO COVERFLOW & FOCO 3D                  */
     /* ======================================================= */
     #carouselTrack {
-      padding-left: calc((100% - min(85vw, 680px)) / 2);
-      padding-right: calc((100% - min(85vw, 680px)) / 2);
+      padding-left: calc((100% - min(85vw, 680px)) / 2) !important;
+      padding-right: calc((100% - min(85vw, 680px)) / 2) !important;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
@@ -726,8 +726,7 @@
 
     <!-- Carrossel de Cards Centralizados com Snap e Animação de Hover -->
     <div class="relative mb-24 sm:mb-32 anim-fade-in anim-delay-1">
-      <div id="debugCarousel" style="margin-bottom: 8px; padding: 6px; background: #9333ea; color: white; font-family: monospace; font-size: 11px; border-radius: 8px; overflow-wrap: break-word;"></div>
-      <div id="carouselTrack" class="flex gap-8 overflow-x-auto snap-x snap-mandatory py-6 px-4 no-scrollbar scroll-smooth">
+      <div id="carouselTrack" class="flex gap-8 overflow-x-auto snap-x snap-mandatory py-6 no-scrollbar scroll-smooth">
         <!-- Injetado dinamicamente via JS -->
       </div>
 
@@ -1575,6 +1574,7 @@
     };
 
     // Estado do idioma global (persistido no localStorage)
+    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
     let currentGlobalLang = localStorage.getItem('nlldesign-lang') || 'pt';
 
     function getPortfolioProjects() {
@@ -2078,11 +2078,7 @@
       });
 
       
-      const dbg = document.getElementById('debugCarousel');
-      if (dbg) {
-        dbg.innerText = 'TRK_L:' + trackRect.left.toFixed(0) + ' TRK_W:' + trackRect.width.toFixed(0) + ' CTR:' + trackCenter.toFixed(0) + ' S_LEFT:' + track.scrollLeft.toFixed(0) + ' | C0_D:' + Math.abs(trackCenter - (cards[0].getBoundingClientRect().left + cards[0].getBoundingClientRect().width/2)).toFixed(0) + ' C1_D:' + Math.abs(trackCenter - (cards[1].getBoundingClientRect().left + cards[1].getBoundingClientRect().width/2)).toFixed(0) + ' | CLOSEST:' + closestIdx + ' CURR:' + currentCardIndex;
-      }
-
+      
       if (closestIdx !== currentCardIndex) {
         currentCardIndex = closestIdx;
         renderDots();
@@ -2247,14 +2243,19 @@
         <button onclick="scrollToCard(${idx})" class="h-2.5 rounded-full transition-all duration-300 ${idx === currentCardIndex ? 'bg-gradient-to-r from-[var(--accent)] to-purple-400 w-8 shadow-sm shadow-purple-500/30' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)] hover:w-3'}" aria-label="Ir para card ${idx + 1}"></button>
       `).join('');
 
-      updateCounter();
-      currentCardIndex = 0;
-      setupCarouselWheel();
+      track.scrollLeft = 0;
       currentCardIndex = 0;
       updateActiveCardClasses(0);
-      updateCarouselParallax();
+      renderDots();
+      updateCounter();
+      setupCarouselWheel();
       initScrollReveal();
       lucide.createIcons();
+      requestAnimationFrame(() => {
+        track.scrollLeft = 0;
+        updateActiveCardClasses(0);
+        updateCarouselParallax();
+      });
     }
 
     function scrollToCard(idx) {
