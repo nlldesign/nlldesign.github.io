@@ -298,6 +298,22 @@
       animation: viewSlideEntrance 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
+    
+    /* Animação do botão Hambúrguer */
+    #mobileMenuBtn.is-active .ham-line-1 {
+      transform: translateY(4px) rotate(45deg);
+    }
+    #mobileMenuBtn.is-active .ham-line-2 {
+      transform: translateY(-4px) rotate(-45deg);
+    }
+
+    /* Estado ativo do Drawer Mobile */
+    #mobileMenuDrawer.is-open {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      transform: translateY(0) !important;
+    }
+
     /* Ambient Dome com pulso suave */
     .dome-glow {
       position: absolute;
@@ -521,22 +537,22 @@
   <!-- HEADER / NAVEGAÇÃO SUPERIOR (Grid 3 colunas idêntico ao luccas.social.br) -->
   <!-- ================================================================= -->
   <header class="site-nav">
-    <div class="max-w-[1240px] mx-auto px-6 sm:px-12 h-[72px] grid grid-cols-[1fr_auto_1fr] items-center gap-6">
+    <div class="max-w-[1240px] mx-auto px-5 sm:px-12 h-[68px] sm:h-[72px] flex items-center justify-between gap-4">
       
       <!-- Esquerda: Brand Mark (Logo SVG + Nome) -->
-      <a href="#/portfolio" onclick="showView('portfolio'); return false;" class="flex items-center gap-3 justify-self-start group">
-        <svg class="w-8 h-8 text-[var(--ink)] transition-transform group-hover:scale-110 duration-300" viewBox="0 0 36 36" fill="none">
+      <a href="#/portfolio" onclick="showView('portfolio'); closeMobileMenu(); return false;" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+        <svg class="w-7 h-7 sm:w-8 sm:h-8 text-[var(--ink)] transition-transform group-hover:scale-110 duration-300" viewBox="0 0 36 36" fill="none">
           <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/>
           <path d="M12 24L12 12L24 24L24 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <div class="flex flex-col">
-          <span class="font-medium text-[15px] tracking-tight leading-none text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">lucas nellucci</span>
-          <span id="headerRoleSubtitle" class="text-[11.5px] text-[var(--muted)] font-mono mt-0.5">ux &amp; product designer</span>
+          <span class="font-medium text-[14px] sm:text-[15px] tracking-tight leading-none text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">lucas nellucci</span>
+          <span id="headerRoleSubtitle" class="text-[10.5px] sm:text-[11.5px] text-[var(--muted)] font-mono mt-0.5">ux &amp; product designer</span>
         </div>
       </a>
 
-      <!-- Centro: Links das Telas Principais -->
-      <nav class="hidden md:flex items-center gap-2">
+      <!-- Centro (Desktop): Links das Telas Principais -->
+      <nav class="hidden md:flex items-center gap-1.5 lg:gap-2">
         <button onclick="showView('portfolio')" id="navLinkPortfolio" class="nav-link" data-active="true">
           portfólio
         </button>
@@ -551,8 +567,8 @@
         </button>
       </nav>
 
-      <!-- Direita: Controles (Tema Claro/Escuro + Redes) -->
-      <div class="flex items-center gap-2 lg:gap-2.5 justify-self-end whitespace-nowrap shrink-0">
+      <!-- Direita: Controles -->
+      <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
         <!-- Seletor Global de Idioma [ pt | en ] -->
         <div class="lang-pill-container" role="group" aria-label="Idioma">
           <button onclick="setGlobalLang('pt')" id="headerLangBtnPt" class="lang-pill-btn active" aria-label="Português">
@@ -563,7 +579,8 @@
           </button>
         </div>
 
-        <button onclick="toggleTheme()" class="tag-pill cursor-pointer text-xs" title="Alternar tema claro/escuro">
+        <!-- Tema Claro/Escuro (Desktop: no header | Mobile: dentro do drawer) -->
+        <button onclick="toggleTheme()" class="tag-pill cursor-pointer text-xs hidden md:inline-flex" title="Alternar tema claro/escuro">
           <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent)] animate-pulse"></span>
           <span id="themeToggleText">modo claro</span>
         </button>
@@ -575,22 +592,81 @@
         <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'header')" class="tag-pill hidden xl:inline-flex text-xs">
           behance ↗
         </a>
+
+        <!-- Botão Hambúrguer Mobile (Apenas em telas < 768px) -->
+        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 rounded-full flex flex-col items-center justify-center gap-1.5 border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] transition-all active:scale-95 shadow-sm" aria-label="Menu" aria-expanded="false">
+          <span class="w-4 h-0.5 bg-current transition-all duration-300 origin-center ham-line-1"></span>
+          <span class="w-4 h-0.5 bg-current transition-all duration-300 origin-center ham-line-2"></span>
+        </button>
       </div>
 
-    </div>
-
-    <!-- Navegação Mobile em abas -->
-    <div class="md:hidden flex items-center justify-around px-3 py-2 border-t border-[var(--line)] bg-[var(--bg)] text-xs">
-      <button onclick="showView('portfolio')" id="mobNavPortfolio" class="nav-link py-1 px-3 text-xs" data-active="true">portfólio</button>
-      <button onclick="scrollToSobre()" id="mobNavSobre" class="nav-link py-1 px-3 text-xs" data-active="false">sobre</button>
-      <button onclick="showView('jogos')" id="mobNavJogos" class="nav-link py-1 px-3 text-xs" data-active="false">jogos &amp; 3d</button>
-      <button onclick="showView('contato')" id="mobNavContato" class="nav-link py-1 px-3 text-xs" data-active="false">contato</button>
-      <div class="lang-pill-container ml-1" role="group" aria-label="Idioma">
-        <button onclick="setGlobalLang('pt')" id="mobLangBtnPt" class="lang-pill-btn active" aria-label="Português">pt</button>
-        <button onclick="setGlobalLang('en')" id="mobLangBtnEn" class="lang-pill-btn" aria-label="English">en</button>
-      </div>
     </div>
   </header>
+
+  <!-- ================================================================= -->
+  <!-- DRAWER / OVERLAY DO MENU HAMBÚRGUER MOBILE                        -->
+  <!-- ================================================================= -->
+  <div id="mobileMenuDrawer" class="fixed inset-0 z-40 bg-[var(--bg)]/95 backdrop-blur-2xl md:hidden flex flex-col justify-between p-6 pt-24 transition-all duration-300 pointer-events-none opacity-0 -translate-y-4" aria-hidden="true">
+    
+    <!-- Links Editoriais em Tipografia de Destaque -->
+    <div class="flex flex-col gap-2 my-auto">
+      <a href="#/portfolio" onclick="showView('portfolio'); closeMobileMenu(); return false;" class="flex items-center justify-between py-4 border-b border-[var(--line)] group">
+        <div class="flex items-baseline gap-3">
+          <span class="font-mono text-xs text-[var(--accent)]">01</span>
+          <span id="mobNavPortfolio" class="text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">portfólio</span>
+        </div>
+        <span class="text-sm font-mono text-[var(--muted)] group-hover:translate-x-1.5 transition-transform">→</span>
+      </a>
+
+      <a href="#/sobre" onclick="scrollToSobre(); closeMobileMenu(); return false;" class="flex items-center justify-between py-4 border-b border-[var(--line)] group">
+        <div class="flex items-baseline gap-3">
+          <span class="font-mono text-xs text-[var(--accent)]">02</span>
+          <span id="mobNavSobre" class="text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">sobre</span>
+        </div>
+        <span class="text-sm font-mono text-[var(--muted)] group-hover:translate-x-1.5 transition-transform">→</span>
+      </a>
+
+      <a href="#/jogos" onclick="showView('jogos'); closeMobileMenu(); return false;" class="flex items-center justify-between py-4 border-b border-[var(--line)] group">
+        <div class="flex items-baseline gap-3">
+          <span class="font-mono text-xs text-cyan-400">03</span>
+          <span id="mobNavJogos" class="text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-cyan-400 transition-colors">jogos &amp; 3d</span>
+        </div>
+        <span class="text-sm font-mono text-[var(--muted)] group-hover:translate-x-1.5 transition-transform">→</span>
+      </a>
+
+      <a href="#/contato" onclick="showView('contato'); closeMobileMenu(); return false;" class="flex items-center justify-between py-4 border-b border-[var(--line)] group">
+        <div class="flex items-baseline gap-3">
+          <span class="font-mono text-xs text-[var(--accent)]">04</span>
+          <span id="mobNavContato" class="text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">contato</span>
+        </div>
+        <span class="text-sm font-mono text-[var(--muted)] group-hover:translate-x-1.5 transition-transform">→</span>
+      </a>
+    </div>
+
+    <!-- Rodapé do Menu Mobile: Alternador de Tema + Redes + Email -->
+    <div class="pt-6 border-t border-[var(--line)] flex flex-col gap-4">
+      <div class="flex items-center justify-between">
+        <button onclick="toggleTheme()" class="tag-pill cursor-pointer text-xs py-2 px-4 shadow-sm" title="Alternar tema">
+          <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent)] animate-pulse"></span>
+          <span id="mobThemeToggleText">modo claro</span>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'mobile_menu')" class="tag-pill text-xs">
+            linkedin ↗
+          </a>
+          <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'mobile_menu')" class="tag-pill text-xs">
+            behance ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="text-[11px] font-mono text-[var(--muted)] text-center pt-2 opacity-70">
+        nellucci.design@gmail.com • são paulo, brasil
+      </div>
+    </div>
+
+  </div>
 
   <!-- ================================================================= -->
   <!-- TELA 1: PORTFÓLIO DE TRABALHOS + SEÇÃO SOBRE ABAIXO DO CARROSSEL  -->
@@ -1573,6 +1649,10 @@
       if (el) {
         el.innerText = isDark ? t.themeLight : t.themeDark;
       }
+      const mobEl = document.getElementById('mobThemeToggleText');
+      if (mobEl) {
+        mobEl.innerText = isDark ? t.themeLight : t.themeDark;
+      }
     }
 
     // Função Mestra de Internacionalização Global [ pt | en ]
@@ -1806,6 +1886,48 @@
     let currentCategory = 'trabalho';
 
     
+    
+    // Gerenciador do Menu Hambúrguer Mobile
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobileMenuDrawer');
+      if (!drawer) return;
+      const isOpen = drawer.classList.contains('is-open');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    }
+
+    function openMobileMenu() {
+      const btn = document.getElementById('mobileMenuBtn');
+      const drawer = document.getElementById('mobileMenuDrawer');
+      if (drawer && btn) {
+        drawer.classList.add('is-open');
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeMobileMenu() {
+      const btn = document.getElementById('mobileMenuBtn');
+      const drawer = document.getElementById('mobileMenuDrawer');
+      if (drawer && btn) {
+        drawer.classList.remove('is-open');
+        btn.classList.remove('is-active');
+        btn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobileMenu();
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) closeMobileMenu();
+    });
+
     // Sistema de Revelação Fluida no Scroll (Intersection Observer)
     function initScrollReveal() {
       if (!('IntersectionObserver' in window)) return;
