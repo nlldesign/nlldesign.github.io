@@ -10,7 +10,7 @@
   <!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lucas nellucci · ux &amp; product designer guiado por dados</title>
+  <title>lucas nellucci · ux &amp; product designer</title>
   <meta name="description" content="lucas nellucci — ux & product designer com base analítica e neurociência: arquitetura de informação, design systems e interfaces validadas por métricas." />
   
   <!-- Favicon: Monograma Transparente NLL Design (Adaptativo para abas escuras e claras) -->
@@ -119,14 +119,20 @@
       box-sizing: border-box;
     }
 
+    html {
+      overflow-x: clip;
+      max-width: 100%;
+    }
+
     body {
+      max-width: 100%;
       background-color: var(--bg);
       color: var(--ink);
       font-family: var(--font-body);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
+      overflow-x: clip;
       transition: background-color 0.35s ease, color 0.35s ease;
       text-transform: lowercase;
     }
@@ -719,8 +725,10 @@
     </div>
   </div>
 
-  <div class="dome-glow"></div>
-  <div class="ambient-orb-2"></div>
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+    <div class="dome-glow"></div>
+    <div class="ambient-orb-2"></div>
+  </div>
 
   <!-- ================================================================= -->
   <!-- HEADER / NAVEGAÇÃO SUPERIOR (Grid 3 colunas idêntico ao luccas.social.br) -->
@@ -729,14 +737,14 @@
     <div class="max-w-[1240px] mx-auto px-4 sm:px-12 h-[64px] sm:h-[72px] flex items-center justify-between gap-2.5 sm:gap-4 w-full">
       
       <!-- Esquerda: Brand Mark (Logo SVG + Nome) -->
-      <a href="#/portfolio" onclick="showView('portfolio'); closeMobileMenu(); return false;" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-        <svg class="w-7 h-7 sm:w-8 sm:h-8 text-[var(--ink)] transition-transform group-hover:scale-110 duration-300" viewBox="0 0 36 36" fill="none">
+      <a href="#/portfolio" onclick="showView('portfolio'); closeMobileMenu(); return false;" class="flex items-center gap-2 sm:gap-3 group min-w-0">
+        <svg class="w-7 h-7 sm:w-8 sm:h-8 shrink-0 text-[var(--ink)] transition-transform group-hover:scale-110 duration-300" viewBox="0 0 36 36" fill="none">
           <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/>
           <path d="M12 24L12 12L24 24L24 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <div class="flex flex-col">
-          <span class="font-medium text-[14px] sm:text-[15px] tracking-tight leading-none text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">lucas nellucci</span>
-          <span id="headerRoleSubtitle" class="text-[10.5px] sm:text-[11.5px] text-[var(--muted)] font-mono mt-0.5">ux &amp; product designer</span>
+        <div class="flex flex-col min-w-0">
+          <span class="font-medium text-[14px] sm:text-[15px] tracking-tight leading-none text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors truncate">lucas nellucci</span>
+          <span id="headerRoleSubtitle" class="text-[10px] sm:text-[11.5px] text-[var(--muted)] font-mono mt-0.5 truncate">ux &amp; product designer</span>
         </div>
       </a>
 
@@ -775,11 +783,11 @@
         </button>
 
         <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'header')" class="tag-pill hidden xl:inline-flex text-xs">
-          linkedin ↗
+          linkedin <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
         </a>
 
         <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'header')" class="tag-pill hidden xl:inline-flex text-xs">
-          behance ↗
+          behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
         </a>
 
         <!-- Botão Hambúrguer Mobile (Apenas em telas < 768px) -->
@@ -842,10 +850,10 @@
 
         <div class="flex items-center gap-2">
           <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'mobile_menu')" class="tag-pill text-xs">
-            linkedin ↗
+            linkedin <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
           </a>
           <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'mobile_menu')" class="tag-pill text-xs">
-            behance ↗
+            behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
           </a>
         </div>
       </div>
@@ -877,7 +885,7 @@
     </div>
 
     <!-- Carrossel de Cards Centralizados com Snap e Animação de Hover -->
-    <div class="relative mb-24 sm:mb-32 anim-fade-in anim-delay-1">
+    <div class="relative -mx-6 sm:-mx-12 mb-24 sm:mb-32 anim-fade-in anim-delay-1 overflow-hidden">
       <div id="carouselTrack" class="flex gap-8 overflow-x-auto snap-x snap-mandatory py-6 no-scrollbar scroll-smooth">
         <!-- Injetado dinamicamente via JS -->
       </div>
@@ -913,15 +921,7 @@
           <span id="sobreTag">sobre · perfil &amp; trajetória</span>
         </div>
 
-        <div class="inline-flex items-center p-1 rounded-full bg-[var(--surface)] border border-[var(--line)] text-xs font-mono shadow-sm">
-          <button onclick="setSobreLang('pt')" id="langBtnPt" class="px-3 py-1 rounded-full transition-all duration-200 bg-[var(--inv-bg)] text-[var(--inv-ink)] font-semibold" aria-label="Português">
-            pt
-          </button>
-          <button onclick="setSobreLang('en')" id="langBtnEn" class="px-3 py-1 rounded-full transition-all duration-200 text-[var(--muted)] hover:text-[var(--ink)]" aria-label="English">
-            en
-          </button>
         </div>
-      </div>
 
       <div id="sobreContentContainer" class="transition-opacity duration-300">
         <h2 id="sobreHeading" class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-6 text-[var(--ink)]">
@@ -1057,13 +1057,13 @@
 
       <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
         <a href="mailto:nellucci.design@gmail.com" onclick="trackOutboundClick('email', this.href, 'contact_panel')" class="px-7 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105 inline-flex items-center gap-1.5" style="background: var(--inv-ink); color: var(--inv-bg);">
-          <span id="contatoEmailText">enviar mensagem ↗</span>
+          <span id="contatoEmailText">enviar mensagem <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg></span>
         </a>
         <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'contact_panel')" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105 inline-flex items-center gap-1.5" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
-          <span id="contatoLinkedinText">linkedin ↗</span>
+          <span id="contatoLinkedinText">linkedin <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg></span>
         </a>
         <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'contact_panel')" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105 inline-flex items-center gap-1.5" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
-          <span id="contatoBehanceText">behance ↗</span>
+          <span id="contatoBehanceText">behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg></span>
         </a>
       </div>
 
@@ -1082,13 +1082,13 @@
   <main id="viewCaseStudy" class="view-screen hidden max-w-[1080px] mx-auto px-6 sm:px-12 py-10 sm:py-16 flex-1 w-full relative z-10 anim-fade-in">
     
     <!-- Top Action: Voltar -->
-    <div class="mb-8 flex items-center justify-between">
+    <div class="mb-8 flex flex-wrap items-center justify-between gap-3">
       <button onclick="navigateBack()" class="tag-pill cursor-pointer text-xs">
         <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
         <span id="caseBackLabel">voltar</span>
       </button>
 
-      <div id="caseTopExternalLinks" class="flex items-center gap-2">
+      <div id="caseTopExternalLinks" class="flex flex-wrap items-center gap-2">
         <!-- Links de Figma / Vercel injetados via JS -->
       </div>
     </div>
@@ -1192,9 +1192,9 @@
   </div>
 
   <!-- RODAPÉ MINIMALISTA (Idêntico ao luccas.social.br) -->
-  <footer class="border-t border-[var(--line)] py-8 text-xs text-[var(--muted)] font-mono relative z-10">
+  <footer class="border-t border-[var(--line)] pt-8 pb-20 sm:py-8 text-xs text-[var(--muted)] font-mono relative z-10">
     <div class="max-w-[1240px] mx-auto px-6 sm:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div id="footerCopyright">© 2026 · lucas nellucci • produto, neurociência &amp; dados</div>
+      <div id="footerCopyright" class="text-center sm:text-left">© 2026 · lucas nellucci • ux &amp; product design</div>
       <div class="flex items-center gap-6">
         <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" onclick="trackOutboundClick('linkedin', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">linkedin</a>
         <a href="https://www.behance.net/lucasnellucci" target="_blank" onclick="trackOutboundClick('behance', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">behance</a>
@@ -1208,6 +1208,8 @@
     // Catálogo 100% autêntico e separado
     const siteTranslations = {
       pt: {
+        preloaderStatus: "carregando experiência...",
+        preloaderDone: "pronto!",
         navPortfolio: "portfólio",
         navSobre: "sobre",
         navJogos: "jogos &amp; 3d",
@@ -1233,16 +1235,16 @@
         contatoTag: "vamos conversar",
         contatoTitle: "vamos construir sua experiência de produto juntos?",
         contatoSubtitle: "conte mais sobre o desafio de design, interface ou produto e vamos juntos!",
-        contatoEmail: "enviar mensagem ↗",
-        contatoLinkedin: "linkedin ↗",
-        contatoBehance: "behance ↗",
+        contatoEmail: "enviar mensagem <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        contatoLinkedin: "linkedin <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        contatoBehance: "behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         contatoLocation: "são paulo, brasil • disponível globalmente (remoto / híbrido)",
 
         backToPortfolio: "voltar ao portfólio",
         backToGames: "voltar aos jogos",
-        viewFigma: "ver no figma ↗",
-        openVercel: "abrir na vercel ↗",
-        officialSite: "site oficial ↗",
+        viewFigma: "ver no figma <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        openVercel: "abrir na vercel <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        officialSite: "site oficial <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         labelDesafio: "desafio",
         labelAbordagem: "abordagem",
         labelResultado: "resultado",
@@ -1251,15 +1253,17 @@
         nextCaseBtn: "abrir case →",
         lightboxHint: "clique para ampliar a imagem",
 
-        footerCopyright: "© 2026 · lucas nellucci • produto, neurociência &amp; dados",
+        footerCopyright: "© 2026 · lucas nellucci • ux &amp; product design",
         footerBackToTop: "voltar ao topo ↑"
       },
       en: {
+        preloaderStatus: "loading experience...",
+        preloaderDone: "ready!",
         navPortfolio: "portfolio",
         navSobre: "about",
         navJogos: "games &amp; 3d",
         navContato: "contact",
-        roleSubtitle: "data-driven ux &amp; product designer",
+        roleSubtitle: "ux &amp; product designer",
         themeLight: "light mode",
         themeDark: "dark mode",
 
@@ -1280,16 +1284,16 @@
         contatoTag: "let's connect",
         contatoTitle: "shall we build your product experience together?",
         contatoSubtitle: "tell me more about your design, interface, or product challenge and let's create impact together!",
-        contatoEmail: "send message ↗",
-        contatoLinkedin: "linkedin ↗",
-        contatoBehance: "behance ↗",
+        contatoEmail: "send message <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        contatoLinkedin: "linkedin <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        contatoBehance: "behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         contatoLocation: "são paulo, brazil • globally available (remote / hybrid)",
 
         backToPortfolio: "back to portfolio",
         backToGames: "back to games",
-        viewFigma: "view on figma ↗",
-        openVercel: "open on vercel ↗",
-        officialSite: "official website ↗",
+        viewFigma: "view on figma <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        openVercel: "open on vercel <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        officialSite: "official website <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         labelDesafio: "challenge",
         labelAbordagem: "approach",
         labelResultado: "outcome",
@@ -1298,7 +1302,7 @@
         nextCaseBtn: "open case →",
         lightboxHint: "click to expand image",
 
-        footerCopyright: "© 2026 · lucas nellucci • product, neuroscience &amp; data",
+        footerCopyright: "© 2026 · lucas nellucci • ux &amp; product design",
         footerBackToTop: "back to top ↑"
       }
     };
@@ -1855,9 +1859,7 @@
         currentGlobalLang = lang;
         localStorage.setItem('nlldesign-lang', lang);
         document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-        document.title = lang === 'pt' 
-          ? 'lucas nellucci · ux & product designer guiado por dados' 
-          : 'lucas nellucci · data-driven ux & product designer';
+        document.title = 'lucas nellucci · ux & product designer';
 
         portfolioProjects = getPortfolioProjects();
         gameProjects = getGameProjects();
@@ -2118,6 +2120,7 @@
     });
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 768) closeMobileMenu();
+      updateCarouselParallax();
     });
 
     // Sistema de Revelação Fluida no Scroll (Intersection Observer)
@@ -2319,17 +2322,18 @@
         const norm = Math.max(-1, Math.min(1, delta / (trackRect.width * 0.75)));
         const absNorm = Math.abs(norm);
 
-        // Curvas físicas de profundidade 3D
-        const scale = 1 - (absNorm * 0.12);
-        const rotateY = norm * -13; // Ângulo de rotação voltado para o centro
-        const translateZ = -100 * absNorm; // Afastamento no eixo Z
-        const opacity = Math.max(0.38, 1 - (absNorm * 0.62));
-        const brightness = Math.max(0.65, 1 - (absNorm * 0.35));
-        const blur = (absNorm * 1.2).toFixed(1);
+        // Curvas físicas de profundidade 3D (adaptadas para desktop e mobile)
+        const isMobile = window.innerWidth < 640;
+        const scale = 1 - (absNorm * (isMobile ? 0.08 : 0.12));
+        const rotateY = norm * (isMobile ? -7 : -13);
+        const translateZ = (isMobile ? -50 : -100) * absNorm;
+        const opacity = Math.max(isMobile ? 0.5 : 0.38, 1 - (absNorm * (isMobile ? 0.5 : 0.62)));
+        const brightness = Math.max(0.68, 1 - (absNorm * 0.32));
+        const blur = isMobile ? '0' : (absNorm * 1.1).toFixed(1);
 
         card.style.transform = `perspective(1400px) translate3d(0, 0, ${translateZ.toFixed(1)}px) rotateY(${rotateY.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
         card.style.opacity = opacity.toFixed(3);
-        card.style.filter = `brightness(${brightness.toFixed(3)}) blur(${blur}px)`;
+        card.style.filter = isMobile ? `brightness(${brightness.toFixed(3)})` : `brightness(${brightness.toFixed(3)}) blur(${blur}px)`;
 
         // Parallax interno da imagem do card (efeito de janela em relevo)
         const coverImg = card.querySelector('.card-cover-img');
@@ -2401,6 +2405,7 @@
 
     // Roteamento SPA entre Telas Dedicadas (NÃO LP!)
     function showView(viewId) {
+      activeCaseId = null;
       triggerTopProgressBar();
       // Pausa qualquer jogo ativo
       const iframe = document.getElementById('gameIframe');
@@ -2448,6 +2453,7 @@
 
     // Rola suavemente até a seção Sobre abaixo do carrossel
     function scrollToSobre() {
+      activeCaseId = null;
       // Garante que a tela de portfolio está visível
       const portfolioView = document.getElementById('viewPortfolio');
       if (portfolioView.classList.contains('hidden')) {
@@ -2540,24 +2546,14 @@
       const cards = track.querySelectorAll('.carousel-card');
       if (cards[idx]) {
         currentCardIndex = idx;
-        cards[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        cards.forEach((c, i) => {
-          if (i === idx) {
-            c.classList.add('is-active');
-            c.style.transform = 'scale(1)';
-            c.style.opacity = '1';
-            c.style.filter = 'brightness(1)';
-          } else {
-            c.classList.remove('is-active');
-            c.style.transform = 'scale(0.92)';
-            c.style.opacity = '0.45';
-            c.style.filter = 'brightness(0.65)';
-          }
-        });
+        const card = cards[idx];
+        const targetScrollLeft = card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
+        track.scrollTo({ left: Math.max(0, targetScrollLeft), behavior: 'smooth' });
+        updateActiveCardClasses(idx);
         renderDots();
         updateCounter();
-        setTimeout(updateCarouselParallax, 50);
-        setTimeout(updateCarouselParallax, 250);
+        setTimeout(updateCarouselParallax, 80);
+        setTimeout(updateCarouselParallax, 320);
       }
     }
 
@@ -2657,8 +2653,8 @@
       // Métricas chave com Italiana Serif
       const metricsContainer = document.getElementById('caseMetricsRow');
       if (item.metrics && item.metrics.length > 0) {
-        metricsContainer.innerHTML = item.metrics.map(m => `
-          <div class="portfolio-card p-5 sm:p-6 text-center sm:text-left hover:scale-[1.02] transition-transform">
+        metricsContainer.innerHTML = item.metrics.map((m, idx) => `
+          <div class="portfolio-card p-5 sm:p-6 text-center sm:text-left hover:scale-[1.02] transition-transform ${item.metrics.length === 3 && idx === 2 ? 'col-span-2 md:col-span-1' : ''}">
             <div class="font-serif-accent text-3xl sm:text-4xl text-[var(--accent)] mb-1">${m.val}</div>
             <div class="text-xs text-[var(--muted)] font-light leading-snug">${m.label}</div>
           </div>
@@ -2672,21 +2668,21 @@
       let linksHtml = '';
       if (item.figmaUrl) {
         linksHtml += `
-          <a href="${item.figmaUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('figma_prototype', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)]">
+          <a href="${item.figmaUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('figma_prototype', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)] whitespace-nowrap">
             <span>${tLang.viewFigma}</span>
           </a>
         `;
       }
       if (item.vercelUrl) {
         linksHtml += `
-          <a href="${item.vercelUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('vercel_app', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)] text-cyan-400">
+          <a href="${item.vercelUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('vercel_app', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)] text-cyan-400 whitespace-nowrap">
             <span>${tLang.openVercel}</span>
           </a>
         `;
       }
       if (item.siteUrl) {
         linksHtml += `
-          <a href="${item.siteUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('official_site', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)]">
+          <a href="${item.siteUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('official_site', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)] whitespace-nowrap">
             <span>${tLang.officialSite}</span>
           </a>
         `;
