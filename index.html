@@ -2045,7 +2045,6 @@
       let minDistance = Infinity;
 
       cards.forEach((card, idx) => {
-        // offsetLeft é imutável em relação a transform: scale()
         const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
         const distance = Math.abs(scrollCenter - cardCenter);
         const maxDist = card.offsetWidth * 1.05;
@@ -2065,15 +2064,17 @@
         }
       });
 
+      // Garante que o card mais próximo do centro SEMPRE tem .is-active
+      cards.forEach((c, i) => {
+        if (i === closestIdx) {
+          c.classList.add('is-active');
+        } else {
+          c.classList.remove('is-active');
+        }
+      });
+
       if (closestIdx !== currentCardIndex) {
         currentCardIndex = closestIdx;
-        cards.forEach((c, i) => {
-          if (i === currentCardIndex) {
-            c.classList.add('is-active');
-          } else {
-            c.classList.remove('is-active');
-          }
-        });
         renderDots();
         updateCounter();
       }
@@ -2088,8 +2089,7 @@
       track.addEventListener('scroll', () => {
         if (!parallaxTicking) {
           window.requestAnimationFrame(() => {
-            updateActiveCardClasses(currentCardIndex);
-      updateCarouselParallax();
+            updateCarouselParallax();
             parallaxTicking = false;
           });
           parallaxTicking = true;
@@ -2104,28 +2104,6 @@
       }, { passive: false });
     }
 
-    // Sincronização do Carrossel ao arrastar ou rolar com touchpad/mobile
-    function initCarouselScrollSync() {
-      const track = document.getElementById('carouselTrack');
-      if (!track || !('IntersectionObserver' in window)) return;
-      const cards = track.querySelectorAll('article');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
-            const index = Array.from(cards).indexOf(entry.target);
-            if (index !== -1 && index !== currentCardIndex) {
-              currentCardIndex = index;
-              renderDots();
-              updateCounter();
-            }
-          }
-        });
-      }, {
-        root: track,
-        threshold: 0.6
-      });
-      cards.forEach(card => observer.observe(card));
-    }
 
     // Header com efeito de elevação no scroll
     window.addEventListener('scroll', () => {
@@ -2260,8 +2238,9 @@
       `).join('');
 
       updateCounter();
-      initCarouselScrollSync();
+      currentCardIndex = 0;
       setupCarouselWheel();
+      updateActiveCardClasses(0);
       updateCarouselParallax();
       initScrollReveal();
       lucide.createIcons();
