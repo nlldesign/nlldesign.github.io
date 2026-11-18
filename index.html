@@ -753,7 +753,7 @@
         <button onclick="showView('portfolio')" id="navLinkPortfolio" class="nav-link" data-active="true">
           portfólio
         </button>
-        <button onclick="scrollToSobre()" id="navLinkSobre" class="nav-link" data-active="false">
+        <button onclick="showView('sobre')" id="navLinkSobre" class="nav-link" data-active="false">
           sobre
         </button>
         <button onclick="showView('jogos')" id="navLinkJogos" class="nav-link" data-active="false">
@@ -815,7 +815,7 @@
         <span class="text-sm font-mono text-[var(--muted)] group-hover:translate-x-1.5 transition-transform">→</span>
       </a>
 
-      <a href="#/sobre" onclick="scrollToSobre(); closeMobileMenu(); return false;" class="flex items-center justify-between py-4 border-b border-[var(--line)] group">
+      <a href="#/sobre" onclick="showView('sobre'); closeMobileMenu(); return false;" class="flex items-center justify-between py-4 border-b border-[var(--line)] group">
         <div class="flex items-baseline gap-3">
           <span class="font-mono text-xs text-[var(--accent)]">02</span>
           <span id="mobNavSobre" class="text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">sobre</span>
@@ -910,100 +910,124 @@
       </div>
     </div>
 
+        <!-- =============================================================== -->
+    <!-- RESUMO BREVE DO SOBRE NA HOME (LEVA PARA A PÁGINA #/sobre)      -->
     <!-- =============================================================== -->
-    <!-- SEÇÃO SOBRE (DIRETAMENTE ABAIXO DO CARROSSEL CONFORME PEDIDO)   -->
-    <!-- =============================================================== -->
-    <section id="sobreSection" class="max-w-[820px] mx-auto pt-16 border-t border-[var(--line)] mb-24 anim-fade-in">
-      
-      <!-- Topo da Seção Sobre com Seletor Bilíngue [ PT | EN ] -->
-      <div class="flex items-center justify-between gap-4 mb-6">
-        <div class="tag-pill">
-          <span id="sobreTag">sobre · perfil &amp; trajetória</span>
-        </div>
-
-        </div>
-
-      <div id="sobreContentContainer" class="transition-opacity duration-300">
-        <h2 id="sobreHeading" class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-6 text-[var(--ink)]">
-          entre o comportamento humano e o produto digital, alguém precisa traduzir.
-        </h2>
-
-        <p id="sobreLead" class="text-lg sm:text-xl text-[var(--muted)] leading-relaxed font-light mb-8">
-          designer de produto estratégico focado em resultados de negócio, unindo ux, marketing, neurociência aplicada ao comportamento do usuário e o uso avançado de inteligência artificial para otimizar processos e sustentar decisões estratégicas.
-        </p>
-
-        <!-- Skill Pills Interativas -->
-        <div id="sobreSkills" class="flex flex-wrap gap-2.5 mb-14 pb-8 border-b border-[var(--line)]">
-          <span class="tag-pill">product design</span>
-          <span class="tag-pill">ux research &amp; cro</span>
-          <span class="tag-pill">neurociência cognitiva</span>
-          <span class="tag-pill">inteligência artificial</span>
-          <span class="tag-pill">google analytics &amp; hotjar</span>
-          <span class="tag-pill">microsoft clarity</span>
-          <span class="tag-pill">design systems</span>
-          <span class="tag-pill">figma</span>
-          <span class="tag-pill">scrum &amp; squads ágeis</span>
-        </div>
-
-        <!-- Trajetória e Perfil Profissional Baseados no Perfil Oficial -->
-        <div id="sobreBio" class="space-y-6 text-base sm:text-lg text-[var(--muted)] leading-relaxed font-light mb-16 reveal-on-scroll">
-          <p>
-            adoto uma abordagem multidisciplinar que conecta dados qualitativos e quantitativos, ferramentas de inteligência artificial e insights comportamentais para compreender profundamente as necessidades reais dos usuários e alinhá-las aos objetivos estratégicos das organizações.
-          </p>
-          <p>
-            atualmente atuo como <strong>product designer pleno no grupo h2</strong>. minha trajetória profissional inclui atuações como <strong>product marketing manager na blackbox technology &amp; cybersecurity</strong> (orlando, fl), liderando estratégias de usabilidade, engajamento e jornadas de descoberta via seo; <strong>ux designer na easychange</strong>, conectando análise de métricas de tráfego e campanhas a soluções de produto sem fricção; <strong>designer instrucional na neogrid</strong>; <strong>web designer na associação cartão cristão</strong>; e <strong>estágio em ui/ux na nesta</strong>.
-          </p>
-          <p>
-            sou pós-graduado em <strong>user experience</strong> pela universidade anhembi morumbi, pós-graduado em <strong>neurociência do desenvolvimento</strong> pela descomplica faculdade digital, graduado em <strong>design gráfico</strong> pela unip e possuo certificação como <strong>ux lead: métricas de performance e qualidade</strong> pela alura.
-          </p>
-        </div>
-
-        <!-- Metodologia de Trabalho (Passos Numerados com Instrument Serif) -->
-        <div class="mb-16 reveal-on-scroll">
-          <span id="sobreProcessLabel" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-5">processo de trabalho</span>
-          
-          <div id="sobreProcessSteps" class="space-y-4">
-            
-            <div class="step-card p-6 sm:p-7 group">
-              <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">01</div>
-              <h3 class="text-xl font-medium text-[var(--ink)] mb-2">diagnóstico &amp; dados</h3>
-              <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
-                cruzo análises quantitativas (ga, hotjar, clarity) com pesquisa qualitativa e benchmarking competitivo para identificar gargalos reais de usabilidade e conversão.
-              </p>
-            </div>
-
-            <div class="step-card p-6 sm:p-7 group">
-              <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">02</div>
-              <h3 class="text-xl font-medium text-[var(--ink)] mb-2">arquitetura &amp; design system</h3>
-              <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
-                estruturo fluxos limpos e jornadas sem fricção cognitiva no figma, aplicando design systems componentizados e protótipos de alta fidelidade para testes.
-              </p>
-            </div>
-
-            <div class="step-card p-6 sm:p-7 group">
-              <div class="font-serif-accent text-3xl text-[var(--accent)] mb-1 group-hover:scale-105 transition-transform inline-block">03</div>
-              <h3 class="text-xl font-medium text-[var(--ink)] mb-2">validação &amp; entrega ágil</h3>
-              <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
-                valido hipóteses em squads com desenvolvedores (scrum), mensuro o impacto em métricas de negócio e garanto evolução contínua com apoio de inteligência artificial.
-              </p>
-            </div>
-
+    <section id="homeSobreTeaser" class="max-w-[920px] mx-auto pt-14 sm:pt-16 border-t border-[var(--line)] mb-16 sm:mb-24 reveal-on-scroll">
+      <div class="portfolio-card p-7 sm:p-10 md:p-12 flex flex-col gap-6">
+        <div class="flex items-center justify-between gap-4">
+          <div class="tag-pill">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+            <span id="homeSobreTag">sobre</span>
           </div>
+          <span class="text-xs font-mono text-[var(--muted)]">são paulo · br</span>
         </div>
 
-        <!-- CTA Final do Sobre -->
-        <div class="pt-8 border-t border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 reveal-on-scroll">
-          <div>
-            <h3 id="sobreCtaTitle" class="text-xl sm:text-2xl font-medium text-[var(--ink)]">tem um desafio de produto com ux no meio?</h3>
-            <p id="sobreCtaSubtitle" class="text-sm text-[var(--muted)] mt-1 font-light">bora conversar e construir juntos.</p>
-          </div>
-          <button onclick="showView('contato')" id="sobreCtaBtn" class="btn-pill-primary shrink-0">
-            falar comigo →
+        <div class="max-w-2xl">
+          <h2 id="homeSobreTitle" class="text-2xl sm:text-4xl font-medium tracking-tight leading-[1.15] text-[var(--ink)] mb-4">
+            entre o comportamento humano e o produto digital, alguém precisa traduzir.
+          </h2>
+          <p id="homeSobreSummary" class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
+            ux &amp; product designer no grupo h2. uno pesquisa comportamental, neurociência, estratégia de marketing e inteligência artificial para desenhar produtos digitais com impacto real.
+          </p>
+        </div>
+
+        <div id="homeSobreHighlights" class="flex flex-wrap gap-2">
+          <span class="tag-pill text-xs">product design</span>
+          <span class="tag-pill text-xs">ux &amp; cro</span>
+          <span class="tag-pill text-xs">neurociência</span>
+          <span class="tag-pill text-xs">inteligência artificial</span>
+        </div>
+
+        <div class="pt-4 border-t border-[var(--line)] flex flex-wrap items-center gap-3 sm:gap-4">
+          <button onclick="showView('sobre')" id="homeSobreCtaBtn" class="btn-pill-primary text-xs sm:text-sm">
+            <span>conhecer minha trajetória</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+          <button onclick="showView('contato')" id="homeSobreContactBtn" class="btn-pill-secondary text-xs sm:text-sm">
+            falar comigo
           </button>
         </div>
       </div>
-
     </section>
+
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- TELA 1.5: SOBRE (PÁGINA DEDICADA #/sobre)                         -->
+  <!-- ================================================================= -->
+  <main id="viewSobre" class="view-screen hidden max-w-[880px] mx-auto px-6 sm:px-12 py-12 sm:py-20 flex-1 w-full relative z-10">
+
+    <!-- Topo: Voltar ao Portfólio -->
+    <div class="mb-10 flex items-center justify-between gap-4">
+      <button onclick="showView('portfolio')" class="tag-pill cursor-pointer text-xs">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+        <span id="sobreBackLabel">voltar ao portfólio</span>
+      </button>
+
+      <div class="tag-pill">
+        <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+        <span id="sobreTag">sobre · perfil &amp; trajetória</span>
+      </div>
+    </div>
+
+    <div id="sobreContentContainer" class="transition-opacity duration-300">
+      <h1 id="sobreHeading" class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-6 text-[var(--ink)]">
+        entre o comportamento humano e o produto digital, alguém precisa traduzir.
+      </h1>
+
+      <p id="sobreLead" class="text-lg sm:text-xl text-[var(--muted)] leading-relaxed font-light mb-8">
+        designer de produto estratégico focado em resultados de negócio, unindo ux, marketing, neurociência aplicada ao comportamento do usuário e o uso avançado de inteligência artificial para otimizar processos e sustentar decisões estratégicas.
+      </p>
+
+      <!-- Bio Resumida -->
+      <div id="sobreBio" class="space-y-5 text-base sm:text-lg text-[var(--muted)] leading-relaxed font-light mb-14 pb-12 border-b border-[var(--line)]">
+        <!-- Injetado via JS -->
+      </div>
+
+      <!-- Experiência Profissional (Timeline Estruturada do PDF) -->
+      <div class="mb-16 reveal-on-scroll">
+        <span id="sobreExpLabel" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-6">experiência profissional</span>
+        <div id="sobreExpTimeline" class="space-y-4">
+          <!-- Injetado via JS -->
+        </div>
+      </div>
+
+      <!-- Formação Acadêmica & Certificações -->
+      <div class="mb-16 reveal-on-scroll">
+        <span id="sobreEduLabel" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-6">formação &amp; certificações</span>
+        <div id="sobreEduGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Injetado via JS -->
+        </div>
+      </div>
+
+      <!-- Competências & Softwares -->
+      <div class="mb-16 reveal-on-scroll">
+        <span id="sobreSkillsLabel" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-5">competências &amp; ferramentas</span>
+        <div id="sobreSkills" class="flex flex-wrap gap-2.5">
+          <!-- Injetado via JS -->
+        </div>
+      </div>
+
+      <!-- Metodologia de Trabalho -->
+      <div class="mb-16 reveal-on-scroll">
+        <span id="sobreProcessLabel" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-5">processo de trabalho</span>
+        <div id="sobreProcessSteps" class="space-y-4">
+          <!-- Injetado via JS -->
+        </div>
+      </div>
+
+      <!-- CTA Final do Sobre -->
+      <div class="pt-8 border-t border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 reveal-on-scroll">
+        <div>
+          <h3 id="sobreCtaTitle" class="text-xl sm:text-2xl font-medium text-[var(--ink)]">tem um desafio de produto com ux no meio?</h3>
+          <p id="sobreCtaSubtitle" class="text-sm text-[var(--muted)] mt-1 font-light">bora conversar e construir juntos.</p>
+        </div>
+        <button onclick="showView('contato')" id="sobreCtaBtn" class="btn-pill-primary shrink-0">
+          falar comigo →
+        </button>
+      </div>
+    </div>
 
   </main>
 
@@ -1746,33 +1770,115 @@
     let gameProjects = getGameProjects();
     let currentCardIndex = 0;
 
-    // Dicionário Bilíngue da Seção Sobre (Perfil Oficial LinkedIn)
+        // Dicionário Bilíngue da Seção Sobre (Home Teaser + Página Completa #/sobre)
     const sobreTranslations = {
       pt: {
+        homeTag: 'sobre',
+        homeTitle: 'entre o comportamento humano e o produto digital, alguém precisa traduzir.',
+        homeSummary: 'ux &amp; product designer no grupo h2. uno pesquisa comportamental, neurociência, estratégia de marketing e inteligência artificial para desenhar produtos digitais com impacto real.',
+        homeHighlights: ['product design', 'ux &amp; cro', 'neurociência', 'inteligência artificial'],
+        homeCta: 'conhecer minha trajetória',
+        homeContact: 'falar comigo',
+
+        backLabel: 'voltar ao portfólio',
         tag: 'sobre · perfil &amp; trajetória',
         title: 'entre o comportamento humano e o produto digital, alguém precisa traduzir.',
         lead: 'designer de produto estratégico focado em resultados de negócio, unindo ux, marketing, neurociência aplicada ao comportamento do usuário e o uso avançado de inteligência artificial para otimizar processos e sustentar decisões estratégicas.',
+        paragraphs: [
+          'adoto uma abordagem multidisciplinar que conecta dados qualitativos e quantitativos, ferramentas de inteligência artificial e insights comportamentais para compreender profundamente as necessidades reais dos usuários e alinhá-las aos objetivos estratégicos das organizações.',
+          'ao longo da minha trajetória, participei de projetos complexos que exigiram visão sistêmica, pensamento analítico e criatividade aplicada — sempre priorizando usabilidade, acessibilidade e experiência do usuário como pilares fundamentais.'
+        ],
+        expHeading: 'experiência profissional',
+        experiences: [
+          {
+            company: 'grupo h2',
+            role: 'product designer pleno',
+            period: 'set 2025 – atual',
+            location: 'são paulo, brasil',
+            desc: 'atuação estratégica em product design, evoluindo jornadas digitais, design systems e validação contínua de produto junto a squads multidisciplinares.'
+          },
+          {
+            company: 'blackbox technology &amp; cybersecurity',
+            role: 'product marketing manager',
+            period: 'jan 2025 – set 2025',
+            location: 'orlando, fl · eua',
+            desc: 'liderança de estratégias para experiências digitais centradas no usuário, com foco em usabilidade, engajamento, conversão, seo (search console) e análise comportamental (ga, hotjar, clarity, gtm e figma) em squads ágeis.'
+          },
+          {
+            company: 'easychange',
+            role: 'ux designer',
+            period: 'mai 2024 – set 2025',
+            location: 'são paulo, brasil',
+            desc: 'atuação na interseção entre marketing digital e ux: tradução de métricas de campanhas e comportamento em melhorias de jornada, landing pages, briefings de tráfego pago e ações de endomarketing.'
+          },
+          {
+            company: 'neogrid',
+            role: 'instructional designer',
+            period: 'abr 2023 – fev 2024',
+            location: 'são paulo, brasil',
+            desc: 'criação de programas estratégicos de treinamento corporativo, conteúdos interativos, pacotes scorm em plataformas lms, campanhas internas e produção audiovisual em adobe premiere.'
+          },
+          {
+            company: 'associação cartão cristão do brasil',
+            role: 'web designer',
+            period: 'jan 2021 – abr 2023',
+            location: 'são paulo, brasil',
+            desc: 'desenvolvimento e otimização de landing pages e fluxos de conversão, gestão de mídias sociais, relatórios de performance, criação visual e vídeos animados (photoshop e illustrator).'
+          },
+          {
+            company: 'nesta',
+            role: 'estágio em ui/ux design',
+            period: 'jan 2019 – dez 2019',
+            location: 'são paulo, brasil',
+            desc: 'criação de interfaces responsivas, wireframes e protótipos (figma, sketch, adobe xd) validados com usuários reais, testes de qa e landing pages no unbounce para o setor de educação.'
+          }
+        ],
+        eduHeading: 'formação &amp; certificações',
+        education: [
+          {
+            school: 'alura',
+            degree: 'ux lead: métricas de performance e qualidade',
+            period: 'ago 2025'
+          },
+          {
+            school: 'descomplica faculdade digital',
+            degree: 'pós-graduação em neurociência do desenvolvimento',
+            period: 'jul 2023 – jul 2024'
+          },
+          {
+            school: 'universidade anhembi morumbi',
+            degree: 'pós-graduação em user experience',
+            period: 'mai 2022 – jul 2023'
+          },
+          {
+            school: 'universidade paulista (unip)',
+            degree: 'graduação em design gráfico',
+            period: '2019 – 2021'
+          }
+        ],
+        skillsHeading: 'competências &amp; ferramentas',
         skills: [
           'product design',
           'ux research &amp; cro',
           'neurociência do comportamento',
           'inteligência artificial',
-          'google analytics &amp; hotjar',
-          'microsoft clarity',
+          'acessibilidade',
+          'liderança &amp; governança',
           'design systems',
           'figma',
+          'google analytics &amp; gtm',
+          'hotjar &amp; clarity',
+          'seo &amp; search console',
+          'adobe creative cloud',
+          'notion &amp; trello',
+          'slack &amp; azure',
           'scrum &amp; squads ágeis'
-        ],
-        paragraphs: [
-          'adoto uma abordagem multidisciplinar que conecta dados qualitativos e quantitativos, ferramentas de inteligência artificial e insights comportamentais para compreender profundamente as necessidades reais dos usuários e alinhá-las aos objetivos estratégicos das organizações.',
-          'atualmente atuo como <strong>product designer pleno no grupo h2</strong>. minha trajetória profissional inclui atuações como <strong>product marketing manager na blackbox technology &amp; cybersecurity</strong> (orlando, fl), liderando estratégias de usabilidade, engajamento e jornadas de descoberta via seo; <strong>ux designer na easychange</strong>, conectando análise de métricas de tráfego e campanhas a soluções de produto sem fricção; <strong>designer instrucional na neogrid</strong>; <strong>web designer na associação cartão cristão</strong>; e <strong>estágio em ui/ux na nesta</strong>.',
-          'sou pós-graduado em <strong>user experience</strong> pela universidade anhembi morumbi, pós-graduado em <strong>neurociência do desenvolvimento</strong> pela descomplica faculdade digital, graduado em <strong>design gráfico</strong> pela unip e possuo certificação como <strong>ux lead: métricas de performance e qualidade</strong> pela alura.'
         ],
         processHeading: 'processo de trabalho',
         steps: [
           {
             num: '01',
-            title: 'diagnóstico &amp; dados',
+            title: 'diagnóstico &amp; descoberta',
             desc: 'cruzo análises quantitativas (ga, hotjar, clarity) com pesquisa qualitativa e benchmarking competitivo para identificar gargalos reais de usabilidade e conversão.'
           },
           {
@@ -1791,24 +1897,106 @@
         ctaBtn: 'falar comigo →'
       },
       en: {
+        homeTag: 'about',
+        homeTitle: 'between human behavior and digital products, someone needs to translate.',
+        homeSummary: 'ux &amp; product designer at grupo h2. combining behavioral research, neuroscience, marketing strategy, and artificial intelligence to craft digital products with real business impact.',
+        homeHighlights: ['product design', 'ux &amp; cro', 'neuroscience', 'artificial intelligence'],
+        homeCta: 'explore full background',
+        homeContact: 'get in touch',
+
+        backLabel: 'back to portfolio',
         tag: 'about · profile &amp; background',
         title: 'between human behavior and digital products, someone needs to translate.',
         lead: 'strategic product designer focused on business results, combining ux, marketing, neuroscience applied to user behavior, and the advanced use of artificial intelligence to optimize workflows and drive strategic impact.',
+        paragraphs: [
+          'i adopt a multidisciplinary approach, combining behavioral insights, qualitative and quantitative data, along with ai tools, to deeply understand user needs and align them with the strategic objectives of organizations.',
+          'throughout my career, i have participated in complex projects requiring systemic vision, analytical thinking, and applied creativity — always prioritizing usability, accessibility, and user experience as fundamental pillars.'
+        ],
+        expHeading: 'work experience',
+        experiences: [
+          {
+            company: 'grupo h2',
+            role: 'product designer pl',
+            period: 'sep 2025 – present',
+            location: 'são paulo, brazil',
+            desc: 'driving product design strategy, evolving digital journeys, scalable design systems, and continuous validation alongside cross-functional squads.'
+          },
+          {
+            company: 'blackbox technology &amp; cybersecurity',
+            role: 'product marketing manager',
+            period: 'jan 2025 – sep 2025',
+            location: 'orlando, fl · usa',
+            desc: 'led user-centered digital strategy focused on usability, engagement, conversion optimization, seo (search console), and behavioral analytics (ga, hotjar, clarity, gtm, figma) within scrum squads.'
+          },
+          {
+            company: 'easychange',
+            role: 'ux designer',
+            period: 'may 2024 – sep 2025',
+            location: 'são paulo, brazil',
+            desc: 'worked at the intersection of digital marketing and ux: translating campaign and behavioral analytics into frictionless journeys, landing pages, paid-traffic briefs, and internal brand communication.'
+          },
+          {
+            company: 'neogrid',
+            role: 'instructional designer',
+            period: 'apr 2023 – feb 2024',
+            location: 'são paulo, brazil',
+            desc: 'developed strategic corporate training programs, interactive learning experiences, scorm/lms deployments, internal engagement campaigns, and audiovisual production in adobe premiere.'
+          },
+          {
+            company: 'associação cartão cristão do brasil',
+            role: 'web designer',
+            period: 'jan 2021 – apr 2023',
+            location: 'são paulo, brazil',
+            desc: 'designed and optimized conversion-focused landing pages and simulation flows, managed social media channels and performance reports, and produced visual assets and animations (photoshop &amp; illustrator).'
+          },
+          {
+            company: 'nesta',
+            role: 'ui/ux design intern',
+            period: 'jan 2019 – dec 2019',
+            location: 'são paulo, brazil',
+            desc: 'designed responsive interfaces, wireframes, and prototypes (figma, sketch, adobe xd) validated through user testing, executed qa checks, and built high-converting unbounce landing pages for education.'
+          }
+        ],
+        eduHeading: 'education &amp; certifications',
+        education: [
+          {
+            school: 'alura',
+            degree: 'ux lead: tracking performance and quality data',
+            period: 'aug 2025'
+          },
+          {
+            school: 'descomplica faculdade digital',
+            degree: 'postgraduate in developmental neuroscience',
+            period: 'jul 2023 – jul 2024'
+          },
+          {
+            school: 'universidade anhembi morumbi',
+            degree: 'postgraduate in user experience',
+            period: 'may 2022 – jul 2023'
+          },
+          {
+            school: 'universidade paulista (unip)',
+            degree: 'bachelor’s degree in graphic design',
+            period: '2019 – 2021'
+          }
+        ],
+        skillsHeading: 'skills &amp; tools',
         skills: [
           'product design',
           'ux research &amp; cro',
           'behavioral neuroscience',
           'artificial intelligence',
-          'google analytics &amp; hotjar',
-          'microsoft clarity',
+          'accessibility',
+          'leadership &amp; governance',
           'design systems',
           'figma',
+          'google analytics &amp; gtm',
+          'hotjar &amp; clarity',
+          'seo &amp; search console',
+          'adobe creative cloud',
+          'notion &amp; trello',
+          'slack &amp; azure',
           'scrum &amp; agile squads'
-        ],
-        paragraphs: [
-          'i adopt a multidisciplinary approach, combining behavioral insights, qualitative and quantitative data, along with ai tools, to deeply understand user needs and align them with the strategic objectives of organizations.',
-          'currently working as <strong>product designer pl at grupo h2</strong>. my career trajectory includes roles as <strong>product marketing manager at blackbox technology &amp; cybersecurity</strong> (orlando, fl), leading user-centered digital strategies, usability, and seo-driven journeys; <strong>ux designer at easychange</strong>, connecting performance analytics with ux solutions; <strong>instructional designer at neogrid</strong>; <strong>web designer at associação cartão cristão</strong>; and <strong>ui/ux design intern at nesta</strong>.',
-          'i hold a postgraduate degree in <strong>user experience</strong> (universidade anhembi morumbi), a postgraduate degree in <strong>developmental neuroscience</strong> (descomplica faculdade digital), a bachelor\'s degree in <strong>graphic design</strong> (unip), and ux lead certification focused on <strong>tracking performance and quality data</strong> (alura).'
         ],
         processHeading: 'work methodology',
         steps: [
@@ -1984,6 +2172,7 @@
         // 9. Re-renderiza carrossel de portfólio e grid de jogos com os novos dados
         renderPortfolioCarousel();
         renderGamesGrid();
+        lucide.createIcons();
 
         // 10. Se houver um estudo de caso aberto, atualiza seus dados
         if (activeCaseId) {
@@ -2003,27 +2192,81 @@
       setGlobalLang(lang);
     }
 
-    function updateSobreSection(lang) {
+        function updateSobreSection(lang) {
       const t = sobreTranslations[lang];
       if (!t) return;
+
+      // 1. Breve resumo na Home (#homeSobreTeaser)
+      const hTag = document.getElementById('homeSobreTag');
+      if (hTag) hTag.innerHTML = t.homeTag;
+      const hTitle = document.getElementById('homeSobreTitle');
+      if (hTitle) hTitle.innerHTML = t.homeTitle;
+      const hSum = document.getElementById('homeSobreSummary');
+      if (hSum) hSum.innerHTML = t.homeSummary;
+      const hHigh = document.getElementById('homeSobreHighlights');
+      if (hHigh) hHigh.innerHTML = t.homeHighlights.map(s => `<span class="tag-pill text-xs">${s}</span>`).join('');
+      const hCta = document.getElementById('homeSobreCtaBtn');
+      if (hCta) hCta.innerHTML = `<span>${t.homeCta}</span><i data-lucide="arrow-right" class="w-4 h-4"></i>`;
+      const hContact = document.getElementById('homeSobreContactBtn');
+      if (hContact) hContact.innerText = t.homeContact;
+
+      // 2. Página Dedicada Sobre (#viewSobre)
+      const sBack = document.getElementById('sobreBackLabel');
+      if (sBack) sBack.innerText = t.backLabel;
       const sTag = document.getElementById('sobreTag');
       if (sTag) sTag.innerHTML = t.tag;
-
       const sHead = document.getElementById('sobreHeading');
       if (sHead) sHead.innerHTML = t.title;
-
       const sLead = document.getElementById('sobreLead');
       if (sLead) sLead.innerHTML = t.lead;
-
-      const sSkills = document.getElementById('sobreSkills');
-      if (sSkills) sSkills.innerHTML = t.skills.map(s => `<span class="tag-pill">${s}</span>`).join('');
-
       const sBio = document.getElementById('sobreBio');
       if (sBio) sBio.innerHTML = t.paragraphs.map(p => `<p>${p}</p>`).join('');
 
+      const sExpLab = document.getElementById('sobreExpLabel');
+      if (sExpLab) sExpLab.innerHTML = t.expHeading;
+      const sExpList = document.getElementById('sobreExpTimeline');
+      if (sExpList && t.experiences) {
+        sExpList.innerHTML = t.experiences.map((exp, idx) => `
+          <div class="step-card p-6 sm:p-7 group">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-4 mb-2">
+              <div>
+                <h3 class="text-lg sm:text-xl font-medium text-[var(--ink)]">${exp.company}</h3>
+                <div class="text-sm font-mono text-[var(--accent)] mt-0.5">${exp.role}</div>
+              </div>
+              <div class="text-xs font-mono text-[var(--muted)] sm:text-right shrink-0">
+                <div>${exp.period}</div>
+                <div class="opacity-70">${exp.location}</div>
+              </div>
+            </div>
+            <p class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light mt-3">
+              ${exp.desc}
+            </p>
+          </div>
+        `).join('');
+      }
+
+      const sEduLab = document.getElementById('sobreEduLabel');
+      if (sEduLab) sEduLab.innerHTML = t.eduHeading;
+      const sEduGrid = document.getElementById('sobreEduGrid');
+      if (sEduGrid && t.education) {
+        sEduGrid.innerHTML = t.education.map(ed => `
+          <div class="step-card p-5 sm:p-6 flex flex-col justify-between gap-3">
+            <div>
+              <span class="text-xs font-mono text-[var(--accent)]">${ed.period}</span>
+              <h3 class="text-base sm:text-lg font-medium text-[var(--ink)] mt-1 leading-snug">${ed.degree}</h3>
+            </div>
+            <div class="text-xs font-mono text-[var(--muted)]">${ed.school}</div>
+          </div>
+        `).join('');
+      }
+
+      const sSkillsLab = document.getElementById('sobreSkillsLabel');
+      if (sSkillsLab) sSkillsLab.innerHTML = t.skillsHeading;
+      const sSkills = document.getElementById('sobreSkills');
+      if (sSkills) sSkills.innerHTML = t.skills.map(s => `<span class="tag-pill">${s}</span>`).join('');
+
       const sProcLab = document.getElementById('sobreProcessLabel');
       if (sProcLab) sProcLab.innerText = t.processHeading;
-
       const sSteps = document.getElementById('sobreProcessSteps');
       if (sSteps) {
         sSteps.innerHTML = t.steps.map(st => `
@@ -2039,10 +2282,8 @@
 
       const ctaT = document.getElementById('sobreCtaTitle');
       if (ctaT) ctaT.innerText = t.ctaTitle;
-
       const ctaSub = document.getElementById('sobreCtaSubtitle');
       if (ctaSub) ctaSub.innerText = t.ctaSubtitle;
-
       const ctaB = document.getElementById('sobreCtaBtn');
       if (ctaB) ctaB.innerText = t.ctaBtn;
     }
@@ -2415,7 +2656,7 @@
       document.querySelectorAll('.view-screen').forEach(el => el.classList.add('hidden'));
 
       // Atualiza botões do header
-      const navs = ['portfolio', 'jogos', 'contato'];
+      const navs = ['portfolio', 'sobre', 'jogos', 'contato'];
       navs.forEach(v => {
         const link = document.getElementById('navLink' + v.charAt(0).toUpperCase() + v.slice(1));
         const mobLink = document.getElementById('mobNav' + v.charAt(0).toUpperCase() + v.slice(1));
@@ -2424,17 +2665,16 @@
         if (mobLink) mobLink.setAttribute('data-active', isActive ? 'true' : 'false');
       });
 
-      // Trata link do sobre
-      const sobreLink = document.getElementById('navLinkSobre');
-      const mobSobreLink = document.getElementById('mobNavSobre');
-      if (sobreLink) sobreLink.setAttribute('data-active', 'false');
-      if (mobSobreLink) mobSobreLink.setAttribute('data-active', 'false');
-
       if (viewId === 'portfolio') {
         document.getElementById('viewPortfolio').classList.remove('hidden');
         renderPortfolioCarousel();
         window.location.hash = '#/portfolio';
         trackGA4PageView('#/portfolio', 'Portfólio de Produto · Lucas Nellucci');
+      } else if (viewId === 'sobre') {
+        document.getElementById('viewSobre').classList.remove('hidden');
+        updateSobreSection(currentGlobalLang);
+        window.location.hash = '#/sobre';
+        trackGA4PageView('#/sobre', 'Sobre & Trajetória · Lucas Nellucci');
       } else if (viewId === 'jogos') {
         document.getElementById('viewJogos').classList.remove('hidden');
         renderGamesGrid();
@@ -2453,32 +2693,7 @@
 
     // Rola suavemente até a seção Sobre abaixo do carrossel
     function scrollToSobre() {
-      activeCaseId = null;
-      // Garante que a tela de portfolio está visível
-      const portfolioView = document.getElementById('viewPortfolio');
-      if (portfolioView.classList.contains('hidden')) {
-        document.querySelectorAll('.view-screen').forEach(el => el.classList.add('hidden'));
-        portfolioView.classList.remove('hidden');
-        renderPortfolioCarousel();
-      }
-
-      // Atualiza estado dos links
-      const sobreLink = document.getElementById('navLinkSobre');
-      const mobSobreLink = document.getElementById('mobNavSobre');
-      const portLink = document.getElementById('navLinkPortfolio');
-      const mobPortLink = document.getElementById('mobNavPortfolio');
-      if (portLink) portLink.setAttribute('data-active', 'false');
-      if (mobPortLink) mobPortLink.setAttribute('data-active', 'false');
-      if (sobreLink) sobreLink.setAttribute('data-active', 'true');
-      if (mobSobreLink) mobSobreLink.setAttribute('data-active', 'true');
-
-      // Rola suavemente
-      const sobreSec = document.getElementById('sobreSection');
-      if (sobreSec) {
-        sobreSec.scrollIntoView({ behavior: 'smooth' });
-      }
-      window.location.hash = '#/sobre';
-      trackGA4PageView('#/sobre', 'Sobre & Trajetória · Lucas Nellucci');
+      showView('sobre');
     }
 
     // Renderiza o Carrossel do Portfólio (Estilo CaseCarousel de luccas.social.br com Animações)
