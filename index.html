@@ -2032,12 +2032,13 @@
       }
     }
 
-    // Efeito Visual Parallax / Coverflow Dinâmico baseado em offsetLeft do container de scroll
+    // Efeito Visual Parallax / Coverflow Dinâmico baseado nas posições visuais reais na tela
     let parallaxTicking = false;
     function updateCarouselParallax() {
       const track = document.getElementById('carouselTrack');
       if (!track) return;
-      const scrollCenter = track.scrollLeft + (track.clientWidth / 2);
+      const trackRect = track.getBoundingClientRect();
+      const trackCenter = trackRect.left + (trackRect.width / 2);
       const cards = track.querySelectorAll('.carousel-card');
       if (!cards.length) return;
       
@@ -2045,9 +2046,10 @@
       let minDistance = Infinity;
 
       cards.forEach((card, idx) => {
-        const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
-        const distance = Math.abs(scrollCenter - cardCenter);
-        const maxDist = card.offsetWidth * 1.05;
+        const cardRect = card.getBoundingClientRect();
+        const cardCenter = cardRect.left + (cardRect.width / 2);
+        const distance = Math.abs(trackCenter - cardCenter);
+        const maxDist = (cardRect.width || 680) * 1.15;
         const normDist = Math.min(1, distance / maxDist);
 
         const scale = 1 - (normDist * 0.08);
@@ -2064,7 +2066,7 @@
         }
       });
 
-      // Garante que o card mais próximo do centro SEMPRE tem .is-active
+      // Aplica .is-active com certeza absoluta no card mais próximo do centro
       cards.forEach((c, i) => {
         if (i === closestIdx) {
           c.classList.add('is-active');
@@ -2240,6 +2242,7 @@
       updateCounter();
       currentCardIndex = 0;
       setupCarouselWheel();
+      currentCardIndex = 0;
       updateActiveCardClasses(0);
       updateCarouselParallax();
       initScrollReveal();
@@ -2251,11 +2254,24 @@
       const cards = track.querySelectorAll('.carousel-card');
       if (cards[idx]) {
         currentCardIndex = idx;
-        const targetScroll = cards[idx].offsetLeft - ((track.clientWidth - cards[idx].offsetWidth) / 2);
-        track.scrollTo({ left: targetScroll, behavior: 'smooth' });
-        updateActiveCardClasses(idx);
+        cards[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        cards.forEach((c, i) => {
+          if (i === idx) {
+            c.classList.add('is-active');
+            c.style.transform = 'scale(1)';
+            c.style.opacity = '1';
+            c.style.filter = 'brightness(1)';
+          } else {
+            c.classList.remove('is-active');
+            c.style.transform = 'scale(0.92)';
+            c.style.opacity = '0.45';
+            c.style.filter = 'brightness(0.65)';
+          }
+        });
         renderDots();
         updateCounter();
+        setTimeout(updateCarouselParallax, 50);
+        setTimeout(updateCarouselParallax, 250);
       }
     }
 
