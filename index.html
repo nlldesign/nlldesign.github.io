@@ -537,7 +537,7 @@
   <!-- HEADER / NAVEGAÇÃO SUPERIOR (Grid 3 colunas idêntico ao luccas.social.br) -->
   <!-- ================================================================= -->
   <header class="site-nav">
-    <div class="max-w-[1240px] mx-auto px-5 sm:px-12 h-[68px] sm:h-[72px] flex items-center justify-between gap-4">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-12 h-[64px] sm:h-[72px] flex items-center justify-between gap-2.5 sm:gap-4 w-full">
       
       <!-- Esquerda: Brand Mark (Logo SVG + Nome) -->
       <a href="#/portfolio" onclick="showView('portfolio'); closeMobileMenu(); return false;" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
@@ -594,7 +594,7 @@
         </a>
 
         <!-- Botão Hambúrguer Mobile (Apenas em telas < 768px) -->
-        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 rounded-full flex flex-col items-center justify-center gap-1.5 border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] transition-all active:scale-95 shadow-sm" aria-label="Menu" aria-expanded="false">
+        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="md:hidden w-9 h-9 sm:w-10 sm:h-10 rounded-full flex flex-col items-center justify-center gap-1.5 border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] transition-all active:scale-95 shadow-sm shrink-0" aria-label="Menu" aria-expanded="false">
           <span class="w-4 h-0.5 bg-current transition-all duration-300 origin-center ham-line-1"></span>
           <span class="w-4 h-0.5 bg-current transition-all duration-300 origin-center ham-line-2"></span>
         </button>
@@ -1904,6 +1904,7 @@
       const drawer = document.getElementById('mobileMenuDrawer');
       if (drawer && btn) {
         drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
         btn.classList.add('is-active');
         btn.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
@@ -1915,6 +1916,7 @@
       const drawer = document.getElementById('mobileMenuDrawer');
       if (drawer && btn) {
         drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
         btn.classList.remove('is-active');
         btn.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
