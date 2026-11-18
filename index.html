@@ -2049,7 +2049,7 @@
         const cardRect = card.getBoundingClientRect();
         const cardCenter = cardRect.left + (cardRect.width / 2);
         const distance = Math.abs(trackCenter - cardCenter);
-        const maxDist = (cardRect.width || 680) * 1.15;
+        const maxDist = 720;
         const normDist = Math.min(1, distance / maxDist);
 
         const scale = 1 - (normDist * 0.08);
@@ -2060,11 +2060,14 @@
         card.style.opacity = opacity.toFixed(4);
         card.style.filter = `brightness(${brightness.toFixed(4)})`;
 
+        console.log('[PARALLAX_DEBUG] card=' + idx + ' cardCenter=' + cardCenter.toFixed(1) + ' trackCenter=' + trackCenter.toFixed(1) + ' dist=' + distance.toFixed(1) + ' min=' + minDistance.toFixed(1));
+
         if (distance < minDistance) {
           minDistance = distance;
           closestIdx = idx;
         }
       });
+      console.log('[PARALLAX_RESULT] closestIdx=' + closestIdx + ' currentCardIndex=' + currentCardIndex);
 
       // Aplica .is-active com certeza absoluta no card mais próximo do centro
       cards.forEach((c, i) => {
