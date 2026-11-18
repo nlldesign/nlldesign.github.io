@@ -726,6 +726,7 @@
 
     <!-- Carrossel de Cards Centralizados com Snap e Animação de Hover -->
     <div class="relative mb-24 sm:mb-32 anim-fade-in anim-delay-1">
+      <div id="debugCarousel" style="margin-bottom: 8px; padding: 6px; background: #9333ea; color: white; font-family: monospace; font-size: 11px; border-radius: 8px; overflow-wrap: break-word;"></div>
       <div id="carouselTrack" class="flex gap-8 overflow-x-auto snap-x snap-mandatory py-6 px-4 no-scrollbar scroll-smooth">
         <!-- Injetado dinamicamente via JS -->
       </div>
@@ -2060,8 +2061,6 @@
         card.style.opacity = opacity.toFixed(4);
         card.style.filter = `brightness(${brightness.toFixed(4)})`;
 
-        console.log('[PARALLAX_DEBUG] card=' + idx + ' cardCenter=' + cardCenter.toFixed(1) + ' trackCenter=' + trackCenter.toFixed(1) + ' dist=' + distance.toFixed(1) + ' min=' + minDistance.toFixed(1));
-
         if (distance < minDistance) {
           minDistance = distance;
           closestIdx = idx;
@@ -2077,6 +2076,12 @@
           c.classList.remove('is-active');
         }
       });
+
+      
+      const dbg = document.getElementById('debugCarousel');
+      if (dbg) {
+        dbg.innerText = 'TRK_L:' + trackRect.left.toFixed(0) + ' TRK_W:' + trackRect.width.toFixed(0) + ' CTR:' + trackCenter.toFixed(0) + ' S_LEFT:' + track.scrollLeft.toFixed(0) + ' | C0_D:' + Math.abs(trackCenter - (cards[0].getBoundingClientRect().left + cards[0].getBoundingClientRect().width/2)).toFixed(0) + ' C1_D:' + Math.abs(trackCenter - (cards[1].getBoundingClientRect().left + cards[1].getBoundingClientRect().width/2)).toFixed(0) + ' | CLOSEST:' + closestIdx + ' CURR:' + currentCardIndex;
+      }
 
       if (closestIdx !== currentCardIndex) {
         currentCardIndex = closestIdx;
