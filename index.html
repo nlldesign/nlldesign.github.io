@@ -433,46 +433,35 @@
     /* CARROSSEL DINÂMICO COVERFLOW & FOCO 3D                  */
     /* ======================================================= */
     #carouselTrack {
-      padding-left: max(20px, calc(50vw - min(42.5vw, 340px) - 20px));
-      padding-right: max(20px, calc(50vw - min(42.5vw, 340px) - 20px));
+      padding-left: calc((100% - min(85vw, 680px)) / 2);
+      padding-right: calc((100% - min(85vw, 680px)) / 2);
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
-      perspective: 1200px;
     }
 
     .carousel-card {
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                  opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                  filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  border-color 0.35s ease;
+      scroll-snap-align: center;
+      transition: box-shadow 0.35s ease, border-color 0.35s ease;
       will-change: transform, opacity, filter;
       transform-origin: center center;
     }
 
     /* Card Ativo Centralizado */
     .carousel-card.is-active {
-      transform: scale(1) translateY(0);
-      opacity: 1 !important;
-      filter: brightness(1) !important;
-      border-color: rgba(192, 132, 252, 0.45);
-      box-shadow: 0 32px 70px rgba(4, 2, 10, 0.8), 0 0 36px rgba(168, 85, 247, 0.22), 0 0 0 1px rgba(192, 132, 252, 0.35);
+      border-color: rgba(192, 132, 252, 0.45) !important;
+      box-shadow: 0 32px 70px rgba(4, 2, 10, 0.8), 0 0 36px rgba(168, 85, 247, 0.22), 0 0 0 1px rgba(192, 132, 252, 0.35) !important;
       z-index: 10;
     }
 
     /* Cards Inativos Laterais */
     .carousel-card:not(.is-active) {
-      transform: scale(0.92) translateY(6px);
-      opacity: 0.45;
-      filter: brightness(0.65) blur(0.3px);
+      border-color: var(--line);
+      box-shadow: var(--shadow);
       z-index: 1;
     }
 
     .carousel-card:not(.is-active):hover {
-      opacity: 0.75;
-      transform: scale(0.95) translateY(2px);
-      filter: brightness(0.85);
       border-color: rgba(192, 132, 252, 0.25);
     }
 
@@ -2014,6 +2003,26 @@
     }
 
     
+    // Atualiza classes ativas e estilos de profundidade imediatamente
+    function updateActiveCardClasses(activeIdx) {
+      const track = document.getElementById('carouselTrack');
+      if (!track) return;
+      const cards = track.querySelectorAll('.carousel-card');
+      cards.forEach((c, i) => {
+        if (i === activeIdx) {
+          c.classList.add('is-active');
+          c.style.transform = 'scale(1)';
+          c.style.opacity = '1';
+          c.style.filter = 'brightness(1)';
+        } else {
+          c.classList.remove('is-active');
+          c.style.transform = 'scale(0.92)';
+          c.style.opacity = '0.45';
+          c.style.filter = 'brightness(0.65)';
+        }
+      });
+    }
+
     // Gerenciador de Clique no Card: Centraliza se estiver na lateral, abre o case se já for o ativo
     function onCardClick(idx, id) {
       if (idx !== currentCardIndex) {
@@ -2023,26 +2032,25 @@
       }
     }
 
-    // Efeito Visual Parallax / Coverflow Dinâmico no Carrossel
+    // Efeito Visual Parallax / Coverflow Dinâmico baseado em offsetLeft do container de scroll
     let parallaxTicking = false;
     function updateCarouselParallax() {
       const track = document.getElementById('carouselTrack');
       if (!track) return;
-      const trackRect = track.getBoundingClientRect();
-      const trackCenter = trackRect.left + trackRect.width / 2;
+      const scrollCenter = track.scrollLeft + (track.clientWidth / 2);
       const cards = track.querySelectorAll('.carousel-card');
+      if (!cards.length) return;
       
       let closestIdx = 0;
       let minDistance = Infinity;
 
       cards.forEach((card, idx) => {
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
-        const distance = Math.abs(trackCenter - cardCenter);
-        const maxDist = card.clientWidth * 1.1;
+        // offsetLeft é imutável em relação a transform: scale()
+        const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+        const distance = Math.abs(scrollCenter - cardCenter);
+        const maxDist = card.offsetWidth * 1.05;
         const normDist = Math.min(1, distance / maxDist);
 
-        // Interpolação fluida baseada na distância do centro
         const scale = 1 - (normDist * 0.08);
         const opacity = 1 - (normDist * 0.55);
         const brightness = 1 - (normDist * 0.35);
@@ -2057,7 +2065,6 @@
         }
       });
 
-      // Atualiza classe is-active e dots se o card central mudou
       if (closestIdx !== currentCardIndex) {
         currentCardIndex = closestIdx;
         cards.forEach((c, i) => {
@@ -2072,7 +2079,7 @@
       }
     }
 
-    // Suporte a rolagem horizontal suave com a roda do mouse (Wheel Assist)
+    // Suporte a rolagem com Wheel e listener de scroll nativo
     function setupCarouselWheel() {
       const track = document.getElementById('carouselTrack');
       if (!track || track._wheelAttached) return;
@@ -2081,7 +2088,8 @@
       track.addEventListener('scroll', () => {
         if (!parallaxTicking) {
           window.requestAnimationFrame(() => {
-            updateCarouselParallax();
+            updateActiveCardClasses(currentCardIndex);
+      updateCarouselParallax();
             parallaxTicking = false;
           });
           parallaxTicking = true;
@@ -2261,21 +2269,14 @@
 
     function scrollToCard(idx) {
       const track = document.getElementById('carouselTrack');
-      const cards = track.querySelectorAll('article');
+      const cards = track.querySelectorAll('.carousel-card');
       if (cards[idx]) {
-        cards[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         currentCardIndex = idx;
-        cards.forEach((c, i) => {
-          if (i === idx) {
-            c.classList.add('is-active');
-          } else {
-            c.classList.remove('is-active');
-          }
-        });
+        const targetScroll = cards[idx].offsetLeft - ((track.clientWidth - cards[idx].offsetWidth) / 2);
+        track.scrollTo({ left: targetScroll, behavior: 'smooth' });
+        updateActiveCardClasses(idx);
         renderDots();
         updateCounter();
-        setTimeout(updateCarouselParallax, 50);
-        setTimeout(updateCarouselParallax, 200);
       }
     }
 
