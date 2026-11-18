@@ -859,7 +859,7 @@
       </div>
 
       <div class="text-[11px] font-mono text-[var(--muted)] text-center pt-2 opacity-70">
-        nellucci.design@gmail.com • são paulo, brasil
+        lucasnellucci@gmail.com • (11) 98478-9811
       </div>
     </div>
 
@@ -906,7 +906,7 @@
       </div>
 
       <div id="carouselCounter" class="text-center text-xs font-mono text-[var(--muted)] mt-2">
-        1 / 4
+        1 / 5
       </div>
     </div>
 
@@ -1080,7 +1080,7 @@
       </p>
 
       <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
-        <a href="mailto:nellucci.design@gmail.com" onclick="trackOutboundClick('email', this.href, 'contact_panel')" class="px-7 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105 inline-flex items-center gap-1.5" style="background: var(--inv-ink); color: var(--inv-bg);">
+        <a href="mailto:lucasnellucci@gmail.com" onclick="trackOutboundClick('email', this.href, 'contact_panel')" class="px-7 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105 inline-flex items-center gap-1.5" style="background: var(--inv-ink); color: var(--inv-bg);">
           <span id="contatoEmailText">enviar mensagem <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg></span>
         </a>
         <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'contact_panel')" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105 inline-flex items-center gap-1.5" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
@@ -1092,7 +1092,11 @@
       </div>
 
       <div class="flex flex-col items-center gap-2">
-        <span class="text-xs font-mono opacity-60">nellucci.design@gmail.com</span>
+        <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs font-mono opacity-70">
+          <span>lucasnellucci@gmail.com</span>
+          <span>•</span>
+          <a href="https://wa.me/5511984789811" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('whatsapp', this.href, 'contact_panel')" class="hover:underline">(11) 98478-9811</a>
+        </div>
         <span id="contatoLocationText" class="text-xs font-mono opacity-50">são paulo, brasil • disponível globalmente (remoto / híbrido)</span>
       </div>
 
@@ -1184,6 +1188,12 @@
 
     </div>
 
+    <!-- Softwares & Disciplinas Utilizadas -->
+    <div id="caseTechsSection" class="mb-14 hidden">
+      <span id="caseTechsLabel" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-3">softwares &amp; disciplinas</span>
+      <div id="caseTechsRow" class="flex flex-wrap gap-2"></div>
+    </div>
+
     <!-- Galeria Visual de Telas com Lightbox -->
     <div id="caseGallerySection" class="mb-16">
       <!-- Injetado via JS -->
@@ -1223,7 +1233,7 @@
         <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" onclick="trackOutboundClick('linkedin', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">linkedin</a>
         <a href="https://www.behance.net/lucasnellucci" target="_blank" onclick="trackOutboundClick('behance', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">behance</a>
         <a href="https://github.com/nlldesign" target="_blank" class="hover:text-[var(--ink)] transition-colors">github</a>
-        <a href="mailto:nellucci.design@gmail.com" onclick="trackOutboundClick('email', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">email</a>
+        <a href="mailto:lucasnellucci@gmail.com" onclick="trackOutboundClick('email', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">email</a>
       </div>
     </div>
   </footer>
@@ -1267,6 +1277,8 @@
         backToPortfolio: "voltar ao portfólio",
         backToGames: "voltar aos jogos",
         viewFigma: "ver no figma <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        viewBehance: "ver no behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        techsLabel: "softwares &amp; disciplinas",
         openVercel: "abrir na vercel <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         officialSite: "site oficial <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         labelDesafio: "desafio",
@@ -1316,6 +1328,8 @@
         backToPortfolio: "back to portfolio",
         backToGames: "back to games",
         viewFigma: "view on figma <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        viewBehance: "view on behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        techsLabel: "tools &amp; disciplines",
         openVercel: "open on vercel <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         officialSite: "official website <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         labelDesafio: "challenge",
@@ -1350,7 +1364,7 @@
           desafio: 'a solicitação surgiu após o antigo fluxo apresentar problemas de funcionalidade que impediam os usuários de realizar simulações de planos, resultando em uma diminuição nas conversões provenientes do site. era fundamental resolver esses problemas para melhorar a experiência do usuário e recuperar as taxas de conversão com agilidade.',
           abordagem: 'optei por seguir para um padrão de interface coeso e direto, com campos de preenchimento limpos e arquitetura de passos guiados. organizando a informação com feedback imediato de valores, eliminamos dúvidas cognitivas e facilitamos a manutenção contínua.',
           resultado: 'as melhorias implementadas resultaram em um aumento considerável na taxa de conversão do site, corrigindo deficiências históricas do fluxo e fortalecendo a captação de novos associados.',
-          techs: ['ux design', 'cro', 'figma', 'wireframing'],
+          techs: ['figma', 'notion', 'adobe illustrator', 'microsoft office', 'slack', 'trello'],
           figmaUrl: null,
           siteUrl: 'https://www.associacaocartaocristao.com.br/assistencia-medica.html',
           behanceUrl: 'https://www.behance.net/gallery/137906687/Simulacao-de-novos-Associados-Cartao-Cristao',
@@ -1377,7 +1391,7 @@
             { val: '100%', label: 'componentizado no figma' }
           ],
           desafio: 'o supermercado bom vizinho dependia exclusivamente de plataformas terceirizadas de entrega. isso limitava severamente a autonomia sobre a marca, a experiência do cliente e a capacidade de fidelização direta.',
-          abordagem: 'o processo foi estruturado em três etapas: imersão, ideação e prototipação. documentamos personas no notion, realizamos benchmarking detalhado de referências do setor no figma e desenvolvemos um design system modular com componentes reutilizáveis para compra e entrega.',
+          abordagem: 'o processo foi estruturado em três etapas: imersão, ideação e prototipação. documentamos no notion e realizamos benchmarking com referências como nabis, nagumo, amazon, ifood e magazine luiza em um painel semântico no figma, culminando em design system e wireframes detalhados.',
           resultado: 'entrega de um protótipo de alta fidelidade que proporcionou uma experiência de compra online fluida, permitindo ao supermercado planejar seu canal direto com controle sobre campanhas e dados de clientes.',
           techs: ['ux research', 'design system', 'figma', 'benchmarking'],
           figmaUrl: null,
@@ -1445,6 +1459,37 @@
             { src: 'assets/framer/intern_2_N2wAqYWAsNq6keAihvfLfgXUlA.png', title: 'biblioteca de componentes e style guide no figma' },
             { src: 'assets/framer/intern_3_Y597s7LZ2lE1lQEXdGU40lznLA0.png', title: 'fluxo antigo da intranet e telas preliminares' }
           ]
+        },
+
+        {
+          id: 'social-media',
+          category: 'trabalho',
+          tag: 'social media &amp; marca',
+          num: '05',
+          title: 'peças digitais para redes sociais',
+          subtitle: 'associação cartão cristão &amp; 9 marcas parceiras • campanhas e performance',
+          summary: 'dois anos de direção visual, campanhas digitais e relatórios de performance para instagram, facebook e linkedin em um ecossistema de 9 marcas.',
+          image: 'assets/framer/social-media_7_dzpes7047JLwMTB827dPxmFKO8A.png',
+          metrics: [
+            { val: '9 marcas', label: 'ecossistema de saúde, educação &amp; pet' },
+            { val: '2 anos', label: 'gestão contínua de mídias sociais' },
+            { val: 'multicanal', label: 'instagram, facebook &amp; linkedin' }
+          ],
+          desafio: 'a associação cartão cristão e seus parceiros (instituto cartão cristão, cartão cristão odonto, cartão cristão pet, clube de saúde são mateus, laboratório melior, colégio paulo monteiro, clube da comunidade alcidio monteiro e collisbloco) precisavam elevar engajamento, visibilidade e conversões com comunicação consistente.',
+          abordagem: 'desenvolvimento de campanhas visuais atraentes, vídeos animados e calendário integrado para redes sociais, aliado a relatórios detalhados de performance para ajustes estratégicos orientados a resultados em tempo real.',
+          resultado: 'aumento expressivo no engajamento e nas conversões das campanhas digitais, consolidando a identidade visual das 9 marcas do grupo.',
+          techs: ['figma', 'adobe photoshop', 'adobe illustrator', 'microsoft office', 'slack', 'trello'],
+          figmaUrl: null,
+          siteUrl: null,
+          behanceUrl: null,
+          gallery: [
+            { src: 'assets/framer/social-media_7_dzpes7047JLwMTB827dPxmFKO8A.png', title: 'associação cartão cristão • campanha março lilás' },
+            { src: 'assets/framer/social-media_10_K0vZr2puFJXrIIwrG79VRjBMHA.png', title: 'associação cartão cristão • dia internacional da mulher' },
+            { src: 'assets/framer/social-media_36_4e5iybVxUTmlO42IXPKKtiolzq8.png', title: 'cartão cristão pet • campanha plano veterinário' },
+            { src: 'assets/framer/social-media_14_5UsyhNNh3InSIo5xqXDzmCvxDA.png', title: 'laboratório melior • comunicação diagnóstica' },
+            { src: 'assets/framer/social-media_20_h6aCNIJ6S5QC7jxkT6EQS6xjU.png', title: 'instituto cartão cristão • carrossel educativo' },
+            { src: 'assets/framer/social-media_8_vNTaCTysJ6TqIjKlrUME51yEthc.png', title: 'clube da comunidade • campanha esportiva futsal' }
+          ]
         }
       ],
       en: [
@@ -1492,7 +1537,7 @@
             { val: '100%', label: 'figma component system' }
           ],
           desafio: 'bom vizinho supermarket relied exclusively on third-party delivery apps. this severely limited their brand independence, customer experience control, and direct retention capabilities.',
-          abordagem: 'structured the project across discovery, ideation, and prototyping. documented personas in notion, conducted comprehensive competitor benchmarking in figma, and developed a modular atomic design system for seamless catalog browsing and checkout.',
+          abordagem: 'structured across immersion, ideation, and prototyping. documented in notion and benchmarked references including nabis, nagumo, amazon, ifood, and magazine luiza on a semantic figma board, leading to a modular design system and detailed wireframes.',
           resultado: 'delivered a high-fidelity interactive prototype enabling the supermarket to launch its direct digital channel with full ownership over promotions and customer relationships.',
           techs: ['ux research', 'design system', 'figma', 'benchmarking'],
           figmaUrl: null,
@@ -1559,6 +1604,37 @@
             { src: 'assets/framer/intern_1_k7XuUK8a3NSNh4RCb6b4iQOwejI.png', title: '10 mobile app screens (feed, chat, employee profile and training)' },
             { src: 'assets/framer/intern_2_N2wAqYWAsNq6keAihvfLfgXUlA.png', title: 'component library and design system in figma' },
             { src: 'assets/framer/intern_3_Y597s7LZ2lE1lQEXdGU40lznLA0.png', title: 'legacy intranet flow and preliminary wireframes' }
+          ]
+        },
+
+        {
+          id: 'social-media',
+          category: 'trabalho',
+          tag: 'social media &amp; brand',
+          num: '05',
+          title: 'digital creatives for social media',
+          subtitle: 'associação cartão cristão &amp; 9 partner brands • campaigns &amp; analytics',
+          summary: 'two years of visual direction, digital campaigns, and performance reporting across instagram, facebook, and linkedin for a 9-brand ecosystem.',
+          image: 'assets/framer/social-media_7_dzpes7047JLwMTB827dPxmFKO8A.png',
+          metrics: [
+            { val: '9 brands', label: 'healthcare, education &amp; pet ecosystem' },
+            { val: '2 years', label: 'end-to-end social media management' },
+            { val: 'omnichannel', label: 'instagram, facebook &amp; linkedin' }
+          ],
+          desafio: 'associação cartão cristão and its partner brands (instituto cartão cristão, cartão cristão odonto, cartão cristão pet, clube de saúde são mateus, laboratório melior, colégio paulo monteiro, clube da comunidade alcidio monteiro, and collisbloco) needed stronger engagement, visibility, and campaign conversions.',
+          abordagem: 'created cohesive visual campaigns, motion assets, and multi-channel content calendars paired with detailed performance reports to drive real-time strategic optimizations.',
+          resultado: 'significant lift in audience engagement and campaign conversions while unifying brand consistency across all 9 organizations.',
+          techs: ['figma', 'adobe photoshop', 'adobe illustrator', 'microsoft office', 'slack', 'trello'],
+          figmaUrl: null,
+          siteUrl: null,
+          behanceUrl: null,
+          gallery: [
+            { src: 'assets/framer/social-media_7_dzpes7047JLwMTB827dPxmFKO8A.png', title: 'associação cartão cristão • women’s health campaign' },
+            { src: 'assets/framer/social-media_10_K0vZr2puFJXrIIwrG79VRjBMHA.png', title: 'associação cartão cristão • international women’s day' },
+            { src: 'assets/framer/social-media_36_4e5iybVxUTmlO42IXPKKtiolzq8.png', title: 'cartão cristão pet • veterinary plan campaign' },
+            { src: 'assets/framer/social-media_14_5UsyhNNh3InSIo5xqXDzmCvxDA.png', title: 'laboratório melior • diagnostic awareness post' },
+            { src: 'assets/framer/social-media_20_h6aCNIJ6S5QC7jxkT6EQS6xjU.png', title: 'instituto cartão cristão • educational carousel' },
+            { src: 'assets/framer/social-media_8_vNTaCTysJ6TqIjKlrUME51yEthc.png', title: 'clube da comunidade • youth futsal campaign' }
           ]
         }
       ]
@@ -2945,6 +3021,18 @@
             </div>
           </div>
         `;
+      }
+
+      // Softwares & Disciplinas Utilizadas
+      const techsSec = document.getElementById('caseTechsSection');
+      const techsRow = document.getElementById('caseTechsRow');
+      const techsLab = document.getElementById('caseTechsLabel');
+      if (techsLab) techsLab.innerHTML = tLang.techsLabel;
+      if (techsSec && techsRow && item.techs && item.techs.length > 0) {
+        techsRow.innerHTML = item.techs.map(tc => `<span class="tag-pill text-xs">${tc}</span>`).join('');
+        techsSec.classList.remove('hidden');
+      } else if (techsSec) {
+        techsSec.classList.add('hidden');
       }
 
       // Galeria Visual
