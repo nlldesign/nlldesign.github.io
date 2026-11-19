@@ -911,6 +911,31 @@
     </div>
 
         <!-- =============================================================== -->
+    
+    <!-- =============================================================== -->
+    <!-- PRODUTOS & EXPERIMENTOS WEB (DEPLOY LIVE NA VERCEL)             -->
+    <!-- =============================================================== -->
+    <section id="vercelAppsSection" class="max-w-[1120px] mx-auto pt-14 sm:pt-16 border-t border-[var(--line)] mb-16 sm:mb-24 reveal-on-scroll">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div>
+          <div class="tag-pill mb-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span id="vercelAppsTag">produtos &amp; labs • vercel</span>
+          </div>
+          <h2 id="vercelAppsTitle" class="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)]">
+            aplicações &amp; protótipos funcionais em produção.
+          </h2>
+        </div>
+        <p id="vercelAppsSubtitle" class="text-xs sm:text-sm text-[var(--muted)] max-w-md font-light">
+          ferramentas de ia, saúde, rh, prospecção e produtividade construídas e publicadas na vercel — clique para abrir e navegar.
+        </p>
+      </div>
+
+      <div id="vercelAppsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Injetado via JS -->
+      </div>
+    </section>
+
     <!-- RESUMO BREVE DO SOBRE NA HOME (LEVA PARA A PÁGINA #/sobre)      -->
     <!-- =============================================================== -->
     <section id="homeSobreTeaser" class="max-w-[920px] mx-auto pt-14 sm:pt-16 border-t border-[var(--line)] mb-16 sm:mb-24 reveal-on-scroll">
@@ -1256,6 +1281,9 @@
         heroPortTitle: 'trabalhos que começam <em class="font-serif-accent italic text-[var(--accent)]">em uma pergunta.</em>',
         heroPortSubtitle: "navegue pelos estudos de caso de produto, escolha um e veja o processo inteiro: o problema de negócio, a arquitetura e o que mudou no resultado.",
         openCaseBtn: "abrir case",
+        vercelAppsTag: "produtos &amp; labs • vercel",
+        vercelAppsTitle: "aplicações &amp; protótipos funcionais em produção.",
+        vercelAppsSubtitle: "ferramentas de ia, saúde, rh, prospecção e produtividade construídas e publicadas na vercel — clique para abrir e navegar.",
 
         heroJogosTag: "jogos &amp; 3d interativo",
         heroJogosTitle: 'jogos, spatial ux e <em class="font-serif-accent italic text-cyan-400">sensorial 3d.</em>',
@@ -1307,6 +1335,9 @@
         heroPortTitle: 'work that begins <em class="font-serif-accent italic text-[var(--accent)]">with a question.</em>',
         heroPortSubtitle: "explore end-to-end product design case studies: business bottlenecks, information architecture, behavioral neuroscience, and measurable conversion lift.",
         openCaseBtn: "open case",
+        vercelAppsTag: "products &amp; labs • vercel",
+        vercelAppsTitle: "live applications &amp; functional prototypes.",
+        vercelAppsSubtitle: "ai, healthcare, hr, lead generation, and productivity apps built and deployed on vercel — click any card to explore live.",
 
         heroJogosTag: "games &amp; interactive 3d",
         heroJogosTitle: 'games, spatial ux &amp; <em class="font-serif-accent italic text-cyan-400">3d sensory design.</em>',
@@ -1660,7 +1691,7 @@
           abordagem: 'utilização de interface diegética: a respiração do personagem indica exaustão, o tremor da lanterna comunica pavor e o inventário é inspecionado diretamente no espaço tridimensional.',
           resultado: 'imersão profunda de horror e alta taxa de retenção por sessão em navegadores desktop.',
           techs: ['three.js', 'webgl', 'spatial audio', 'diegetic ui'],
-          vercelUrl: 'https://corpo-seco.vercel.app',
+          vercelUrl: 'https://vale-do-corpo-seco.vercel.app/',
           embedUrl: 'games/corpo-seco/index.html',
           gallery: []
         },
@@ -1683,7 +1714,7 @@
           abordagem: 'câmera isométrica fluida para exploração das ruínas e transição cinematográfica para o plano de combate, mantendo as mecânicas originais de desvio.',
           resultado: 'experiência aclamada pela precisão de movimento e fidelidade sensorial ao clássico.',
           techs: ['three.js', 'custom shaders', 'game design'],
-          vercelUrl: 'https://undertale-3d.vercel.app',
+          vercelUrl: null,
           embedUrl: 'games/undertale-3d/index.html',
           gallery: []
         },
@@ -1706,7 +1737,7 @@
           abordagem: 'motor físico personalizado em canvas puro calculando inércia, fricção e colisão de projéteis com micro-explosões de partículas.',
           resultado: 'jogabilidade viciante de estilo arcade com ciclo de reinício instantâneo.',
           techs: ['html5 canvas', 'game physics', 'arcade ui'],
-          vercelUrl: 'https://swam-invasion.vercel.app',
+          vercelUrl: 'https://milons.vercel.app/',
           embedUrl: 'games/swam-invasion/index.html',
           gallery: []
         },
@@ -1729,8 +1760,31 @@
           abordagem: 'criação de botões táteis analógicos, sons de estática e frequências de rádio via web audio api e representação volumétrica de recursos em tanques 3d.',
           resultado: 'experiência com atmosfera singular e prazer sensorial de operar uma rádio clandestina.',
           techs: ['web audio api', 'tactile ui', 'world building'],
-          vercelUrl: 'https://biopunk-idle.vercel.app',
+          vercelUrl: null,
           embedUrl: 'games/bio-horde/index.html',
+          gallery: []
+        },
+
+        {
+          id: 'pizzarun',
+          category: 'jogos',
+          tag: 'next.js &amp; 3d runner',
+          num: '05',
+          title: 'midnight pizza run 2.0',
+          subtitle: 'jogo 3d em tempo real • corrida noturna, obstáculos e hud arcade',
+          summary: 'experiência 3d interativa construída com next.js e renderização em canvas, unindo resposta imediata de controles, câmera dinâmica e placar em tempo real.',
+          image: 'assets/pizzarun-preview.svg',
+          metrics: [
+            { val: 'next.js', label: 'arquitetura web interativa' },
+            { val: '3d runner', label: 'câmera e colisões em tempo real' },
+            { val: 'vercel', label: 'deploy ao vivo em produção' }
+          ],
+          desafio: 'criar uma corrida 3d fluida direto no navegador com inicialização instantânea, feedback claro de pontuação e controles responsivos.',
+          abordagem: 'desenvolvimento de tela inicial imersiva integrada ao canvas 3d, transições imediatas para o gameplay e hud minimalista de alta legibilidade.',
+          resultado: 'jogo 3d publicado e navegável na vercel com ciclo completo de partida e pontuação ao vivo.',
+          techs: ['next.js', 'three.js', 'game feel', 'vercel'],
+          vercelUrl: 'https://pizzarun2-0.vercel.app/',
+          embedUrl: null,
           gallery: []
         }
       ],
@@ -1753,7 +1807,7 @@
           abordagem: 'implemented a purely diegetic ui: character breathing signals exhaustion, flashlight flickering indicates terror, and inventory items are inspected directly within 3d space.',
           resultado: 'deep narrative immersion and high session retention across desktop browsers.',
           techs: ['three.js', 'webgl', 'spatial audio', 'diegetic ui'],
-          vercelUrl: 'https://corpo-seco.vercel.app',
+          vercelUrl: 'https://vale-do-corpo-seco.vercel.app/',
           embedUrl: 'games/corpo-seco/index.html',
           gallery: []
         },
@@ -1776,7 +1830,7 @@
           abordagem: 'fluid isometric camera for ruins exploration paired with a cinematic zoom into the battle plane, maintaining original dodging dynamics and sound design.',
           resultado: 'celebrated by players for its movement precision and sensory tribute to the classic indie title.',
           techs: ['three.js', 'custom shaders', 'game design'],
-          vercelUrl: 'https://undertale-3d.vercel.app',
+          vercelUrl: null,
           embedUrl: 'games/undertale-3d/index.html',
           gallery: []
         },
@@ -1799,7 +1853,7 @@
           abordagem: 'custom lightweight physics engine in pure html5 canvas calculating inertia, drag, and projectile collisions with micro-particle sparks.',
           resultado: 'addictive arcade-style gameplay with instant restart loops and high replay value.',
           techs: ['html5 canvas', 'game physics', 'arcade ui'],
-          vercelUrl: 'https://swam-invasion.vercel.app',
+          vercelUrl: 'https://milons.vercel.app/',
           embedUrl: 'games/swam-invasion/index.html',
           gallery: []
         },
@@ -1822,8 +1876,31 @@
           abordagem: 'crafted physical-feeling skeuomorphic toggles, radio static frequencies via the web audio api, and volumetric 3d resource tanks.',
           resultado: 'evocative atmospheric depth with the tactile satisfaction of operating a clandestine transmitter.',
           techs: ['web audio api', 'tactile ui', 'world building'],
-          vercelUrl: 'https://biopunk-idle.vercel.app',
+          vercelUrl: null,
           embedUrl: 'games/bio-horde/index.html',
+          gallery: []
+        },
+
+        {
+          id: 'pizzarun',
+          category: 'jogos',
+          tag: 'next.js &amp; 3d runner',
+          num: '05',
+          title: 'midnight pizza run 2.0',
+          subtitle: 'real-time 3d web game • night run, obstacle dodging &amp; arcade hud',
+          summary: 'interactive 3d browser experience built with next.js and real-time canvas rendering, pairing tight controls with dynamic camera framing and live scoring.',
+          image: 'assets/pizzarun-preview.svg',
+          metrics: [
+            { val: 'next.js', label: 'interactive web architecture' },
+            { val: '3d runner', label: 'real-time camera &amp; collisions' },
+            { val: 'vercel', label: 'live production deployment' }
+          ],
+          desafio: 'delivering a smooth 3d browser runner with instant startup, clear score feedback, and responsive movement.',
+          abordagem: 'crafted an immersive start screen over the live 3d canvas with instant transition into active gameplay and a clean, high-contrast hud.',
+          resultado: 'fully playable 3d web game live on vercel with complete loop and live scoring.',
+          techs: ['next.js', 'three.js', 'game feel', 'vercel'],
+          vercelUrl: 'https://pizzarun2-0.vercel.app/',
+          embedUrl: null,
           gallery: []
         }
       ]
@@ -2098,6 +2175,161 @@
       }
     };
 
+    
+    const vercelAppsData = {
+      pt: [
+        {
+          id: 'fibrocare',
+          tag: 'health tech · vite',
+          title: 'fibrocare',
+          desc: 'monitor cíclico e alerta preventivo de crises para pacientes com fibromialgia, com onboarding fluido.',
+          image: 'assets/fibrocare-preview.svg',
+          url: 'https://fibrocare-alpha.vercel.app/',
+          status: 'aberto'
+        },
+        {
+          id: 'job-finder',
+          tag: 'ia · recrutamento',
+          title: 'jobfinder ai',
+          desc: 'copiloto de carreira e recrutamento com preenchimento assistido por ia e análise de aderência a vagas.',
+          image: 'assets/jobhunter-preview.svg',
+          url: 'https://job-finder-azure-zeta.vercel.app/',
+          status: 'aberto'
+        },
+        {
+          id: 'mapleads',
+          tag: 'b2b · express',
+          title: 'mapleads',
+          desc: 'prospecção inteligente de clientes no google maps com chips rápidos por nicho e filtros segmentados.',
+          image: 'assets/mapleads-preview.svg',
+          url: 'https://mapleads-psi.vercel.app/',
+          status: 'aberto'
+        },
+        {
+          id: 'habit-tracker',
+          tag: 'gamificação · rpg',
+          title: 'habit rpg',
+          desc: 'workspace pessoal gamificado para construção de hábitos diários com progressão visual estilo rpg.',
+          image: 'assets/habit-rpg-preview.svg',
+          url: 'https://personal-habit-tracker-x.vercel.app/',
+          status: 'login'
+        },
+        {
+          id: 'rh-hub',
+          tag: 'enterprise · dp/rh',
+          title: 'rh hub',
+          desc: 'dashboard corporativo de departamento pessoal e recursos humanos com acesso demonstrativo integrado.',
+          image: 'assets/framer-intern-cover.png',
+          url: 'https://rh-hub-9mh4.vercel.app/',
+          status: 'demo'
+        },
+        {
+          id: 'sportintel-hub',
+          tag: 'analytics · esportes',
+          title: 'sportintel hub',
+          desc: 'hub de inteligência esportiva com filtros por modalidade e painel escuro focado em leitura rápida.',
+          image: 'assets/token-tracker-preview.svg',
+          url: 'https://hub-de-intelig-ncia-esportiva.vercel.app/',
+          status: 'aberto'
+        }
+      ],
+      en: [
+        {
+          id: 'fibrocare',
+          tag: 'health tech · vite',
+          title: 'fibrocare',
+          desc: 'cyclic symptom monitor and flare-up alert system designed for fibromyalgia care with clean onboarding.',
+          image: 'assets/fibrocare-preview.svg',
+          url: 'https://fibrocare-alpha.vercel.app/',
+          status: 'live'
+        },
+        {
+          id: 'job-finder',
+          tag: 'ai · career copilot',
+          title: 'jobfinder ai',
+          desc: 'ai recruitment and career copilot featuring one-click sample prompts and role-fit analysis.',
+          image: 'assets/jobhunter-preview.svg',
+          url: 'https://job-finder-azure-zeta.vercel.app/',
+          status: 'live'
+        },
+        {
+          id: 'mapleads',
+          tag: 'b2b · express',
+          title: 'mapleads',
+          desc: 'smart google maps lead prospector with quick-pick niche chips and targeted local discovery.',
+          image: 'assets/mapleads-preview.svg',
+          url: 'https://mapleads-psi.vercel.app/',
+          status: 'live'
+        },
+        {
+          id: 'habit-tracker',
+          tag: 'gamification · rpg',
+          title: 'habit rpg',
+          desc: 'gamified personal workspace for building daily habits with rpg-inspired progression mechanics.',
+          image: 'assets/habit-rpg-preview.svg',
+          url: 'https://personal-habit-tracker-x.vercel.app/',
+          status: 'login'
+        },
+        {
+          id: 'rh-hub',
+          tag: 'enterprise · hr/ops',
+          title: 'rh hub',
+          desc: 'hr and people operations dashboard featuring an integrated demo account login experience.',
+          image: 'assets/framer-intern-cover.png',
+          url: 'https://rh-hub-9mh4.vercel.app/',
+          status: 'demo'
+        },
+        {
+          id: 'sportintel-hub',
+          tag: 'analytics · sports',
+          title: 'sportintel hub',
+          desc: 'sports intelligence hub featuring modality filters and a dark-mode analytical dashboard.',
+          image: 'assets/token-tracker-preview.svg',
+          url: 'https://hub-de-intelig-ncia-esportiva.vercel.app/',
+          status: 'live'
+        }
+      ]
+    };
+
+    function renderVercelAppsGrid() {
+      const grid = document.getElementById('vercelAppsGrid');
+      if (!grid) return;
+      const t = siteTranslations[currentGlobalLang] || siteTranslations.pt;
+      const apps = vercelAppsData[currentGlobalLang] || vercelAppsData.pt;
+
+      const tagEl = document.getElementById('vercelAppsTag');
+      const titleEl = document.getElementById('vercelAppsTitle');
+      const subEl = document.getElementById('vercelAppsSubtitle');
+      if (tagEl) tagEl.innerHTML = t.vercelAppsTag;
+      if (titleEl) titleEl.innerHTML = t.vercelAppsTitle;
+      if (subEl) subEl.innerHTML = t.vercelAppsSubtitle;
+
+      grid.innerHTML = apps.map(app => `
+        <a href="${app.url}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('vercel_app', this.href, '${app.id}')" class="portfolio-card reveal-on-scroll overflow-hidden flex flex-col justify-between group cursor-pointer">
+          <div class="relative h-40 w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
+            <img src="${app.image}" alt="${app.title}" class="card-cover-img w-full h-full object-cover" />
+            <div class="absolute top-3 left-3 tag-pill backdrop-blur-md bg-[var(--surface)]/85 text-[11px] text-cyan-400">
+              ${app.tag}
+            </div>
+            <div class="absolute top-3 right-3 tag-pill backdrop-blur-md bg-[var(--surface)]/85 text-[10px] font-mono">
+              ${app.status}
+            </div>
+          </div>
+          <div class="p-5 flex flex-col justify-between flex-1">
+            <div>
+              <h3 class="text-lg font-medium text-[var(--ink)] group-hover:text-cyan-400 transition-colors mb-1.5 flex items-center justify-between gap-2">
+                <span>${app.title}</span>
+                <svg class='inline-block w-3.5 h-3.5 shrink-0 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
+              </h3>
+              <p class="text-xs text-[var(--muted)] leading-relaxed font-light">
+                ${app.desc}
+              </p>
+            </div>
+          </div>
+        </a>
+      `).join('');
+    }
+
     // Helper de texto do botão de alternância de tema
     function updateThemeToggleText() {
       const root = document.documentElement;
@@ -2247,6 +2479,7 @@
 
         // 9. Re-renderiza carrossel de portfólio e grid de jogos com os novos dados
         renderPortfolioCarousel();
+        renderVercelAppsGrid();
         renderGamesGrid();
         lucide.createIcons();
 
@@ -2744,6 +2977,7 @@
       if (viewId === 'portfolio') {
         document.getElementById('viewPortfolio').classList.remove('hidden');
         renderPortfolioCarousel();
+        renderVercelAppsGrid();
         window.location.hash = '#/portfolio';
         trackGA4PageView('#/portfolio', 'Portfólio de Produto · Lucas Nellucci');
       } else if (viewId === 'sobre') {
