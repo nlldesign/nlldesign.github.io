@@ -936,6 +936,30 @@
       </div>
     </section>
 
+    <!-- =============================================================== -->
+    <!-- PLUGINS, EXTENSÕES & LABS DE IA (GOOGLE DRIVE & AI STUDIO)     -->
+    <!-- =============================================================== -->
+    <section id="driveProjectsSection" class="max-w-[1120px] mx-auto pt-14 sm:pt-16 border-t border-[var(--line)] mb-16 sm:mb-24 reveal-on-scroll">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div>
+          <div class="tag-pill mb-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+            <span id="driveProjectsTag">plugins, extensões &amp; labs de ia • como funciona</span>
+          </div>
+          <h2 id="driveProjectsTitle" class="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)]">
+            plugins, extensões &amp; protótipos — como funcionam.
+          </h2>
+        </div>
+        <p id="driveProjectsSubtitle" class="text-xs sm:text-sm text-[var(--muted)] max-w-md font-light">
+          plugins criados para antigravity e jogos, extensões chrome arquivadas no google drive e experimentos do google ai studio explicados em detalhes: arquitetura e funcionamento interno.
+        </p>
+      </div>
+
+      <div id="driveProjectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Injetado via JS -->
+      </div>
+    </section>
+
     <!-- RESUMO BREVE DO SOBRE NA HOME (LEVA PARA A PÁGINA #/sobre)      -->
     <!-- =============================================================== -->
     <section id="homeSobreTeaser" class="max-w-[920px] mx-auto pt-14 sm:pt-16 border-t border-[var(--line)] mb-16 sm:mb-24 reveal-on-scroll">
@@ -1008,6 +1032,14 @@
       <!-- Bio Resumida -->
       <div id="sobreBio" class="space-y-5 text-base sm:text-lg text-[var(--muted)] leading-relaxed font-light mb-14 pb-12 border-b border-[var(--line)]">
         <!-- Injetado via JS -->
+      </div>
+
+      <!-- Como Atuo com Inteligência Artificial -->
+      <div id="sobreAiSection" class="mb-16 reveal-on-scroll">
+        <span id="sobreAiLabel" class="text-xs font-mono uppercase tracking-wider text-[var(--accent)] block mb-6">como atuo com inteligência artificial</span>
+        <div id="sobreAiGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Injetado via JS -->
+        </div>
       </div>
 
       <!-- Experiência Profissional (Timeline Estruturada do PDF) -->
@@ -1283,7 +1315,14 @@
         openCaseBtn: "abrir case",
         vercelAppsTag: "produtos &amp; labs • vercel",
         vercelAppsTitle: "aplicações &amp; protótipos funcionais em produção.",
-        vercelAppsSubtitle: "ferramentas de ia, saúde, rh, prospecção e produtividade construídas e publicadas na vercel — clique para abrir e navegar.",
+        vercelAppsSubtitle: "ferramentas de ia, saúde, rh, prospecção e educação construídas e publicadas na vercel e github — clique para abrir e navegar.",
+        driveProjectsTag: "plugins, extensões &amp; labs de ia • como funciona",
+        driveProjectsTitle: "plugins, extensões &amp; protótipos — como funcionam.",
+        driveProjectsSubtitle: "plugins criados para antigravity e jogos, extensões chrome arquivadas no google drive e experimentos do google ai studio explicados em detalhes: arquitetura e funcionamento interno.",
+        howItWorksBtn: "como funciona",
+        labelDriveOverview: "o projeto",
+        labelDriveHowItWorks: "como funciona",
+        labelDriveArchitecture: "arquitetura &amp; entregável",
 
         heroJogosTag: "jogos &amp; 3d interativo",
         heroJogosTitle: 'jogos, spatial ux e <em class="font-serif-accent italic text-cyan-400">sensorial 3d.</em>',
@@ -1339,7 +1378,14 @@
         openCaseBtn: "open case",
         vercelAppsTag: "products &amp; labs • vercel",
         vercelAppsTitle: "live applications &amp; functional prototypes.",
-        vercelAppsSubtitle: "ai, healthcare, hr, lead generation, and productivity apps built and deployed on vercel — click any card to explore live.",
+        vercelAppsSubtitle: "ai, healthcare, hr, lead generation, and education apps built and deployed on vercel and github — click any card to explore.",
+        driveProjectsTag: "plugins, extensions &amp; ai labs • how it works",
+        driveProjectsTitle: "plugins, extensions &amp; ai prototypes — how they work.",
+        driveProjectsSubtitle: "custom plugins for antigravity and games, chrome extensions archived on google drive, and google ai studio experiments explained in depth: architecture and internal mechanics.",
+        howItWorksBtn: "how it works",
+        labelDriveOverview: "the project",
+        labelDriveHowItWorks: "how it works",
+        labelDriveArchitecture: "architecture &amp; output",
 
         heroJogosTag: "games &amp; interactive 3d",
         heroJogosTitle: 'games, spatial ux &amp; <em class="font-serif-accent italic text-cyan-400">3d sensory design.</em>',
@@ -1797,6 +1843,30 @@
           githubUrl: null,
           embedUrl: null,
           gallery: []
+        },
+
+        {
+          id: 'radio-esperanca',
+          category: 'jogos',
+          tag: 'three.js • biopunk idle',
+          num: '06',
+          title: 'rádio esperança 3d: biopunk idle',
+          subtitle: 'tático isométrico 3d em three.js • simbiose setor 4 &amp; mutações',
+          summary: 'idle tático 3d ambientado no subsolo de um setor biopunk: patrulhe em three.js, gerencie microfraturas e toxinas, desbloqueie mutações anatômicas e sintonize a rádio pirata 88.4 mhz.',
+          image: 'assets/biopunk-idle-real.png?v=real3',
+          metrics: [
+            { val: 'three.js 3d', label: 'arena tática no setor 4 com sprites customizados' },
+            { val: '6 sistemas', label: 'punhos, bot, armas vivas, bio-dex, rádio &amp; base' },
+            { val: 'idle tático', label: 'gestão de atp celular, microfratura &amp; toxina' }
+          ],
+          desafio: 'unir a estética opressiva de laboratório subterrâneo a um idle de progressão tática onde o piloto automático e o jogador administram risco real — como fraturas ao socar mutantes sem talas de cálcio.',
+          abordagem: 'engine híbrida em three.js r128 e tailwind css carregando sprites 2.5d via sprites_data.js, IA de patrulha entre salas táticas, armadilhas de porta, sistema de bio-dex com variantes shiny e abas modulares para mutações, automação e rádio esperança.',
+          resultado: 'protótipo jogável em navegador integrado diretamente ao portfólio e versionado em git, com hud diegético completo e zero dependências de backend.',
+          techs: ['three.js r128', 'javascript es6', 'tailwind css', 'sprites 2.5d', 'tactical idle ux'],
+          vercelUrl: null,
+          githubUrl: 'https://github.com/nlldesign/nlldesign.github.io/tree/main/games/biopunk-idle',
+          embedUrl: 'games/biopunk-idle/index.html',
+          gallery: []
         }
       ],
       en: [
@@ -1920,6 +1990,30 @@
           githubUrl: null,
           embedUrl: null,
           gallery: []
+        },
+
+        {
+          id: 'radio-esperanca',
+          category: 'jogos',
+          tag: 'three.js • biopunk idle',
+          num: '06',
+          title: 'radio esperanca 3d: biopunk idle',
+          subtitle: '3d isometric tactical idle in three.js • sector 4 symbiosis &amp; mutations',
+          summary: 'tactical 3d biopunk idle set inside underground Sector 4: patrol rooms in three.js, balance bone microfractures and toxicity, evolve anatomical mutations, and tune pirate radio 88.4 mhz.',
+          image: 'assets/biopunk-idle-real.png?v=real3',
+          metrics: [
+            { val: 'three.js 3d', label: 'tactical sector 4 arena with custom 2.5d sprites' },
+            { val: '6 modules', label: 'combat, bot automation, bio-dex, radio &amp; base' },
+            { val: 'tactical idle', label: 'cellular atp, microfracture &amp; toxin management' }
+          ],
+          desafio: 'blending a claustrophobic subterranean lab aesthetic with an idle tactical loop where both autopilot and player decisions balance real risk-reward tradeoffs like bone microfractures.',
+          abordagem: 'built a hybrid three.js r128 + tailwind css runtime loading sprites via sprites_data.js, room-to-room AI patrol, doorway traps, shiny Bio-Dex variants, and tabbed interfaces for mutations, bots, and live radio dispatches.',
+          resultado: 'playable browser prototype embedded directly in the portfolio and versioned on git with zero backend dependencies.',
+          techs: ['three.js r128', 'javascript es6', 'tailwind css', '2.5d sprites', 'tactical idle ux'],
+          vercelUrl: null,
+          githubUrl: 'https://github.com/nlldesign/nlldesign.github.io/tree/main/games/biopunk-idle',
+          embedUrl: 'games/biopunk-idle/index.html',
+          gallery: []
         }
       ]
     };
@@ -1946,18 +2040,42 @@
       pt: {
         homeTag: 'sobre',
         homeTitle: 'entre o comportamento humano e o produto digital, alguém precisa traduzir.',
-        homeSummary: 'ux &amp; product designer no grupo h2. uno pesquisa comportamental, neurociência, estratégia de marketing e inteligência artificial para desenhar produtos digitais com impacto real.',
-        homeHighlights: ['product design', 'ux &amp; cro', 'neurociência', 'inteligência artificial'],
+        homeSummary: 'ux &amp; product designer no grupo h2. uno pesquisa comportamental, neurociência e inteligência artificial aplicada — de discovery e prototipação em código à criação de agentes, plugins e extensões próprias.',
+        homeHighlights: ['product design', 'ux &amp; cro', 'neurociência', 'ia aplicada &amp; agentes'],
         homeCta: 'conhecer minha trajetória',
         homeContact: 'falar comigo',
 
         backLabel: 'voltar ao portfólio',
         tag: 'sobre · perfil &amp; trajetória',
         title: 'entre o comportamento humano e o produto digital, alguém precisa traduzir.',
-        lead: 'designer de produto estratégico focado em resultados de negócio, unindo ux, marketing, neurociência aplicada ao comportamento do usuário e o uso avançado de inteligência artificial para otimizar processos e sustentar decisões estratégicas.',
+        lead: 'designer de produto estratégico focado em resultados de negócio, unindo ux, marketing, neurociência aplicada ao comportamento do usuário e o uso avançado de inteligência artificial para otimizar processos, prototipar em código e sustentar decisões estratégicas.',
         paragraphs: [
           'adoto uma abordagem multidisciplinar que conecta dados qualitativos e quantitativos, ferramentas de inteligência artificial e insights comportamentais para compreender profundamente as necessidades reais dos usuários e alinhá-las aos objetivos estratégicos das organizações.',
-          'ao longo da minha trajetória, participei de projetos complexos que exigiram visão sistêmica, pensamento analítico e criatividade aplicada — sempre priorizando usabilidade, acessibilidade e experiência do usuário como pilares fundamentais.'
+          'ao longo da minha trajetória, participei de projetos complexos que exigiram visão sistêmica, pensamento analítico e criatividade aplicada — sempre priorizando usabilidade, acessibilidade e experiência do usuário como pilares fundamentais.',
+          'na prática com inteligência artificial, vou além de prompts pontuais: uso modelos generativos e fluxos agênticos no discovery de produto, para construir MVPs navegáveis em código, criar plugins de produtividade (como o monitor de tokens e cotas no Antigravity 2.0) e desenhar experiências onde latência, contexto e controle humano trabalham juntos.'
+        ],
+        aiHeading: 'como atuo com inteligência artificial',
+        aiPillars: [
+          {
+            num: '01',
+            title: 'discovery &amp; pesquisa acelerada',
+            desc: 'sintetizo entrevistas, benchmarks competitivos e sinais comportamentais com LLMs e grounding em fontes reais para formular hipóteses testáveis em horas, não semanas.'
+          },
+          {
+            num: '02',
+            title: 'prototipação funcional em código',
+            desc: 'levo conceitos além das telas estáticas no figma: valido jornadas completas em aplicações reais (react, next.js, tailwind e vercel) para testar atrito e valor antes do handoff.'
+          },
+          {
+            num: '03',
+            title: 'agentes, plugins &amp; automações',
+            desc: 'desenvolvo ferramentas próprias para o meu fluxo e de equipes — como o plugin token tracker para antigravity 2.0, extensões chrome mv3, addons em lua e crawlers em python.'
+          },
+          {
+            num: '04',
+            title: 'design de experiências com ia',
+            desc: 'projeto interfaces de ia cuidando do que define confiança na ponta: skeletons para latência percebida, fallbacks graciosos em erro de cota, transparência de fontes e controle humano.'
+          }
         ],
         expHeading: 'experiência profissional',
         experiences: [
@@ -2032,7 +2150,9 @@
           'product design',
           'ux research &amp; cro',
           'neurociência do comportamento',
-          'inteligência artificial',
+          'ia aplicada &amp; prompt engineering',
+          'agentes de ia, plugins &amp; mcp',
+          'prototipação em código (next.js &amp; tailwind)',
           'acessibilidade',
           'liderança &amp; governança',
           'design systems',
@@ -2070,18 +2190,42 @@
       en: {
         homeTag: 'about',
         homeTitle: 'between human behavior and digital products, someone needs to translate.',
-        homeSummary: 'ux &amp; product designer at grupo h2. combining behavioral research, neuroscience, marketing strategy, and artificial intelligence to craft digital products with real business impact.',
-        homeHighlights: ['product design', 'ux &amp; cro', 'neuroscience', 'artificial intelligence'],
+        homeSummary: 'ux &amp; product designer at grupo h2. blending behavioral research, neuroscience, and applied artificial intelligence — from discovery and code prototyping to custom ai agents, plugins, and browser extensions.',
+        homeHighlights: ['product design', 'ux &amp; cro', 'neuroscience', 'applied ai &amp; agents'],
         homeCta: 'explore full background',
         homeContact: 'get in touch',
 
         backLabel: 'back to portfolio',
         tag: 'about · profile &amp; background',
         title: 'between human behavior and digital products, someone needs to translate.',
-        lead: 'strategic product designer focused on business results, combining ux, marketing, neuroscience applied to user behavior, and the advanced use of artificial intelligence to optimize workflows and drive strategic impact.',
+        lead: 'strategic product designer focused on business results, combining ux, marketing, neuroscience applied to user behavior, and applied artificial intelligence to prototype in code, automate workflows, and drive product impact.',
         paragraphs: [
           'i adopt a multidisciplinary approach, combining behavioral insights, qualitative and quantitative data, along with ai tools, to deeply understand user needs and align them with the strategic objectives of organizations.',
-          'throughout my career, i have participated in complex projects requiring systemic vision, analytical thinking, and applied creativity — always prioritizing usability, accessibility, and user experience as fundamental pillars.'
+          'throughout my career, i have participated in complex projects requiring systemic vision, analytical thinking, and applied creativity — always prioritizing usability, accessibility, and user experience as fundamental pillars.',
+          'in practice with artificial intelligence, i move well beyond one-off prompts: i orchestrate agentic workflows during product discovery, ship functional code MVPs to test real interaction friction, build custom developer tooling (such as the Token Tracker plugin for Antigravity 2.0), and design ai-native interfaces around latency perception, graceful fallbacks, and human control.'
+        ],
+        aiHeading: 'how i work with artificial intelligence',
+        aiPillars: [
+          {
+            num: '01',
+            title: 'discovery &amp; accelerated research',
+            desc: 'synthesizing user interviews, competitive benchmarks, and behavioral signals with LLMs grounded in verifiable sources to shape testable hypotheses in hours rather than weeks.'
+          },
+          {
+            num: '02',
+            title: 'functional code prototyping',
+            desc: 'pushing concepts beyond static figma frames into live react, next.js, tailwind, and vercel prototypes so teams validate real interactions before engineering handoff.'
+          },
+          {
+            num: '03',
+            title: 'agents, plugins &amp; tooling',
+            desc: 'building tailored productivity tools around ai workflows — including the antigravity 2.0 token &amp; quota sidecar plugin, chrome mv3 extensions, lua addons, and python crawlers.'
+          },
+          {
+            num: '04',
+            title: 'ai-native interface design',
+            desc: 'designing generative experiences that respect human cognition: skeleton feedback for perceived latency, resilient quota fallbacks, source transparency, and user-in-the-loop controls.'
+          }
         ],
         expHeading: 'work experience',
         experiences: [
@@ -2156,7 +2300,9 @@
           'product design',
           'ux research &amp; cro',
           'behavioral neuroscience',
-          'artificial intelligence',
+          'applied ai &amp; prompt engineering',
+          'ai agents, plugins &amp; mcp',
+          'functional prototyping (next.js &amp; tailwind)',
           'accessibility',
           'leadership &amp; governance',
           'design systems',
@@ -2341,6 +2487,54 @@
           resultado: 'shell analítico ágil publicado na vercel com navegação instantânea entre modalidades, campeonatos e filtros de mercado.',
           techs: ['vite', 'react', 'data visualization', 'market radar ui', 'dark mode'],
           gallery: []
+        },
+        {
+          id: 'pepe-oracle',
+          category: 'labs',
+          tag: 'ai hub · next.js + gemini',
+          num: '07',
+          title: 'pepe design oracle v3',
+          subtitle: 'hub de inteligência em design &amp; ux com google search grounding e modo offline',
+          summary: 'plataforma curadora para designers alimentada por gemini com grounding real na web, feed offline no indexeddb (dexie), proteção anti-erro 429 nas edge functions e exportação de newsletters em pdf (acesso demo: pepe2025).',
+          image: 'assets/pepe-real.png?v=real3',
+          vercelUrl: 'https://pepe-black.vercel.app/',
+          githubUrl: 'https://github.com/nlldesign/Pepe',
+          status: 'demo',
+          metrics: [
+            { val: 'grounding', label: 'pesquisa na web real via gemini api' },
+            { val: 'indexeddb', label: 'persistência offline &amp; favoritos com dexie' },
+            { val: 'soft-200', label: 'resiliência anti-crash para limite 429' }
+          ],
+          desafio: 'reunir tendências confiáveis de ux, ui e produto sem alucinações de modelos genéricos e sem travar a interface diante de limites de cota ou falhas de conexão.',
+          abordagem: 'arquitetura com vercel edge functions (/api/chat e /api/feed) usando google search grounding e respostas soft-200 para fallback de cota 429, somada a banco local dexie.js, skeletons de carregamento e gerador de boletim pdf via html2pdf.js (senha demo visível na tela: pepe2025).',
+          resultado: 'aplicação publicada na vercel e versionada no github com curadoria fundamentada, cache local instantâneo e leitura offline.',
+          techs: ['react', 'gemini api + grounding', 'vercel edge functions', 'dexie indexeddb', 'html2pdf.js', 'ux ai'],
+          gallery: [
+            { src: 'assets/pepe-real.png', title: 'tela de entrada do pepe design oracle v3 na vercel com dica de acesso demo (pepe2025)' }
+          ]
+        },
+        {
+          id: 'study-fatec',
+          category: 'labs',
+          tag: 'edtech · python + static web',
+          num: '08',
+          title: 'study-fatec',
+          subtitle: 'banco oficial do vestibular fatec (2016–2026) &amp; simulador sem uso de ia',
+          summary: 'simulador gratuito com mais de 1.000 questões oficiais recortadas via python/pymupdf, dicas determinísticas em 3 níveis sem custo de ia, botão eliminar 2 e painel de acertos por matéria no localstorage.',
+          image: 'assets/study-fatec-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: 'https://github.com/nlldesign/Study-fatec',
+          status: 'github',
+          metrics: [
+            { val: '2016–2026', label: 'provas oficiais e gabaritos fatec' },
+            { val: 'custo zero', label: 'gerador de dicas determinístico sem ia' },
+            { val: '3 níveis', label: 'comando, conceito-chave &amp; armadilhas' }
+          ],
+          desafio: 'preservar fórmulas matemáticas, mapas, tabelas e textos de apoio compartilhados das provas oficiais da fatec, oferecendo suporte pedagógico inteligente sem custos recorrentes de APIs de IA.',
+          abordagem: 'pipeline scraper em python + pymupdf (scraper/scrape.py) que recorta enunciados em imagens de alta resolução e vincula textos de apoio; motor de regras hints.py com 3 níveis de dicas + eliminar 2; e frontend estático puro em web/ com filtros e estatísticas em localstorage.',
+          resultado: 'repositório completo publicado no github (nlldesign/Study-fatec) pronto para rodar localmente ou via hospedagem estática com custo zero de operação.',
+          techs: ['python + pymupdf', 'rule-based hints', 'html5 / css3 / js', 'edtech ux', 'localstorage analytics'],
+          gallery: []
         }
       ],
       en: [
@@ -2489,6 +2683,54 @@
           resultado: 'snappy analytical interface live on vercel delivering instant visual hierarchy across sports categories and market filters.',
           techs: ['vite', 'react', 'data visualization', 'market radar ui', 'dark mode'],
           gallery: []
+        },
+        {
+          id: 'pepe-oracle',
+          category: 'labs',
+          tag: 'ai hub · next.js + gemini',
+          num: '07',
+          title: 'pepe design oracle v3',
+          subtitle: 'ux &amp; product intelligence hub with google search grounding and offline feed',
+          summary: 'curated workspace for designers powered by gemini with real web grounding, dexie indexeddb offline persistence, anti-crash 429 quota protection on edge functions, and pdf newsletter exports (demo access: pepe2025).',
+          image: 'assets/pepe-real.png?v=real3',
+          vercelUrl: 'https://pepe-black.vercel.app/',
+          githubUrl: 'https://github.com/nlldesign/Pepe',
+          status: 'demo',
+          metrics: [
+            { val: 'grounding', label: 'live web retrieval via gemini api' },
+            { val: 'indexeddb', label: 'offline persistence &amp; bookmarks in dexie' },
+            { val: 'soft-200', label: 'graceful http 429 anti-crash handling' }
+          ],
+          desafio: 'curating reliable ux and product design intelligence without generic model hallucinations or UI freezes under rate limits and unstable connections.',
+          abordagem: 'built with vercel edge functions (/api/chat and /api/feed) using google search grounding and soft-200 fallback responses for quota spikes, paired with dexie.js local storage, skeleton loading states, and html2pdf.js newsletter exports (visible demo key: pepe2025).',
+          resultado: 'deployed live on vercel and versioned on github with source-grounded research and instant offline reading.',
+          techs: ['react', 'gemini api + grounding', 'vercel edge functions', 'dexie indexeddb', 'html2pdf.js', 'ai ux'],
+          gallery: [
+            { src: 'assets/pepe-real.png', title: 'pepe design oracle v3 sign-in view on vercel showing demo key hint (pepe2025)' }
+          ]
+        },
+        {
+          id: 'study-fatec',
+          category: 'labs',
+          tag: 'edtech · python + static web',
+          num: '08',
+          title: 'study-fatec',
+          subtitle: 'official fatec exam bank (2016–2026) &amp; zero-cost rule-based simulator',
+          summary: 'free exam simulator indexing official 2016–2026 question crops via python/pymupdf, 3-level deterministic hints with zero AI API cost, eliminate-2 helper, and per-subject localstorage accuracy tracking.',
+          image: 'assets/study-fatec-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: 'https://github.com/nlldesign/Study-fatec',
+          status: 'github',
+          metrics: [
+            { val: '2016–2026', label: 'official fatec exams &amp; answer keys' },
+            { val: 'zero cost', label: 'deterministic hint generator without ai' },
+            { val: '3 levels', label: 'prompt cues, key concepts &amp; distractors' }
+          ],
+          desafio: 'preserving complex math formulas, maps, tables, and shared reading passages from official PDF exams while offering structured pedagogical hints without ongoing AI API costs.',
+          abordagem: 'implemented a python + pymupdf extraction pipeline (scraper/scrape.py) cropping high-res question visuals and linking shared context blocks; deterministic hints.py engine plus eliminate-2; and pure static web simulator with filters and localstorage analytics.',
+          resultado: 'complete codebase and asset bank published on github (nlldesign/Study-fatec), ready to run locally or via zero-cost static hosting.',
+          techs: ['python + pymupdf', 'rule-based hints', 'html5 / css3 / js', 'edtech ux', 'localstorage analytics'],
+          gallery: []
         }
       ]
     };
@@ -2510,7 +2752,14 @@
       if (titleEl) titleEl.innerHTML = t.vercelAppsTitle;
       if (subEl) subEl.innerHTML = t.vercelAppsSubtitle;
 
-      grid.innerHTML = apps.map(app => `
+      const svgArrow = "<svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>";
+      grid.innerHTML = apps.map(app => {
+        const rightPill = app.vercelUrl
+          ? `<a href="${app.vercelUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('vercel_app', this.href, '${app.id}')" class="tag-pill text-[10.5px] text-cyan-400 hover:border-cyan-400 whitespace-nowrap"><span>vercel</span> ${svgArrow}</a>`
+          : (app.githubUrl
+            ? `<a href="${app.githubUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('github', this.href, '${app.id}')" class="tag-pill text-[10.5px] text-[var(--ink)] hover:border-[var(--ink)] whitespace-nowrap"><span>github</span> ${svgArrow}</a>`
+            : '');
+        return `
         <article onclick="openCaseStudy('${app.id}')" class="portfolio-card reveal-on-scroll overflow-hidden flex flex-col justify-between group cursor-pointer">
           <div class="relative h-40 w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
             <img src="${app.image}" alt="${app.title}" class="card-cover-img w-full h-full object-cover object-top" />
@@ -2536,14 +2785,507 @@
                 <span>${t.readCaseBtn}</span>
                 <span class="group-hover:translate-x-1 transition-transform">→</span>
               </span>
-              <a href="${app.vercelUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('vercel_app', this.href, '${app.id}')" class="tag-pill text-[10.5px] text-cyan-400 hover:border-cyan-400 whitespace-nowrap">
-                <span>vercel</span>
-                <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
-              </a>
+              ${rightPill}
             </div>
           </div>
         </article>
-      `).join('');
+      `;
+      }).join('');
+    }
+
+    const driveProjectsData = {
+      pt: [
+        {
+          id: 'token-tracker',
+          category: 'drive',
+          tag: 'antigravity 2.0 • plugin',
+          num: '01',
+          title: 'token tracker (antigravity 2.0)',
+          subtitle: 'plugin sidecar para monitorar tokens, cotas ao vivo e custo multi-modelo',
+          summary: 'plugin construído para o google antigravity 2.0 que consulta o language server para listar cotas ao vivo, lê o histórico transcript.jsonl por turno e calcula custos em usd/brl e economia de cache.',
+          image: 'assets/token-tracker-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: 'https://github.com/nlldesign/nlldesign.github.io/tree/main/projects/token-tracker',
+          status: 'plugin',
+          originPill: 'github',
+          metrics: [
+            { val: 'getuserstatus', label: 'cotas &amp; reset em tempo real via language server' },
+            { val: 'usd + brl', label: 'cálculo por turno lendo transcript.jsonl' },
+            { val: 'simulador', label: 'comparativo de custo entre modelos e janela de contexto' }
+          ],
+          desafio: 'ao operar sessões longas com múltiplos modelos no antigravity 2.0 (gemini 4 neon, argon, hydrogen, claude opus/sonnet e flash), faltava visibilidade clara do consumo acumulado em dólares/reais, da economia gerada por cache read e do percentual restante de cota antes de atingir limites.',
+          abordagem: 'plugin em node.js + sidecar html (plugin.json, sidecars/tracker/main.mjs, pricing.mjs, index.html e skill.md): consulta o endpoint GetUserStatus no language server local com token csrf da sessão para exibir todos os modelos e timers de renovação; lê passo a passo o transcript.jsonl da conversa para detectar trocas de modelo por turno; calcula entrada, saída e cache read; estima ocupação dinâmica da janela de contexto e oferece simulador comparativo em tema claro/escuro nativo.',
+          resultado: 'painel lateral integrado via sidecar://token-tracker/tracker/ e versionado em git (projects/token-tracker), dando transparência financeira e operacional completa para sessões agênticas.',
+          techs: ['antigravity plugin', 'node.js mjs', 'transcript.jsonl parser', 'getuserstatus rpc', 'pricing simulator', 'sidecar pane'],
+          gallery: []
+        },
+        {
+          id: 'druid-helper',
+          category: 'drive',
+          tag: 'lua • wow classic addon',
+          num: '02',
+          title: 'druid helper v2.0 (addon wow)',
+          subtitle: 'addon multi-forma em lua com leitura de grimório, alerta de aggro e radar de cura',
+          summary: 'addon desenvolvido em lua para world of warcraft classic/forever que escaneia suas magias aprendidas por nível, transforma o hud entre urso/felino/curador e emite alertas de aggro e prioridade de cura.',
+          image: 'assets/druid-helper-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: 'https://github.com/nlldesign/nlldesign.github.io/tree/main/projects/druid-helper',
+          status: 'addon lua',
+          originPill: 'github',
+          metrics: [
+            { val: '3 formas', label: 'hud adaptativo urso (tank), felino (dps) &amp; healer' },
+            { val: 'grimório', label: 'varredura automática das skills reais do personagem' },
+            { val: '/dh config', label: 'painel gráfico de opacidade, escala &amp; som' }
+          ],
+          desafio: 'druidas no wow classic alternam papéis drásticos no meio do combate (urso tank com raiva, gato dps com energia/combo e curador de grupo com mana), tornando guias genéricos estáticos inúteis quando o personagem ainda está evoluindo de nível.',
+          abordagem: 'escrito em lua pura (DruidHelper.lua e DruidHelper.toc): ao carregar ou trocar de forma, o addon varre o grimório para identificar apenas as magias já treinadas no nível atual; em forma de urso exibe barra de raiva e toca PlaySound se um mob solto atacar aliados (GROWL); em felino alterna para energia + 5 pontos de combo com rotação Rake/Claw/Rip/Ferocious Bite; e no modo healer ordena party1–party4 por urgência (<35% crítico vs <75% Rejuvenation) com janela /dh config para ajuste ao vivo.',
+          resultado: 'addon leve e autocontido versionado no git (projects/druid-helper), eliminando ruído de tela durante masmorras.',
+          techs: ['lua', 'wow classic api', 'spellbook scanner', 'combat log &amp; aggro alert', 'healer radar ui'],
+          gallery: []
+        },
+        {
+          id: 'cao-farejador',
+          category: 'drive',
+          tag: 'chrome mv3 • google drive',
+          num: '03',
+          title: 'cão farejador (extensão v1–v3)',
+          subtitle: 'extensão chrome mv3 para captura estruturada, bolão em lote e notebooks colab',
+          summary: 'família de extensões chrome evoluída em 3 versões no google drive que lê o dom da página via inject.js, filtra bilhetes/eventos pelo content.js e orquestra ações no popup.html + scripts colab de json.',
+          image: 'assets/cao-farejador-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'extensão',
+          originPill: 'google drive',
+          metrics: [
+            { val: '3 versões', label: 'evolução iterativa v1.0, v2.0, v3.0 &amp; bolão bulk' },
+            { val: '4 módulos', label: 'manifest v3, inject.js, content.js &amp; popup UI' },
+            { val: 'colab json', label: 'notebooks parceiros de apostas simples &amp; múltiplas' }
+          ],
+          desafio: 'automatizar a leitura e preparação repetitiva de bilhetes e mapeamentos de bolão diretamente no navegador sem depender de cópia manual propensa a erros.',
+          abordagem: 'arquitetada em manifest v3 e arquivada em /01_Códigos/Extensão no google drive: ao abrir o site alvo, manifest.json carrega content.js como ponte isolada e injeta inject.js (8.7 KB) no contexto da página para ler estruturas internas e estados de bilhete; os dados estruturados sobem para o painel popup.html / popup.js (19.7 KB, incluindo fluxos em lote do backup antes_bolao_bulk) e integram-se com notebooks google colab dedicados (Automacao_CaoFarejador_Multiplas.ipynb e Json Apostas Simples e Apostas Múltiplas).',
+          resultado: 'extensão modular testada em três gerações com histórico versionado no drive e padronização completa dos payloads json.',
+          techs: ['chrome extension mv3', 'javascript (dom/inject)', 'popup UI html/js', 'json payload parser', 'google colab python'],
+          gallery: []
+        },
+        {
+          id: 'betting-helper',
+          category: 'drive',
+          tag: 'chrome mv3 • dual-world',
+          num: '04',
+          title: 'betting helper extension',
+          subtitle: 'extensão chrome com ponte main-world / isolated-world e automação parceira',
+          summary: 'extensão manifest v3 estruturada com separação estrita entre mundo principal da página (content-main.js), mundo isolado de segurança (content-isolated.js) e popup de controle estilizado (25 kb).',
+          image: 'assets/betting-helper-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'extensão',
+          originPill: 'google drive',
+          metrics: [
+            { val: 'dual-world', label: 'content-main.js + content-isolated.js (mv3)' },
+            { val: 'popup 25kb', label: 'interface dedicada em popup.html &amp; popup.css' },
+            { val: 'documentada', label: 'readme.md e notebook automacao_seubet_iraq' }
+          ],
+          desafio: 'respeitar as restrições de segurança do chrome manifest v3 ao mesmo tempo em que é necessário ler variáveis e eventos que só existem no escopo global javascript da aba aberta.',
+          abordagem: 'implementação limpa em duas camadas em /01_Códigos/Extensão/betting-helper-extension: content-main.js (8.8 KB) roda no MAIN world capturando dados da página e disparando mensagens estruturadas; content-isolated.js (4.0 KB) recebe os eventos no contexto isolado com acesso às APIs do Chrome; e popup.html/css/js (25 KB) oferece interface visual clara apoiada por README.md e pelo notebook Automacao_SeuBet_Iraq.ipynb.',
+          resultado: 'arquitetura de extensão segura, documentada e desacoplada dos scripts da página hospedeira.',
+          techs: ['chrome manifest v3', 'main vs isolated world', 'html/css popup ui', 'event messaging bridge', 'colab automation'],
+          gallery: []
+        },
+        {
+          id: 'bet-crawler',
+          category: 'drive',
+          tag: 'python • fastapi &amp; playwright',
+          num: '05',
+          title: 'bet crawler web dashboard',
+          subtitle: 'painel local em fastapi + websocket para testar e monitorar crawler playwright',
+          summary: 'controlador web em dark mode que orquestra um crawler assíncrono em playwright interceptando tráfego /odds, transmite logs em tempo real via websocket e inclui mock server integrado.',
+          image: 'assets/bet-crawler-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'local lab',
+          originPill: 'python lab',
+          metrics: [
+            { val: 'websocket', label: 'streaming ao vivo de odds e terminal logs' },
+            { val: 'playwright', label: 'interceptação assíncrona de rotas /odds' },
+            { val: 'mock server', label: 'simulador http/ws embutido para testes seguros' }
+          ],
+          desafio: 'testar e depurar scrapers de odds dinâmicas sem depender de sites externos instáveis nem operar cego pelo terminal sem feedback visual.',
+          abordagem: 'run.py instala dependências e inicia server.py em fastapi; o backend gerencia uma thread de mock server http em :8080 e uma tarefa assíncrona do playwright que intercepta pacotes contendo /odds, enviando cada captura por websocket para o painel glassmorphic em index.html — exibindo cartões que piscam verde/vermelho nas variações e console de logs ao vivo.',
+          resultado: 'arquitetura completa de laboratório para validação reproduzível e observável de crawlers de alta frequência.',
+          techs: ['python', 'fastapi &amp; uvicorn', 'playwright async', 'websockets', 'mock http server', 'dark glass ui'],
+          gallery: []
+        },
+        {
+          id: 'insightflow-ai',
+          category: 'drive',
+          tag: 'ai studio • data viz &amp; ia',
+          num: '06',
+          title: 'insightflow ai &amp; smart data dashboard',
+          subtitle: 'suíte de painéis analíticos em next.js + ia do google ai studio',
+          summary: 'consolidação dos applets insightflow ai dashboard, data analysis dashboard e smart data dashboard: leitura de bases estruturadas, gráficos interativos e síntese executiva via prompts gemini.',
+          image: 'assets/insightflow-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'ai studio',
+          originPill: 'ai studio',
+          metrics: [
+            { val: '3 applets', label: 'insightflow v1, ai dashboard &amp; smart data' },
+            { val: 'next.js + ia', label: 'kpis dinâmicos sem escrever queries sql' },
+            { val: 'anomalias', label: 'explicação automática de tendências e picos' }
+          ],
+          desafio: 'transformar planilhas e conjuntos de dados tabulares em leitura executiva rápida para quem não domina SQL ou ferramentas pesadas de BI.',
+          abordagem: 'arquivado em /02_Gemini/Google AI Studio: o usuário carrega um dataset no canvas em next.js, a interface calcula métricas de resumo e séries temporais visuais enquanto o motor gemini analisa correlações, desvios e sintetiza insights em linguagem natural ao lado dos gráficos.',
+          resultado: 'protótipos navegáveis de inteligência analítica testados como aceleradores de descoberta em negócios e marketing.',
+          techs: ['google ai studio', 'next.js', 'gemini api', 'data visualization', 'prompt engineering'],
+          gallery: []
+        },
+        {
+          id: 'strafebet-mvp',
+          category: 'drive',
+          tag: 'ai studio • igaming ux',
+          num: '07',
+          title: 'strafebet mvp',
+          subtitle: 'protótipo de frontend iGaming de alta densidade &amp; cálculo rápido de bilhete',
+          summary: 'experimento de interface para apostas esportivas criado no google ai studio focado em escaneabilidade de odds ao vivo, feedback visual de seleção e betslip com retorno instantâneo.',
+          image: 'assets/strafebet-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'ai studio',
+          originPill: 'ai studio',
+          metrics: [
+            { val: 'betslip', label: 'recálculo imediato de stake x odd decimal' },
+            { val: 'dark ui', label: 'hierarquia contrastada para leitura rápida' },
+            { val: 'igaming mvp', label: 'protótipo interativo no google ai studio' }
+          ],
+          desafio: 'reduzir a poluição visual comum em casas de apostas mantendo visíveis partida, mercado, cotações ao vivo e preenchimento de bilhete com zero atrito.',
+          abordagem: 'construído no google ai studio combinando cards de confronto limpos, destaque cromático apenas nos botões de cotação acionáveis e painel lateral fixo de betslip que atualiza o retorno potencial em tempo real a cada clique ou ajuste de stake.',
+          resultado: 'laboratório prático de design de interação aplicado ao setor de iGaming e jornadas de alta velocidade.',
+          techs: ['google ai studio', 'react / frontend', 'igaming ux', 'dark ui system', 'micro-interactions'],
+          gallery: []
+        },
+        {
+          id: 'designdream-ai',
+          category: 'drive',
+          tag: 'ai studio • vision ai',
+          num: '08',
+          title: 'designdream ai',
+          subtitle: 'consultor interativo de design de interiores por foto e ia multimodal',
+          summary: 'applet multimodal do google ai studio em que o usuário envia a foto de um cômodo real e recebe direções visuais de reforma, paletas de cores e sugestões práticas de mobiliário.',
+          image: 'assets/designdream-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'ai studio',
+          originPill: 'ai studio',
+          metrics: [
+            { val: 'foto -> conceito', label: 'leitura multimodal de iluminação e layout' },
+            { val: 'paleta', label: 'extração e recomendação de tokens cromáticos' },
+            { val: 'makeover', label: 'sugestões guiadas por estilo arquitetônico' }
+          ],
+          desafio: 'ajudar pessoas a visualizar o potencial real de um ambiente doméstico a partir de uma única foto de celular, sem saber termos técnicos de arquitetura.',
+          abordagem: 'fluxo em 3 passos dentro do applet do google ai studio: upload da fotografia do ambiente -> prompt multimodal estruturado analisa iluminação, proporções e móveis existentes -> geração da proposta de transformação (ex.: japandi, industrial ou minimalista) acompanhada de paleta de materiais e lista acionável de mudanças.',
+          resultado: 'prova de conceito funcional de ux multimodal unindo visão computacional e curadoria de design.',
+          techs: ['google ai studio', 'gemini vision', 'multimodal ux', 'color tokens', 'interactive ui'],
+          gallery: []
+        },
+        {
+          id: 'jarvis-interface',
+          category: 'drive',
+          tag: 'ai studio • ai hud',
+          num: '09',
+          title: 'j.a.r.v.i.s. interface',
+          subtitle: 'interface hud futurista de assistente cognitivo &amp; telemetria conversacional',
+          summary: 'applet experimental do google ai studio desenhado como painel tático de assistente pessoal (just a rather very intelligent system) com persona técnica direta e anéis de telemetria.',
+          image: 'assets/jarvis-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'ai studio',
+          originPill: 'ai studio',
+          metrics: [
+            { val: 'hud radial', label: 'feedback visual de estado, voz e processamento' },
+            { val: 'persona ai', label: 'system prompt estruturado para briefings diretos' },
+            { val: 'ai studio', label: 'protótipo conceitual arquivado no google drive' }
+          ],
+          desafio: 'explorar como uma interface conversacional pode sair do formato padrão de bolhas de chat e assumir uma estética de painel operacional de comando.',
+          abordagem: 'construído no google ai studio com system prompt dedicado definindo a persona analítica do j.a.r.v.i.s., acoplado a uma UI escura com indicadores radiais ciano/violeta para representar escuta, contexto ativo e respostas estruturadas em modo briefing.',
+          resultado: 'estudo visual e funcional de interação humano-ia para assistentes contextuais.',
+          techs: ['google ai studio', 'gemini persona prompt', 'hud ui design', 'stateful chat', 'motion feedback'],
+          gallery: []
+        }
+      ],
+      en: [
+        {
+          id: 'token-tracker',
+          category: 'drive',
+          tag: 'antigravity 2.0 • plugin',
+          num: '01',
+          title: 'token tracker (antigravity 2.0)',
+          subtitle: 'sidecar plugin tracking multi-model tokens, live quotas &amp; usd/brl costs',
+          summary: 'custom google antigravity 2.0 plugin that queries the local language server for live model quotas, parses transcript.jsonl per turn, and calculates usd/brl costs and cache savings.',
+          image: 'assets/token-tracker-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: 'https://github.com/nlldesign/nlldesign.github.io/tree/main/projects/token-tracker',
+          status: 'plugin',
+          originPill: 'github',
+          metrics: [
+            { val: 'getuserstatus', label: 'live model quotas &amp; reset timers via RPC' },
+            { val: 'usd + brl', label: 'per-turn cost calculation from transcript.jsonl' },
+            { val: 'cost sim', label: 'cross-model comparison &amp; context gauge' }
+          ],
+          desafio: 'when running long agentic sessions across multiple models in antigravity 2.0 (gemini 4 neon, argon, hydrogen, claude opus/sonnet, flash), there was no real-time visibility into usd/brl spend, cache-read savings, or remaining quota before rate limits hit.',
+          abordagem: 'built a node.js + html sidecar plugin (plugin.json, sidecars/tracker/main.mjs, pricing.mjs, index.html, and skill.md): authenticates against the local language server GetUserStatus endpoint using the session csrf token to display available/locked models and reset countdowns; parses transcript.jsonl step-by-step to track model switches per turn; calculates input/output/cache savings; meters context window saturation; and renders a comparative cost table with native light/dark CSS vars.',
+          resultado: 'auxiliary pane integrated via sidecar://token-tracker/tracker/ and versioned on github (projects/token-tracker), bringing financial and quota observability to ai sessions.',
+          techs: ['antigravity plugin', 'node.js mjs', 'transcript.jsonl parser', 'getuserstatus rpc', 'pricing simulator', 'sidecar pane'],
+          gallery: []
+        },
+        {
+          id: 'druid-helper',
+          category: 'drive',
+          tag: 'lua • wow classic addon',
+          num: '02',
+          title: 'druid helper v2.0 (wow addon)',
+          subtitle: 'multi-form lua addon with spellbook scanning, aggro sound alert &amp; healer radar',
+          summary: 'lua addon for world of warcraft classic/forever that dynamically scans learned abilities by level, morphs hud metrics across bear/cat/healer forms, and prioritizes dungeon heals.',
+          image: 'assets/druid-helper-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: 'https://github.com/nlldesign/nlldesign.github.io/tree/main/projects/druid-helper',
+          status: 'lua addon',
+          originPill: 'github',
+          metrics: [
+            { val: '3 forms', label: 'morphing hud: bear tank, cat dps &amp; healer' },
+            { val: 'spellbook', label: 'live detection of level-unlocked abilities' },
+            { val: '/dh config', label: 'in-game slider UI for scale, alpha &amp; alerts' }
+          ],
+          desafio: 'classic wow druids swap drastically different combat roles mid-pull (rage tanking, energy/combo dps, mana healing), making static level-60 rotation addons misleading while leveling.',
+          abordagem: 'implemented in pure lua (DruidHelper.lua and DruidHelper.toc): scans the character spellbook so suggestions match only abilities actually trained; shifts into a red rage bar in Bear Form with PlaySound GROWL warnings whenever loose mobs target party healers/dps; switches to yellow energy + 5 combo-point tracking (Rake/Claw/Rip/Bite) in Cat Form; and sorts party1–party4 health in Healer Mode (<35% critical burst vs <75% Rejuvenation) with live /dh config tuning.',
+          resultado: 'lightweight self-contained addon archived in git (projects/druid-helper) that cuts combat UI noise during dungeons.',
+          techs: ['lua', 'wow classic api', 'spellbook scanner', 'combat log &amp; aggro alert', 'healer radar ui'],
+          gallery: []
+        },
+        {
+          id: 'cao-farejador',
+          category: 'drive',
+          tag: 'chrome mv3 • google drive',
+          num: '03',
+          title: 'cao farejador (extension v1–v3)',
+          subtitle: 'chrome mv3 extension for dom extraction, bulk pool tools &amp; colab json flows',
+          summary: 'three-generation chrome extension stored on google drive reading page dom via inject.js, bridging payloads through content.js into popup.html/js and companion colab json notebooks.',
+          image: 'assets/cao-farejador-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'extension',
+          originPill: 'google drive',
+          metrics: [
+            { val: '3 versions', label: 'iterated across v1.0, v2.0, v3.0 &amp; bulk mode' },
+            { val: '4 files', label: 'manifest v3, inject.js, content.js &amp; popup ui' },
+            { val: 'colab json', label: 'paired notebooks for single &amp; combo bet schemas' }
+          ],
+          desafio: 'automating repetitive slip inspection and pool (bolao) mapping directly inside the browser without error-prone manual copy-pasting.',
+          abordagem: 'built under manifest v3 and archived in /01_Codigos/Extensao on google drive: manifest.json mounts content.js as an isolated bridge while injecting inject.js (8.7 KB) into page context to read dom and slip states; structured events flow up into popup.html / popup.js (19.7 KB, including batch flows from antes_bolao_bulk) and pair with dedicated google colab converters (Automacao_CaoFarejador_Multiplas.ipynb and Json Apostas Simples e Apostas Multiplas).',
+          resultado: 'modular browser toolset iterated through three major releases with standardized json payloads.',
+          techs: ['chrome extension mv3', 'javascript (dom/inject)', 'popup UI html/js', 'json payload parser', 'google colab python'],
+          gallery: []
+        },
+        {
+          id: 'betting-helper',
+          category: 'drive',
+          tag: 'chrome mv3 • dual-world',
+          num: '04',
+          title: 'betting helper extension',
+          subtitle: 'manifest v3 extension with strict main-world / isolated-world script split',
+          summary: 'chrome extension architected around separate main-world extraction (content-main.js), isolated chrome bridge (content-isolated.js), and a 25 kb interactive popup panel.',
+          image: 'assets/betting-helper-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'extension',
+          originPill: 'google drive',
+          metrics: [
+            { val: 'dual-world', label: 'content-main.js + content-isolated.js (mv3)' },
+            { val: '25kb popup', label: 'dedicated UI across popup.html, .css &amp; .js' },
+            { val: 'documented', label: 'readme.md + automacao_seubet_iraq colab script' }
+          ],
+          desafio: 'complying with strict manifest v3 security boundaries while still inspecting live javascript states inside host tabs.',
+          abordagem: 'clean two-layer design in /01_Codigos/Extensao/betting-helper-extension: content-main.js (8.8 KB) operates inside the page main world and dispatches sanitized events; content-isolated.js (4.0 KB) relays messages safely to chrome runtime APIs; and popup.html/css/js (25 KB) exposes one-click controls documented alongside README.md and Automacao_SeuBet_Iraq.ipynb.',
+          resultado: 'maintainable mv3 extension cleanly decoupled from host-site globals.',
+          techs: ['chrome manifest v3', 'main vs isolated world', 'html/css popup ui', 'event messaging bridge', 'colab automation'],
+          gallery: []
+        },
+        {
+          id: 'bet-crawler',
+          category: 'drive',
+          tag: 'python • fastapi &amp; playwright',
+          num: '05',
+          title: 'bet crawler web dashboard',
+          subtitle: 'fastapi + websocket local control center for testing an async playwright crawler',
+          summary: 'dark-mode web control panel orchestrating an async playwright crawler intercepting /odds network responses, streaming live websocket logs, and toggling an integrated mock server.',
+          image: 'assets/bet-crawler-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'local lab',
+          originPill: 'python lab',
+          metrics: [
+            { val: 'websocket', label: 'live odds stream &amp; scrolling terminal output' },
+            { val: 'playwright', label: 'async network traffic interception (/odds)' },
+            { val: 'mock server', label: 'built-in http simulator for safe testing' }
+          ],
+          desafio: 'testing and observing dynamic odds scrapers reliably without breaking against flaky live targets or flying blind inside a headless cli.',
+          abordagem: 'run.py bootstraps python/playwright dependencies and starts server.py on fastapi; the backend manages a mock http server thread (:8080) and an async playwright worker intercepting /odds responses, broadcasting json updates via websocket to the glassmorphic frontend (index.html) with flashing green/red delta cards and real-time terminal logs.',
+          resultado: 'self-contained observable lab architecture for reproducible high-frequency crawler testing.',
+          techs: ['python', 'fastapi &amp; uvicorn', 'playwright async', 'websockets', 'mock http server', 'dark glass ui'],
+          gallery: []
+        },
+        {
+          id: 'insightflow-ai',
+          category: 'drive',
+          tag: 'ai studio • data viz &amp; ia',
+          num: '06',
+          title: 'insightflow ai &amp; smart data dashboard',
+          subtitle: 'next.js + gemini analytics suite built in google ai studio',
+          summary: 'consolidates insightflow ai dashboard, data analysis dashboard, and smart data dashboard: ingests tabular datasets into interactive charts and synthesizes plain-language executive insights.',
+          image: 'assets/insightflow-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'ai studio',
+          originPill: 'ai studio',
+          metrics: [
+            { val: '3 applets', label: 'insightflow v1, ai dashboard &amp; smart data' },
+            { val: 'next.js + ai', label: 'dynamic kpi dashboards without manual sql' },
+            { val: 'anomalies', label: 'automated trend and outlier summarization' }
+          ],
+          desafio: 'enabling non-technical teams to extract clear trends and anomalies from raw datasets without writing complex sql queries or configuring heavy bi suites.',
+          abordagem: 'archived under /02_Gemini/Google AI Studio: users upload datasets into a next.js analytics canvas that builds KPI summary cards and trend plots automatically, while structured gemini prompts surface correlations, outliers, and concise executive summaries alongside the visuals.',
+          resultado: 'navigable ai-analytics prototypes used to accelerate product and marketing data discovery.',
+          techs: ['google ai studio', 'next.js', 'gemini api', 'data visualization', 'prompt engineering'],
+          gallery: []
+        },
+        {
+          id: 'strafebet-mvp',
+          category: 'drive',
+          tag: 'ai studio • igaming ux',
+          num: '07',
+          title: 'strafebet mvp',
+          subtitle: 'high-density igaming frontend prototype &amp; instant betslip ux',
+          summary: 'sportsbook UI experiment crafted in google ai studio focusing on live odds legibility, crisp tap targets, and friction-free single/combo stake payout calculation.',
+          image: 'assets/strafebet-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'ai studio',
+          originPill: 'ai studio',
+          metrics: [
+            { val: 'betslip', label: 'live stake-to-return decimal odds math' },
+            { val: 'dark ui', label: 'high-contrast scannability under live action' },
+            { val: 'igaming mvp', label: 'interactive prototype built in ai studio' }
+          ],
+          desafio: 'eliminating visual clutter typical of sportsbook interfaces while keeping live odds movements, markets, and slip confirmation effortless.',
+          abordagem: 'prototyped in google ai studio with clean match rows, targeted accent highlights limited to interactive odds buttons, and a persistent dark betslip panel recalculating projected returns dynamically as stakes change.',
+          resultado: 'hands-on interaction design lab tailored for high-tempo igaming user journeys.',
+          techs: ['google ai studio', 'react / frontend', 'igaming ux', 'dark ui system', 'micro-interactions'],
+          gallery: []
+        },
+        {
+          id: 'designdream-ai',
+          category: 'drive',
+          tag: 'ai studio • vision ai',
+          num: '08',
+          title: 'designdream ai',
+          subtitle: 'multimodal ai interior design consultant for instant room makeovers',
+          summary: 'google ai studio multimodal app where users upload a photo of any room and receive tailored architectural makeover directions, color tokens, and actionable furniture guidance.',
+          image: 'assets/designdream-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'ai studio',
+          originPill: 'ai studio',
+          metrics: [
+            { val: 'photo -> plan', label: 'multimodal reading of lighting &amp; room layout' },
+            { val: 'palettes', label: 'extracted color tokens &amp; finish suggestions' },
+            { val: 'makeover', label: 'style-guided furnishing recommendations' }
+          ],
+          desafio: 'helping everyday users imagine realistic room transformations from a single smartphone photo without interior design vocabulary.',
+          abordagem: 'three-step flow in google ai studio: upload room photo -> multimodal gemini analysis reads natural light, proportions, and existing furniture -> outputs a cohesive makeover direction (such as modern japandi or minimalist) with curated palettes and step-by-step styling tweaks.',
+          resultado: 'functional multimodal UX proof of concept uniting computer vision with practical design curation.',
+          techs: ['google ai studio', 'gemini vision', 'multimodal ux', 'color tokens', 'interactive ui'],
+          gallery: []
+        },
+        {
+          id: 'jarvis-interface',
+          category: 'drive',
+          tag: 'ai studio • ai hud',
+          num: '09',
+          title: 'j.a.r.v.i.s. interface',
+          subtitle: 'futuristic ai assistant hud &amp; conversational telemetry concept',
+          summary: 'google ai studio experiment reimagining conversational ai as an ambient command hud (just a rather very intelligent system) with structured technical persona and radial telemetry.',
+          image: 'assets/jarvis-preview.svg?v=real3',
+          vercelUrl: null,
+          githubUrl: null,
+          status: 'ai studio',
+          originPill: 'ai studio',
+          metrics: [
+            { val: 'radial hud', label: 'visual state feedback for listening &amp; inference' },
+            { val: 'ai persona', label: 'system prompt tuned for direct technical briefings' },
+            { val: 'ai studio', label: 'conceptual prototype archived on google drive' }
+          ],
+          desafio: 'moving ai interaction beyond repetitive chat bubbles into an operational cockpit metaphor with clear visual system state cues.',
+          abordagem: 'built in google ai studio combining a strict analytical system prompt for j.a.r.v.i.s. with a dark radial HUD aesthetic in cyan and violet reflecting active context, latency, and structured command outputs.',
+          resultado: 'visual and interaction study for context-aware ambient ai copilots.',
+          techs: ['google ai studio', 'gemini persona prompt', 'hud ui design', 'stateful chat', 'motion feedback'],
+          gallery: []
+        }
+      ]
+    };
+
+    function getDriveProjects() {
+      return driveProjectsData[currentGlobalLang] || driveProjectsData.pt;
+    }
+
+    function renderDriveProjectsGrid() {
+      const grid = document.getElementById('driveProjectsGrid');
+      if (!grid) return;
+      const t = siteTranslations[currentGlobalLang] || siteTranslations.pt;
+      const projects = getDriveProjects();
+
+      const tagEl = document.getElementById('driveProjectsTag');
+      const titleEl = document.getElementById('driveProjectsTitle');
+      const subEl = document.getElementById('driveProjectsSubtitle');
+      if (tagEl) tagEl.innerHTML = t.driveProjectsTag;
+      if (titleEl) titleEl.innerHTML = t.driveProjectsTitle;
+      if (subEl) subEl.innerHTML = t.driveProjectsSubtitle;
+
+      const svgArrow = "<svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>";
+      grid.innerHTML = projects.map(proj => {
+        const rightPill = proj.githubUrl
+          ? `<a href="${proj.githubUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('github', this.href, '${proj.id}')" class="tag-pill text-[10.5px] text-[var(--ink)] hover:border-[var(--ink)] whitespace-nowrap"><span>github</span> ${svgArrow}</a>`
+          : `<span class="tag-pill text-[10.5px] text-[var(--muted)] whitespace-nowrap">${proj.originPill}</span>`;
+        return `
+        <article onclick="openCaseStudy('${proj.id}')" class="portfolio-card reveal-on-scroll overflow-hidden flex flex-col justify-between group cursor-pointer">
+          <div class="relative h-40 w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
+            <img src="${proj.image}" alt="${proj.title}" class="card-cover-img w-full h-full object-cover object-top" />
+            <div class="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-black/55 to-transparent pointer-events-none"></div>
+            <div class="absolute top-3 left-3 tag-pill backdrop-blur-md bg-[var(--surface)]/85 text-[11px] text-[var(--accent)]">
+              ${proj.tag}
+            </div>
+            <div class="absolute top-3 right-3 tag-pill backdrop-blur-md bg-[var(--surface)]/85 text-[10px] font-mono">
+              ${proj.status}
+            </div>
+          </div>
+          <div class="p-5 flex flex-col justify-between flex-1 gap-4">
+            <div>
+              <h3 class="text-lg font-medium text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors mb-1.5">
+                ${proj.title}
+              </h3>
+              <p class="text-xs text-[var(--muted)] leading-relaxed font-light line-clamp-3">
+                ${proj.summary}
+              </p>
+            </div>
+            <div class="pt-3 border-t border-[var(--line)] flex items-center justify-between gap-2">
+              <span class="text-xs font-mono text-[var(--accent)] flex items-center gap-1">
+                <span>${t.howItWorksBtn}</span>
+                <span class="group-hover:translate-x-1 transition-transform">→</span>
+              </span>
+              ${rightPill}
+            </div>
+          </div>
+        </article>
+      `;
+      }).join('');
     }
 
     // Helper de texto do botão de alternância de tema
@@ -2696,6 +3438,7 @@
         // 9. Re-renderiza carrossel de portfólio e grid de jogos com os novos dados
         renderPortfolioCarousel();
         renderVercelAppsGrid();
+        renderDriveProjectsGrid();
         renderGamesGrid();
         lucide.createIcons();
 
@@ -2746,6 +3489,19 @@
       if (sLead) sLead.innerHTML = t.lead;
       const sBio = document.getElementById('sobreBio');
       if (sBio) sBio.innerHTML = t.paragraphs.map(p => `<p>${p}</p>`).join('');
+
+      const sAiLab = document.getElementById('sobreAiLabel');
+      if (sAiLab && t.aiHeading) sAiLab.innerHTML = t.aiHeading;
+      const sAiGrid = document.getElementById('sobreAiGrid');
+      if (sAiGrid && t.aiPillars) {
+        sAiGrid.innerHTML = t.aiPillars.map(p => `
+          <div class="step-card p-5 sm:p-6 group">
+            <div class="font-serif-accent text-2xl text-[var(--accent)] mb-1">${p.num}</div>
+            <h3 class="text-base sm:text-lg font-medium text-[var(--ink)] mb-2">${p.title}</h3>
+            <p class="text-sm text-[var(--muted)] leading-relaxed font-light">${p.desc}</p>
+          </div>
+        `).join('');
+      }
 
       const sExpLab = document.getElementById('sobreExpLabel');
       if (sExpLab) sExpLab.innerHTML = t.expHeading;
@@ -3194,6 +3950,7 @@
         document.getElementById('viewPortfolio').classList.remove('hidden');
         renderPortfolioCarousel();
         renderVercelAppsGrid();
+        renderDriveProjectsGrid();
         window.location.hash = '#/portfolio';
         trackGA4PageView('#/portfolio', 'Portfólio de Produto · Lucas Nellucci');
       } else if (viewId === 'sobre') {
@@ -3366,7 +4123,7 @@
     // Abre a Tela de Estudo de Caso (Idêntica a luccas.social.br/portfolio/[case])
     function openCaseStudy(id) {
       triggerTopProgressBar();
-      const item = [...portfolioProjects, ...getVercelApps(), ...gameProjects].find(c => c.id === id);
+      const item = [...portfolioProjects, ...getVercelApps(), ...getDriveProjects(), ...gameProjects].find(c => c.id === id);
       if (!item) return;
 
       activeCaseId = id;
@@ -3385,6 +4142,20 @@
       document.getElementById('caseBadge').innerHTML = item.tag;
       document.getElementById('caseTitle').innerHTML = item.title;
       document.getElementById('caseSubtitle').innerHTML = item.subtitle;
+
+      // Rótulos adaptativos para Projetos Drive/Plugins ("como funciona") vs Cases padrão
+      const lblDes = document.getElementById('caseLabelDesafio');
+      const lblAb = document.getElementById('caseLabelAbordagem');
+      const lblRes = document.getElementById('caseLabelResultado');
+      if (item.category === 'drive') {
+        if (lblDes) lblDes.innerHTML = tLang.labelDriveOverview;
+        if (lblAb) lblAb.innerHTML = tLang.labelDriveHowItWorks;
+        if (lblRes) lblRes.innerHTML = tLang.labelDriveArchitecture;
+      } else {
+        if (lblDes) lblDes.innerHTML = tLang.labelDesafio;
+        if (lblAb) lblAb.innerHTML = tLang.labelAbordagem;
+        if (lblRes) lblRes.innerHTML = tLang.labelResultado;
+      }
 
       // Blocos editoriais 180px 1fr
       document.getElementById('caseDesafioText').innerText = item.desafio;
@@ -3522,7 +4293,9 @@
       }
 
       // Banner de Próximo Case
-      const list = item.category === 'jogos' ? gameProjects : (item.category === 'labs' ? getVercelApps() : portfolioProjects);
+      const list = item.category === 'jogos'
+        ? gameProjects
+        : (item.category === 'labs' ? getVercelApps() : (item.category === 'drive' ? getDriveProjects() : portfolioProjects));
       const curIdx = list.findIndex(c => c.id === id);
       const nextItem = list[(curIdx + 1) % list.length];
       document.getElementById('nextCaseTitle').innerHTML = nextItem.title;
@@ -3534,9 +4307,11 @@
     }
 
     function goToNextCase() {
-      const item = [...portfolioProjects, ...getVercelApps(), ...gameProjects].find(c => c.id === activeCaseId);
+      const item = [...portfolioProjects, ...getVercelApps(), ...getDriveProjects(), ...gameProjects].find(c => c.id === activeCaseId);
       if (!item) return;
-      const list = item.category === 'jogos' ? gameProjects : (item.category === 'labs' ? getVercelApps() : portfolioProjects);
+      const list = item.category === 'jogos'
+        ? gameProjects
+        : (item.category === 'labs' ? getVercelApps() : (item.category === 'drive' ? getDriveProjects() : portfolioProjects));
       const curIdx = list.findIndex(c => c.id === activeCaseId);
       const nextItem = list[(curIdx + 1) % list.length];
       openCaseStudy(nextItem.id);

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <pattern id="gridPat" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect width="800" height="450" fill="url(#gridPat)"/>
+  
+  <circle cx="630" cy="95" r="190" fill="rgba(59,130,246,0.12)"/>
+  <circle cx="160" cy="350" r="170" fill="rgba(16,185,129,0.08)"/>
+  <rect x="56" y="42" width="688" height="366" rx="20" fill="#10131a" stroke="rgba(255,255,255,0.1)"/>
+
+  <!-- Header -->
+  <text x="82" y="74" fill="#93c5fd" font-family="monospace" font-size="12" font-weight="bold">STUDY-FATEC  //  VESTIBULAR 2016-2026 (ZERO-AI)</text>
+  <rect x="560" y="54" width="160" height="26" rx="13" fill="rgba(16,185,129,0.14)" stroke="#10b981" stroke-opacity="0.45"/>
+  <text x="578" y="71" fill="#6ee7b7" font-family="monospace" font-size="10">CUSTO ZERO • STATIC</text>
+
+  <!-- Left Main Exam Card -->
+  <rect x="82" y="102" width="414" height="278" rx="14" fill="#161a24" stroke="rgba(255,255,255,0.09)"/>
+  <text x="102" y="128" fill="#60a5fa" font-family="monospace" font-size="10">FATEC 2025-2 • Q18 • MATEMATICA / RACIOCINIO</text>
+  <rect x="102" y="142" width="374" height="72" rx="10" fill="#1e2433" stroke="rgba(255,255,255,0.06)"/>
+  <text x="118" y="166" fill="#e2e8f0" font-family="sans-serif" font-size="12">Recorte PyMuPDF em alta resolucao preservando</text>
+  <text x="118" y="184" fill="#94a3b8" font-family="sans-serif" font-size="12">formulas, tabelas, mapas e texto de apoio compartilhado.</text>
+
+  <!-- Hints Accordion (3 Levels + Eliminar 2) -->
+  <rect x="102" y="228" width="180" height="34" rx="8" fill="rgba(59,130,246,0.16)" stroke="#3b82f6" stroke-opacity="0.5"/>
+  <text x="118" y="249" fill="#bfdbfe" font-family="monospace" font-size="10">DICA 1-3 (REGRAS)</text>
+  <rect x="294" y="228" width="182" height="34" rx="8" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-opacity="0.5"/>
+  <text x="316" y="249" fill="#fde68a" font-family="monospace" font-size="10">ELIMINAR 2 OPCOES</text>
+
+  <!-- Alternative Pills -->
+  <rect x="102" y="276" width="374" height="26" rx="6" fill="#1f2533"/>
+  <text x="114" y="293" fill="#6ee7b7" font-family="monospace" font-size="10">[C] Alternativa correta validada pelo gabarito oficial</text>
+  <rect x="102" y="310" width="374" height="26" rx="6" fill="#1b1f2a" opacity="0.55"/>
+  <text x="114" y="327" fill="#71717a" font-family="monospace" font-size="10">[A] Termo absoluto ("sempre" / "nunca") eliminado</text>
+
+  <!-- Right Analytics Panel -->
+  <rect x="514" y="102" width="204" height="278" rx="14" fill="#161a24" stroke="rgba(16,185,129,0.35)"/>
+  <text x="532" y="128" fill="#6ee7b7" font-family="monospace" font-size="11" font-weight="bold">LOCALSTORAGE STATS</text>
+  <text x="532" y="168" fill="#ffffff" font-family="sans-serif" font-size="28" font-weight="700">1,000+</text>
+  <text x="532" y="186" fill="#94a3b8" font-family="monospace" font-size="10">QUESTOES OFICIAIS</text>
+
+  <text x="532" y="222" fill="#cbd5e1" font-family="monospace" font-size="10">MATEMATICA • 78%</text>
+  <rect x="532" y="230" width="168" height="6" rx="3" fill="#27272a"/>
+  <rect x="532" y="230" width="131" height="6" rx="3" fill="#3b82f6"/>
+
+  <text x="532" y="260" fill="#cbd5e1" font-family="monospace" font-size="10">PORTUGUES • 84%</text>
+  <rect x="532" y="268" width="168" height="6" rx="3" fill="#27272a"/>
+  <rect x="532" y="268" width="141" height="6" rx="3" fill="#10b981"/>
+
+  <text x="532" y="298" fill="#cbd5e1" font-family="monospace" font-size="10">FISICA / QUIM • 69%</text>
+  <rect x="532" y="306" width="168" height="6" rx="3" fill="#27272a"/>
+  <rect x="532" y="306" width="116" height="6" rx="3" fill="#a855f7"/>
+
+  <text x="532" y="356" fill="#71717a" font-family="monospace" font-size="10">github.com/nlldesign/Study-fatec</text>
+
+</svg>

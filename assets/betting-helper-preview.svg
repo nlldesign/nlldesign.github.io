@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <pattern id="gridPat" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect width="800" height="450" fill="url(#gridPat)"/>
+  
+  <circle cx="190" cy="110" r="180" fill="rgba(34,211,238,0.1)"/>
+  <circle cx="640" cy="340" r="180" fill="rgba(168,85,247,0.09)"/>
+  <rect x="56" y="42" width="688" height="366" rx="20" fill="#101217" stroke="rgba(255,255,255,0.1)"/>
+  <text x="82" y="74" fill="#67e8f9" font-family="monospace" font-size="12" font-weight="bold">BETTING HELPER EXTENSION  //  CHROME MV3 DUAL-WORLD</text>
+  <rect x="580" y="54" width="140" height="26" rx="13" fill="rgba(34,211,238,0.12)" stroke="#22d3ee" stroke-opacity="0.45"/>
+  <text x="598" y="71" fill="#67e8f9" font-family="monospace" font-size="10">MANIFEST V3</text>
+
+  <!-- Main World vs Isolated World Split -->
+  <rect x="82" y="106" width="298" height="196" rx="14" fill="#171922" stroke="#22d3ee" stroke-opacity="0.45"/>
+  <text x="102" y="132" fill="#67e8f9" font-family="monospace" font-size="11" font-weight="bold">MAIN &amp; ISOLATED SCRIPTS</text>
+  <rect x="102" y="148" width="258" height="36" rx="8" fill="#212430"/>
+  <text x="116" y="170" fill="#e4e4e7" font-family="monospace" font-size="11">content-main.js (8.8 KB)</text>
+  <rect x="102" y="194" width="258" height="36" rx="8" fill="#212430"/>
+  <text x="116" y="216" fill="#e4e4e7" font-family="monospace" font-size="11">content-isolated.js (4.0 KB)</text>
+  <text x="102" y="258" fill="#a1a1aa" font-family="sans-serif" font-size="11">Leitura segura do contexto da pagina</text>
+  <text x="102" y="274" fill="#a1a1aa" font-family="sans-serif" font-size="11">e ponte via chrome.runtime</text>
+
+  <!-- Bridge Arrows -->
+  <path d="M 388 184 H 416 M 410 178 L 416 184 L 410 190" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 416 218 H 388 M 394 212 L 388 218 L 394 224" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Popup UI & Companion Notebook -->
+  <rect x="424" y="106" width="294" height="196" rx="14" fill="#171922" stroke="#a855f7" stroke-opacity="0.5"/>
+  <text x="444" y="132" fill="#d8b4fe" font-family="monospace" font-size="11" font-weight="bold">POPUP CONTROL UI (25 KB)</text>
+  <rect x="444" y="148" width="254" height="36" rx="8" fill="#231f33"/>
+  <text x="458" y="170" fill="#f3e8ff" font-family="monospace" font-size="11">popup.html + popup.css + .js</text>
+  <rect x="444" y="194" width="254" height="36" rx="8" fill="#212430"/>
+  <text x="458" y="216" fill="#6ee7b7" font-family="monospace" font-size="11">Colab: Automacao_SeuBet_Iraq</text>
+  <text x="444" y="258" fill="#a1a1aa" font-family="sans-serif" font-size="11">Inspecao de mercados e painel rapido</text>
+  <text x="444" y="274" fill="#a1a1aa" font-family="sans-serif" font-size="11">com README e payloads JSON</text>
+
+  <!-- Bottom Metadata Strip -->
+  <rect x="82" y="322" width="636" height="58" rx="12" fill="#14161e" stroke="rgba(255,255,255,0.08)"/>
+  <text x="102" y="346" fill="#e4e4e7" font-family="monospace" font-size="11">ARQUITETURA: Page World Hook -> CustomEvent Bridge -> Extension Popup</text>
+  <text x="102" y="366" fill="#71717a" font-family="monospace" font-size="10">ARQUIVADO NO GOOGLE DRIVE (/01_Codigos/Extensao/betting-helper-extension)</text>
+
+</svg>
