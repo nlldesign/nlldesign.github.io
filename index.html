@@ -1306,6 +1306,8 @@
         backToGames: "voltar aos jogos",
         viewFigma: "ver no figma <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         viewBehance: "ver no behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        viewGithub: "ver no github <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        readCaseBtn: "ver detalhes",
         techsLabel: "softwares &amp; disciplinas",
         openVercel: "abrir na vercel <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         officialSite: "site oficial <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
@@ -1360,6 +1362,8 @@
         backToGames: "back to games",
         viewFigma: "view on figma <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         viewBehance: "view on behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        viewGithub: "view on github <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        readCaseBtn: "view details",
         techsLabel: "tools &amp; disciplines",
         openVercel: "open on vercel <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         officialSite: "official website <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
@@ -1676,22 +1680,23 @@
         {
           id: 'corpo-seco',
           category: 'jogos',
-          tag: '3d diegetic ui',
+          tag: 'three.js • survival 3d',
           num: '01',
           title: 'corpo seco: a maldição do vale',
-          subtitle: 'terror folclórico brasileiro • interface diegética, lanterna e inventário 3d',
-          summary: 'experiência atmosférica de terror em primeira pessoa baseada no folclore brasileiro. interface sem hud tradicional: sanidade e itens comunicados através de iluminação e áudio.',
+          subtitle: 'terror folclórico em react, typescript &amp; three.js • sobrevivência por saltos',
+          summary: 'jogo de suspense 3d no navegador onde o solo amaldiçoado puxa o jogador para as trevas — avançar saltando plataformas enquanto evita o corpo seco de olhos vermelhos é a única rota até o amuleto da luz.',
           image: 'assets/corpo-seco-hero.png',
           metrics: [
-            { val: 'three.js', label: 'renderização 3d em tempo real' },
-            { val: 'diegetic', label: 'interface zero-hud imersiva' },
-            { val: '60 fps', label: 'otimização para navegadores' }
+            { val: 'three.js', label: 'renderização 3d com react &amp; vite' },
+            { val: 'diegetic', label: 'atmosfera sonora &amp; visual zero-hud' },
+            { val: 'touch + pc', label: 'controles adaptativos desktop &amp; mobile' }
           ],
-          desafio: 'transmitir tensão psicológica em um jogo web 3d sem poluir a visão do jogador com barras de vida ou menus artificiais.',
-          abordagem: 'utilização de interface diegética: a respiração do personagem indica exaustão, o tremor da lanterna comunica pavor e o inventário é inspecionado diretamente no espaço tridimensional.',
-          resultado: 'imersão profunda de horror e alta taxa de retenção por sessão em navegadores desktop.',
-          techs: ['three.js', 'webgl', 'spatial audio', 'diegetic ui'],
+          desafio: 'transmitir tensão constante sem poluir a viewport com barras artificiais, além de garantir jogabilidade fluida tanto com teclado (wasd/setas/espaço) quanto em telas touch.',
+          abordagem: 'arquitetura em react, typescript, vite e three.js com iluminação volumétrica em névoa, detecção automática de toque com botões virtuais e mecânica central onde pisar fora das plataformas puxa o jogador para a escuridão.',
+          resultado: 'protótipo 3d imersivo publicado em produção na vercel com objetivo claro, feedback imediato de perigo e controles responsivos multi-dispositivo.',
+          techs: ['react', 'typescript', 'vite', 'three.js', 'webgl'],
           vercelUrl: 'https://vale-do-corpo-seco.vercel.app/',
+          githubUrl: null,
           embedUrl: 'games/corpo-seco/index.html',
           gallery: []
         },
@@ -1715,6 +1720,7 @@
           resultado: 'experiência aclamada pela precisão de movimento e fidelidade sensorial ao clássico.',
           techs: ['three.js', 'custom shaders', 'game design'],
           vercelUrl: null,
+          githubUrl: null,
           embedUrl: 'games/undertale-3d/index.html',
           gallery: []
         },
@@ -1722,45 +1728,49 @@
         {
           id: 'swam-invasion',
           category: 'jogos',
-          tag: 'arcade shooter',
+          tag: 'three.js • tático 3d',
           num: '03',
-          title: 'swam invasion',
-          subtitle: 'arcade espacial retrô com física vetorial e combate em tempo real',
-          summary: 'jogo de ação com controles fluidos, combate espacial vetorial, partículas e trilha sonora sintetizada.',
+          title: 'colony survivor: the million swarm',
+          subtitle: 'defesa colonial tática em 3d • torretas elementais, guardas e hiper-infestação',
+          summary: 'jogo de defesa colonial em three.js r128: posicione até 6 torretas (gatling, railgun, chamas e crio), recrute fuzileiros e gerencie a barra de agressividade antes da tempestade de até 1.200 monstros.',
           image: 'assets/swam-invasion-preview.svg',
           metrics: [
-            { val: 'canvas 2d', label: 'renderização com partículas' },
-            { val: 'arcade', label: 'mecânica de reflexos rápidos' },
-            { val: 'game loop', label: 'física de inércia espacial' }
+            { val: '6 torretas', label: 'gatling, railgun, chamas &amp; crio' },
+            { val: '1.200+', label: 'horda em hiper-infestação >200%' },
+            { val: '2 modos', label: 'prólogo tático &amp; combate direto' }
           ],
-          desafio: 'garantir resposta imediata de teclado e sensação de peso nas acelerações da nave em telas de alta taxa de atualização.',
-          abordagem: 'motor físico personalizado em canvas puro calculando inércia, fricção e colisão de projéteis com micro-explosões de partículas.',
-          resultado: 'jogabilidade viciante de estilo arcade com ciclo de reinício instantâneo.',
-          techs: ['html5 canvas', 'game physics', 'arcade ui'],
+          desafio: 'equilibrar legibilidade tática e performance com centenas de inimigos simultâneos em 3d, criando um dilema real entre evoluir a base e provocar o enxame.',
+          abordagem: 'motor duplo (canvas 3d em three.js + camada fx 2d), mecânica de risco vs recompensa com nova cinética em upgrades da base e introdução narrativa com prólogo tático.',
+          resultado: 'experiência estratégica intensa publicada na vercel com código aberto no github e partida imediata no navegador.',
+          techs: ['three.js r128', 'html5 canvas', 'tailwind css', 'tactical hud'],
           vercelUrl: 'https://milons.vercel.app/',
+          githubUrl: 'https://github.com/nlldesign/Swam-invasion',
           embedUrl: 'games/swam-invasion/index.html',
-          gallery: []
+          gallery: [
+            { src: 'assets/colony-survivor-real.png', title: 'tela inicial e cards táticos de colony survivor: the million swarm' }
+          ]
         },
 
         {
           id: 'biopunk-idle',
           category: 'jogos',
-          tag: 'interactive fiction',
+          tag: 'fps retrô psx • web audio',
           num: '04',
-          title: 'biopunk idle &amp; radio',
-          subtitle: 'gestão analógica de recursos, rádio pirata e sintetizadores sonoros',
-          summary: 'jogo incremental temático com rádio pirata atmosférica, estética biopunk e sintonizadores analógicos de áudio e tanques biológicos.',
+          title: 'bio-horde 98: zona leste psx',
+          subtitle: 'survival horror fps estilo ps1 em arquivo único • texturas &amp; áudio 100% procedurais',
+          summary: 'protótipo fps 3d retrô ambientado na zona leste de são paulo em outubro de 1998. renderização pixelada 320×240, comércios locais, texturas em canvas e sintetizador de áudio sem nenhum arquivo .mp3.',
           image: 'assets/biopunk-preview.svg',
           metrics: [
-            { val: 'web audio', label: 'frequências e estática analógica' },
-            { val: 'tactile', label: 'knobs e botões físicos' },
-            { val: '3d idle', label: 'economia de recursos' }
+            { val: '320×240', label: 'estética ps1 &amp; scanlines crt' },
+            { val: '0 assets', label: 'texturas e áudio 100% procedurais' },
+            { val: 'single-file', label: 'three.js + web audio em 1 html' }
           ],
-          desafio: 'evitar que um jogo idle se torne uma planilha fria e criar vínculo emocional através de ambientação estética analógica.',
-          abordagem: 'criação de botões táteis analógicos, sons de estática e frequências de rádio via web audio api e representação volumétrica de recursos em tanques 3d.',
-          resultado: 'experiência com atmosfera singular e prazer sensorial de operar uma rádio clandestina.',
-          techs: ['web audio api', 'tactile ui', 'world building'],
+          desafio: 'construir um bairro inteiro explorável da zona leste (com letreiros como bar do pedro e farmácia zl), armas distintas e sirenes policiais sem depender de modelos externos ou áudio pré-gravado.',
+          abordagem: 'geração procedural de asfalto, azulejos e letreiros via canvas 2d combinada com síntese matemática na web audio api (pistola 9mm, m60-zl, calibre 12, rádio copom e passos), além de cutscene inicial e radar 2d.',
+          resultado: 'protótipo experimental completo em arquivo html único, com código aberto no github e jogável direto no navegador.',
+          techs: ['three.js r128', 'web audio api', 'canvas 2d procedural', 'pointer lock fps'],
           vercelUrl: null,
+          githubUrl: 'https://github.com/nlldesign/bio-horde-98',
           embedUrl: 'games/bio-horde/index.html',
           gallery: []
         },
@@ -1768,22 +1778,23 @@
         {
           id: 'pizzarun',
           category: 'jogos',
-          tag: 'next.js &amp; 3d runner',
+          tag: 'next.js 15 &amp; three.js',
           num: '05',
           title: 'midnight pizza run 2.0',
-          subtitle: 'jogo 3d em tempo real • corrida noturna, obstáculos e hud arcade',
-          summary: 'experiência 3d interativa construída com next.js e renderização em canvas, unindo resposta imediata de controles, câmera dinâmica e placar em tempo real.',
+          subtitle: 'horror 3d em primeira pessoa • 10 caixas na floresta, lanterna &amp; stamina',
+          summary: 'jogo de terror em primeira pessoa feito em next.js 15 e three.js onde você coleta 10 caixas de pizza em uma floresta escura gerenciando bateria de lanterna e cooldown de corrida.',
           image: 'assets/pizzarun-preview.svg',
           metrics: [
-            { val: 'next.js', label: 'arquitetura web interativa' },
-            { val: '3d runner', label: 'câmera e colisões em tempo real' },
-            { val: 'vercel', label: 'deploy ao vivo em produção' }
+            { val: 'next.js 15', label: 'typescript + three.js + radix ui' },
+            { val: '10 pizzas', label: 'coleta em mapa de floresta escura' },
+            { val: 'cross-input', label: 'wasd/mouse &amp; joystick virtual mobile' }
           ],
-          desafio: 'criar uma corrida 3d fluida direto no navegador com inicialização instantânea, feedback claro de pontuação e controles responsivos.',
-          abordagem: 'desenvolvimento de tela inicial imersiva integrada ao canvas 3d, transições imediatas para o gameplay e hud minimalista de alta legibilidade.',
-          resultado: 'jogo 3d publicado e navegável na vercel com ciclo completo de partida e pontuação ao vivo.',
-          techs: ['next.js', 'three.js', 'game feel', 'vercel'],
+          desafio: 'unir tensão de gerenciamento de recursos (luz da lanterna e fôlego para sprint) com controles confortáveis em telas desktop e joystick virtual no celular.',
+          abordagem: 'arquitetura modular em react, three.js e tailwind/radix ui com câmera em primeira pessoa, coleta por clique/toque, sistema de cooldown de corrida e deploy contínuo na vercel.',
+          resultado: 'jogo 3d completo publicado em produção na vercel com pontuação ao vivo e loop completo de fuga.',
+          techs: ['next.js 15', 'three.js', 'typescript', 'radix ui', 'tailwind css'],
           vercelUrl: 'https://pizzarun2-0.vercel.app/',
+          githubUrl: null,
           embedUrl: null,
           gallery: []
         }
@@ -1792,22 +1803,23 @@
         {
           id: 'corpo-seco',
           category: 'jogos',
-          tag: '3d diegetic ui',
+          tag: 'three.js • 3d survival',
           num: '01',
           title: 'corpo seco: curse of the valley',
-          subtitle: 'brazilian folk horror • diegetic interface, 3d flashlight and spatial audio',
-          summary: 'atmospheric first-person psychological horror based on brazilian folklore. zero traditional hud: sanity, stamina and items communicated entirely through lighting and audio cues.',
+          subtitle: 'brazilian folk horror in react, typescript &amp; three.js • platform survival',
+          summary: 'browser 3d suspense game where cursed ground drags you into darkness — leaping across platforms while evading the red-eyed corpo seco is the only path to the amulet of light.',
           image: 'assets/corpo-seco-hero.png',
           metrics: [
-            { val: 'three.js', label: 'real-time 3d webgl rendering' },
-            { val: 'diegetic', label: 'immersive zero-hud interface' },
-            { val: '60 fps', label: 'optimized for desktop browsers' }
+            { val: 'three.js', label: 'real-time 3d with react &amp; vite' },
+            { val: 'diegetic', label: 'zero-hud spatial audio &amp; fog cues' },
+            { val: 'touch + pc', label: 'auto desktop &amp; mobile controls' }
           ],
-          desafio: 'conveying dread and psychological tension in a browser 3d experience without cluttering the viewport with artificial health bars or floating menus.',
-          abordagem: 'implemented a purely diegetic ui: character breathing signals exhaustion, flashlight flickering indicates terror, and inventory items are inspected directly within 3d space.',
-          resultado: 'deep narrative immersion and high session retention across desktop browsers.',
-          techs: ['three.js', 'webgl', 'spatial audio', 'diegetic ui'],
+          desafio: 'conveying relentless psychological dread without cluttering the viewport with artificial bars, while keeping movement responsive on both keyboards and touch devices.',
+          abordagem: 'built with react, typescript, vite, and three.js featuring atmospheric fog, automatic touch virtual controls, and a core mechanic where stepping off platforms pulls you into darkness.',
+          resultado: 'immersive 3d suspense prototype deployed live on vercel with clear objective framing and responsive multi-device input.',
+          techs: ['react', 'typescript', 'vite', 'three.js', 'webgl'],
           vercelUrl: 'https://vale-do-corpo-seco.vercel.app/',
+          githubUrl: null,
           embedUrl: 'games/corpo-seco/index.html',
           gallery: []
         },
@@ -1831,6 +1843,7 @@
           resultado: 'celebrated by players for its movement precision and sensory tribute to the classic indie title.',
           techs: ['three.js', 'custom shaders', 'game design'],
           vercelUrl: null,
+          githubUrl: null,
           embedUrl: 'games/undertale-3d/index.html',
           gallery: []
         },
@@ -1838,45 +1851,49 @@
         {
           id: 'swam-invasion',
           category: 'jogos',
-          tag: 'arcade shooter',
+          tag: 'three.js • 3d tactics',
           num: '03',
-          title: 'swam invasion',
-          subtitle: 'retro space arcade shooter with vector physics &amp; real-time particles',
-          summary: 'fast-paced action game with fluid momentum, vector space combat, explosive particle effects, and an energetic synth soundtrack.',
+          title: 'colony survivor: the million swarm',
+          subtitle: '3d tactical colony defense • elemental turrets, rifle guards &amp; hyper-infestation',
+          summary: 'three.js r128 colony defense game: deploy up to 6 turrets (gatling, railgun, flame, cryo), recruit rifle guards, and balance base upgrades against swarming hyper-infestations of up to 1,200 monsters.',
           image: 'assets/swam-invasion-preview.svg',
           metrics: [
-            { val: 'canvas 2d', label: 'high-performance particle engine' },
-            { val: 'arcade', label: 'fast reflex gameplay loop' },
-            { val: 'inertia', label: 'space momentum physics' }
+            { val: '6 turrets', label: 'gatling, railgun, flame &amp; cryo' },
+            { val: '1,200+', label: 'hyper-infestation crimson storm' },
+            { val: '2 modes', label: 'tactical prologue &amp; direct combat' }
           ],
-          desafio: 'ensuring zero-lag keyboard inputs and a tactile feeling of ship momentum on high-refresh-rate displays.',
-          abordagem: 'custom lightweight physics engine in pure html5 canvas calculating inertia, drag, and projectile collisions with micro-particle sparks.',
-          resultado: 'addictive arcade-style gameplay with instant restart loops and high replay value.',
-          techs: ['html5 canvas', 'game physics', 'arcade ui'],
+          desafio: 'maintaining tactical clarity and smooth frame rates with hundreds of simultaneous 3d enemies while creating meaningful risk-vs-reward dilemmas on every upgrade.',
+          abordagem: 'dual-canvas engine (three.js 3d world + 2d fx overlay), kinetic nova risk-vs-reward pulses triggered by base upgrades, and an interactive tactical prologue.',
+          resultado: 'intense browser strategy game live on vercel with open-source code on github.',
+          techs: ['three.js r128', 'html5 canvas', 'tailwind css', 'tactical hud'],
           vercelUrl: 'https://milons.vercel.app/',
+          githubUrl: 'https://github.com/nlldesign/Swam-invasion',
           embedUrl: 'games/swam-invasion/index.html',
-          gallery: []
+          gallery: [
+            { src: 'assets/colony-survivor-real.png', title: 'colony survivor: the million swarm start menu and tactical cards' }
+          ]
         },
 
         {
           id: 'biopunk-idle',
           category: 'jogos',
-          tag: 'interactive fiction',
+          tag: 'psx retro fps • web audio',
           num: '04',
-          title: 'biopunk idle &amp; pirate radio',
-          subtitle: 'tactile analog resource management, radio frequencies and audio synthesizers',
-          summary: 'atmospheric incremental game featuring a clandestine pirate radio station, biopunk visual identity, tactile audio tuners, and biological incubation tanks.',
+          title: 'bio-horde 98: zona leste psx',
+          subtitle: 'single-file ps1 survival horror fps • 100% procedural textures &amp; web audio synth',
+          summary: 'retro 3d survival fps set in zona leste, são paulo in october 1998. features pixelated 320×240 rendering, enterable local shops, canvas-drawn signage, and mathematically synthesized gun &amp; siren audio.',
           image: 'assets/biopunk-preview.svg',
           metrics: [
-            { val: 'web audio', label: 'analog radio static &amp; filters' },
-            { val: 'tactile', label: 'physical knobs and toggle switches' },
-            { val: '3d idle', label: 'volumetric resource economics' }
+            { val: '320×240', label: 'ps1 pixellation &amp; crt scanlines' },
+            { val: '0 assets', label: '100% procedural textures &amp; audio' },
+            { val: 'single-file', label: 'three.js + web audio in 1 html' }
           ],
-          desafio: 'preventing an incremental idle game from feeling like a sterile spreadsheet and creating emotional attachment through tactile analog immersion.',
-          abordagem: 'crafted physical-feeling skeuomorphic toggles, radio static frequencies via the web audio api, and volumetric 3d resource tanks.',
-          resultado: 'evocative atmospheric depth with the tactile satisfaction of operating a clandestine transmitter.',
-          techs: ['web audio api', 'tactile ui', 'world building'],
+          desafio: 'building an explorable sao paulo neighborhood block (bar do pedro, farmacia zl, alleys), multi-weapon combat, and police radio atmosphere with zero external images or .mp3/.wav files.',
+          abordagem: 'procedural canvas 2d material generation paired with web audio api synthesis (9mm pistol, m60-zl, 12-gauge shotgun, sirens, copom radio beeps), plus letterbox intro cutscene and 2d tactical radar.',
+          resultado: 'complete single-file browser fps prototype published openly on github and playable right on screen.',
+          techs: ['three.js r128', 'web audio api', 'procedural canvas 2d', 'pointer lock fps'],
           vercelUrl: null,
+          githubUrl: 'https://github.com/nlldesign/bio-horde-98',
           embedUrl: 'games/bio-horde/index.html',
           gallery: []
         },
@@ -1884,22 +1901,23 @@
         {
           id: 'pizzarun',
           category: 'jogos',
-          tag: 'next.js &amp; 3d runner',
+          tag: 'next.js 15 &amp; three.js',
           num: '05',
           title: 'midnight pizza run 2.0',
-          subtitle: 'real-time 3d web game • night run, obstacle dodging &amp; arcade hud',
-          summary: 'interactive 3d browser experience built with next.js and real-time canvas rendering, pairing tight controls with dynamic camera framing and live scoring.',
+          subtitle: 'first-person 3d horror • 10 pizza boxes in a dark forest &amp; stamina loop',
+          summary: 'first-person 3d horror game built with next.js 15 and three.js where players scavenge 10 pizza boxes across a dark forest while managing flashlight battery and sprint cooldowns.',
           image: 'assets/pizzarun-preview.svg',
           metrics: [
-            { val: 'next.js', label: 'interactive web architecture' },
-            { val: '3d runner', label: 'real-time camera &amp; collisions' },
-            { val: 'vercel', label: 'live production deployment' }
+            { val: 'next.js 15', label: 'typescript + three.js + radix ui' },
+            { val: '10 boxes', label: 'scavenge loop in dark forest' },
+            { val: 'cross-input', label: 'wasd/mouse &amp; mobile virtual stick' }
           ],
-          desafio: 'delivering a smooth 3d browser runner with instant startup, clear score feedback, and responsive movement.',
-          abordagem: 'crafted an immersive start screen over the live 3d canvas with instant transition into active gameplay and a clean, high-contrast hud.',
-          resultado: 'fully playable 3d web game live on vercel with complete loop and live scoring.',
-          techs: ['next.js', 'three.js', 'game feel', 'vercel'],
+          desafio: 'combining tense resource management (flashlight battery and sprint stamina) with responsive controls on both desktop pointer lock and mobile virtual joysticks.',
+          abordagem: 'modular react, three.js, tailwind css, and radix ui architecture supporting dark-forest lighting, proximity pursuit, and seamless desktop/mobile HUD controls.',
+          resultado: 'complete 3d browser horror runner deployed live on vercel with score tracking and instant replayability.',
+          techs: ['next.js 15', 'three.js', 'typescript', 'radix ui', 'tailwind css'],
           vercelUrl: 'https://pizzarun2-0.vercel.app/',
+          githubUrl: null,
           embedUrl: null,
           gallery: []
         }
@@ -2176,126 +2194,314 @@
     };
 
     
-    const vercelAppsData = {
+        const vercelAppsData = {
       pt: [
         {
           id: 'fibrocare',
-          tag: 'health tech · vite',
+          category: 'labs',
+          tag: 'health tech · vite + supabase',
+          num: '01',
           title: 'fibrocare',
-          desc: 'monitor cíclico e alerta preventivo de crises para pacientes com fibromialgia, com onboarding fluido.',
+          subtitle: 'monitor cíclico de fibromialgia, mapa corporal acr &amp; previsão de crises',
+          summary: 'aplicativo web e mobile-first para check-in de dor em menos de 30s, mapa anatômico interativo (acr 2016), teoria das colheres e alerta preditivo de crises em 24h–48h.',
           image: 'assets/fibrocare-preview.svg',
-          url: 'https://fibrocare-alpha.vercel.app/',
-          status: 'aberto'
+          vercelUrl: 'https://fibrocare-alpha.vercel.app/',
+          githubUrl: 'https://github.com/nlldesign/Fibrotracker',
+          status: 'aberto',
+          metrics: [
+            { val: '< 30s', label: 'check-in diário de baixo atrito' },
+            { val: '19 áreas', label: 'índice clínico wpi · acr 2016' },
+            { val: '24h–48h', label: 'alerta preditivo de crises' }
+          ],
+          desafio: 'pessoas com fibromialgia enfrentam fadiga cognitiva (fibrofog) e precisam registrar dor, gatilhos e medicações sem formulários longos — além de traduzir sintomas subjetivos em laudos objetivos para o reumatologista.',
+          abordagem: 'criação de check-in guiado (<30s) com escala eva (0–10), mapa corporal interativo em svg (frente e costas cobrindo os critérios wpi/sss do american college of rheumatology), medidor de energia pela teoria das colheres e banco supabase com row level security (lgpd).',
+          resultado: 'produto clínico completo com calendário preditivo (estável, alerta precoce e crise), plano de acolhimento/pacing e exportação de relatório médico em pdf e csv.',
+          techs: ['react', 'typescript', 'vite', 'supabase rls (lgpd)', 'svg body map', 'acr 2016'],
+          gallery: [
+            { src: 'assets/fibrocare-real.png', title: 'onboarding de diário clínico inteligente na vercel (fibrocare)' }
+          ]
         },
         {
           id: 'job-finder',
-          tag: 'ia · recrutamento',
-          title: 'jobfinder ai',
-          desc: 'copiloto de carreira e recrutamento com preenchimento assistido por ia e análise de aderência a vagas.',
+          category: 'labs',
+          tag: 'ia · node + express',
+          num: '02',
+          title: 'jobmatch ai (jobhunter)',
+          subtitle: 'copiloto de vagas linkedin + gupy &amp; reescrita na fórmula google xyz',
+          summary: 'plataforma inteligente que extrai seu perfil de currículos pdf/txt, varre vagas reais no linkedin e na gupy, calcula compatibilidade e reescreve o currículo na fórmula google xyz.',
           image: 'assets/jobhunter-preview.svg',
-          url: 'https://job-finder-azure-zeta.vercel.app/',
-          status: 'aberto'
+          vercelUrl: 'https://job-finder-azure-zeta.vercel.app/',
+          githubUrl: null,
+          status: 'aberto',
+          metrics: [
+            { val: '2 canais', label: 'varredura simultânea linkedin &amp; gupy' },
+            { val: 'google xyz', label: 'currículo reescrito para cada vaga' },
+            { val: 'pdf / txt', label: 'leitura automática do perfil profissional' }
+          ],
+          desafio: 'eliminar o atrito manual de buscar vagas em múltiplos portais e adaptar currículos genéricos para filtros de recrutamento (ats) sem perder coerência com o perfil real do candidato.',
+          abordagem: 'construção de backend em node.js/express integrado às APIs públicas de busca do linkedin e gupy com filtros por senioridade (júnior a lead) e frescor (3–30 dias), aliado a extrator universal com pdf.js e gerador de pitch + guia salarial clt/pj.',
+          resultado: 'copiloto funcional em produção na vercel com carregamento de exemplo em 1 clique, cálculo de match, geração instantânea na fórmula google xyz e exportação csv.',
+          techs: ['node.js', 'express', 'pdf.js', 'tailwind css', 'linkedin &amp; gupy', 'fórmula google xyz'],
+          gallery: [
+            { src: 'assets/jobmatch-real.png', title: 'interface real do jobmatch ai (universal edition) em produção' }
+          ]
         },
         {
           id: 'mapleads',
-          tag: 'b2b · express',
+          category: 'labs',
+          tag: 'b2b · express + puppeteer',
+          num: '03',
           title: 'mapleads',
-          desc: 'prospecção inteligente de clientes no google maps com chips rápidos por nicho e filtros segmentados.',
+          subtitle: 'prospecção local no google maps, anti-repetição &amp; roteiro de cold calling',
+          summary: 'sistema em node.js e puppeteer para encontrar negócios locais por gps e raio (com filtro exclusivo de lojas sem site), evitar contatos repetidos e exportar leads direto para excel.',
           image: 'assets/mapleads-preview.svg',
-          url: 'https://mapleads-psi.vercel.app/',
-          status: 'aberto'
+          vercelUrl: 'https://mapleads-psi.vercel.app/',
+          githubUrl: 'https://github.com/nlldesign/Mapleads',
+          status: 'aberto',
+          metrics: [
+            { val: '0 duplicatas', label: 'banco de exclusão via planilha prévia' },
+            { val: 'em lote', label: 'fila para múltiplas cidades e nichos' },
+            { val: '.xlsx / .csv', label: 'exportação com links de whatsapp' }
+          ],
+          desafio: 'equipes comerciais perdem horas prospectando manualmente no google maps e frequentemente abordam empresas que já estão na base ou que já possuem presença digital consolidada.',
+          abordagem: 'arquitetura de prospecção assistida com chips rápidos por nicho, filtro "apenas lojas sem site", upload de planilhas (.xlsx/.csv) para bloquear duplicatas antes da busca, modo em lote e dossiê integrado com roteiro de cold calling em 5 passos.',
+          resultado: 'ferramenta b2b completa com docker/render e interface publicada na vercel, entregando diagnóstico de pontos fracos e exportação consolidada pronta para abordagem.',
+          techs: ['node.js', 'express', 'puppeteer', 'xlsx / multer', 'docker', 'cold calling ux'],
+          gallery: [
+            { src: 'assets/mapleads-real.png', title: 'painel de prospecção por raio e proteção contra duplicatas no mapleads' }
+          ]
         },
         {
           id: 'habit-tracker',
-          tag: 'gamificação · rpg',
+          category: 'labs',
+          tag: 'next.js + supabase',
+          num: '04',
           title: 'habit rpg',
-          desc: 'workspace pessoal gamificado para construção de hábitos diários com progressão visual estilo rpg.',
+          subtitle: 'produtividade gamificada por reforço positivo puro (sem hp/punição)',
+          summary: 'aplicação em next.js e supabase com missões diárias, combos, loja de recompensas personalizáveis, cadernos em rich-text (tiptap) e reset autônomo às 03h via pg_cron.',
           image: 'assets/habit-rpg-preview.svg',
-          url: 'https://personal-habit-tracker-x.vercel.app/',
-          status: 'login'
+          vercelUrl: 'https://personal-habit-tracker-x.vercel.app/',
+          githubUrl: null,
+          status: 'login',
+          metrics: [
+            { val: '0 punição', label: 'reforço positivo sem barra de hp' },
+            { val: 'pg_cron', label: 'reset diário automático às 03h brt' },
+            { val: 'rpc atômica', label: 'progressão em tempo real no supabase' }
+          ],
+          desafio: 'muitos apps de hábitos gamificados punem o usuário com perda de vida (hp) quando um dia falha, gerando ansiedade e abandono rápido em vez de constância saudável.',
+          abordagem: 'redesign focado em psicologia comportamental: remoção intencional de penalidades, função rpc atômica no postgresql (fórmula nível * 200 xp + moedas), reordenação drag &amp; drop (@dnd-kit), loja de recompensas reais e cadernos tiptap.',
+          resultado: 'workspace pessoal ultra-wide até 1600px em dark glassmorphism protegido por supabase auth e rls, pronto para uso diário sem atrito emocional.',
+          techs: ['next.js', 'tailwind css', 'supabase pg_cron', 'tiptap editor', 'dnd-kit', 'gamification ux'],
+          gallery: []
         },
         {
           id: 'rh-hub',
+          category: 'labs',
           tag: 'enterprise · dp/rh',
+          num: '05',
           title: 'rh hub',
-          desc: 'dashboard corporativo de departamento pessoal e recursos humanos com acesso demonstrativo integrado.',
-          image: 'assets/framer-intern-cover.png',
-          url: 'https://rh-hub-9mh4.vercel.app/',
-          status: 'demo'
+          subtitle: 'central operacional de dp, rh &amp; suporte a varejo com 7 módulos',
+          summary: 'painel executivo 360° para gestão de lojas e equipes: colaboradores, conformidade esocial (s-2200/s-2299), controle de ponto/atestados, recrutamento em kanban e busca global ⌘k.',
+          image: 'assets/rh-hub-preview.png',
+          vercelUrl: 'https://rh-hub-9mh4.vercel.app/',
+          githubUrl: null,
+          status: 'demo',
+          metrics: [
+            { val: '7 módulos', label: 'desempenho, dp, ponto &amp; recrutamento' },
+            { val: 'esocial', label: 'fluxo contábil s-2200 &amp; desligamento' },
+            { val: 'modo demo', label: 'conta teste pronta: ana@rhhub.com' }
+          ],
+          desafio: 'unificar rotinas fragmentadas de departamento pessoal no varejo — folha, 13º salário, atestados médicos com cid, envios para contabilidade e funil de contratação — em um fluxo único e legível.',
+          abordagem: 'arquitetura enterprise em 7 módulos integrados: visão executiva 360°, gestão de contratos ativos/afastados, rastreamento de envios ao esocial, ponto com upload de atestado, kanban de vagas (triagem → entrevista → proposta) e atalho ⌘k.',
+          resultado: 'plataforma navegável na vercel com tema claro/escuro e modo demonstração integrado na tela inicial para avaliação imediata de todos os fluxos.',
+          techs: ['react', 'enterprise ux', 'kanban recruitment', 'esocial dp/rh', 'command palette ⌘k', 'dark/light ui'],
+          gallery: [
+            { src: 'assets/rh-hub-preview.png', title: 'painel executivo 360° do rh hub acessado via conta demonstrativa' }
+          ]
         },
         {
           id: 'sportintel-hub',
-          tag: 'analytics · esportes',
+          category: 'labs',
+          tag: 'vite · radar de mercado',
+          num: '06',
           title: 'sportintel hub',
-          desc: 'hub de inteligência esportiva com filtros por modalidade e painel escuro focado em leitura rápida.',
-          image: 'assets/token-tracker-preview.svg',
-          url: 'https://hub-de-intelig-ncia-esportiva.vercel.app/',
-          status: 'aberto'
+          subtitle: 'radar de inteligência esportiva, eventos ao vivo &amp; dropping odds',
+          summary: 'painel analítico em dark mode para monitoramento simultâneo de eventos esportivos em 5 modalidades, variações bruscas de cota (dropping odds) e janelas temporais.',
+          image: 'assets/sportintel-preview.svg',
+          vercelUrl: 'https://hub-de-intelig-ncia-esportiva.vercel.app/',
+          githubUrl: null,
+          status: 'aberto',
+          metrics: [
+            { val: '5 esportes', label: 'futebol, brasileirão, basquete, tênis &amp; e-sports' },
+            { val: 'dropping odds', label: 'radar visual de anomalias de mercado' },
+            { val: 'dark ui', label: 'leitura rápida com filtros combinados' }
+          ],
+          desafio: 'organizar grandes volumes de partidas, ligas e movimentos de mercado sem sobrecarregar visualmente o analista durante o acompanhamento em tempo real.',
+          abordagem: 'interface em dark mode esmeralda de alto contraste com barra de filtros em 1 clique por esporte, alternadores "ao vivo" e "dropping odds", busca por equipes e recorte temporal (hoje / próximos 7 dias).',
+          resultado: 'shell analítico ágil publicado na vercel com navegação instantânea entre modalidades, campeonatos e filtros de mercado.',
+          techs: ['vite', 'react', 'data visualization', 'market radar ui', 'dark mode'],
+          gallery: []
         }
       ],
       en: [
         {
           id: 'fibrocare',
-          tag: 'health tech · vite',
+          category: 'labs',
+          tag: 'health tech · vite + supabase',
+          num: '01',
           title: 'fibrocare',
-          desc: 'cyclic symptom monitor and flare-up alert system designed for fibromyalgia care with clean onboarding.',
+          subtitle: 'fibromyalgia cyclic tracker, acr body map &amp; 24–48h flare-up predictor',
+          summary: 'mobile-first clinical web app enabling <30s daily pain check-ins, interactive acr 2016 svg body mapping, spoon theory energy pacing, and predictive flare-up alerts.',
           image: 'assets/fibrocare-preview.svg',
-          url: 'https://fibrocare-alpha.vercel.app/',
-          status: 'live'
+          vercelUrl: 'https://fibrocare-alpha.vercel.app/',
+          githubUrl: 'https://github.com/nlldesign/Fibrotracker',
+          status: 'live',
+          metrics: [
+            { val: '< 30s', label: 'low-friction daily symptom check-in' },
+            { val: '19 zones', label: 'clinical wpi index · acr 2016' },
+            { val: '24h–48h', label: 'predictive flare-up forecasting' }
+          ],
+          desafio: 'patients dealing with fibromyalgia and brain fog (fibrofog) struggle with lengthy health forms, yet rheumatologists need standardized longitudinal scores to adjust treatment safely.',
+          abordagem: 'crafted a sub-30s guided check-in with eva (0–10) pain scoring, front/back interactive svg body map aligned with acr 2016 (wpi/sss), spoon theory battery tracking to prevent pem crashes, and supabase postgresql with rls (lgpd).',
+          resultado: 'complete health companion live on vercel featuring a predictive calendar (stable, early warning, flare), cycle trigger radar, and clean pdf/csv medical reports.',
+          techs: ['react', 'typescript', 'vite', 'supabase rls (lgpd)', 'svg body map', 'acr 2016'],
+          gallery: [
+            { src: 'assets/fibrocare-real.png', title: 'fibrocare smart clinical diary onboarding live on vercel' }
+          ]
         },
         {
           id: 'job-finder',
-          tag: 'ai · career copilot',
-          title: 'jobfinder ai',
-          desc: 'ai recruitment and career copilot featuring one-click sample prompts and role-fit analysis.',
+          category: 'labs',
+          tag: 'ai · node + express',
+          num: '02',
+          title: 'jobmatch ai (jobhunter)',
+          subtitle: 'linkedin + gupy multi-channel scanner &amp; google xyz resume writer',
+          summary: 'career copilot that parses pdf/txt resumes, scans real linkedin &amp; gupy listings simultaneously, scores role compatibility, and tailors resumes using google’s xyz formula.',
           image: 'assets/jobhunter-preview.svg',
-          url: 'https://job-finder-azure-zeta.vercel.app/',
-          status: 'live'
+          vercelUrl: 'https://job-finder-azure-zeta.vercel.app/',
+          githubUrl: null,
+          status: 'live',
+          metrics: [
+            { val: '2 channels', label: 'parallel linkedin &amp; gupy search' },
+            { val: 'google xyz', label: 'per-role tailored resume synthesis' },
+            { val: 'pdf / txt', label: 'universal profile parsing via pdf.js' }
+          ],
+          desafio: 'eliminating the tedious loop of browsing fragmented job boards and manually rewriting generic resumes for ats screening while keeping claims faithful to the candidate’s experience.',
+          abordagem: 'built a node.js/express engine consuming live linkedin &amp; gupy feeds with recency (3–30d) and seniority filters, paired with client/server pdf.js extraction, recruiter outreach pitches, and clt/contractor compensation guides.',
+          resultado: 'end-to-end dark-mode recruitment copilot deployed live on vercel with one-click demo prompts, match scoring, and structured csv export.',
+          techs: ['node.js', 'express', 'pdf.js', 'tailwind css', 'linkedin &amp; gupy', 'google xyz formula'],
+          gallery: [
+            { src: 'assets/jobmatch-real.png', title: 'jobmatch ai (universal edition) live workspace on vercel' }
+          ]
         },
         {
           id: 'mapleads',
-          tag: 'b2b · express',
+          category: 'labs',
+          tag: 'b2b · express + puppeteer',
+          num: '03',
           title: 'mapleads',
-          desc: 'smart google maps lead prospector with quick-pick niche chips and targeted local discovery.',
+          subtitle: 'google maps lead prospector, deduplication &amp; cold calling playbook',
+          summary: 'node.js &amp; puppeteer local lead discovery platform featuring gps radius search, "no website only" filtering, spreadsheet-based deduplication, and 1-click excel exports.',
           image: 'assets/mapleads-preview.svg',
-          url: 'https://mapleads-psi.vercel.app/',
-          status: 'live'
+          vercelUrl: 'https://mapleads-psi.vercel.app/',
+          githubUrl: 'https://github.com/nlldesign/Mapleads',
+          status: 'live',
+          metrics: [
+            { val: '0 repeats', label: 'context spreadsheet deduplication' },
+            { val: 'batch queue', label: 'multi-city &amp; multi-niche scraping' },
+            { val: '.xlsx / .csv', label: 'export with direct whatsapp links' }
+          ],
+          desafio: 'b2b sales teams waste hours manually auditing local listings and frequently cold-call businesses they have already contacted or that do not need web redesign services.',
+          abordagem: 'designed a guided prospector with quick niche chips, a "stores without website" filter, pre-existing .xlsx/.csv exclusion indexing, batch csv prospecting, and an integrated 5-step cold calling script modal.',
+          resultado: 'dockerized b2b prospecting engine and live vercel ui delivering weakness diagnostics and ready-to-call excel/csv sheets.',
+          techs: ['node.js', 'express', 'puppeteer', 'xlsx / multer', 'docker', 'cold calling ux'],
+          gallery: [
+            { src: 'assets/mapleads-real.png', title: 'mapleads radius prospector and anti-duplication guard live on vercel' }
+          ]
         },
         {
           id: 'habit-tracker',
-          tag: 'gamification · rpg',
+          category: 'labs',
+          tag: 'next.js + supabase',
+          num: '04',
           title: 'habit rpg',
-          desc: 'gamified personal workspace for building daily habits with rpg-inspired progression mechanics.',
+          subtitle: 'pure positive-reinforcement gamified productivity (zero hp penalties)',
+          summary: 'next.js &amp; supabase rpg workspace built without health bars or punishment — featuring daily quests, streak combos, custom rewards shop, tiptap notebooks, and 3am pg_cron resets.',
           image: 'assets/habit-rpg-preview.svg',
-          url: 'https://personal-habit-tracker-x.vercel.app/',
-          status: 'login'
+          vercelUrl: 'https://personal-habit-tracker-x.vercel.app/',
+          githubUrl: null,
+          status: 'login',
+          metrics: [
+            { val: '0 penalty', label: 'positive reinforcement without hp loss' },
+            { val: 'pg_cron', label: 'automated 3am brt daily reset' },
+            { val: 'atomic rpc', label: 'real-time xp &amp; coins progression' }
+          ],
+          desafio: 'traditional habit rpgs punish missed days with health loss and guilt triggers, driving user anxiety and churn rather than sustainable routine building.',
+          abordagem: 'intentionally removed health bars in favor of positive reinforcement, atomic postgresql rpc leveling (level * 200 xp), drag-and-drop prioritization (@dnd-kit), custom reward stores, and accordion tiptap notes.',
+          resultado: 'ultra-wide dark-glassmorphism productivity workspace backed by supabase auth &amp; rls for anxiety-free daily momentum.',
+          techs: ['next.js', 'tailwind css', 'supabase pg_cron', 'tiptap editor', 'dnd-kit', 'gamification ux'],
+          gallery: []
         },
         {
           id: 'rh-hub',
+          category: 'labs',
           tag: 'enterprise · hr/ops',
+          num: '05',
           title: 'rh hub',
-          desc: 'hr and people operations dashboard featuring an integrated demo account login experience.',
-          image: 'assets/framer-intern-cover.png',
-          url: 'https://rh-hub-9mh4.vercel.app/',
-          status: 'demo'
+          subtitle: '7-module hr, payroll &amp; retail store operations command center',
+          summary: '360° executive dashboard unifying headcount tracking, brazilian esocial (s-2200/s-2299) accounting handoffs, timesheet &amp; medical certificate logs, kanban hiring, and ⌘k search.',
+          image: 'assets/rh-hub-preview.png',
+          vercelUrl: 'https://rh-hub-9mh4.vercel.app/',
+          githubUrl: null,
+          status: 'demo',
+          metrics: [
+            { val: '7 modules', label: 'executive, hr, payroll &amp; kanban' },
+            { val: 'esocial', label: 's-2200 &amp; termination tracking' },
+            { val: 'demo mode', label: 'built-in test login: ana@rhhub.com' }
+          ],
+          desafio: 'consolidating fragmented retail hr workflows — payroll allocation, 13th salary advances, sick-leave uploads, accounting submissions, and store hiring — into a single coherent platform.',
+          abordagem: 'architected 7 connected enterprise modules covering 360° executive kpis, employee contracts, esocial compliance queues, store attendance, kanban recruiting (screening → interview → offer), operational to-dos, and ⌘k quick search.',
+          resultado: 'responsive dark/light enterprise workspace live on vercel with one-click demo access right from the sign-in card.',
+          techs: ['react', 'enterprise ux', 'kanban recruitment', 'esocial hr/ops', 'command palette ⌘k', 'dark/light ui'],
+          gallery: [
+            { src: 'assets/rh-hub-preview.png', title: 'rh hub 360° executive dashboard previewed via built-in demo mode' }
+          ]
         },
         {
           id: 'sportintel-hub',
-          tag: 'analytics · sports',
+          category: 'labs',
+          tag: 'vite · market radar',
+          num: '06',
           title: 'sportintel hub',
-          desc: 'sports intelligence hub featuring modality filters and a dark-mode analytical dashboard.',
-          image: 'assets/token-tracker-preview.svg',
-          url: 'https://hub-de-intelig-ncia-esportiva.vercel.app/',
-          status: 'live'
+          subtitle: 'sports market intelligence radar, live tracking &amp; dropping odds alerts',
+          summary: 'high-density emerald dark-mode analytical hub built with vite &amp; react for rapid filtering across 5 sports, live event toggles, and dropping-odds market anomalies.',
+          image: 'assets/sportintel-preview.svg',
+          vercelUrl: 'https://hub-de-intelig-ncia-esportiva.vercel.app/',
+          githubUrl: null,
+          status: 'live',
+          metrics: [
+            { val: '5 sports', label: 'football, brasileirão, basketball, tennis &amp; esports' },
+            { val: 'dropping odds', label: 'rapid market anomaly monitoring' },
+            { val: 'dark ui', label: 'low-fatigue analytical hierarchy' }
+          ],
+          desafio: 'organizing dense multi-league match schedules and fast-moving market odds signals without overwhelming the user’s visual scanning flow.',
+          abordagem: 'crafted a clean emerald dark-mode shell with instant one-click sport pills, dedicated "live" and "dropping odds" market toggles, team search, and league/date range filters.',
+          resultado: 'snappy analytical interface live on vercel delivering instant visual hierarchy across sports categories and market filters.',
+          techs: ['vite', 'react', 'data visualization', 'market radar ui', 'dark mode'],
+          gallery: []
         }
       ]
     };
+
+    function getVercelApps() {
+      return vercelAppsData[currentGlobalLang] || vercelAppsData.pt;
+    }
 
     function renderVercelAppsGrid() {
       const grid = document.getElementById('vercelAppsGrid');
       if (!grid) return;
       const t = siteTranslations[currentGlobalLang] || siteTranslations.pt;
-      const apps = vercelAppsData[currentGlobalLang] || vercelAppsData.pt;
+      const apps = getVercelApps();
 
       const tagEl = document.getElementById('vercelAppsTag');
       const titleEl = document.getElementById('vercelAppsTitle');
@@ -2305,7 +2511,7 @@
       if (subEl) subEl.innerHTML = t.vercelAppsSubtitle;
 
       grid.innerHTML = apps.map(app => `
-        <a href="${app.url}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('vercel_app', this.href, '${app.id}')" class="portfolio-card reveal-on-scroll overflow-hidden flex flex-col justify-between group cursor-pointer">
+        <article onclick="openCaseStudy('${app.id}')" class="portfolio-card reveal-on-scroll overflow-hidden flex flex-col justify-between group cursor-pointer">
           <div class="relative h-40 w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
             <img src="${app.image}" alt="${app.title}" class="card-cover-img w-full h-full object-cover" />
             <div class="absolute top-3 left-3 tag-pill backdrop-blur-md bg-[var(--surface)]/85 text-[11px] text-cyan-400">
@@ -2315,18 +2521,27 @@
               ${app.status}
             </div>
           </div>
-          <div class="p-5 flex flex-col justify-between flex-1">
+          <div class="p-5 flex flex-col justify-between flex-1 gap-4">
             <div>
-              <h3 class="text-lg font-medium text-[var(--ink)] group-hover:text-cyan-400 transition-colors mb-1.5 flex items-center justify-between gap-2">
-                <span>${app.title}</span>
-                <svg class='inline-block w-3.5 h-3.5 shrink-0 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
+              <h3 class="text-lg font-medium text-[var(--ink)] group-hover:text-cyan-400 transition-colors mb-1.5">
+                ${app.title}
               </h3>
-              <p class="text-xs text-[var(--muted)] leading-relaxed font-light">
-                ${app.desc}
+              <p class="text-xs text-[var(--muted)] leading-relaxed font-light line-clamp-3">
+                ${app.summary}
               </p>
             </div>
+            <div class="pt-3 border-t border-[var(--line)] flex items-center justify-between gap-2">
+              <span class="text-xs font-mono text-[var(--accent)] flex items-center gap-1">
+                <span>${t.readCaseBtn}</span>
+                <span class="group-hover:translate-x-1 transition-transform">→</span>
+              </span>
+              <a href="${app.vercelUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('vercel_app', this.href, '${app.id}')" class="tag-pill text-[10.5px] text-cyan-400 hover:border-cyan-400 whitespace-nowrap">
+                <span>vercel</span>
+                <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
+              </a>
+            </div>
           </div>
-        </a>
+        </article>
       `).join('');
     }
 
@@ -3150,7 +3365,7 @@
     // Abre a Tela de Estudo de Caso (Idêntica a luccas.social.br/portfolio/[case])
     function openCaseStudy(id) {
       triggerTopProgressBar();
-      const item = [...portfolioProjects, ...gameProjects].find(c => c.id === id);
+      const item = [...portfolioProjects, ...getVercelApps(), ...gameProjects].find(c => c.id === id);
       if (!item) return;
 
       activeCaseId = id;
@@ -3216,6 +3431,13 @@
         linksHtml += `
           <a href="${item.behanceUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)] whitespace-nowrap">
             <span>${tLang.viewBehance}</span>
+          </a>
+        `;
+      }
+      if (item.githubUrl) {
+        linksHtml += `
+          <a href="${item.githubUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('github', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)] whitespace-nowrap">
+            <span>${tLang.viewGithub}</span>
           </a>
         `;
       }
@@ -3299,7 +3521,7 @@
       }
 
       // Banner de Próximo Case
-      const list = item.category === 'jogos' ? gameProjects : portfolioProjects;
+      const list = item.category === 'jogos' ? gameProjects : (item.category === 'labs' ? getVercelApps() : portfolioProjects);
       const curIdx = list.findIndex(c => c.id === id);
       const nextItem = list[(curIdx + 1) % list.length];
       document.getElementById('nextCaseTitle').innerHTML = nextItem.title;
@@ -3311,8 +3533,9 @@
     }
 
     function goToNextCase() {
-      const item = [...portfolioProjects, ...gameProjects].find(c => c.id === activeCaseId);
-      const list = item.category === 'jogos' ? gameProjects : portfolioProjects;
+      const item = [...portfolioProjects, ...getVercelApps(), ...gameProjects].find(c => c.id === activeCaseId);
+      if (!item) return;
+      const list = item.category === 'jogos' ? gameProjects : (item.category === 'labs' ? getVercelApps() : portfolioProjects);
       const curIdx = list.findIndex(c => c.id === activeCaseId);
       const nextItem = list[(curIdx + 1) % list.length];
       openCaseStudy(nextItem.id);

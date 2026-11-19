@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="spBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050b09"/>
+      <stop offset="100%" stop-color="#0a1914"/>
+    </linearGradient>
+    <linearGradient id="spAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#spBg)"/>
+  <rect x="40" y="30" width="720" height="390" rx="16" fill="#09110e" stroke="#10b981" stroke-opacity="0.28" stroke-width="2"/>
+
+  <!-- Header bar -->
+  <rect x="40" y="30" width="720" height="52" rx="16" fill="#070e0b"/>
+  <circle cx="72" cy="56" r="10" fill="#10b981" fill-opacity="0.22" stroke="#10b981" stroke-opacity="0.7"/>
+  <path d="M74 50 L68 57 H73 L71 62 L77 55 H72 Z" fill="#34d399"/>
+  <text x="92" y="61" fill="#e2e8f0" font-family="monospace" font-size="14" font-weight="bold">SportIntel Hub // Radar Esportivo &amp; Dropping Odds</text>
+  <rect x="618" y="45" width="122" height="22" rx="11" fill="#10b981" fill-opacity="0.18" stroke="#10b981" stroke-opacity="0.45"/>
+  <circle cx="632" cy="56" r="3.5" fill="#10b981"/>
+  <text x="642" y="60" fill="#34d399" font-family="sans-serif" font-size="10.5" font-weight="bold">AO VIVO • MERCADO</text>
+
+  <!-- Sport filter pills -->
+  <rect x="64" y="100" width="108" height="26" rx="13" fill="#10b981" fill-opacity="0.22" stroke="#10b981" stroke-opacity="0.6"/>
+  <text x="82" y="117" fill="#34d399" font-family="sans-serif" font-size="11.5" font-weight="bold">Futebol</text>
+
+  <rect x="182" y="100" width="102" height="26" rx="13" fill="#0d1915" stroke="#1e293b"/>
+  <text x="200" y="117" fill="#94a3b8" font-family="sans-serif" font-size="11.5">Brasileirão</text>
+
+  <rect x="294" y="100" width="92" height="26" rx="13" fill="#0d1915" stroke="#1e293b"/>
+  <text x="313" y="117" fill="#94a3b8" font-family="sans-serif" font-size="11.5">Basquete</text>
+
+  <rect x="396" y="100" width="76" height="26" rx="13" fill="#0d1915" stroke="#1e293b"/>
+  <text x="418" y="117" fill="#94a3b8" font-family="sans-serif" font-size="11.5">Tênis</text>
+
+  <rect x="482" y="100" width="92" height="26" rx="13" fill="#0d1915" stroke="#1e293b"/>
+  <text x="502" y="117" fill="#94a3b8" font-family="sans-serif" font-size="11.5">E-sports</text>
+
+  <!-- Right Toggle Pills -->
+  <rect x="598" y="100" width="64" height="26" rx="13" fill="#f43f5e" fill-opacity="0.16" stroke="#f43f5e" stroke-opacity="0.4"/>
+  <text x="610" y="117" fill="#fb7185" font-family="monospace" font-size="10.5" font-weight="bold">Ao Vivo</text>
+
+  <rect x="668" y="100" width="72" height="26" rx="13" fill="#22d3ee" fill-opacity="0.16" stroke="#22d3ee" stroke-opacity="0.4"/>
+  <text x="676" y="117" fill="#67e8f9" font-family="monospace" font-size="10.5" font-weight="bold">Drop Odds</text>
+
+  <!-- Card 1: Market Signal -->
+  <rect x="64" y="148" width="322" height="114" rx="12" fill="#07120e" stroke="#10b981" stroke-opacity="0.22"/>
+  <text x="82" y="174" fill="#94a3b8" font-family="monospace" font-size="10.5">SÉRIE A • FLUXO DE LIQUIDEZ</text>
+  <text x="82" y="202" fill="#f8fafc" font-family="sans-serif" font-size="16" font-weight="bold">Variação de Odds &amp; Pressão</text>
+  <rect x="82" y="218" width="176" height="8" rx="4" fill="#1e293b"/>
+  <rect x="82" y="218" width="132" height="8" rx="4" fill="url(#spAccent)"/>
+  <text x="82" y="246" fill="#34d399" font-family="monospace" font-size="12" font-weight="bold">-14.2% Dropping Alert</text>
+
+  <!-- Card 2: Trend Graph -->
+  <rect x="404" y="148" width="336" height="114" rx="12" fill="#07120e" stroke="#10b981" stroke-opacity="0.22"/>
+  <text x="422" y="174" fill="#94a3b8" font-family="monospace" font-size="10.5">RADAR TEMPORAL • MONITORAMENTO</text>
+  <path d="M 424 234 Q 470 218, 512 224 T 594 196 T 668 208 T 720 180" fill="none" stroke="url(#spAccent)" stroke-width="3"/>
+  <circle cx="720" cy="180" r="5" fill="#22d3ee"/>
+  <text x="422" y="248" fill="#67e8f9" font-family="monospace" font-size="11.5">Janela de Valor Detectada</text>
+
+  <!-- Bottom Row Cards -->
+  <rect x="64" y="280" width="214" height="116" rx="12" fill="#07120e" stroke="#1e293b"/>
+  <text x="82" y="308" fill="#64748b" font-family="monospace" font-size="10.5">FILTROS RÁPIDOS</text>
+  <text x="82" y="336" fill="#e2e8f0" font-family="sans-serif" font-size="14" font-weight="bold">Hoje • Próximos 7d</text>
+  <text x="82" y="362" fill="#94a3b8" font-family="sans-serif" font-size="11.5">Escaneamento por liga</text>
+
+  <rect x="294" y="280" width="214" height="116" rx="12" fill="#07120e" stroke="#1e293b"/>
+  <text x="312" y="308" fill="#64748b" font-family="monospace" font-size="10.5">ALERTA DE LIQUIDEZ</text>
+  <text x="312" y="336" fill="#34d399" font-family="sans-serif" font-size="14" font-weight="bold">Anomalias de Cota</text>
+  <text x="312" y="362" fill="#94a3b8" font-family="sans-serif" font-size="11.5">Leitura em dark mode</text>
+
+  <rect x="524" y="280" width="216" height="116" rx="12" fill="#07120e" stroke="#1e293b"/>
+  <text x="542" y="308" fill="#64748b" font-family="monospace" font-size="10.5">MODALIDADES</text>
+  <text x="542" y="336" fill="#22d3ee" font-family="sans-serif" font-size="14" font-weight="bold">5 Esportes Ativos</text>
+  <text x="542" y="362" fill="#94a3b8" font-family="sans-serif" font-size="11.5">Deploy live na Vercel</text>
+</svg>
