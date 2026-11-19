@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <pattern id="gridPat" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect width="800" height="450" fill="url(#gridPat)"/>
+  
+  <circle cx="400" cy="225" r="210" fill="rgba(236,72,153,0.08)"/>
+  <rect x="56" y="42" width="688" height="366" rx="20" fill="#121216" stroke="rgba(255,255,255,0.1)"/>
+  <text x="82" y="74" fill="#f9a8d4" font-family="monospace" font-size="12" font-weight="bold">DESIGNDREAM AI  //  INTERIOR MAKEOVER ENGINE</text>
+
+  <!-- Before Card -->
+  <rect x="82" y="98" width="290" height="220" rx="14" fill="#1a1a22" stroke="rgba(255,255,255,0.12)"/>
+  <text x="100" y="124" fill="#a1a1aa" font-family="monospace" font-size="10">ANTES  •  FOTO ENVIADA</text>
+  <rect x="108" y="146" width="238" height="148" rx="8" fill="#23232d" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4 4"/>
+  <!-- Wireframe Sofa & Window -->
+  <rect x="132" y="216" width="124" height="44" rx="6" stroke="#71717a" stroke-width="1.5"/>
+  <rect x="148" y="164" width="64" height="38" rx="2" stroke="#71717a" stroke-width="1.5"/>
+  <line x1="180" y1="164" x2="180" y2="202" stroke="#71717a" stroke-width="1"/>
+  <text x="136" y="280" fill="#71717a" font-family="monospace" font-size="10">AMBIENTE ORIGINAL</text>
+
+  <!-- Transform Arrow -->
+  <circle cx="400" cy="208" r="22" fill="#a855f7" fill-opacity="0.2" stroke="#a855f7"/>
+  <path d="M 392 208 H 408 M 402 202 L 408 208 L 402 214" stroke="#f3e8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- After Card -->
+  <rect x="428" y="98" width="290" height="220" rx="14" fill="#1a1826" stroke="#a855f7" stroke-opacity="0.5"/>
+  <text x="446" y="124" fill="#d8b4fe" font-family="monospace" font-size="10">DEPOIS  •  MAKEOVER IA</text>
+  <rect x="454" y="146" width="238" height="148" rx="8" fill="rgba(168,85,247,0.12)" stroke="#a855f7" stroke-opacity="0.4"/>
+  <rect x="478" y="212" width="132" height="48" rx="8" fill="#312e81" stroke="#a855f7" stroke-width="1.5"/>
+  <rect x="494" y="164" width="64" height="38" rx="4" fill="rgba(34,211,238,0.16)" stroke="#22d3ee" stroke-width="1.5"/>
+  <circle cx="648" cy="186" r="14" fill="rgba(251,191,36,0.25)" stroke="#fbbf24"/>
+  <line x1="648" y1="200" x2="648" y2="260" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="476" y="280" fill="#e9d5ff" font-family="monospace" font-size="10">JAPANDI MODERNO + LUZ QUENTE</text>
+
+  <!-- Style Palette Footer -->
+  <text x="82" y="356" fill="#a1a1aa" font-family="monospace" font-size="11">PALETA EXTRAIDA:</text>
+  <circle cx="212" cy="352" r="12" fill="#e7e5e4"/>
+  <circle cx="244" cy="352" r="12" fill="#d6b89c"/>
+  <circle cx="276" cy="352" r="12" fill="#312e81"/>
+  <circle cx="308" cy="352" r="12" fill="#10b981"/>
+  <rect x="524" y="336" width="194" height="32" rx="16" fill="rgba(168,85,247,0.2)" stroke="#a855f7" stroke-opacity="0.5"/>
+  <text x="550" y="356" fill="#f3e8ff" font-family="monospace" font-size="10">GERAR NOVO CONCEITO</text>
+
+</svg>

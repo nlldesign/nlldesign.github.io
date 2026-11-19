@@ -1,0 +1,10 @@
+{
+  "name": "token-tracker",
+  "displayName": "Token Tracker",
+  "description": "Monitoramento em tempo real do uso de tokens, custos e janela de contexto no painel lateral do Antigravity 2.0.",
+  "suggestedPrompts": [
+    "Abrir o monitor de tokens no painel lateral",
+    "Quantos tokens foram consumidos nesta conversa?",
+    "Ver detalhes de custos e uso de cache"
+  ]
+}

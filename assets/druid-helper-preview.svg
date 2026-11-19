@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <pattern id="gridPat" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect width="800" height="450" fill="url(#gridPat)"/>
+  
+  <circle cx="640" cy="90" r="180" fill="rgba(16,185,129,0.09)"/>
+  <circle cx="150" cy="360" r="160" fill="rgba(168,85,247,0.08)"/>
+  <!-- Header Pill -->
+  <rect x="64" y="42" width="220" height="28" rx="14" fill="#18181b" stroke="rgba(255,255,255,0.12)"/>
+  <circle cx="84" cy="56" r="4" fill="#10b981"/>
+  <text x="98" y="60" fill="#e4e4e7" font-family="monospace" font-size="11" letter-spacing="1">WOW CLASSIC // LUA ADDON</text>
+  <!-- Top Mode Tabs (Bear / Cat / Healer) -->
+  <rect x="64" y="92" width="212" height="72" rx="14" fill="#141418" stroke="#ef4444" stroke-opacity="0.5"/>
+  <text x="84" y="118" fill="#fca5a5" font-family="monospace" font-size="11" font-weight="bold">BEAR TANK</text>
+  <rect x="84" y="130" width="172" height="10" rx="5" fill="#27272a"/>
+  <rect x="84" y="130" width="134" height="10" rx="5" fill="#ef4444"/>
+  <text x="84" y="154" fill="#a1a1aa" font-family="monospace" font-size="10">RAGE 78/100 • GROWL READY</text>
+
+  <rect x="294" y="92" width="212" height="72" rx="14" fill="#141418" stroke="#f59e0b" stroke-opacity="0.5"/>
+  <text x="314" y="118" fill="#fcd34d" font-family="monospace" font-size="11" font-weight="bold">CAT DPS</text>
+  <rect x="314" y="130" width="172" height="10" rx="5" fill="#27272a"/>
+  <rect x="314" y="130" width="150" height="10" rx="5" fill="#f59e0b"/>
+  <!-- 5 Combo dots -->
+  <circle cx="320" cy="150" r="4" fill="#f59e0b"/>
+  <circle cx="334" cy="150" r="4" fill="#f59e0b"/>
+  <circle cx="348" cy="150" r="4" fill="#f59e0b"/>
+  <circle cx="362" cy="150" r="4" fill="#f59e0b"/>
+  <circle cx="376" cy="150" r="4" fill="#3f3f46"/>
+  <text x="392" y="154" fill="#a1a1aa" font-family="monospace" font-size="10">4/5 COMBO</text>
+
+  <rect x="524" y="92" width="212" height="72" rx="14" fill="#141418" stroke="#3b82f6" stroke-opacity="0.5"/>
+  <text x="544" y="118" fill="#93c5fd" font-family="monospace" font-size="11" font-weight="bold">HEALER RADAR</text>
+  <rect x="544" y="130" width="172" height="10" rx="5" fill="#27272a"/>
+  <rect x="544" y="130" width="160" height="10" rx="5" fill="#3b82f6"/>
+  <text x="544" y="154" fill="#a1a1aa" font-family="monospace" font-size="10">MANA 92% • HOT TRACKER</text>
+
+  <!-- Central Main HUD Panel -->
+  <rect x="64" y="186" width="672" height="214" rx="18" fill="#131317" stroke="rgba(255,255,255,0.1)"/>
+  <text x="90" y="218" fill="#ffffff" font-family="sans-serif" font-size="16" font-weight="600">Druid Helper v2.0 — Smart Rotation &amp; Party Radar</text>
+  <text x="90" y="238" fill="#71717a" font-family="monospace" font-size="11">/dh config  •  Spellbook Auto-Scan  •  PlaySound Aggro Alert</text>
+
+  <!-- Alert Bar -->
+  <rect x="90" y="256" width="620" height="36" rx="10" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-opacity="0.45"/>
+  <circle cx="110" cy="274" r="5" fill="#ef4444"/>
+  <text x="126" y="278" fill="#fecaca" font-family="monospace" font-size="12">GROWL (TAUNT) — Mob solto detectado no Healer (Party 2)</text>
+
+  <!-- Party Health Bars -->
+  <rect x="90" y="310" width="144" height="66" rx="10" fill="#1c1c22" stroke="rgba(239,68,68,0.5)"/>
+  <text x="104" y="330" fill="#fca5a5" font-family="monospace" font-size="10">TANK • CRITICO</text>
+  <text x="104" y="348" fill="#ffffff" font-family="monospace" font-size="16" font-weight="bold">31%</text>
+  <rect x="104" y="358" width="116" height="6" rx="3" fill="#27272a"/>
+  <rect x="104" y="358" width="36" height="6" rx="3" fill="#ef4444"/>
+
+  <rect x="248" y="310" width="144" height="66" rx="10" fill="#1c1c22" stroke="rgba(245,158,11,0.5)"/>
+  <text x="262" y="330" fill="#fcd34d" font-family="monospace" font-size="10">DPS 1 • REJUV</text>
+  <text x="262" y="348" fill="#ffffff" font-family="monospace" font-size="16" font-weight="bold">68%</text>
+  <rect x="262" y="358" width="116" height="6" rx="3" fill="#27272a"/>
+  <rect x="262" y="358" width="78" height="6" rx="3" fill="#f59e0b"/>
+
+  <rect x="406" y="310" width="144" height="66" rx="10" fill="#1c1c22" stroke="rgba(16,185,129,0.4)"/>
+  <text x="420" y="330" fill="#6ee7b7" font-family="monospace" font-size="10">DPS 2 • ESTAVEL</text>
+  <text x="420" y="348" fill="#ffffff" font-family="monospace" font-size="16" font-weight="bold">94%</text>
+  <rect x="420" y="358" width="116" height="6" rx="3" fill="#27272a"/>
+  <rect x="420" y="358" width="108" height="6" rx="3" fill="#10b981"/>
+
+  <rect x="564" y="310" width="146" height="66" rx="10" fill="#1c1c22" stroke="rgba(34,211,238,0.4)"/>
+  <text x="578" y="330" fill="#67e8f9" font-family="monospace" font-size="10">SUGESTAO IA</text>
+  <text x="578" y="350" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="600">Swiftmend -> Tank</text>
+  <text x="578" y="366" fill="#71717a" font-family="monospace" font-size="10">CD READY • 0.0s</text>
+
+</svg>

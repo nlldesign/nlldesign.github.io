@@ -1,0 +1,3447 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RÁDIO ESPERANÇA 3D // SIMBIOSE SETOR 4 - BIOPUNK IDLE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="sprites_data.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bio-green: #10b981;
+            --bio-amber: #f59e0b;
+            --bio-crimson: #ef4444;
+            --bio-dark: #030504;
+        }
+        * {
+            user-select: none;
+            -webkit-user-select: none;
+            box-sizing: border-box;
+        }
+        html, body {
+            background-color: #030504;
+            color: #d1fae5;
+            font-family: 'Rajdhani', sans-serif;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .font-mono-tech {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .crt-scanlines {
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%, 
+                rgba(0, 0, 0, 0.38) 50%
+            ), linear-gradient(
+                90deg,
+                rgba(255, 0, 0, 0.03),
+                rgba(0, 255, 0, 0.01),
+                rgba(0, 0, 255, 0.03)
+            );
+            background-size: 100% 3px, 6px 100%;
+            pointer-events: none;
+        }
+        .bio-vignette {
+            box-shadow: inset 0 0 85px rgba(0,0,0,0.92), inset 0 0 28px rgba(16, 185, 129, 0.14);
+        }
+        .vein-border {
+            border: 1px solid rgba(16, 185, 129, 0.28);
+            box-shadow: 0 0 14px rgba(16, 185, 129, 0.08), inset 0 0 12px rgba(16, 185, 129, 0.05);
+        }
+        #combat-viewport {
+            height: 46vh;
+            min-height: 290px;
+            max-height: 520px;
+            width: 100%;
+            flex-shrink: 0;
+            position: relative;
+        }
+        #three-container {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        #three-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+            display: block;
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060b09;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10b98144;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b98188;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.85; }
+            50% { opacity: 0.4; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 2.5s infinite ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0); }
+            20% { transform: translate(-3px, 2px); }
+            40% { transform: translate(3px, -2px); }
+            60% { transform: translate(-2px, -1px); }
+            80% { transform: translate(2px, 2px); }
+        }
+        .screen-shake {
+            animation: shake 0.25s ease-in-out;
+        }
+        .glass-panel {
+            background: rgba(6, 12, 9, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="flex flex-col h-full w-full relative select-none overflow-hidden">
+
+    <!-- CUTSCENE INICIAL: DO ESCURO AO PRIMEIRO SOCO -->
+    <div id="cutscene-overlay" class="fixed inset-0 z-50 bg-[#020403] flex flex-col items-center justify-between p-6 transition-opacity duration-700">
+        <div class="w-full max-w-2xl flex justify-between items-center text-xs font-mono-tech text-emerald-500/70 border-b border-emerald-900/50 pb-2">
+            <span id="cutscene-header">SINAL NEURAL: DESCONECTADO // SETOR 04-SUBSOLO</span>
+            <button onclick="window.skipCutscene()" class="px-3 py-1 rounded bg-emerald-950/80 hover:bg-emerald-900 text-emerald-200 border border-emerald-600/50 transition text-xs cursor-pointer">
+                IR DIRETO AO JOGO 3D <i class="fa-solid fa-forward ml-1"></i>
+            </button>
+        </div>
+
+        <div class="flex flex-col items-center justify-center w-full max-w-xl my-auto space-y-5">
+            <div class="relative w-full h-44 bg-[#050907] rounded-lg vein-border overflow-hidden flex items-center justify-center">
+                <canvas id="cutscene-canvas" class="w-full h-full block"></canvas>
+                <div id="cutscene-badge" class="absolute top-2.5 left-3 font-mono-tech text-xs text-amber-400/95 flex items-center gap-2 bg-black/70 px-2.5 py-1 rounded border border-amber-500/30">
+                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+                    <span id="cutscene-freq-label">FREQ: 88.4 MHz (SINAL FRACO)</span>
+                </div>
+                <div id="cutscene-step-indicator" class="absolute bottom-2 right-3 font-mono-tech text-[10px] text-emerald-400/80">
+                    TRANSMISSÃO 1 / 3
+                </div>
+            </div>
+
+            <div id="cutscene-text-container" class="w-full min-h-[115px] bg-emerald-950/20 border border-emerald-800/40 rounded-lg p-4 flex flex-col justify-between shadow-inner">
+                <p id="cutscene-text" class="font-mono-tech text-sm sm:text-base text-emerald-100 leading-relaxed"></p>
+                <div class="flex justify-between items-center mt-4 pt-2 border-t border-emerald-900/40">
+                    <span class="font-mono-tech text-[10px] text-amber-400/80"><i class="fa-solid fa-wave-square mr-1"></i>RÁDIO PARASITA ACOPLADO</span>
+                    <button id="cutscene-btn" onclick="window.advanceCutscene()" class="px-5 py-2 rounded bg-amber-600/25 hover:bg-amber-500/40 text-amber-200 border border-amber-400/60 font-mono-tech text-xs sm:text-sm tracking-wider uppercase transition shadow-lg shadow-amber-950/50 flex items-center gap-2 cursor-pointer">
+                        <span>GOLPEAR O VIDRO DO TANQUE [SOCO]</span>
+                        <i class="fa-solid fa-hand-fist"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full max-w-2xl text-center font-mono-tech text-[11px] text-emerald-600/60">
+            PROJETO BIOPUNK // COBAIA #049-B // MONITOR SIMBIÓTICO V.3.5 (IDLE-DEX ENGINE)
+        </div>
+    </div>
+
+    <!-- MODAL DE CUTSCENE DE MARCO (MILESTONES) -->
+    <div id="milestone-modal" class="fixed inset-0 z-40 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="w-full max-w-lg bg-[#070d0a] vein-border rounded-xl p-5 border-amber-500/40 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-emerald-900/60 pb-2">
+                <span id="milestone-title" class="font-mono-tech text-amber-400 text-sm uppercase tracking-widest flex items-center gap-2">
+                    <i class="fa-solid fa-dna animate-spin"></i> MUTAÇÃO SIMBIÓTICA DETECTADA
+                </span>
+                <span class="font-mono-tech text-xs text-emerald-500">REGISTRO NEURAL</span>
+            </div>
+            <div class="h-36 bg-[#030605] rounded-lg border border-emerald-900/50 flex items-center justify-center relative overflow-hidden">
+                <canvas id="milestone-canvas" class="w-full h-full"></canvas>
+            </div>
+            <p id="milestone-desc" class="font-mono-tech text-xs sm:text-sm text-emerald-100 leading-relaxed"></p>
+            <div class="flex justify-end pt-2">
+                <button onclick="window.closeMilestoneModal()" class="w-full sm:w-auto px-6 py-2.5 rounded bg-emerald-600/30 hover:bg-emerald-500/40 text-emerald-200 border border-emerald-400/50 font-mono-tech text-xs uppercase tracking-wider transition cursor-pointer">
+                    INTEGRAR AO CÓRTEX [CONTINUAR]
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE PROGRESSO OFFLINE (ESTASE NEURAL) -->
+    <div id="offline-modal" class="fixed inset-0 z-40 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="w-full max-w-md bg-[#070d0a] vein-border rounded-xl p-5 border-cyan-500/50 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-cyan-900/60 pb-2">
+                <span class="font-mono-tech text-cyan-400 text-sm uppercase tracking-widest flex items-center gap-2">
+                    <i class="fa-solid fa-bed-pulse text-cyan-400"></i> DESPERTAR DA ESTASE NEURAL
+                </span>
+                <span id="offline-time-badge" class="font-mono-tech text-xs text-cyan-300">00h 00m</span>
+            </div>
+            <p class="text-xs text-emerald-300/80 leading-relaxed font-mono-tech">
+                Enquanto sua consciência esteve em modo de estase biológica, os órgãos cultivados e seu esquadrão continuaram processando o Setor 4:
+            </p>
+            <div class="grid grid-cols-2 gap-2 bg-black/50 p-3 rounded border border-cyan-950 font-mono-tech text-xs">
+                <div class="flex items-center gap-2 text-emerald-300">
+                    <i class="fa-solid fa-bolt text-emerald-400"></i>
+                    <span>ATP Celular: <strong id="off-atp" class="text-emerald-200">+0</strong></span>
+                </div>
+                <div class="flex items-center gap-2 text-red-300">
+                    <i class="fa-solid fa-biohazard text-red-400"></i>
+                    <span>Biomassa: <strong id="off-bio" class="text-red-200">+0</strong></span>
+                </div>
+                <div class="flex items-center gap-2 text-amber-300">
+                    <i class="fa-solid fa-bone text-amber-400"></i>
+                    <span>Cálcio Ósseo: <strong id="off-cal" class="text-amber-200">+0</strong></span>
+                </div>
+                <div class="flex items-center gap-2 text-cyan-300">
+                    <i class="fa-solid fa-satellite-dish text-cyan-400"></i>
+                    <span>Ecos de Rádio: <strong id="off-echoes" class="text-cyan-200">+0</strong></span>
+                </div>
+            </div>
+            <div class="flex justify-end pt-2">
+                <button onclick="window.closeOfflineModal()" class="w-full py-2.5 rounded bg-cyan-600/30 hover:bg-cyan-500/40 text-cyan-200 border border-cyan-400/50 font-mono-tech text-xs uppercase tracking-wider transition cursor-pointer">
+                    ABSORVER NUTRIENTES & CONTINUAR
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE SISTEMA (SAVE, EXPORT, IMPORT, RESET) -->
+    <div id="save-modal" class="fixed inset-0 z-40 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="w-full max-w-lg bg-[#070d0a] vein-border rounded-xl p-5 border-emerald-500/40 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-emerald-900/60 pb-2">
+                <span class="font-mono-tech text-emerald-400 text-sm uppercase tracking-widest flex items-center gap-2">
+                    <i class="fa-solid fa-floppy-disk text-emerald-400"></i> GERENCIADOR DE DADOS GENÉTICOS (SAVE)
+                </span>
+                <button onclick="window.toggleSaveModal()" class="text-emerald-500 hover:text-emerald-300 text-sm cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <p class="text-xs text-emerald-300/80 leading-relaxed font-mono-tech">
+                O jogo é <strong>salvo automaticamente a cada 4 segundos</strong> no seu navegador. Você também pode exportar seu genoma para jogar em outro dispositivo:
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="window.manualSave()" class="px-4 py-2 rounded bg-emerald-950 hover:bg-emerald-900 border border-emerald-600 text-emerald-200 font-mono-tech text-xs transition cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-floppy-disk text-emerald-400"></i> Salvar Agora
+                </button>
+                <button onclick="window.exportSaveData()" class="px-4 py-2 rounded bg-cyan-950 hover:bg-cyan-900 border border-cyan-600 text-cyan-200 font-mono-tech text-xs transition cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-export text-cyan-400"></i> Exportar Save
+                </button>
+                <button onclick="window.importSaveData()" class="px-4 py-2 rounded bg-amber-950 hover:bg-amber-900 border border-amber-600 text-amber-200 font-mono-tech text-xs transition cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-import text-amber-400"></i> Importar Save
+                </button>
+                <button onclick="window.hardResetGame()" class="px-4 py-2 rounded bg-red-950 hover:bg-red-900 border border-red-700 text-red-200 font-mono-tech text-xs transition cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-triangle-exclamation text-red-400"></i> Resetar Tudo
+                </button>
+            </div>
+            <div>
+                <label class="font-mono-tech text-[11px] text-emerald-400 block mb-1">CÓDIGO DE DADOS GENÉTICOS (JSON / BASE64):</label>
+                <textarea id="save-data-textarea" rows="4" class="w-full bg-black/60 border border-emerald-900 rounded p-2 text-[11px] font-mono-tech text-emerald-200 focus:outline-none focus:border-emerald-500" placeholder="Clique em Exportar ou cole seu save aqui..."></textarea>
+            </div>
+            <div class="flex justify-between items-center pt-2 border-t border-emerald-900/50">
+                <span id="save-status-msg" class="font-mono-tech text-[11px] text-emerald-400">Sistema nominal.</span>
+                <button onclick="window.toggleSaveModal()" class="px-5 py-1.5 rounded bg-emerald-950 hover:bg-emerald-900 text-emerald-200 border border-emerald-700 font-mono-tech text-xs transition cursor-pointer">
+                    FECHAR
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CONQUISTAS (BIO-PROEZAS) -->
+    <div id="achievements-modal" class="fixed inset-0 z-40 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="w-full max-w-2xl bg-[#070d0a] vein-border rounded-xl p-5 border-yellow-500/50 shadow-2xl space-y-4 max-h-[85vh] flex flex-col">
+            <div class="flex items-center justify-between border-b border-yellow-900/60 pb-2 shrink-0">
+                <span class="font-mono-tech text-yellow-400 text-sm uppercase tracking-widest flex items-center gap-2">
+                    <i class="fa-solid fa-trophy text-yellow-400"></i> BIO-PROEZAS & MARCOS GENÉTICOS
+                </span>
+                <div class="flex items-center gap-3">
+                    <span id="achievements-progress-pill" class="font-mono-tech text-xs text-yellow-300 bg-yellow-950/60 px-2 py-0.5 rounded border border-yellow-700/50">0 / 10 DESBLOQUEADAS</span>
+                    <button onclick="window.toggleAchievementsModal()" class="text-yellow-500 hover:text-yellow-300 text-sm cursor-pointer">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <p class="text-xs text-emerald-300/80 leading-relaxed font-mono-tech shrink-0">
+                Cada conquista desbloqueia um <strong>bônus biológico permanente acumulativo</strong> para sua cobaia e suas próximas transmissões de clone:
+            </p>
+            <div id="achievements-list-container" class="space-y-2 overflow-y-auto flex-1 pr-1">
+                <!-- Preenchido via JavaScript -->
+            </div>
+            <div class="flex justify-end pt-2 border-t border-emerald-900/50 shrink-0">
+                <button onclick="window.toggleAchievementsModal()" class="px-5 py-1.5 rounded bg-yellow-950/50 hover:bg-yellow-900 text-yellow-200 border border-yellow-700 font-mono-tech text-xs transition cursor-pointer">
+                    FECHAR
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE MANUAL DO OPERADOR / GUIA BIOPUNK -->
+    <div id="help-modal" class="fixed inset-0 z-40 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="w-full max-w-2xl bg-[#070d0a] vein-border rounded-xl p-5 border-emerald-500/40 shadow-2xl space-y-4 max-h-[85vh] flex flex-col">
+            <div class="flex items-center justify-between border-b border-emerald-900/60 pb-2 shrink-0">
+                <span class="font-mono-tech text-emerald-400 text-sm uppercase tracking-widest flex items-center gap-2">
+                    <i class="fa-solid fa-book-medical text-emerald-400"></i> MANUAL BIOMÉTRICO DO SETOR 4
+                </span>
+                <button onclick="window.toggleHelpModal()" class="text-emerald-500 hover:text-emerald-300 text-sm cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="space-y-3.5 text-xs text-emerald-200/90 leading-relaxed font-mono-tech overflow-y-auto flex-1 pr-1">
+                <div class="bg-black/50 p-3 rounded border border-emerald-900/70">
+                    <h4 class="text-amber-400 font-bold uppercase mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-bone"></i> 1. Microfratura Óssea (Gargalo dos Punhos)
+                    </h4>
+                    <p>Socar espécimes sem proteção acumula estresse ósseo. Se atingir 100%, sua mão quebra causando -70% de dano até que se regenere com descanso ou que o Bot injete uma Tala de Cálcio.</p>
+                </div>
+                <div class="bg-black/50 p-3 rounded border border-purple-900/70">
+                    <h4 class="text-purple-400 font-bold uppercase mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-vial-virus"></i> 2. Toxicidade e Rejeição de Armas Vivas
+                    </h4>
+                    <p>Armas vivas acopladas disparam projéteis potentes, mas bombeiam toxinas nas suas veias. Ao atingir 100%, você entra em choque séptico e perde HP continuamente. Use a Auto-Diálise Sanguínea para purificar seu organismo.</p>
+                </div>
+                <div class="bg-black/50 p-3 rounded border border-red-900/70">
+                    <h4 class="text-red-400 font-bold uppercase mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-volume-high"></i> 3. Poluição Sonora (dB) e Hordas
+                    </h4>
+                    <p>Armas de fogo (como a Escopeta) geram estrondos que ecoam pelos dutos. Ao atingir 100 dB, o som atrai imediatamente uma horda de mutantes extras. Cultive a Membrana de Micélio na base para silenciar disparos.</p>
+                </div>
+                <div class="bg-black/50 p-3 rounded border border-yellow-900/70">
+                    <h4 class="text-yellow-400 font-bold uppercase mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-medal"></i> 4. Ginásios de Expurgo (Gauntlet Sem Cura)
+                    </h4>
+                    <p>Inspirado no <em>idleDEX</em>: enfrente 3 Guardiões Apex seguidos <strong>sem regeneração celular entre os combates</strong>. Vencer concede Insígnias permanentes com +25% de Dano Global vitalício.</p>
+                </div>
+                <div class="bg-black/50 p-3 rounded border border-cyan-900/70">
+                    <h4 class="text-cyan-400 font-bold uppercase mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-keyboard"></i> 5. Atalhos de Teclado & Clique Interativo
+                    </h4>
+                    <p>• <strong>Espaço:</strong> Desferir golpe manual imediato no zumbi mais próximo.<br>
+                    • <strong>Clique no 3D:</strong> Golpe crítico em zumbis, coleta rápida de cápsulas ou deslocamento do personagem.<br>
+                    • <strong>1 a 6:</strong> Alternar rapidamente entre as 6 abas do console.<br>
+                    • <strong>E:</strong> Disparar armadilha ambiental da sala se estiver pronta.<br>
+                    • <strong>C:</strong> Ciclar entre câmeras 3D (Tática, Ombro e Top-down).<br>
+                    • <strong>M:</strong> Ativar/desativar áudio.</p>
+                </div>
+            </div>
+            <div class="flex justify-end pt-2 border-t border-emerald-900/50 shrink-0">
+                <button onclick="window.toggleHelpModal()" class="px-5 py-1.5 rounded bg-emerald-950 hover:bg-emerald-900 text-emerald-200 border border-emerald-700 font-mono-tech text-xs transition cursor-pointer">
+                    ENTENDIDO
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BARRA DE MONITORAMENTO BIOMÉTRICO (HEADER) -->
+    <header class="w-full bg-[#060c09] border-b border-emerald-900/60 px-3 py-1.5 flex flex-wrap items-center justify-between gap-2 z-20 shrink-0">
+        <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1.5 bg-emerald-950/50 border border-emerald-800/50 px-2.5 py-1 rounded" title="Frequência Cardíaca da Cobaia">
+                <i class="fa-solid fa-heart-pulse text-red-500 animate-pulse text-sm"></i>
+                <span id="bpm-display" class="font-mono-tech text-xs text-emerald-300">78 BPM</span>
+            </div>
+            <div class="hidden sm:flex items-center gap-1.5 bg-amber-950/30 border border-amber-700/40 px-2.5 py-1 rounded">
+                <i class="fa-solid fa-tower-broadcast text-amber-400 text-xs"></i>
+                <span id="sector-display" class="font-mono-tech text-xs text-amber-300">SETOR 4 // ONDA 1</span>
+            </div>
+            <span id="prestige-badge" class="hidden bg-purple-950/60 border border-purple-500/40 px-2 py-0.5 rounded font-mono-tech text-[11px] text-purple-300">
+                GENOMA v1.0
+            </span>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <div class="flex items-center gap-1.5 bg-[#09130e] border border-emerald-800/50 px-2.5 py-1 rounded cursor-pointer hover:border-emerald-500 transition" title="ATP Celular (Energia para Mutações e Curas)">
+                <i class="fa-solid fa-bolt text-emerald-400 text-xs"></i>
+                <div class="leading-none">
+                    <div class="text-[9px] font-mono-tech text-emerald-500 uppercase">ATP Celular</div>
+                    <div id="res-atp" class="font-mono-tech text-xs sm:text-sm font-bold text-emerald-200">60</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 bg-[#09130e] border border-red-900/50 px-2.5 py-1 rounded cursor-pointer hover:border-red-500 transition" title="Biomassa (Munição Viva e Órgãos da Base)">
+                <i class="fa-solid fa-biohazard text-red-400 text-xs"></i>
+                <div class="leading-none">
+                    <div class="text-[9px] font-mono-tech text-red-400 uppercase">Biomassa</div>
+                    <div id="res-biomass" class="font-mono-tech text-xs sm:text-sm font-bold text-red-200">30</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 bg-[#09130e] border border-amber-800/50 px-2.5 py-1 rounded cursor-pointer hover:border-amber-500 transition" title="Cálcio (Munição Óssea e Reforço Esquelético)">
+                <i class="fa-solid fa-bone text-amber-300 text-xs"></i>
+                <div class="leading-none">
+                    <div class="text-[9px] font-mono-tech text-amber-400 uppercase">Cálcio</div>
+                    <div id="res-calcium" class="font-mono-tech text-xs sm:text-sm font-bold text-amber-100">25</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 bg-[#09130e] border border-cyan-800/50 px-2.5 py-1 rounded cursor-pointer hover:border-cyan-500 transition" title="Ecos de Rádio (Sinais para Recrutas e Drops)">
+                <i class="fa-solid fa-satellite-dish text-cyan-400 text-xs"></i>
+                <div class="leading-none">
+                    <div class="text-[9px] font-mono-tech text-cyan-400 uppercase">Ecos</div>
+                    <div id="res-echoes" class="font-mono-tech text-xs sm:text-sm font-bold text-cyan-200">12</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-1 sm:gap-1.5">
+            <!-- Velocidade 1x / 2x -->
+            <button id="speed-btn" onclick="window.toggleGameSpeed()" class="px-2 py-1 rounded bg-emerald-950/60 hover:bg-emerald-900 border border-emerald-700/50 text-emerald-300 text-xs font-mono-tech transition cursor-pointer" title="Velocidade da Simulação (1x / 2x)">
+                <span id="speed-label" class="font-bold">1x</span>
+            </button>
+            <!-- Áudio FX -->
+            <button id="audio-btn" onclick="window.toggleAudio()" class="px-2 py-1 rounded bg-emerald-950/60 hover:bg-emerald-900 border border-emerald-700/50 text-emerald-300 text-xs font-mono-tech transition cursor-pointer" title="Ativar/Mutar Efeitos Sonoros Biopunk (SFX)">
+                <i id="audio-icon" class="fa-solid fa-volume-high"></i>
+            </button>
+            <!-- Música Drone Ambiente -->
+            <button id="music-btn" onclick="window.toggleMusic()" class="px-2 py-1 rounded bg-emerald-950/60 hover:bg-emerald-900 border border-emerald-700/50 text-emerald-300 text-xs font-mono-tech transition cursor-pointer" title="Ligar/Desligar Música Ambiente (Drone Procedural)">
+                <i id="music-icon" class="fa-solid fa-music"></i>
+            </button>
+            <!-- Conquistas -->
+            <button onclick="window.toggleAchievementsModal()" class="px-2 py-1 rounded bg-yellow-950/60 hover:bg-yellow-900 border border-yellow-700/50 text-yellow-300 text-xs font-mono-tech transition cursor-pointer relative" title="Ver Bio-Proezas e Conquistas">
+                <i class="fa-solid fa-trophy"></i>
+                <span id="achievements-badge-dot" class="hidden absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-yellow-400 animate-ping"></span>
+            </button>
+            <!-- Guia / Ajuda -->
+            <button onclick="window.toggleHelpModal()" class="px-2 py-1 rounded bg-emerald-950/60 hover:bg-emerald-900 border border-emerald-700/50 text-emerald-300 text-xs font-mono-tech transition cursor-pointer" title="Manual do Operador (Regras e Lore)">
+                <i class="fa-solid fa-circle-question"></i>
+            </button>
+            <!-- Save / Opções -->
+            <button onclick="window.toggleSaveModal()" class="px-2 py-1 rounded bg-cyan-950/60 hover:bg-cyan-900 border border-cyan-700/50 text-cyan-300 text-xs font-mono-tech transition cursor-pointer relative" title="Gerenciar Save (Exportar / Importar / Resetar)">
+                <i class="fa-solid fa-floppy-disk"></i>
+                <span id="autosave-ping" class="hidden absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-400"></span>
+            </button>
+            <!-- Replay Cutscene -->
+            <button onclick="window.replayIntro()" class="px-2 py-1 rounded bg-emerald-950/60 hover:bg-emerald-900 border border-emerald-700/50 text-amber-300 text-xs font-mono-tech transition cursor-pointer" title="Rever Cutscene do Tanque">
+                <i class="fa-solid fa-film"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- METADE SUPERIOR: O COMPLEXO SUBTERRÂNEO 3D -->
+    <section id="combat-viewport" class="bg-[#030605] overflow-hidden border-b-2 border-emerald-900/80 select-none">
+        <div id="three-container" class="cursor-crosshair"></div>
+        <div id="floating-labels-layer" class="absolute inset-0 pointer-events-none overflow-hidden z-10"></div>
+        <div class="absolute inset-0 crt-scanlines bio-vignette pointer-events-none"></div>
+
+        <!-- BOSS HEALTH BAR OVERLAY (GINÁSIO DE EXPURGO) -->
+        <div id="boss-hud-overlay" class="absolute top-2.5 inset-x-0 mx-auto w-full max-w-sm sm:max-w-md hidden flex-col items-center z-30 pointer-events-none px-3">
+            <div class="w-full glass-panel border border-red-500/70 rounded-lg p-2 shadow-2xl flex flex-col gap-1">
+                <div class="flex items-center justify-between font-mono-tech text-xs">
+                    <span id="boss-hud-name" class="text-red-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-skull text-red-500 animate-pulse"></i> GUARDIÃO APEX: TITÃ ESPORÍFERO
+                    </span>
+                    <span id="boss-hud-hp-text" class="text-amber-300 font-bold">100%</span>
+                </div>
+                <div class="w-full h-2.5 bg-black/80 rounded-full overflow-hidden border border-red-900/80 relative">
+                    <div id="boss-hud-hp-bar" class="h-full bg-gradient-to-r from-red-600 via-amber-500 to-red-500 transition-all duration-150" style="width: 100%"></div>
+                </div>
+                <div class="flex justify-between font-mono-tech text-[10px] text-emerald-400/80">
+                    <span class="text-red-300"><i class="fa-solid fa-shield-virus mr-1"></i>GAUNTLET ATIVO</span>
+                    <span id="boss-hud-stage-label" class="text-amber-400">ESTÁGIO 1 / 3 (SEM REGENERAÇÃO)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- HUD SUPERIOR ESQUERDO: ARMA ACOPLADA, CÂMERA E SALA ATUAL -->
+        <div class="absolute top-2.5 left-3 z-20 flex flex-col gap-1.5 pointer-events-none max-w-[65%]">
+            <div class="flex flex-wrap items-center gap-1.5">
+                <div class="flex items-center gap-2 bg-black/80 border border-emerald-700/60 px-2.5 py-1 rounded backdrop-blur-xs pointer-events-auto shadow-lg">
+                    <span id="active-weapon-icon" class="text-amber-400 text-sm"><i class="fa-solid fa-hand-fist"></i></span>
+                    <div>
+                        <div id="active-weapon-name" class="font-mono-tech text-xs font-bold text-emerald-200 uppercase">PUNHOS CERRADOS</div>
+                        <div id="active-weapon-cost" class="font-mono-tech text-[10px] text-emerald-400/90">Gargalo: +Microfratura Óssea</div>
+                    </div>
+                </div>
+
+                <button onclick="window.cycleCameraAngle()" class="pointer-events-auto px-2.5 py-1.5 rounded bg-emerald-950/85 hover:bg-emerald-900 border border-emerald-600/60 font-mono-tech text-[11px] text-emerald-200 flex items-center gap-1.5 shadow-lg transition cursor-pointer" title="Atalho: Tecla C">
+                    <i class="fa-solid fa-video text-amber-400"></i>
+                    <span id="cam-mode-label">CÂMERA: 3D TÁTICA</span>
+                </button>
+
+                <button onclick="window.toggleNavMode()" class="pointer-events-auto px-2.5 py-1.5 rounded bg-cyan-950/85 hover:bg-cyan-900 border border-cyan-600/60 font-mono-tech text-[11px] text-cyan-200 flex items-center gap-1.5 shadow-lg transition cursor-pointer">
+                    <i class="fa-solid fa-compass text-cyan-400 animate-spin"></i>
+                    <span id="nav-mode-label">IA: EXPLORAR & EVITAR</span>
+                </button>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2.5 bg-black/75 border border-emerald-900/70 px-2.5 py-1 rounded font-mono-tech text-[10px] text-emerald-300 w-fit">
+                <span><i class="fa-solid fa-door-open text-amber-400 mr-1"></i>LOCAL: <strong id="hud-coords" class="text-amber-200">PÁTIO CENTRAL</strong></span>
+                <span><i class="fa-solid fa-person-running text-emerald-400 mr-1"></i>MODO: <strong id="hud-sprint-badge" class="text-cyan-300">EXPLORAÇÃO</strong></span>
+                <span><i class="fa-solid fa-bolt-lightning text-purple-400 mr-1"></i>ARMADILHA [E]: <strong id="hud-trap-cd" class="text-emerald-300">PRONTA</strong></span>
+            </div>
+        </div>
+
+        <!-- HUD SUPERIOR DIREITO: PROGRESSO DA ONDA, GAUNTLET E PILOTO AUTOMÁTICO -->
+        <div class="absolute top-2.5 right-3 z-20 flex flex-col items-end gap-1.5">
+            <div class="bg-black/80 border border-emerald-800/60 px-3 py-1.5 rounded backdrop-blur-xs text-right shadow-lg">
+                <div class="flex items-center justify-end gap-2">
+                    <span id="wave-title" class="font-mono-tech text-xs font-bold text-amber-400">SETOR 4 // ONDA 1</span>
+                    <button id="boss-toggle-btn" onclick="window.toggleAutoAdvance()" class="pointer-events-auto px-1.5 py-0.5 text-[10px] font-mono-tech rounded bg-emerald-900/70 text-emerald-200 border border-emerald-600/50 hover:bg-emerald-800 cursor-pointer">
+                        AVANÇO: AUTO
+                    </button>
+                </div>
+                <div class="w-44 h-1.5 bg-emerald-950 rounded-full overflow-hidden mt-1 border border-emerald-800/50">
+                    <div id="wave-progress-bar" class="h-full bg-amber-500 transition-all duration-200" style="width: 0%"></div>
+                </div>
+                <div id="wave-kills-text" class="font-mono-tech text-[10px] text-emerald-400 mt-0.5">Caçada no Setor: 0 / 5</div>
+            </div>
+
+            <div class="flex items-center gap-2 bg-black/80 border border-cyan-800/60 px-2.5 py-1 rounded font-mono-tech text-[10px] text-cyan-200 shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                <span id="autopilot-action-pill">BUSCANDO CÁPSULAS NO GRID...</span>
+                <span class="text-amber-300 border-l border-emerald-800 pl-2">BIO-DEX: <strong id="hud-dex-count">1/6</strong></span>
+            </div>
+        </div>
+
+        <!-- BARRAS VITAIS BIOPUNK (RODAPÉ DO VISOR 3D) -->
+        <div class="absolute bottom-2 left-3 right-3 z-20 grid grid-cols-2 sm:grid-cols-4 gap-2 pointer-events-none bg-black/80 p-2 rounded-lg border border-emerald-900/70 backdrop-blur-xs">
+            <div>
+                <div class="flex justify-between font-mono-tech text-[10px]">
+                    <span class="text-emerald-300"><i class="fa-solid fa-heart mr-1 text-emerald-400"></i>INTEGRIDADE (HP)</span>
+                    <span id="vital-hp-text" class="text-emerald-200 font-bold">100/100</span>
+                </div>
+                <div class="w-full h-2 bg-gray-900 rounded-full overflow-hidden border border-emerald-900/60 mt-0.5">
+                    <div id="vital-hp-bar" class="h-full bg-emerald-500 transition-all duration-150" style="width: 100%"></div>
+                </div>
+            </div>
+            <div>
+                <div class="flex justify-between font-mono-tech text-[10px]">
+                    <span class="text-amber-300"><i class="fa-solid fa-bone mr-1 text-amber-400"></i>MICROFRATURA (PUNHOS)</span>
+                    <span id="vital-fracture-text" class="text-amber-200 font-bold">0%</span>
+                </div>
+                <div class="w-full h-2 bg-gray-900 rounded-full overflow-hidden border border-amber-900/60 mt-0.5">
+                    <div id="vital-fracture-bar" class="h-full bg-amber-500 transition-all duration-150" style="width: 0%"></div>
+                </div>
+            </div>
+            <div>
+                <div class="flex justify-between font-mono-tech text-[10px]">
+                    <span class="text-purple-300"><i class="fa-solid fa-vial-virus mr-1 text-purple-400"></i>REJEIÇÃO / TOXINA</span>
+                    <span id="vital-tox-text" class="text-purple-200 font-bold">0%</span>
+                </div>
+                <div class="w-full h-2 bg-gray-900 rounded-full overflow-hidden border border-purple-900/60 mt-0.5">
+                    <div id="vital-tox-bar" class="h-full bg-purple-500 transition-all duration-150" style="width: 0%"></div>
+                </div>
+            </div>
+            <div>
+                <div class="flex justify-between font-mono-tech text-[10px]">
+                    <span class="text-red-300"><i class="fa-solid fa-volume-high mr-1 text-red-400"></i>POLUIÇÃO SONORA (dB)</span>
+                    <span id="vital-noise-text" class="text-red-200 font-bold">0 dB</span>
+                </div>
+                <div class="w-full h-2 bg-gray-900 rounded-full overflow-hidden border border-red-900/60 mt-0.5">
+                    <div id="vital-noise-bar" class="h-full bg-red-500 transition-all duration-150" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METADE INFERIOR: O CONSOLE SIMBIÓTICO (HUD IDLE-DEX) -->
+    <main class="flex-1 flex flex-col bg-[#050a08] overflow-hidden min-h-0">
+        <div class="flex flex-wrap items-center justify-between border-b border-emerald-900/70 bg-[#07100c] px-3 py-1.5 gap-2 shrink-0">
+            <div class="flex items-center gap-1 overflow-x-auto max-w-full py-0.5">
+                <button onclick="window.switchTab('metabolism')" id="tab-btn-metabolism" class="tab-btn px-2.5 py-1.5 rounded font-mono-tech text-xs uppercase tracking-wider bg-emerald-600/25 text-emerald-200 border border-emerald-500/60 flex items-center gap-1.5 transition whitespace-nowrap cursor-pointer">
+                    <i class="fa-solid fa-hand-fist text-emerald-400"></i> 1. Corpo & Punhos
+                </button>
+                <button onclick="window.switchTab('autopilot')" id="tab-btn-autopilot" class="tab-btn px-2.5 py-1.5 rounded font-mono-tech text-xs uppercase tracking-wider bg-emerald-950/40 text-emerald-400/80 border border-emerald-900/50 hover:text-emerald-200 flex items-center gap-1.5 transition whitespace-nowrap cursor-pointer">
+                    <i class="fa-solid fa-sliders text-cyan-400"></i> 2. Automação (Bot)
+                </button>
+                <button onclick="window.switchTab('weapons')" id="tab-btn-weapons" class="tab-btn px-2.5 py-1.5 rounded font-mono-tech text-xs uppercase tracking-wider bg-emerald-950/40 text-emerald-400/80 border border-emerald-900/50 hover:text-emerald-200 flex items-center gap-1.5 transition whitespace-nowrap cursor-pointer">
+                    <i class="fa-solid fa-gun text-amber-400"></i> 3. Armas Vivas
+                </button>
+                <button onclick="window.switchTab('biodex')" id="tab-btn-biodex" class="tab-btn px-2.5 py-1.5 rounded font-mono-tech text-xs uppercase tracking-wider bg-emerald-950/40 text-emerald-400/80 border border-emerald-900/50 hover:text-emerald-200 flex items-center gap-1.5 transition whitespace-nowrap cursor-pointer">
+                    <i class="fa-solid fa-book-skull text-yellow-400"></i> 4. Bio-Dex & Ginásios
+                </button>
+                <button onclick="window.switchTab('radio')" id="tab-btn-radio" class="tab-btn px-2.5 py-1.5 rounded font-mono-tech text-xs uppercase tracking-wider bg-emerald-950/40 text-emerald-400/80 border border-emerald-900/50 hover:text-emerald-200 flex items-center gap-1.5 transition whitespace-nowrap cursor-pointer">
+                    <i class="fa-solid fa-tower-cell text-cyan-400"></i> 5. Rádio Esperança
+                </button>
+                <button onclick="window.switchTab('colony')" id="tab-btn-colony" class="tab-btn px-2.5 py-1.5 rounded font-mono-tech text-xs uppercase tracking-wider bg-emerald-950/40 text-emerald-400/80 border border-emerald-900/50 hover:text-emerald-200 flex items-center gap-1.5 transition whitespace-nowrap cursor-pointer">
+                    <i class="fa-solid fa-users-rays text-purple-400"></i> 6. Base & Time
+                </button>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-2 bg-black/60 border border-emerald-900/60 px-3 py-1 rounded max-w-md truncate">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                <p id="radio-log-ticker" class="font-mono-tech text-[11px] text-emerald-300 truncate">
+                    [88.4 MHz]: "Cobaia #049 ativa. Use as portas das salas para afunilar hordas grandes..."
+                </p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-3 sm:p-4">
+            <!-- ABA 1: METABOLISMO & PUNHOS -->
+            <div id="tab-metabolism" class="tab-panel grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div class="bg-[#08120e] vein-border rounded-lg p-3 flex flex-col justify-between space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-emerald-900/60 pb-1.5 mb-2">
+                            <h3 class="font-mono-tech text-xs uppercase text-amber-400 tracking-wider">POSTURA DE COMBATE (AUTO)</h3>
+                            <span id="combat-pace-badge" class="font-mono-tech text-[10px] px-1.5 py-0.5 rounded bg-emerald-900/60 text-emerald-300">RITMO PADRÃO</span>
+                        </div>
+                        <p class="text-xs text-emerald-300/80 leading-relaxed mb-3">
+                            Socar mutantes causa <strong>Microfraturas</strong>. Se chegar a 100%, sua mão quebra (-70% dano) até regenerar ou o Bot injetar uma Tala de Cálcio.
+                        </p>
+                        <div class="space-y-1.5">
+                            <label class="font-mono-tech text-[10px] text-emerald-400 uppercase">INTENSIDADE NEURAL:</label>
+                            <div class="grid grid-cols-3 gap-1.5">
+                                <button onclick="window.setCombatStance('cautious')" id="stance-cautious" class="stance-btn px-2 py-2 rounded bg-emerald-950/60 border border-emerald-800/50 font-mono-tech text-[11px] text-emerald-300 hover:bg-emerald-900/60 transition cursor-pointer">
+                                    <i class="fa-solid fa-shield-heart block mb-0.5 text-emerald-400"></i>
+                                    CAUTELOSO<br><span class="text-[9px] opacity-75">-55% Fratura</span>
+                                </button>
+                                <button onclick="window.setCombatStance('balanced')" id="stance-balanced" class="stance-btn px-2 py-2 rounded bg-amber-600/25 border border-amber-400/70 font-mono-tech text-[11px] text-amber-200 transition cursor-pointer">
+                                    <i class="fa-solid fa-scale-balanced block mb-0.5 text-amber-400"></i>
+                                    PADRÃO<br><span class="text-[9px] opacity-75">100% Dano</span>
+                                </button>
+                                <button onclick="window.setCombatStance('frenzy')" id="stance-frenzy" class="stance-btn px-2 py-2 rounded bg-emerald-950/60 border border-emerald-800/50 font-mono-tech text-[11px] text-red-300 hover:bg-red-950/50 transition cursor-pointer">
+                                    <i class="fa-solid fa-fire-flame-curved block mb-0.5 text-red-400"></i>
+                                    FRENESI<br><span class="text-[9px] opacity-75">1.8x Vel / +Osso</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-emerald-900/50 font-mono-tech text-[11px] space-y-1 bg-black/40 p-2.5 rounded border border-emerald-950">
+                        <div class="text-cyan-400 font-bold uppercase mb-1"><i class="fa-solid fa-chart-line mr-1"></i> TELEMETRIA DA COBAIA</div>
+                        <div class="flex justify-between"><span>Mutantes Abatidos:</span><strong id="rep-kills" class="text-emerald-200">0</strong></div>
+                        <div class="flex justify-between"><span>Variantes ★ Shiny:</span><strong id="rep-shinies" class="text-yellow-300">0</strong></div>
+                        <div class="flex justify-between"><span>Auto-Talas / Diálises:</span><strong id="rep-heals" class="text-amber-300">0</strong></div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 bg-[#08120e] vein-border rounded-lg p-3">
+                    <div class="flex items-center justify-between border-b border-emerald-900/60 pb-1.5 mb-2.5">
+                        <h3 class="font-mono-tech text-xs uppercase text-emerald-400 tracking-wider">MUTAÇÕES ANATÔMICAS (PUNHOS & CORPO)</h3>
+                        <span class="font-mono-tech text-[11px] text-emerald-500">DANO POR GOLPE: <strong id="stat-dps" class="text-emerald-300">8.0</strong></span>
+                    </div>
+                    <div id="body-upgrades-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5"></div>
+                </div>
+            </div>
+
+            <!-- ABA 2: AUTOMAÇÃO NEURAL (ESTILO IDLEDEX) -->
+            <div id="tab-autopilot" class="tab-panel hidden grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="bg-[#08120e] vein-border rounded-lg p-3 space-y-3">
+                    <div class="border-b border-emerald-900/60 pb-1.5">
+                        <h3 class="font-mono-tech text-xs uppercase text-cyan-400 tracking-wider"><i class="fa-solid fa-robot mr-1.5"></i>REGRAS DO PILOTO AUTOMÁTICO (IDLEDEX BOT)</h3>
+                        <p class="text-[11px] text-emerald-300/75 mt-0.5">O jogo é 100% automático. Ajuste quando o Bot deve gastar ATP para curar fraturas, filtrar toxinas ou correr para uma sala segura.</p>
+                    </div>
+
+                    <div class="bg-black/40 p-2.5 rounded border border-emerald-900/60 space-y-1">
+                        <div class="flex justify-between font-mono-tech text-xs">
+                            <span class="text-emerald-200"><i class="fa-solid fa-syringe text-amber-400 mr-1"></i> Injetar Tala Óssea (12 ATP + 4 Cálcio)</span>
+                            <span id="lbl-auto-splint" class="text-amber-300 font-bold">Fratura &ge; 75%</span>
+                        </div>
+                        <input type="range" min="30" max="95" step="5" value="75" oninput="window.updateAutopilotRule('splintThreshold', this.value)" class="w-full accent-amber-500 cursor-pointer h-1.5 bg-emerald-950 rounded">
+                    </div>
+
+                    <div class="bg-black/40 p-2.5 rounded border border-emerald-900/60 space-y-1">
+                        <div class="flex justify-between font-mono-tech text-xs">
+                            <span class="text-purple-200"><i class="fa-solid fa-filter text-purple-400 mr-1"></i> Auto-Diálise Sanguínea (25 ATP)</span>
+                            <span id="lbl-auto-dialysis" class="text-purple-300 font-bold">Toxicidade &ge; 70%</span>
+                        </div>
+                        <input type="range" min="30" max="95" step="5" value="70" oninput="window.updateAutopilotRule('dialysisThreshold', this.value)" class="w-full accent-purple-500 cursor-pointer h-1.5 bg-emerald-950 rounded">
+                    </div>
+
+                    <div class="bg-black/40 p-2.5 rounded border border-emerald-900/60 space-y-1">
+                        <div class="flex justify-between font-mono-tech text-xs">
+                            <span class="text-red-200"><i class="fa-solid fa-person-running text-red-400 mr-1"></i> Sprint p/ Sala Tática (Gargalo)</span>
+                            <span id="lbl-auto-kite" class="text-red-300 font-bold">HP &le; 50% ou 3+ Zumbis</span>
+                        </div>
+                        <input type="range" min="20" max="85" step="5" value="50" oninput="window.updateAutopilotRule('retreatHpThreshold', this.value)" class="w-full accent-red-500 cursor-pointer h-1.5 bg-emerald-950 rounded">
+                    </div>
+                </div>
+
+                <div class="bg-[#08120e] vein-border rounded-lg p-3 flex flex-col justify-between space-y-3">
+                    <div class="space-y-2.5">
+                        <div class="border-b border-emerald-900/60 pb-1.5">
+                            <h3 class="font-mono-tech text-xs uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-microchip mr-1.5"></i>PROTOCOLOS DE MUNIÇÃO & EXPLORAÇÃO</h3>
+                        </div>
+
+                        <label class="flex items-center justify-between bg-black/40 p-2.5 rounded border border-emerald-900/60 cursor-pointer">
+                            <div>
+                                <div class="font-mono-tech text-xs text-emerald-200 font-bold">Retrair p/ Punhos se Faltar Biomassa/Cálcio</div>
+                                <div class="text-[10px] text-emerald-400/70">Evita que armas vivas famintas drenem seu HP quando a munição zerar.</div>
+                            </div>
+                            <input type="checkbox" id="chk-autoFistFallback" checked onchange="window.updateAutopilotRule('autoFistFallback', this.checked)" class="w-4 h-4 accent-emerald-500">
+                        </label>
+
+                        <label class="flex items-center justify-between bg-black/40 p-2.5 rounded border border-emerald-900/60 cursor-pointer">
+                            <div>
+                                <div class="font-mono-tech text-xs text-purple-200 font-bold">Descanso de Rejeição (Evitar 100% Toxina)</div>
+                                <div class="text-[10px] text-emerald-400/70">Alterna temporariamente para os punhos se a Toxicidade passar de 85%.</div>
+                            </div>
+                            <input type="checkbox" id="chk-autoHazardRest" checked onchange="window.updateAutopilotRule('autoHazardRest', this.checked)" class="w-4 h-4 accent-purple-500">
+                        </label>
+
+                        <label class="flex items-center justify-between bg-black/40 p-2.5 rounded border border-emerald-900/60 cursor-pointer">
+                            <div>
+                                <div class="font-mono-tech text-xs text-yellow-300 font-bold">Priorizar Cápsulas & Mutantes ★ Shiny</div>
+                                <div class="text-[10px] text-emerald-400/70">Faz o Bot correr pelo complexo atrás de drops procedurais e espécies raras.</div>
+                            </div>
+                            <input type="checkbox" id="chk-prioritizeShinyAndLoot" checked onchange="window.updateAutopilotRule('prioritizeShinyAndLoot', this.checked)" class="w-4 h-4 accent-amber-500">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA 3: ARMAS VIVAS (GARGALOS BIOPUNK) -->
+            <div id="tab-weapons" class="tab-panel hidden space-y-3">
+                <div class="bg-[#08120e] vein-border rounded-lg p-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-900/60 pb-2 mb-3">
+                        <div>
+                            <h3 class="font-mono-tech text-xs uppercase text-amber-400 tracking-wider">ARSENAL SIMBIÓTICO & COMBUSTÃO</h3>
+                            <p class="text-[11px] text-emerald-300/75">Armas vivas consomem Cálcio ou Biomassa a cada tiro e geram Toxicidade. Armas de fogo geram Ruído (dB) que atrai hordas!</p>
+                        </div>
+                        <button onclick="window.equipWeapon('fists')" class="px-3 py-1.5 rounded bg-emerald-950 hover:bg-emerald-900 border border-emerald-600/50 font-mono-tech text-xs text-emerald-200 transition cursor-pointer">
+                            <i class="fa-solid fa-hand-fist mr-1"></i> RETRAIR P/ PUNHOS
+                        </button>
+                    </div>
+                    <div id="weapons-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+                </div>
+            </div>
+
+            <!-- ABA 4: BIO-DEX & INSÍGNIAS (GAUNTLET SEM CURA) -->
+            <div id="tab-biodex" class="tab-panel hidden grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div class="bg-[#08120e] vein-border rounded-lg p-3 flex flex-col justify-between space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-emerald-900/60 pb-1.5 mb-2">
+                            <h3 class="font-mono-tech text-xs uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-medal mr-1.5"></i>EXPURGO DE SETOR (GINÁSIO)</h3>
+                            <span id="badge-count-label" class="font-mono-tech text-[10px] px-1.5 py-0.5 rounded bg-amber-950 text-amber-300">0 / 4 INSÍGNIAS</span>
+                        </div>
+                        <p class="text-xs text-emerald-300/80 leading-relaxed mb-2.5">
+                            Inspirado no <em>idleDEX</em>: enfrente <strong>3 Guardiões Apex em sequência sem regenerar HP entre as lutas</strong> para ganhar Insígnias permanentes!
+                        </p>
+                        <div id="gym-status-box" class="bg-black/50 border border-amber-800/50 rounded p-2.5 font-mono-tech text-xs space-y-1">
+                            <div class="text-amber-300 font-bold" id="gym-title">GINÁSIO 1: NINHO DE ESPOROS</div>
+                            <div class="text-[11px] text-emerald-300" id="gym-desc">3 Chefes Seguidos // Recompensa: +25% Dano & Recursos Permanente</div>
+                        </div>
+                    </div>
+                    <button id="start-gym-btn" onclick="window.startSectorGym()" class="w-full py-2.5 px-3 rounded bg-amber-600/30 hover:bg-amber-500/40 border border-amber-400/60 font-mono-tech text-xs font-bold text-amber-200 uppercase tracking-wider transition cursor-pointer">
+                        <i class="fa-solid fa-biohazard mr-1"></i> DESAFIAR GUARDIÕES (3 LUTAS)
+                    </button>
+                </div>
+
+                <div class="md:col-span-2 bg-[#08120e] vein-border rounded-lg p-3">
+                    <div class="flex items-center justify-between border-b border-emerald-900/60 pb-1.5 mb-2.5">
+                        <h3 class="font-mono-tech text-xs uppercase text-yellow-400 tracking-wider"><i class="fa-solid fa-dna mr-1.5"></i>CATÁLOGO BIO-DEX & VARIANTES ★ SHINY</h3>
+                        <span class="font-mono-tech text-[11px] text-emerald-400">BÔNUS DA DEX: <strong id="dex-bonus-mult" class="text-yellow-300">+0% Dano Global</strong></span>
+                    </div>
+                    <div id="biodex-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2"></div>
+                </div>
+            </div>
+
+            <!-- ABA 5: RÁDIO ESPERANÇA & PRESTÍGIO -->
+            <div id="tab-radio" class="tab-panel hidden grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="bg-[#08120e] vein-border rounded-lg p-3 space-y-3">
+                    <div class="flex items-center justify-between border-b border-emerald-900/60 pb-1.5">
+                        <h3 class="font-mono-tech text-xs uppercase text-cyan-400 tracking-wider"><i class="fa-solid fa-wave-square mr-1.5"></i>OSCILOSCÓPIO NEURAL (FREQUÊNCIAS)</h3>
+                        <span id="current-freq-badge" class="font-mono-tech text-xs px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-700/50">88.4 MHz</span>
+                    </div>
+                    <div class="relative h-28 bg-[#030705] rounded border border-emerald-900/60 overflow-hidden">
+                        <canvas id="radio-tab-canvas" class="w-full h-full block"></canvas>
+                        <div id="signal-lock-status" class="absolute top-1.5 left-2.5 font-mono-tech text-[11px] text-emerald-400 bg-black/70 px-2 py-0.5 rounded">
+                            BANDA 88.4 MHz: PULSO DE REGENERAÇÃO (+30% Cura/Osso)
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-mono-tech text-[10px] text-emerald-400 uppercase">SINTONIZAR FREQUÊNCIA DO SETOR (MUDA O BUFF ATIVO):</label>
+                        <input type="range" id="freq-slider" min="880" max="1080" value="884" oninput="window.onFrequencySlide(this.value)" class="w-full accent-cyan-400 cursor-pointer h-2 bg-emerald-950 rounded">
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 pt-1">
+                        <button onclick="window.decodeRadioDrop()" class="p-2 rounded bg-cyan-950/50 hover:bg-cyan-900/60 border border-cyan-700/50 font-mono-tech text-[10px] text-cyan-200 transition cursor-pointer">
+                            <i class="fa-solid fa-box-open block mb-0.5 text-cyan-400"></i>
+                            SOLTAR CÁPSULA<br><span class="text-[9px] text-cyan-400">8 ECOS</span>
+                        </button>
+                        <button onclick="window.emitHarmonicPulse()" class="p-2 rounded bg-emerald-950/50 hover:bg-emerald-900/60 border border-emerald-700/50 font-mono-tech text-[10px] text-emerald-200 transition cursor-pointer">
+                            <i class="fa-solid fa-shield-virus block mb-0.5 text-emerald-400"></i>
+                            LIMPAR OSSO/TOX<br><span class="text-[9px] text-emerald-400">12 ECOS</span>
+                        </button>
+                        <button onclick="window.lureApexMutant()" class="p-2 rounded bg-amber-950/50 hover:bg-amber-900/60 border border-amber-700/50 font-mono-tech text-[10px] text-amber-200 transition cursor-pointer">
+                            <i class="fa-solid fa-star block mb-0.5 text-amber-400"></i>
+                            ATRAIR ★ SHINY<br><span class="text-[9px] text-amber-400">20 ECOS</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-[#08120e] vein-border rounded-lg p-3 flex flex-col justify-between space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-emerald-900/60 pb-1.5 mb-2">
+                            <h3 class="font-mono-tech text-xs uppercase text-purple-400 tracking-wider"><i class="fa-solid fa-dna mr-1.5"></i>TRANSMISSÃO DE MEMÓRIA (PRESTÍGIO)</h3>
+                            <span id="prestige-level" class="font-mono-tech text-xs text-purple-300 font-bold">Genoma v1.0</span>
+                        </div>
+                        <p class="text-xs text-emerald-300/80 leading-relaxed mb-3">
+                            Transfira sua consciência pelo rádio para um novo clone de estase. Reinicia na Onda 1 nos punhos, mas <strong>mantém toda a Bio-Dex, Insígnias e multiplica a densidade óssea e dano permanentemente</strong>.
+                        </p>
+                        <div class="bg-black/40 p-2.5 rounded border border-purple-900/50 font-mono-tech text-xs space-y-1">
+                            <div class="flex justify-between"><span>Multiplicador Genético Atual:</span><strong id="prestige-mult" class="text-purple-300">1.00x</strong></div>
+                            <div class="flex justify-between"><span>Próximo Clone:</span><strong id="prestige-pending" class="text-amber-300">Requer Onda 4</strong></div>
+                        </div>
+                    </div>
+                    <button id="prestige-btn" onclick="window.triggerPrestige()" disabled class="w-full py-2.5 px-4 rounded bg-purple-700/30 hover:bg-purple-600/40 disabled:opacity-40 disabled:cursor-not-allowed border border-purple-500/60 font-mono-tech text-xs font-bold text-purple-200 uppercase tracking-wider transition cursor-pointer">
+                        <i class="fa-solid fa-tower-broadcast mr-1"></i> TRANSMITIR MEMÓRIA GENÉTICA
+                    </button>
+                </div>
+            </div>
+
+            <!-- ABA 6: BASE & TIME -->
+            <div id="tab-colony" class="tab-panel hidden grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="bg-[#08120e] vein-border rounded-lg p-3 space-y-2.5">
+                    <div class="border-b border-emerald-900/60 pb-1.5">
+                        <h3 class="font-mono-tech text-xs uppercase text-purple-400 tracking-wider"><i class="fa-solid fa-user-shield mr-1.5"></i>ESQUADRÃO SINCRONIZADO PELO RÁDIO (3D)</h3>
+                        <p class="text-[11px] text-emerald-300/75">Sobreviventes recrutados caminham com você no mapa 3D e ajudam a controlar as waves.</p>
+                    </div>
+                    <div id="squad-list" class="space-y-2"></div>
+                </div>
+
+                <div class="bg-[#08120e] vein-border rounded-lg p-3 space-y-2.5">
+                    <div class="border-b border-emerald-900/60 pb-1.5">
+                        <h3 class="font-mono-tech text-xs uppercase text-emerald-400 tracking-wider"><i class="fa-solid fa-lungs mr-1.5"></i>ÓRGÃOS BIOMECÂNICOS DA BASE</h3>
+                        <p class="text-[11px] text-emerald-300/75">Cultive estruturas vivas nas paredes do complexo para gerar munição orgânica e absorver ruído (dB).</p>
+                    </div>
+                    <div id="base-list" class="space-y-2"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ============================================================================
+        // 1. SINTETIZADOR DE ÁUDIO PROCEDURAL BIOPUNK (WEB AUDIO API + DRONE AMBIENTE)
+        // ============================================================================
+        
+        // ============================================================================
+        // 0. GERENCIADOR DE SPRITES PIXEL ART & TEXTURAS THREE.JS
+        // ============================================================================
+        const TextureCache = {};
+        function getSpriteTexture(name) {
+            if (TextureCache[name]) return TextureCache[name];
+            let src = '';
+            if (window.GAME_SPRITES && window.GAME_SPRITES[name]) {
+                src = window.GAME_SPRITES[name];
+            } else {
+                src = 'sprites/' + name + '.png';
+            }
+            const tex = new THREE.TextureLoader().load(src);
+            tex.magFilter = THREE.NearestFilter;
+            tex.minFilter = THREE.NearestFilter;
+            TextureCache[name] = tex;
+            return tex;
+        }
+
+        function getSpriteImgSrc(name) {
+            if (window.GAME_SPRITES && window.GAME_SPRITES[name]) {
+                return window.GAME_SPRITES[name];
+            }
+            return 'sprites/' + name + '.png';
+        }
+
+        const SoundEngine = {
+            ctx: null,
+            enabled: true,
+            musicEnabled: true,
+            droneGain: null,
+            droneOsc1: null,
+            droneOsc2: null,
+            droneLfo: null,
+            init() {
+                try {
+                    if (!this.ctx) {
+                        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                        if (AudioCtx) this.ctx = new AudioCtx();
+                    }
+                    if (this.ctx && this.ctx.state === 'suspended') {
+                        this.ctx.resume();
+                    }
+                    if (this.ctx && !this.droneGain && this.musicEnabled) {
+                        this.startAmbientDrone();
+                    }
+                } catch (e) {}
+            },
+            startAmbientDrone() {
+                if (!this.ctx || this.droneGain) return;
+                try {
+                    const now = this.ctx.currentTime;
+                    this.droneGain = this.ctx.createGain();
+                    this.droneGain.gain.setValueAtTime(0.04, now);
+
+                    const filter = this.ctx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.value = 180;
+
+                    this.droneOsc1 = this.ctx.createOscillator();
+                    this.droneOsc1.type = 'sawtooth';
+                    this.droneOsc1.frequency.setValueAtTime(55, now); // A1
+
+                    this.droneOsc2 = this.ctx.createOscillator();
+                    this.droneOsc2.type = 'sine';
+                    this.droneOsc2.frequency.setValueAtTime(82.4, now); // E2
+
+                    // LFO para pulso biológico lento
+                    this.droneLfo = this.ctx.createOscillator();
+                    this.droneLfo.frequency.setValueAtTime(0.09, now);
+                    const lfoGain = this.ctx.createGain();
+                    lfoGain.gain.value = 60;
+                    this.droneLfo.connect(lfoGain);
+                    lfoGain.connect(filter.frequency);
+
+                    this.droneOsc1.connect(filter);
+                    this.droneOsc2.connect(filter);
+                    filter.connect(this.droneGain);
+                    this.droneGain.connect(this.ctx.destination);
+
+                    this.droneOsc1.start();
+                    this.droneOsc2.start();
+                    this.droneLfo.start();
+                } catch (e) {}
+            },
+            setMusic(enable) {
+                this.musicEnabled = enable;
+                if (!this.ctx) this.init();
+                if (this.droneGain) {
+                    this.droneGain.gain.setTargetAtTime(this.musicEnabled ? 0.04 : 0.0001, this.ctx.currentTime, 0.4);
+                } else if (this.musicEnabled) {
+                    this.startAmbientDrone();
+                }
+            },
+            playHeartbeat() {
+                if (!this.enabled || !this.ctx) return;
+                try {
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(58, now);
+                    osc.frequency.exponentialRampToValueAtTime(28, now + 0.14);
+                    gain.gain.setValueAtTime(0.22, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.17);
+                } catch (e) {}
+            },
+            playPunch(isHeavy = false) {
+                if (!this.enabled || !this.ctx) return;
+                try {
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(isHeavy ? 150 : 115, now);
+                    osc.frequency.exponentialRampToValueAtTime(34, now + 0.11);
+                    gain.gain.setValueAtTime(isHeavy ? 0.32 : 0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.13);
+                } catch (e) {}
+            },
+            playBioShot(pitch = 320) {
+                if (!this.enabled || !this.ctx) return;
+                try {
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(pitch, now);
+                    osc.frequency.exponentialRampToValueAtTime(65, now + 0.09);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.11);
+                } catch (e) {}
+            },
+            playTrapZap() {
+                if (!this.enabled || !this.ctx) return;
+                try {
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(520, now);
+                    osc.frequency.exponentialRampToValueAtTime(95, now + 0.24);
+                    gain.gain.setValueAtTime(0.22, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.26);
+                } catch (e) {}
+            },
+            playCapsulePickup() {
+                if (!this.enabled || !this.ctx) return;
+                try {
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(440, now);
+                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.15);
+                } catch (e) {}
+            },
+            playNoiseAlarm() {
+                if (!this.enabled || !this.ctx) return;
+                try {
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(740, now);
+                    osc.frequency.linearRampToValueAtTime(320, now + 0.22);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.24);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } catch (e) {}
+            },
+            playRadioStatic(duration = 0.18) {
+                if (!this.enabled || !this.ctx) return;
+                try {
+                    const bufferSize = Math.floor(this.ctx.sampleRate * duration);
+                    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+                    const noise = this.ctx.createBufferSource();
+                    noise.buffer = buffer;
+                    const filter = this.ctx.createBiquadFilter();
+                    filter.type = 'bandpass';
+                    filter.frequency.value = 1200;
+                    const gain = this.ctx.createGain();
+                    gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.005, this.ctx.currentTime + duration);
+                    noise.connect(filter);
+                    filter.connect(this.ctx.destination);
+                    noise.start();
+                } catch (e) {}
+            },
+            playFanfare() {
+                if (!this.enabled || !this.ctx) return;
+                try {
+                    const now = this.ctx.currentTime;
+                    [220, 277, 330, 440].forEach((freq, i) => {
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + i * 0.08);
+                        gain.gain.setValueAtTime(0.18, now + i * 0.08);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.35);
+                        osc.connect(gain);
+                        gain.connect(this.ctx.destination);
+                        osc.start(now + i * 0.08);
+                        osc.stop(now + i * 0.08 + 0.36);
+                    });
+                } catch (e) {}
+            }
+        };
+
+        window.toggleAudio = function() {
+            SoundEngine.init();
+            SoundEngine.enabled = !SoundEngine.enabled;
+            const icon = document.getElementById('audio-icon');
+            if (icon) {
+                icon.className = SoundEngine.enabled
+                    ? 'fa-solid fa-volume-high text-emerald-300'
+                    : 'fa-solid fa-volume-xmark text-red-400';
+            }
+        };
+
+        window.toggleMusic = function() {
+            SoundEngine.init();
+            SoundEngine.setMusic(!SoundEngine.musicEnabled);
+            const icon = document.getElementById('music-icon');
+            if (icon) {
+                icon.className = SoundEngine.musicEnabled
+                    ? 'fa-solid fa-music text-emerald-300'
+                    : 'fa-solid fa-volume-xmark text-gray-500';
+            }
+        };
+
+        // ============================================================================
+        // 2. CUTSCENE INICIAL E CUTSCENES DE MARCO (MILESTONES)
+        // ============================================================================
+        const CutsceneSteps = [
+            {
+                freq: "88.4 MHz // SINAL DE EMERGÊNCIA",
+                text: "« ...Se ainda houver alguém consciente no Setor 4... escute minha frequência. O laboratório entrou em contenção biológica. Quebre o vidro do tanque de estase agora! »",
+                btnText: "GOLPEAR O VIDRO DO TANQUE [SOCO]"
+            },
+            {
+                freq: "88.4 MHz // RACHADURA HIDRÁULICA",
+                text: "CRACK! O vidro blindado estilhaça e o líquido amniótico escorre pelo piso frio. Você cai de joelhos no escuro. No seu antebraço esquerdo, um rádio biomecânico fundido às veias pulsa com luz âmbar.",
+                btnText: "LEVANTAR E FECHAR OS PUNHOS"
+            },
+            {
+                freq: "ALERTA DE PROXIMIDADE // HORDAS NO SETOR",
+                text: "Passos úmidos ecoam pelas 4 salas de contenção ao redor. Seus músculos ainda estão atrofiados, mas o transmissor dá um choque adrenal nos seus nervos. O Piloto Neural assume o controle de combate!",
+                btnText: "ATIVAR MONITOR SIMBIÓTICO 3D"
+            }
+        ];
+
+        let currentCutsceneStep = 0;
+        let inCutscene = true;
+
+        let stasisTankImg = null;
+        function renderCutsceneCanvas() {
+            const canvas = document.getElementById('cutscene-canvas');
+            if (!canvas || !inCutscene) return;
+            const ctx = canvas.getContext('2d');
+            if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
+                canvas.width = canvas.clientWidth || 500;
+                canvas.height = canvas.clientHeight || 176;
+            }
+            const w = canvas.width;
+            const h = canvas.height;
+            const t = performance.now() * 0.004;
+
+            ctx.fillStyle = '#040806';
+            ctx.fillRect(0, 0, w, h);
+
+            ctx.strokeStyle = 'rgba(16, 185, 129, 0.09)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < w; x += 24) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+            }
+            for (let y = 0; y < h; y += 24) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+            }
+
+            // Desenhar sprite do Tanque de Estase Quebrado no centro
+            if (!stasisTankImg) {
+                stasisTankImg = new Image();
+                stasisTankImg.src = getSpriteImgSrc('base_stasis_tank');
+            }
+            if (stasisTankImg.complete && stasisTankImg.naturalWidth > 0) {
+                const imgW = 200;
+                const imgH = 98;
+                ctx.drawImage(stasisTankImg, (w - imgW) / 2, (h - imgH) / 2 + Math.sin(t * 3) * 3, imgW, imgH);
+            }
+
+            // Linha osciloscópica neural sobreposta
+            ctx.beginPath();
+            ctx.strokeStyle = currentCutsceneStep === 2 ? 'rgba(239, 68, 68, 0.85)' : (currentCutsceneStep === 1 ? 'rgba(245, 158, 11, 0.85)' : 'rgba(16, 185, 129, 0.85)');
+            ctx.lineWidth = 2;
+            for (let x = 0; x < w; x++) {
+                const spike = (Math.abs((x + t * 55) % 130 - 65) < 9) ? Math.sin(x * 0.85) * 32 : 0;
+                const wave = Math.sin(x * 0.05 + t * 3) * 8;
+                const y = h / 2 + wave + spike;
+                if (x === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            if (inCutscene) requestAnimationFrame(renderCutsceneCanvas);
+        }
+
+        function updateCutsceneUI() {
+            const step = CutsceneSteps[currentCutsceneStep];
+            if (!step) return;
+            document.getElementById('cutscene-freq-label').textContent = step.freq;
+            document.getElementById('cutscene-text').textContent = step.text;
+            document.getElementById('cutscene-step-indicator').textContent = 'TRANSMISSÃO ' + (currentCutsceneStep + 1) + ' / ' + CutsceneSteps.length;
+            const btnSpan = document.getElementById('cutscene-btn').querySelector('span');
+            if (btnSpan) btnSpan.textContent = step.btnText;
+        }
+
+        window.advanceCutscene = function() {
+            SoundEngine.init();
+            if (currentCutsceneStep === 0) SoundEngine.playPunch(true);
+            else if (currentCutsceneStep === 1) SoundEngine.playRadioStatic(0.22);
+            else SoundEngine.playHeartbeat();
+
+            currentCutsceneStep++;
+            if (currentCutsceneStep >= CutsceneSteps.length) {
+                window.skipCutscene();
+            } else {
+                updateCutsceneUI();
+            }
+        };
+
+        window.skipCutscene = function() {
+            SoundEngine.init();
+            inCutscene = false;
+            const overlay = document.getElementById('cutscene-overlay');
+            if (overlay) {
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    onWindowResize();
+                }, 650);
+            }
+        };
+
+        window.replayIntro = function() {
+            currentCutsceneStep = 0;
+            inCutscene = true;
+            const overlay = document.getElementById('cutscene-overlay');
+            if (overlay) {
+                overlay.style.display = 'flex';
+                setTimeout(() => overlay.classList.remove('opacity-0', 'pointer-events-none'), 20);
+            }
+            updateCutsceneUI();
+            renderCutsceneCanvas();
+        };
+
+        function triggerMilestoneCutscene(title, desc, colorHex = '#f59e0b') {
+            const modal = document.getElementById('milestone-modal');
+            if (!modal) return;
+            document.getElementById('milestone-title').innerHTML = '<i class="fa-solid fa-dna animate-spin"></i> ' + title;
+            document.getElementById('milestone-desc').textContent = desc;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            SoundEngine.playRadioStatic(0.3);
+            SoundEngine.playFanfare();
+
+            const canvas = document.getElementById('milestone-canvas');
+            if (canvas) {
+                canvas.width = canvas.clientWidth || 420;
+                canvas.height = canvas.clientHeight || 140;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#030705';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.strokeStyle = colorHex;
+                ctx.lineWidth = 2.5;
+                ctx.beginPath();
+                for (let x = 0; x < canvas.width; x += 4) {
+                    const y = canvas.height / 2 + Math.sin(x * 0.08) * 28 * Math.sin(x * 0.02);
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            }
+        }
+
+        window.closeMilestoneModal = function() {
+            const modal = document.getElementById('milestone-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        };
+
+        // ============================================================================
+        // 3. ESTADO DO JOGO BIOPUNK + REGRAS IDLEDEX + CONQUISTAS
+        // ============================================================================
+        const GameState = {
+            atp: 60,
+            biomass: 30,
+            calcium: 25,
+            echoes: 12,
+            hp: 100,
+            maxHp: 100,
+            boneFracture: 0,
+            handBroken: false,
+            toxicity: 0,
+            noiseDb: 0,
+            kills: 0,
+            shinies: 0,
+            healsCount: 0,
+            manualHits: 0,
+            wave: 1,
+            killsInWave: 0,
+            killsRequired: 5,
+            autoAdvance: true,
+            inGymGauntlet: false,
+            gymStage: 0,
+            badges: 0,
+            prestigeLevel: 1,
+            prestigeMult: 1.0,
+            activeWeapon: 'fists',
+            preferredWeapon: 'fists',
+            combatStance: 'balanced',
+            cameraMode: 0,
+            navMode: 'explore', // 'explore' | 'hunt'
+            trapCooldown: 0,
+            frequency: 884,
+            simSpeed: 1,
+            lastSaveTime: Date.now(),
+            seenFirstWeaponCutscene: false,
+            seenFirstSquadCutscene: false,
+            autopilot: {
+                splintThreshold: 75,
+                dialysisThreshold: 70,
+                retreatHpThreshold: 50,
+                autoFistFallback: true,
+                autoHazardRest: true,
+                prioritizeShinyAndLoot: true
+            },
+            upgrades: {
+                muscleDensity: { level: 0, baseCost: 15, costMult: 1.55, name: "Miófibras Densas", desc: "+3.5 Dano base nos punhos e armas" },
+                boneCalcium: { level: 0, baseCost: 22, costMult: 1.65, name: "Esqueleto Calcificado", desc: "-18% Acúmulo de Microfratura ao socar" },
+                adrenalGland: { level: 0, baseCost: 30, costMult: 1.7, name: "Glândula Adrenal", desc: "+12% Velocidade de ataque e Sprint" },
+                liverSymbiosis: { level: 0, baseCost: 40, costMult: 1.75, name: "Fígado Quimérico", desc: "-20% Toxicidade de armas vivas e +Regen HP" }
+            },
+            weapons: {
+                fists: {
+                    unlocked: true, level: 1, damage: 8, range: 3.1, cooldown: 0.55,
+                    costType: 'none', costAmount: 0, toxGen: 0, noiseGen: 0, fractureGen: 7.5,
+                    name: "Punhos Cerrados", icon: "fa-hand-fist", sprite: "weapon_fists",
+                    desc: "Combate visceral corpo a corpo. Não gasta munição, mas gera Microfraturas nos ossos da mão."
+                },
+                boneKnuckles: {
+                    unlocked: false, level: 0, unlockCost: 25, unlockRes: 'calcium',
+                    damage: 20, range: 3.4, cooldown: 0.5,
+                    costType: 'calcium', costAmount: 0.6, toxGen: 1.2, noiseGen: 0, fractureGen: 2.0,
+                    name: "Soqueira de Esporão Ósseo", icon: "fa-bone", sprite: "weapon_bone_knuckles",
+                    desc: "Exoesqueleto calcificado que perfura crânios. Consome Cálcio por golpe, mas reduz fraturas."
+                },
+                toothPistol: {
+                    unlocked: false, level: 0, unlockCost: 35, unlockRes: 'biomass',
+                    damage: 38, range: 11.5, cooldown: 0.65,
+                    costType: 'biomass', costAmount: 1.2, toxGen: 3.2, noiseGen: 4, fractureGen: 0,
+                    name: "Pistola de Dentes Calcificados", icon: "fa-tooth", sprite: "weapon_tooth_pistol",
+                    desc: "Parasita acoplado ao punho que dispara molares em alta pressão. Consome Biomassa e injeta Toxina."
+                },
+                bileRifle: {
+                    unlocked: false, level: 0, unlockCost: 75, unlockRes: 'biomass',
+                    damage: 82, range: 15.0, cooldown: 0.75,
+                    costType: 'biomass', costAmount: 2.4, toxGen: 5.5, noiseGen: 6, fractureGen: 0,
+                    name: "Rifle de Bile Ácida", icon: "fa-vial-circle-check", sprite: "weapon_bile_rifle",
+                    desc: "Dispara jatos corrosivos à distância que derretem grupos de mutantes. Alto custo de Biomassa."
+                },
+                rustyShotgun: {
+                    unlocked: false, level: 0, unlockCost: 45, unlockRes: 'echoes',
+                    damage: 145, range: 9.5, cooldown: 1.05,
+                    costType: 'calcium', costAmount: 1.8, toxGen: 0, noiseGen: 24, fractureGen: 3.0,
+                    name: "Escopeta de Contenção", icon: "fa-burst", sprite: "weapon_bile_rifle",
+                    desc: "Arma balística brutal do Setor 4. Não gera toxina, mas causa enorme Poluição Sonora (dB) que atrai hordas!"
+                }
+            },
+            biodex: [
+                { id: 'z1', name: "Cientista Fúngico", color: 0x22543d, count: 0, shinyCount: 0, unlocked: true, desc: "Infectado inicial do Setor 4." },
+                { id: 'z2', name: "Rastejador de Amônia", color: 0x1e3a5f, count: 0, shinyCount: 0, unlocked: false, desc: "Ágil, corre pelos corredores." },
+                { id: 'z3', name: "Cão Necrótico", color: 0x5f1e2e, count: 0, shinyCount: 0, unlocked: false, desc: "Cobaia canina hiper-agressiva." },
+                { id: 'z4', name: "Brutamontes Calcificado", color: 0x5c4d32, count: 0, shinyCount: 0, unlocked: false, desc: "Blindado com placas ósseas." },
+                { id: 'z5', name: "Cobaia Luminescente", color: 0x0e7490, count: 0, shinyCount: 0, unlocked: false, desc: "Emite pulsos radioativos." },
+                { id: 'z6', name: "Guardião Apex (Chefe)", color: 0x7f1d1d, count: 0, shinyCount: 0, unlocked: false, desc: "Aberração alfa dos Ginásios." }
+            ],
+            squad: [
+                { id: 'med', name: "Dra. Vena (Bio-Médica)", unlocked: false, cost: 18, dps: 14, color: 0x10b981, desc: "Dispara dardos cirúrgicos e reduz sua Toxicidade/Fratura lentamente." },
+                { id: 'heavy', name: "Kael #012 (Ex-Segurança)", unlocked: false, cost: 40, dps: 36, color: 0xf59e0b, desc: "Linha de frente com lâmina óssea pesada que empurra mutantes." },
+                { id: 'hound', name: "Sonda Simbiótica 'Eco'", unlocked: false, cost: 75, dps: 68, color: 0x06b6d4, desc: "Drone orgânico flutuante que caça variantes Shiny e coleta cápsulas." }
+            ],
+            baseOrgans: [
+                { id: 'incubator', name: "Incubadora de Biomassa", level: 0, cost: 25, desc: "Cultiva tecido vivo nas paredes (+Biomassa/s para suas armas)." },
+                { id: 'calcifier', name: "Extrator Medular de Cálcio", level: 0, cost: 30, desc: "Processa ossos de zumbis abatidos (+Cálcio/s e regeneração óssea)." },
+                { id: 'mycelium', name: "Membrana Acústica de Micélio", level: 0, cost: 40, desc: "Absorve o eco dos tiros no setor (-Poluição Sonora dB/s)." },
+                { id: 'antenna', name: "Amplificador Neural de Rádio", level: 0, cost: 55, desc: "Capta transmissões distantes (+Ecos/s e +ATP passivo)." }
+            ],
+            achievements: {
+                first_blood: { name: "Primeiro Sangue", desc: "Abater o primeiro mutante do Setor 4", icon: "fa-skull", unlocked: false, bonusText: "+5% Dano Base Permanente", check: (s) => s.kills >= 1 },
+                fist_master: { name: "Punhos de Carbono", desc: "Abater 25 mutantes em combate", icon: "fa-hand-fist", unlocked: false, bonusText: "-15% Fratura Óssea ao socar", check: (s) => s.kills >= 25 },
+                shiny_hunter: { name: "Aberração Cromática", desc: "Abater uma variante mutante ★ Shiny", icon: "fa-star", unlocked: false, bonusText: "+3% Chance de mutantes Shiny", check: (s) => s.shinies >= 1 },
+                gym_champion: { name: "Insígnia de Expurgo", desc: "Completar seu primeiro Ginásio Gauntlet sem cura", icon: "fa-medal", unlocked: false, bonusText: "+20% Vida Máxima (HP)", check: (s) => s.badges >= 1 },
+                clone_reborn: { name: "Transmissão Concluída", desc: "Realizar o primeiro prestígio de consciência", icon: "fa-dna", unlocked: false, bonusText: "+25% Ganho de ATP em todas as fontes", check: (s) => s.prestigeLevel > 1 },
+                squad_ready: { name: "Banda de Frequência", desc: "Recrutar ao menos 1 sobrevivente para o mapa 3D", icon: "fa-user-group", unlocked: false, bonusText: "+20% DPS de todos os aliados", check: (s) => s.squad.some(m => m.unlocked) },
+                radio_tuned: { name: "Harmonia Acústica", desc: "Sintonizar qualquer frequência de rádio acima de 100.0 MHz", icon: "fa-radio", unlocked: false, bonusText: "+15% Ecos captados", check: (s) => s.frequency >= 1000 },
+                organ_master: { name: "Biotecnologia Viva", desc: "Cultivar ao menos 2 órgãos da base", icon: "fa-lungs", unlocked: false, bonusText: "+25% Produção de órgãos", check: (s) => s.baseOrgans.filter(o => o.level > 0).length >= 2 },
+                manual_brawler: { name: "Reflexos do Piloto", desc: "Desferir 15 golpes manuais com cliques ou barra de espaço", icon: "fa-hand-pointer", unlocked: false, bonusText: "+30% Dano Crítico Manual", check: (s) => s.manualHits >= 15 },
+                dex_scholar: { name: "Enciclopédia Biológica", desc: "Registrar 4 espécimes diferentes na Bio-Dex", icon: "fa-book-skull", unlocked: false, bonusText: "+15% Dano Global da Dex", check: (s) => s.biodex.filter(d => d.count > 0).length >= 4 }
+            }
+        };
+
+        // ============================================================================
+        // 4. MUNDO 3D THREE.JS: SALAS, CÂMERA, PARTICULAS E RAYCASTING DE CLIQUE
+        // ============================================================================
+        let scene, camera, renderer;
+        let playerGroup, rightArmWeaponMesh, leftArmRadioMesh;
+        let playerLimbs = {};
+        let zombieEntities = [];
+        let capsuleEntities = [];
+        let squadMeshes = [];
+        let veinMeshes = [];
+        let projectileEntities = [];
+        let particleEntities = [];
+        let waypointRingMesh;
+
+        const playerState = {
+            x: 0,
+            z: 5,
+            vx: 0,
+            vz: 0,
+            facingAngle: 0,
+            isSprinting: false,
+            attackTimer: 0,
+            currentRoom: "PÁTIO CENTRAL",
+            waypoint: { x: 8, z: -6 },
+            waypointTimer: 0,
+            targetRoomIdx: -1,
+            roomHoldTimer: 0
+        };
+
+        const TACTICAL_ROOMS = [
+            {
+                name: "SALA DE CRIOGENIA (NO)",
+                cx: -17, cz: -17,
+                doorX: -10.5, doorZ: -10.5,
+                insideX: -17.5, insideZ: -17.5,
+                trapColor: 0x06b6d4, trapName: "DESCARGA CRIO-ELÉTRICA",
+                trapMesh: null
+            },
+            {
+                name: "CÂMARA DE INCINERAÇÃO (NE)",
+                cx: 17, cz: -17,
+                doorX: 10.5, doorZ: -10.5,
+                insideX: 17.5, insideZ: -17.5,
+                trapColor: 0xf59e0b, trapName: "JATO DE VAPOR ÁCIDO",
+                trapMesh: null
+            },
+            {
+                name: "BUNKER DE TRIAGEM (SO)",
+                cx: -17, cz: 17,
+                doorX: -10.5, doorZ: 10.5,
+                insideX: -17.5, insideZ: 17.5,
+                trapColor: 0x10b981, trapName: "PULSO BIO-HARMÔNICO",
+                trapMesh: null
+            },
+            {
+                name: "REATOR DE BIOMASSA (SE)",
+                cx: 17, cz: 17,
+                doorX: 10.5, doorZ: 10.5,
+                insideX: 17.5, insideZ: 17.5,
+                trapColor: 0xa855f7, trapName: "ONDA NEURAL UV",
+                trapMesh: null
+            }
+        ];
+
+        const WALL_SEGMENTS = [
+            { x: 0, z: -26, w: 52, d: 1.5 },
+            { x: 0, z: 26, w: 52, d: 1.5 },
+            { x: -26, z: 0, w: 1.5, d: 52 },
+            { x: 26, z: 0, w: 1.5, d: 52 },
+            { x: -20.5, z: -11, w: 11, d: 1.2 },
+            { x: -11, z: -20.5, w: 1.2, d: 11 },
+            { x: 20.5, z: -11, w: 11, d: 1.2 },
+            { x: 11, z: -20.5, w: 1.2, d: 11 },
+            { x: -20.5, z: 11, w: 11, d: 1.2 },
+            { x: -11, z: 20.5, w: 1.2, d: 11 },
+            { x: 20.5, z: 11, w: 11, d: 1.2 },
+            { x: 11, z: 20.5, w: 1.2, d: 11 }
+        ];
+
+        let isDraggingCamera = false;
+        let prevPointerX = 0;
+        let startDragX = 0;
+        let startDragY = 0;
+        let cameraOrbitYaw = 0.35;
+
+        function init3D() {
+            const container = document.getElementById('three-container');
+            if (!container) return;
+
+            const width = container.clientWidth || window.innerWidth;
+            const height = container.clientHeight || 340;
+
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x030705);
+            scene.fog = new THREE.FogExp2(0x030705, 0.022);
+
+            camera = new THREE.PerspectiveCamera(52, width / height, 0.1, 200);
+            camera.position.set(0, 22, 22);
+            camera.lookAt(0, 0, 0);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+            container.innerHTML = '';
+            container.appendChild(renderer.domElement);
+
+            const raycaster = new THREE.Raycaster();
+            const mouseVec = new THREE.Vector2();
+
+            container.addEventListener('pointerdown', (e) => {
+                isDraggingCamera = true;
+                prevPointerX = e.clientX;
+                startDragX = e.clientX;
+                startDragY = e.clientY;
+            });
+            window.addEventListener('pointerup', (e) => {
+                if (isDraggingCamera) {
+                    const dragDist = Math.hypot(e.clientX - startDragX, e.clientY - startDragY);
+                    if (dragDist < 8) {
+                        handle3DClick(e);
+                    }
+                }
+                isDraggingCamera = false;
+            });
+            window.addEventListener('pointermove', (e) => {
+                if (!isDraggingCamera) return;
+                const dx = e.clientX - prevPointerX;
+                prevPointerX = e.clientX;
+                cameraOrbitYaw -= dx * 0.008;
+            });
+
+            function handle3DClick(e) {
+                if (!renderer || !camera) return;
+                const rect = renderer.domElement.getBoundingClientRect();
+                mouseVec.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+                mouseVec.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+                raycaster.setFromCamera(mouseVec, camera);
+
+                // 1. Checar clique em bio-cápsulas
+                const capMeshes = capsuleEntities.map(c => c.mesh);
+                const capHits = raycaster.intersectObjects(capMeshes, true);
+                if (capHits.length > 0) {
+                    const hitMesh = capHits[0].object;
+                    const idx = capsuleEntities.findIndex(c => c.mesh === hitMesh || (hitMesh.parent && hitMesh.parent === c.mesh));
+                    if (idx !== -1) {
+                        collectBioCapsule(idx, true);
+                        return;
+                    }
+                }
+
+                // 2. Checar clique em zumbis para golpe manual crítico
+                const zMeshes = zombieEntities.map(z => z.mesh);
+                const zHits = raycaster.intersectObjects(zMeshes, true);
+                if (zHits.length > 0) {
+                    let topObj = zHits[0].object;
+                    while (topObj.parent && topObj.parent !== scene) {
+                        topObj = topObj.parent;
+                    }
+                    const hitZombie = zombieEntities.find(z => z.mesh === topObj);
+                    if (hitZombie) {
+                        performManualStrike(hitZombie);
+                        return;
+                    }
+                }
+
+                // 3. Clique no chão: direcionar o waypoint manualmente
+                const floorHits = raycaster.intersectObjects(scene.children);
+                for (let i = 0; i < floorHits.length; i++) {
+                    const hit = floorHits[i];
+                    if (hit.point && Math.abs(hit.point.y) < 1.0) {
+                        const targetCoords = resolveWallCollisions(hit.point.x, hit.point.z, 0.85);
+                        playerState.waypoint.x = targetCoords.x;
+                        playerState.waypoint.z = targetCoords.z;
+                        playerState.waypointTimer = 5.0;
+                        spawnFloatingText("ORDEM MANUAL: MOVENDO...", "#06b6d4");
+                        break;
+                    }
+                }
+            }
+
+            const ambientLight = new THREE.AmbientLight(0x0f2e20, 1.35);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0x34d399, 1.25);
+            dirLight.position.set(14, 32, 18);
+            scene.add(dirLight);
+
+            const floorGeo = new THREE.PlaneGeometry(54, 54);
+            const floorMat = new THREE.MeshStandardMaterial({ color: 0x040b08, roughness: 0.9 });
+            const floorMesh = new THREE.Mesh(floorGeo, floorMat);
+            floorMesh.rotation.x = -Math.PI / 2;
+            floorMesh.position.y = -0.02;
+            scene.add(floorMesh);
+
+            const gridHelper = new THREE.GridHelper(52, 26, 0x10b981, 0x072619);
+            gridHelper.position.y = 0.01;
+            scene.add(gridHelper);
+
+            const wallMat = new THREE.MeshStandardMaterial({ color: 0x0b2117, roughness: 0.75, metalness: 0.25 });
+            const trimMat = new THREE.MeshStandardMaterial({ color: 0x10b981, emissive: 0x064e3b, emissiveIntensity: 0.5 });
+
+            WALL_SEGMENTS.forEach(seg => {
+                const wall = new THREE.Mesh(new THREE.BoxGeometry(seg.w, 3.2, seg.d), wallMat);
+                wall.position.set(seg.x, 1.6, seg.z);
+                scene.add(wall);
+
+                const topTrim = new THREE.Mesh(new THREE.BoxGeometry(seg.w + 0.05, 0.14, seg.d + 0.05), trimMat);
+                topTrim.position.set(seg.x, 3.25, seg.z);
+                scene.add(topTrim);
+            });
+
+            TACTICAL_ROOMS.forEach(room => {
+                const padGeo = new THREE.RingGeometry(1.1, 1.8, 20);
+                const padMat = new THREE.MeshBasicMaterial({ color: room.trapColor, side: THREE.DoubleSide, transparent: true, opacity: 0.65 });
+                const padMesh = new THREE.Mesh(padGeo, padMat);
+                padMesh.rotation.x = -Math.PI / 2;
+                padMesh.position.set(room.doorX, 0.04, room.doorZ);
+                scene.add(padMesh);
+                room.trapMesh = padMesh;
+            });
+
+            const tankGroup = new THREE.Group();
+            const tankBase = new THREE.Mesh(
+                new THREE.CylinderGeometry(2.2, 2.4, 0.4, 20),
+                new THREE.MeshStandardMaterial({ color: 0x111827, metalness: 0.7, roughness: 0.3 })
+            );
+            tankBase.position.y = 0.2;
+            tankGroup.add(tankBase);
+
+            const tankSpriteMat = new THREE.SpriteMaterial({
+                map: getSpriteTexture('base_stasis_tank'),
+                transparent: true
+            });
+            const tankSprite = new THREE.Sprite(tankSpriteMat);
+            tankSprite.center.set(0.5, 0.0);
+            tankSprite.scale.set(5.2, 3.2, 1);
+            tankSprite.position.set(0, 0.4, 0);
+            tankGroup.add(tankSprite);
+
+            const tankLight = new THREE.PointLight(0x10b981, 2.4, 16);
+            tankLight.position.set(0, 2.2, 0);
+            tankGroup.add(tankLight);
+            scene.add(tankGroup);
+
+            const ringGeo = new THREE.RingGeometry(0.45, 0.7, 16);
+            const ringMat = new THREE.MeshBasicMaterial({ color: 0x06b6d4, side: THREE.DoubleSide, transparent: true, opacity: 0.55 });
+            waypointRingMesh = new THREE.Mesh(ringGeo, ringMat);
+            waypointRingMesh.rotation.x = -Math.PI / 2;
+            waypointRingMesh.position.set(playerState.waypoint.x, 0.04, playerState.waypoint.z);
+            scene.add(waypointRingMesh);
+
+            buildArticulatedPlayer();
+
+            for (let i = 0; i < 6; i++) spawnBioCapsule();
+            for (let i = 0; i < 4; i++) spawnMutantZombie(false);
+
+            if (window.ResizeObserver) {
+                const ro = new ResizeObserver(() => onWindowResize());
+                ro.observe(container);
+            }
+            window.addEventListener('resize', onWindowResize);
+            animate3D();
+        }
+
+        let playerSprite = null;
+        let playerRadioLight = null;
+        function buildArticulatedPlayer() {
+            playerGroup = new THREE.Group();
+
+            const shadowGeo = new THREE.CircleGeometry(0.65, 16);
+            const shadowMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.5 });
+            const shadow = new THREE.Mesh(shadowGeo, shadowMat);
+            shadow.rotation.x = -Math.PI / 2;
+            shadow.position.y = 0.02;
+            playerGroup.add(shadow);
+
+            const spriteMat = new THREE.SpriteMaterial({
+                map: getSpriteTexture('player_idle_0'),
+                transparent: true,
+                depthTest: true
+            });
+            playerSprite = new THREE.Sprite(spriteMat);
+            playerSprite.center.set(0.5, 0.08);
+            playerSprite.scale.set(2.4, 2.4, 1);
+            playerGroup.add(playerSprite);
+
+            playerRadioLight = new THREE.PointLight(0xf59e0b, 2.0, 15);
+            playerRadioLight.position.set(0, 1.4, 0);
+            playerGroup.add(playerRadioLight);
+
+            playerGroup.position.set(playerState.x, 0, playerState.z);
+            scene.add(playerGroup);
+        }
+
+        function updatePlayerWeaponVisual3D() {
+            if (!playerRadioLight) return;
+            const wKey = GameState.activeWeapon;
+            if (wKey === 'fists') {
+                playerRadioLight.color.setHex(0xf59e0b);
+            } else if (wKey === 'boneKnuckles') {
+                playerRadioLight.color.setHex(0xfde68a);
+            } else if (wKey === 'toothPistol') {
+                playerRadioLight.color.setHex(0xf43f5e);
+            } else if (wKey === 'bileRifle') {
+                playerRadioLight.color.setHex(0x10b981);
+            } else if (wKey === 'rustyShotgun') {
+                playerRadioLight.color.setHex(0xf97316);
+            }
+        }
+
+        function onWindowResize() {
+            const container = document.getElementById('three-container');
+            if (!container || !camera || !renderer) return;
+            const w = container.clientWidth || window.innerWidth;
+            const h = container.clientHeight || 320;
+            if (w === 0 || h === 0) return;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        }
+
+        function resolveWallCollisions(x, z, radius = 0.85) {
+            let nx = Math.max(-24.6, Math.min(24.6, x));
+            let nz = Math.max(-24.6, Math.min(24.6, z));
+
+            for (let i = 0; i < WALL_SEGMENTS.length; i++) {
+                const seg = WALL_SEGMENTS[i];
+                const halfW = seg.w / 2 + radius;
+                const halfD = seg.d / 2 + radius;
+                const dx = nx - seg.x;
+                const dz = nz - seg.z;
+
+                if (Math.abs(dx) < halfW && Math.abs(dz) < halfD) {
+                    const overlapX = halfW - Math.abs(dx);
+                    const overlapZ = halfD - Math.abs(dz);
+                    if (overlapX < overlapZ) {
+                        nx += dx >= 0 ? overlapX : -overlapX;
+                    } else {
+                        nz += dz >= 0 ? overlapZ : -overlapZ;
+                    }
+                }
+            }
+            return { x: nx, z: nz };
+        }
+
+        function spawnBioCapsule() {
+            if (!scene || capsuleEntities.length >= 8) return;
+            const group = new THREE.Group();
+
+            const shadowGeo = new THREE.CircleGeometry(0.35, 12);
+            const shadowMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.45 });
+            const shadow = new THREE.Mesh(shadowGeo, shadowMat);
+            shadow.rotation.x = -Math.PI / 2;
+            shadow.position.y = 0.02;
+            group.add(shadow);
+
+            const spriteMat = new THREE.SpriteMaterial({
+                map: getSpriteTexture('item_capsule_single'),
+                transparent: true
+            });
+            const sprite = new THREE.Sprite(spriteMat);
+            sprite.scale.set(1.3, 1.3, 1);
+            sprite.position.y = 0.7;
+            group.add(sprite);
+
+            const capLight = new THREE.PointLight(0x06b6d4, 1.2, 5);
+            capLight.position.set(0, 0.7, 0);
+            group.add(capLight);
+
+            let x = (Math.random() - 0.5) * 42;
+            let z = (Math.random() - 0.5) * 42;
+            if (Math.abs(Math.abs(x) - 11) < 2.2) x += 3.2;
+            if (Math.abs(Math.abs(z) - 11) < 2.2) z += 3.2;
+
+            group.position.set(x, 0, z);
+            scene.add(group);
+            capsuleEntities.push({ mesh: group, sprite: sprite, x, z });
+        }
+
+        function collectBioCapsule(index, isManual = false) {
+            if (index < 0 || index >= capsuleEntities.length) return;
+            const cap = capsuleEntities[index];
+            scene.remove(cap.mesh);
+            capsuleEntities.splice(index, 1);
+
+            const gainAtp = Math.floor((14 + GameState.wave * 3) * GameState.prestigeMult * (isManual ? 1.5 : 1));
+            const gainBio = Math.floor(6 + GameState.wave * 1.5);
+            GameState.atp += gainAtp;
+            GameState.biomass += gainBio;
+            GameState.echoes += 2;
+
+            SoundEngine.playCapsulePickup();
+            spawnFloatingText(isManual ? '+COLETA RÁPIDA! +' + gainAtp + ' ATP' : '+' + gainAtp + ' ATP / +' + gainBio + ' BIO', "#06b6d4");
+            spawnParticles(cap.x, 0.7, cap.z, 0x06b6d4, 6);
+            setTimeout(spawnBioCapsule, 900);
+            updateUI();
+        }
+
+        function spawnMutantZombie(forceShiny = false, isGymBoss = false) {
+            if (!scene) return;
+            const unlockedPool = GameState.biodex.slice(0, Math.min(5, 1 + Math.floor(GameState.wave / 2)));
+            const species = isGymBoss
+                ? GameState.biodex[5]
+                : unlockedPool[Math.floor(Math.random() * unlockedPool.length)];
+            species.unlocked = true;
+
+            const isShiny = forceShiny || (!isGymBoss && Math.random() < (0.14 + (GameState.achievements.shiny_hunter.unlocked ? 0.03 : 0)));
+            const group = new THREE.Group();
+
+            const shadowGeo = new THREE.CircleGeometry(isGymBoss ? 1.1 : 0.65, 16);
+            const shadowMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.55 });
+            const shadow = new THREE.Mesh(shadowGeo, shadowMat);
+            shadow.rotation.x = -Math.PI / 2;
+            shadow.position.y = 0.02;
+            group.add(shadow);
+
+            const isStalker = (species.id === 'z2' || species.id === 'z5');
+            const texPrefix = isStalker ? 'mutant_stalker_' : 'mutant_fungal_';
+            const frame1 = texPrefix + '1';
+            const frame2 = texPrefix + '2';
+
+            const scaleMult = isGymBoss ? 3.4 : (species.id === 'z4' ? 2.5 : 2.0);
+            const spriteMat = new THREE.SpriteMaterial({
+                map: getSpriteTexture(frame1),
+                transparent: true,
+                depthTest: true
+            });
+            if (isShiny) {
+                spriteMat.color.setHex(0xfef08a);
+            } else if (isGymBoss) {
+                spriteMat.color.setHex(0xffaaaa);
+            }
+
+            const sprite = new THREE.Sprite(spriteMat);
+            sprite.center.set(0.5, 0.08);
+            sprite.scale.set(scaleMult, scaleMult, 1);
+            group.add(sprite);
+
+            if (isGymBoss) {
+                const bossLight = new THREE.PointLight(0xef4444, 2.5, 12);
+                bossLight.position.set(0, 1.5, 0);
+                group.add(bossLight);
+            } else if (isShiny) {
+                const shinyLight = new THREE.PointLight(0xfacc15, 1.8, 8);
+                shinyLight.position.set(0, 1.2, 0);
+                group.add(shinyLight);
+            }
+
+            const lanes = [
+                { x: 0, z: -23 }, { x: 0, z: 23 },
+                { x: -23, z: 0 }, { x: 23, z: 0 }
+            ];
+            const lane = lanes[Math.floor(Math.random() * lanes.length)];
+            const x = lane.x + (Math.random() - 0.5) * 6;
+            const z = lane.z + (Math.random() - 0.5) * 6;
+            group.position.set(x, 0, z);
+            scene.add(group);
+
+            const maxHp = Math.floor((26 + GameState.wave * 14) * (isGymBoss ? 3.5 : 1) * (isShiny ? 1.5 : 1));
+            const speed = (isGymBoss ? 4.4 : 3.6 + Math.random() * 1.1);
+
+            zombieEntities.push({
+                mesh: group,
+                sprite: sprite,
+                frame1: frame1,
+                frame2: frame2,
+                scaleMult: scaleMult,
+                speciesId: species.id,
+                name: isGymBoss ? 'Guardião Apex (' + (GameState.gymStage + 1) + '/3)' : species.name,
+                x, z,
+                hp: maxHp,
+                maxHp,
+                isShiny,
+                isGymBoss,
+                speed,
+                walkPhase: Math.random() * Math.PI * 2
+            });
+
+            if (isGymBoss) {
+                updateBossBar();
+            }
+        }
+
+        function spawnVisualProjectile(fromX, fromZ, toX, toZ, colorHex) {
+            if (!scene) return;
+            const geo = new THREE.SphereGeometry(0.22, 8, 8);
+            const mat = new THREE.MeshBasicMaterial({ color: colorHex });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.set(fromX, 1.5, fromZ);
+            scene.add(mesh);
+            projectileEntities.push({
+                mesh,
+                x: fromX, z: fromZ,
+                tx: toX, tz: toZ,
+                progress: 0
+            });
+        }
+
+        function spawnParticles(x, y, z, colorHex, count = 6) {
+            if (!scene) return;
+            for (let i = 0; i < count; i++) {
+                const geo = new THREE.BoxGeometry(0.12, 0.12, 0.12);
+                const mat = new THREE.MeshBasicMaterial({ color: colorHex, transparent: true, opacity: 0.9 });
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set(x, y, z);
+                scene.add(mesh);
+                particleEntities.push({
+                    mesh,
+                    vx: (Math.random() - 0.5) * 3.5,
+                    vy: Math.random() * 2.5 + 1.0,
+                    vz: (Math.random() - 0.5) * 3.5,
+                    life: 0.45
+                });
+            }
+        }
+
+        function triggerScreenShake() {
+            const vp = document.getElementById('combat-viewport');
+            if (vp) {
+                vp.classList.remove('screen-shake');
+                void vp.offsetWidth;
+                vp.classList.add('screen-shake');
+            }
+        }
+
+        function performManualStrike(targetZombie) {
+            SoundEngine.init();
+            GameState.manualHits++;
+            checkAchievements();
+
+            let target = targetZombie;
+            if (!target && zombieEntities.length > 0) {
+                target = zombieEntities[0];
+            }
+            if (!target) return;
+
+            const critMult = GameState.achievements.manual_brawler.unlocked ? 2.6 : 2.0;
+            const dmg = calculateWeaponDamage() * critMult;
+            target.hp -= dmg;
+            playerState.attackTimer = 0.35;
+
+            spawnParticles(target.x, 1.5, target.z, 0xef4444, 8);
+            triggerScreenShake();
+            SoundEngine.playPunch(true);
+            spawnFloatingText('CRÍTICO MANUAL! -' + Math.floor(dmg), "#facc15");
+
+            if (target.isGymBoss) updateBossBar();
+
+            if (target.hp <= 0) {
+                handleZombieKilled(target);
+            }
+        }
+
+        let clock = new THREE.Clock();
+
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+            const rawDt = Math.min(clock.getDelta(), 0.1);
+            const dt = rawDt * GameState.simSpeed;
+            const elapsed = clock.getElapsedTime() * GameState.simSpeed;
+
+            if (!scene || !camera || !renderer) return;
+            if (inCutscene) {
+                renderer.render(scene, camera);
+                return;
+            }
+
+            let nearbyCount = 0;
+            let closestZombie = null;
+            let closestDist = 999;
+            let shinyZombie = null;
+
+            for (let i = 0; i < zombieEntities.length; i++) {
+                const z = zombieEntities[i];
+                const d = Math.hypot(z.x - playerState.x, z.z - playerState.z);
+                if (d < 7.5) nearbyCount++;
+                if (d < closestDist) {
+                    closestDist = d;
+                    closestZombie = z;
+                }
+                if (z.isShiny) shinyZombie = z;
+            }
+
+            const lowHp = (GameState.hp / GameState.maxHp) * 100 <= GameState.autopilot.retreatHpThreshold;
+            const overwhelmed = nearbyCount >= 3 || lowHp || GameState.handBroken;
+            playerState.waypointTimer -= dt;
+
+            if (overwhelmed && playerState.roomHoldTimer <= 0) {
+                playerState.isSprinting = true;
+                if (playerState.targetRoomIdx === -1) {
+                    let bestIdx = 0;
+                    let bestScore = 999;
+                    TACTICAL_ROOMS.forEach((r, idx) => {
+                        const d = Math.hypot(r.doorX - playerState.x, r.doorZ - playerState.z);
+                        if (d < bestScore && d > 3.0) {
+                            bestScore = d;
+                            bestIdx = idx;
+                        }
+                    });
+                    playerState.targetRoomIdx = bestIdx;
+                    playerState.roomHoldTimer = 4.5;
+                }
+                const room = TACTICAL_ROOMS[playerState.targetRoomIdx];
+                playerState.waypoint.x = room.doorX;
+                playerState.waypoint.z = room.doorZ;
+                document.getElementById('autopilot-action-pill').textContent = 'SPRINT TÁTICO -> ' + room.name;
+            } else {
+                if (playerState.roomHoldTimer > 0) {
+                    playerState.roomHoldTimer -= dt;
+                    if (playerState.roomHoldTimer <= 0) {
+                        playerState.targetRoomIdx = -1;
+                    }
+                }
+                playerState.isSprinting = nearbyCount >= 2;
+
+                const distToWp = Math.hypot(playerState.waypoint.x - playerState.x, playerState.waypoint.z - playerState.z);
+                if (GameState.autopilot.prioritizeShinyAndLoot && capsuleEntities.length > 0 && playerState.navMode === 'explore') {
+                    let nearestCap = capsuleEntities[0];
+                    let minCapDist = 999;
+                    capsuleEntities.forEach(c => {
+                        const cd = Math.hypot(c.x - playerState.x, c.z - playerState.z);
+                        if (cd < minCapDist) { minCapDist = cd; nearestCap = c; }
+                    });
+                    playerState.waypoint.x = nearestCap.x;
+                    playerState.waypoint.z = nearestCap.z;
+                    document.getElementById('autopilot-action-pill').textContent = shinyZombie
+                        ? 'CAÇANDO MUTANTE ★ SHINY!'
+                        : 'COLETANDO BIO-CÁPSULA NO MAPA...';
+                } else if (distToWp < 2.2 || playerState.waypointTimer <= 0) {
+                    playerState.waypointTimer = 4.0;
+                    playerState.waypoint.x = (Math.random() - 0.5) * 36;
+                    playerState.waypoint.z = (Math.random() - 0.5) * 36;
+                    document.getElementById('autopilot-action-pill').textContent = 'PATRULHANDO SETOR 4...';
+                }
+            }
+
+            if (waypointRingMesh) {
+                waypointRingMesh.position.set(playerState.waypoint.x, 0.04, playerState.waypoint.z);
+                waypointRingMesh.rotation.z = elapsed * 2;
+            }
+
+            let moveAngle = Math.atan2(playerState.waypoint.z - playerState.z, playerState.waypoint.x - playerState.x);
+
+            const activeWep = GameState.weapons[GameState.activeWeapon];
+            if (closestZombie && closestDist < 3.6 && activeWep.range > 5) {
+                const awayAngle = Math.atan2(playerState.z - closestZombie.z, playerState.x - closestZombie.x);
+                moveAngle = awayAngle + 0.55;
+                playerState.isSprinting = true;
+            }
+
+            let speed = playerState.isSprinting ? 7.8 : 5.0;
+            speed *= (1 + GameState.upgrades.adrenalGland.level * 0.08);
+            if (GameState.combatStance === 'frenzy') speed *= 1.22;
+
+            const nextX = playerState.x + Math.cos(moveAngle) * speed * dt;
+            const nextZ = playerState.z + Math.sin(moveAngle) * speed * dt;
+            const resolvedPlayer = resolveWallCollisions(nextX, nextZ, 0.85);
+            playerState.x = resolvedPlayer.x;
+            playerState.z = resolvedPlayer.z;
+
+            let roomLabel = "PÁTIO CENTRAL";
+            TACTICAL_ROOMS.forEach((room, idx) => {
+                if (room.trapMesh) {
+                    room.trapMesh.material.opacity = GameState.trapCooldown <= 0 ? 0.75 : 0.15;
+                }
+                const distDoor = Math.hypot(playerState.x - room.doorX, playerState.z - room.doorZ);
+                if (Math.abs(playerState.x - room.cx) < 7.5 && Math.abs(playerState.z - room.cz) < 7.5) {
+                    roomLabel = room.name;
+                }
+                if (distDoor < 4.2 && nearbyCount >= 2 && GameState.trapCooldown <= 0) {
+                    triggerRoomTrap(idx);
+                }
+            });
+
+            document.getElementById('hud-coords').textContent = roomLabel;
+            document.getElementById('hud-sprint-badge').textContent = playerState.isSprinting ? "SPRINT EVASIVO" : "EXPLORANDO";
+
+            if (playerGroup && playerSprite) {
+                playerGroup.position.set(playerState.x, 0, playerState.z);
+
+                const movingX = Math.cos(moveAngle);
+                const facingLeft = (closestZombie && closestDist <= activeWep.range + 1.5)
+                    ? (closestZombie.x < playerState.x)
+                    : (movingX < -0.05);
+
+                const baseW = 2.4;
+                const baseH = 2.4;
+                playerSprite.scale.x = facingLeft ? -baseW : baseW;
+                playerSprite.scale.y = baseH;
+
+                if (playerState.attackTimer > 0) {
+                    const pFrame = (playerState.attackTimer > 0.18) ? 0 : 1;
+                    playerSprite.material.map = getSpriteTexture('player_punch_' + pFrame);
+                } else if (playerState.isSprinting) {
+                    const sFrame = Math.floor((elapsed * 12) % 5);
+                    playerSprite.material.map = getSpriteTexture('player_sprint_' + sFrame);
+                } else if (distToWp > 0.5) {
+                    const wFrame = Math.floor((elapsed * 9) % 6);
+                    playerSprite.material.map = getSpriteTexture('player_walk_' + wFrame);
+                } else {
+                    const iFrame = Math.floor((elapsed * 3.5) % 4);
+                    playerSprite.material.map = getSpriteTexture('player_idle_' + iFrame);
+                }
+
+                playerSprite.position.y = Math.abs(Math.sin(elapsed * (playerState.isSprinting ? 14 : 8))) * 0.08;
+            }
+
+            if (playerState.attackTimer > 0) playerState.attackTimer -= dt;
+
+            for (let i = capsuleEntities.length - 1; i >= 0; i--) {
+                const cap = capsuleEntities[i];
+                if (cap.sprite) {
+                    cap.sprite.position.y = 0.65 + Math.sin(elapsed * 4 + i) * 0.18;
+                }
+                if (Math.hypot(playerState.x - cap.x, playerState.z - cap.z) < 2.1) {
+                    collectBioCapsule(i, false);
+                }
+            }
+
+            for (let i = zombieEntities.length - 1; i >= 0; i--) {
+                const z = zombieEntities[i];
+                z.walkPhase += dt * 8;
+
+                let targetX = playerState.x;
+                let targetZ = playerState.z;
+                TACTICAL_ROOMS.forEach(room => {
+                    const playerInRoom = Math.abs(playerState.x - room.cx) < 6.8 && Math.abs(playerState.z - room.cz) < 6.8;
+                    const zombieInRoom = Math.abs(z.x - room.cx) < 6.8 && Math.abs(z.z - room.cz) < 6.8;
+                    if (playerInRoom !== zombieInRoom) {
+                        targetX = room.doorX;
+                        targetZ = room.doorZ;
+                    }
+                });
+
+                const zAngle = Math.atan2(targetZ - z.z, targetX - z.x);
+                let zNextX = z.x + Math.cos(zAngle) * z.speed * dt;
+                let zNextZ = z.z + Math.sin(zAngle) * z.speed * dt;
+
+                for (let j = 0; j < zombieEntities.length; j++) {
+                    if (i === j) continue;
+                    const other = zombieEntities[j];
+                    const distBetween = Math.hypot(zNextX - other.x, zNextZ - other.z);
+                    if (distBetween < 1.1 && distBetween > 0.01) {
+                        zNextX += ((zNextX - other.x) / distBetween) * 1.8 * dt;
+                        zNextZ += ((zNextZ - other.z) / distBetween) * 1.8 * dt;
+                    }
+                }
+
+                const zRes = resolveWallCollisions(zNextX, zNextZ, 0.7);
+                z.x = zRes.x;
+                z.z = zRes.z;
+                if (z.sprite) {
+                    const facingLeft = playerState.x < z.x;
+                    z.sprite.scale.x = facingLeft ? -z.scaleMult : z.scaleMult;
+                    const frameName = Math.sin(z.walkPhase * 0.7) > 0 ? z.frame1 : z.frame2;
+                    z.sprite.material.map = getSpriteTexture(frameName);
+                }
+                z.mesh.position.set(z.x, Math.abs(Math.sin(z.walkPhase)) * 0.08, z.z);
+
+                const distToPlayer = Math.hypot(playerState.x - z.x, playerState.z - z.z);
+                if (distToPlayer < 1.65) {
+                    GameState.hp = Math.max(0, GameState.hp - (4.5 + GameState.wave * 0.8) * dt);
+                    if (Math.random() < 0.04) SoundEngine.playHeartbeat();
+                    if (GameState.hp <= 0) handlePlayerCollapse();
+                }
+            }
+
+            squadMeshes.forEach((ally, idx) => {
+                const orbitAngle = elapsed * 1.4 + idx * 2.1;
+                const ax = playerState.x + Math.cos(orbitAngle) * 2.8;
+                const az = playerState.z + Math.sin(orbitAngle) * 2.8;
+                ally.position.set(ax, 0.2 + Math.abs(Math.sin(elapsed * 6 + idx)) * 0.15, az);
+                if (closestZombie && ally.sprite) {
+                    const allyFacingLeft = closestZombie.x < ax;
+                    ally.sprite.scale.x = allyFacingLeft ? -2.0 : 2.0;
+                }
+            });
+
+            for (let i = projectileEntities.length - 1; i >= 0; i--) {
+                const p = projectileEntities[i];
+                p.progress += dt * 7.5;
+                if (p.progress >= 1) {
+                    scene.remove(p.mesh);
+                    projectileEntities.splice(i, 1);
+                } else {
+                    p.mesh.position.x = p.x + (p.tx - p.x) * p.progress;
+                    p.mesh.position.z = p.z + (p.tz - p.z) * p.progress;
+                }
+            }
+
+            for (let i = particleEntities.length - 1; i >= 0; i--) {
+                const part = particleEntities[i];
+                part.life -= dt;
+                part.mesh.position.x += part.vx * dt;
+                part.mesh.position.y += part.vy * dt;
+                part.mesh.position.z += part.vz * dt;
+                part.vy -= 9.8 * dt;
+                if (part.life <= 0 || part.mesh.position.y <= 0) {
+                    scene.remove(part.mesh);
+                    particleEntities.splice(i, 1);
+                }
+            }
+
+            if (GameState.cameraMode === 0) {
+                const camDist = 21;
+                camera.position.set(
+                    playerState.x + Math.sin(cameraOrbitYaw) * camDist,
+                    19,
+                    playerState.z + Math.cos(cameraOrbitYaw) * camDist
+                );
+                camera.lookAt(playerState.x, 1.0, playerState.z);
+            } else if (GameState.cameraMode === 1) {
+                camera.position.set(playerState.x - 5.5, 4.8, playerState.z + 6.5);
+                camera.lookAt(playerState.x, 1.6, playerState.z);
+            } else {
+                camera.position.set(playerState.x, 34, playerState.z + 0.1);
+                camera.lookAt(playerState.x, 0, playerState.z);
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        function triggerRoomTrap(roomIndex) {
+            if (GameState.trapCooldown > 0) return;
+            const room = TACTICAL_ROOMS[roomIndex];
+            GameState.trapCooldown = 22.0;
+            SoundEngine.playTrapZap();
+            triggerScreenShake();
+            spawnFloatingText(room.trapName + "!", "#06b6d4");
+            broadcastRadioMsg('ARMADILHA ATIVADA: ' + room.trapName + ' purificou o gargalo da sala!');
+
+            zombieEntities.forEach(z => {
+                if (Math.hypot(z.x - room.doorX, z.z - room.doorZ) < 8.5) {
+                    z.hp -= calculateWeaponDamage() * 2.4;
+                    spawnParticles(z.x, 1.5, z.z, room.trapColor, 8);
+                }
+            });
+            playerState.targetRoomIdx = -1;
+            playerState.roomHoldTimer = 0;
+            updateBossBar();
+        }
+
+        function updateBossBar() {
+            const bossHud = document.getElementById('boss-hud-overlay');
+            if (!bossHud) return;
+
+            if (GameState.inGymGauntlet) {
+                bossHud.classList.remove('hidden');
+                bossHud.classList.add('flex');
+                const boss = zombieEntities.find(z => z.isGymBoss);
+                if (boss) {
+                    const pct = Math.max(0, Math.min(100, (boss.hp / boss.maxHp) * 100));
+                    document.getElementById('boss-hud-hp-bar').style.width = pct + '%';
+                    document.getElementById('boss-hud-hp-text').textContent = Math.ceil(pct) + '%';
+                    document.getElementById('boss-hud-name').innerHTML = '<i class="fa-solid fa-skull text-red-500 animate-pulse"></i> GUARDIÃO APEX: ' + boss.name.toUpperCase();
+                    document.getElementById('boss-hud-stage-label').textContent = 'ESTÁGIO ' + (GameState.gymStage + 1) + ' / 3 (SEM REGENERAÇÃO)';
+                }
+            } else {
+                bossHud.classList.add('hidden');
+                bossHud.classList.remove('flex');
+            }
+        }
+
+        // ============================================================================
+        // 5. COMBATE BIOPUNK, GARGALOS, ATUALIZAÇÃO DA BASE E GAUNTLET IDLEDEX
+        // ============================================================================
+        function getFrequencyBonuses() {
+            const f = GameState.frequency;
+            if (f < 940) return { regenMult: 1.3, dmgMult: 1.0, shinyChanceBonus: 0, label: "PULSO DELTA (+30% Regeneração & Osso)" };
+            if (f < 1010) return { regenMult: 1.0, dmgMult: 1.25, shinyChanceBonus: 0, label: "FREQUÊNCIA DE FÚRIA (+25% Dano Global)" };
+            return { regenMult: 1.0, dmgMult: 1.05, shinyChanceBonus: 0.12, label: "ECO DE RESSONÂNCIA (+Chance de ★ Shiny & Ecos)" };
+        }
+
+        function calculateWeaponDamage() {
+            const wep = GameState.weapons[GameState.activeWeapon];
+            let dmg = wep.damage + (GameState.upgrades.muscleDensity.level * 3.5) + (wep.level * 6);
+            if (GameState.combatStance === 'frenzy') dmg *= 1.45;
+            if (GameState.combatStance === 'cautious') dmg *= 0.8;
+            if (GameState.handBroken && GameState.activeWeapon === 'fists') dmg *= 0.3;
+
+            const dexUnlockedCount = GameState.biodex.filter(d => d.count > 0).length;
+            const shinyTotal = GameState.biodex.reduce((acc, d) => acc + d.shinyCount, 0);
+            let dexMult = 1 + (dexUnlockedCount * 0.08) + (shinyTotal * 0.05);
+            if (GameState.achievements.dex_scholar.unlocked) dexMult *= 1.15;
+
+            const badgeMult = 1 + (GameState.badges * 0.25);
+            const achBonus = GameState.achievements.first_blood.unlocked ? 1.05 : 1.0;
+
+            return dmg * dexMult * badgeMult * GameState.prestigeMult * getFrequencyBonuses().dmgMult * achBonus;
+        }
+
+        function handlePlayerCollapse() {
+            SoundEngine.playRadioStatic(0.35);
+            if (GameState.inGymGauntlet) {
+                GameState.inGymGauntlet = false;
+                GameState.gymStage = 0;
+                spawnFloatingText("EXPURGO FALHOU! RECUANDO...", "#ef4444");
+                broadcastRadioMsg("Dra. Vena: Sinais vitais críticos! Abortando Gauntlet do Ginásio...");
+                updateBossBar();
+            } else {
+                GameState.wave = Math.max(1, GameState.wave - 1);
+                GameState.killsInWave = 0;
+                spawnFloatingText("COLAPSO VITAL! RECUANDO ONDA...", "#ef4444");
+                broadcastRadioMsg("Monitor: Integridade em colapso. O Piloto Neural retrocedeu para recomposição celular.");
+            }
+            GameState.hp = GameState.maxHp;
+            GameState.boneFracture = 0;
+            GameState.handBroken = false;
+            GameState.toxicity = 0;
+            updateUI();
+        }
+
+        function gameTick() {
+            if (inCutscene) return;
+            const freqBonus = getFrequencyBonuses();
+
+            if (GameState.trapCooldown > 0) {
+                GameState.trapCooldown = Math.max(0, GameState.trapCooldown - (0.5 * GameState.simSpeed));
+                document.getElementById('hud-trap-cd').textContent = GameState.trapCooldown > 0
+                    ? Math.ceil(GameState.trapCooldown) + 's'
+                    : "PRONTA [E]";
+            }
+
+            if (!GameState.inGymGauntlet) {
+                const hpRegen = (1.2 + GameState.upgrades.liverSymbiosis.level * 0.6) * freqBonus.regenMult * GameState.simSpeed;
+                GameState.hp = Math.min(GameState.maxHp, GameState.hp + hpRegen);
+            }
+
+            const boneHeal = (0.9 + GameState.baseOrgans[1].level * 0.7) * freqBonus.regenMult * GameState.simSpeed;
+            GameState.boneFracture = Math.max(0, GameState.boneFracture - boneHeal);
+            if (GameState.handBroken && GameState.boneFracture < 35) {
+                GameState.handBroken = false;
+                spawnFloatingText("OSSO REGENERADO!", "#10b981");
+                broadcastRadioMsg("Córtex: Fratura óssea soldada. Dano dos punhos normalizado.");
+            }
+
+            const toxDecay = (0.8 + GameState.upgrades.liverSymbiosis.level * 0.5) * GameState.simSpeed;
+            GameState.toxicity = Math.max(0, GameState.toxicity - toxDecay);
+
+            const noiseDecay = (2.5 + GameState.baseOrgans[2].level * 3.0) * GameState.simSpeed;
+            GameState.noiseDb = Math.max(0, GameState.noiseDb - noiseDecay);
+
+            const organMult = GameState.achievements.organ_master.unlocked ? 1.25 : 1.0;
+            if (GameState.baseOrgans[0].level > 0) GameState.biomass += GameState.baseOrgans[0].level * 0.9 * organMult * GameState.simSpeed;
+            if (GameState.baseOrgans[1].level > 0) GameState.calcium += GameState.baseOrgans[1].level * 0.8 * organMult * GameState.simSpeed;
+            if (GameState.baseOrgans[3].level > 0) {
+                GameState.echoes += GameState.baseOrgans[3].level * 0.25 * organMult * GameState.simSpeed;
+                GameState.atp += GameState.baseOrgans[3].level * 1.5 * organMult * GameState.simSpeed;
+            }
+
+            if (GameState.boneFracture >= GameState.autopilot.splintThreshold && GameState.atp >= 12 && GameState.calcium >= 4) {
+                GameState.atp -= 12;
+                GameState.calcium -= 4;
+                GameState.boneFracture = Math.max(0, GameState.boneFracture - 55);
+                GameState.handBroken = false;
+                GameState.healsCount++;
+                spawnFloatingText("AUTO-TALA DE CÁLCIO!", "#f59e0b");
+            }
+
+            if (GameState.toxicity >= GameState.autopilot.dialysisThreshold && GameState.atp >= 25) {
+                GameState.atp -= 25;
+                GameState.toxicity = Math.max(0, GameState.toxicity - 60);
+                GameState.healsCount++;
+                spawnFloatingText("AUTO-DIÁLISE SANGUÍNEA!", "#a855f7");
+            }
+
+            if (GameState.autopilot.autoHazardRest && GameState.toxicity >= 85 && GameState.activeWeapon !== 'fists') {
+                window.equipWeapon('fists', true);
+                spawnFloatingText("DESCANSO DE TOXINA -> PUNHOS", "#a855f7");
+            } else if (GameState.preferredWeapon !== 'fists' && GameState.activeWeapon === 'fists' && GameState.toxicity < 45) {
+                const pref = GameState.weapons[GameState.preferredWeapon];
+                const hasAmmo = pref.costType === 'biomass' ? GameState.biomass >= pref.costAmount * 3 : GameState.calcium >= pref.costAmount * 3;
+                if (hasAmmo) window.equipWeapon(GameState.preferredWeapon, true);
+            }
+
+            if (zombieEntities.length > 0) {
+                let target = zombieEntities[0];
+                let minDist = Math.hypot(target.x - playerState.x, target.z - playerState.z);
+                zombieEntities.forEach(z => {
+                    const d = Math.hypot(z.x - playerState.x, z.z - playerState.z);
+                    if (d < minDist) { minDist = d; target = z; }
+                });
+
+                let wep = GameState.weapons[GameState.activeWeapon];
+
+                let canAffordAmmo = true;
+                if (wep.costType === 'biomass') {
+                    if (GameState.biomass >= wep.costAmount) GameState.biomass -= wep.costAmount;
+                    else canAffordAmmo = false;
+                } else if (wep.costType === 'calcium') {
+                    if (GameState.calcium >= wep.costAmount) GameState.calcium -= wep.costAmount;
+                    else canAffordAmmo = false;
+                }
+
+                if (!canAffordAmmo) {
+                    if (GameState.autopilot.autoFistFallback) {
+                        window.equipWeapon('fists', true);
+                        wep = GameState.weapons.fists;
+                        spawnFloatingText("SEM MUNIÇÃO -> USANDO PUNHOS!", "#f59e0b");
+                    } else {
+                        GameState.hp = Math.max(1, GameState.hp - 4);
+                        spawnFloatingText("ARMA FAMINTA DRENOU HP!", "#ef4444");
+                    }
+                }
+
+                if (wep.fractureGen > 0) {
+                    const achFrac = GameState.achievements.fist_master.unlocked ? 0.85 : 1.0;
+                    const fracMult = Math.max(0.2, 1 - GameState.upgrades.boneCalcium.level * 0.18) * (GameState.combatStance === 'cautious' ? 0.45 : (GameState.combatStance === 'frenzy' ? 1.4 : 1)) * achFrac;
+                    GameState.boneFracture = Math.min(100, GameState.boneFracture + wep.fractureGen * fracMult);
+                    if (GameState.boneFracture >= 100 && !GameState.handBroken) {
+                        GameState.handBroken = true;
+                        spawnFloatingText("MÃO FRATURADA! (-70% DANO)", "#ef4444");
+                        broadcastRadioMsg("Aviso: Mão fraturada sob impacto direto! Recomenda-se tala de cálcio.");
+                    }
+                }
+
+                if (wep.toxGen > 0) {
+                    const toxMult = Math.max(0.25, 1 - GameState.upgrades.liverSymbiosis.level * 0.2);
+                    GameState.toxicity = Math.min(100, GameState.toxicity + wep.toxGen * toxMult);
+                    if (GameState.toxicity >= 100) {
+                        GameState.hp = Math.max(0, GameState.hp - 6);
+                        spawnFloatingText("CHOQUE SÉPTICO (100% TOX)!", "#a855f7");
+                    }
+                }
+
+                if (wep.noiseGen > 0) {
+                    GameState.noiseDb = Math.min(120, GameState.noiseDb + wep.noiseGen);
+                    if (GameState.noiseDb >= 100) {
+                        GameState.noiseDb = 45;
+                        spawnMutantZombie(false);
+                        spawnMutantZombie(false);
+                        SoundEngine.playNoiseAlarm();
+                        spawnFloatingText("BARULHO ATRAIU HORDA EXTRA!", "#ef4444");
+                        broadcastRadioMsg("Alerta: Eco de disparos excedeu 100 dB! Horda extra invadindo corredores.");
+                    }
+                }
+
+                let squadDmg = 0;
+                GameState.squad.forEach((s) => {
+                    if (s.unlocked) {
+                        let bonus = GameState.achievements.squad_ready.unlocked ? 1.2 : 1.0;
+                        squadDmg += s.dps * bonus;
+                        if (Math.random() < 0.4) {
+                            spawnVisualProjectile(playerState.x, playerState.z, target.x, target.z, s.color);
+                        }
+                    }
+                });
+
+                const totalDmg = calculateWeaponDamage() + squadDmg * 0.5;
+                target.hp -= totalDmg;
+                playerState.attackTimer = 0.25;
+
+                if (GameState.activeWeapon === 'fists' || GameState.activeWeapon === 'boneKnuckles') {
+                    SoundEngine.playPunch(GameState.activeWeapon === 'boneKnuckles');
+                } else {
+                    SoundEngine.playBioShot(GameState.activeWeapon === 'rustyShotgun' ? 150 : 320);
+                    spawnVisualProjectile(playerState.x, playerState.z, target.x, target.z, GameState.activeWeapon === 'bileRifle' ? 0x10b981 : 0xf59e0b);
+                }
+
+                if (target.isGymBoss) updateBossBar();
+
+                if (target.hp <= 0) {
+                    handleZombieKilled(target);
+                }
+            }
+
+            const desiredZombies = GameState.inGymGauntlet ? 1 : 4 + Math.min(4, Math.floor(GameState.wave / 2));
+            if (zombieEntities.length < desiredZombies) {
+                const shinyRoll = Math.random() < (0.12 + freqBonus.shinyChanceBonus);
+                spawnMutantZombie(shinyRoll, GameState.inGymGauntlet);
+            }
+
+            checkAchievements();
+            renderRadioOscilloscope();
+            updateUI();
+        }
+
+        function handleZombieKilled(z) {
+            scene.remove(z.mesh);
+            const idx = zombieEntities.indexOf(z);
+            if (idx !== -1) zombieEntities.splice(idx, 1);
+
+            if (scene) {
+                const deadMat = new THREE.SpriteMaterial({
+                    map: getSpriteTexture('mutant_fungal_dead'),
+                    transparent: true,
+                    opacity: 0.95
+                });
+                const deadSprite = new THREE.Sprite(deadMat);
+                deadSprite.center.set(0.5, 0.1);
+                const s = z.scaleMult || 2.0;
+                deadSprite.scale.set(s, s * 0.75, 1);
+                deadSprite.position.set(z.x, 0.05, z.z);
+                scene.add(deadSprite);
+                let deadAlpha = 0.95;
+                const fadeInterval = setInterval(() => {
+                    deadAlpha -= 0.1;
+                    if (deadAlpha <= 0) {
+                        clearInterval(fadeInterval);
+                        scene.remove(deadSprite);
+                    } else {
+                        deadMat.opacity = deadAlpha;
+                    }
+                }, 120);
+            }
+
+            GameState.kills++;
+            if (z.isShiny) GameState.shinies++;
+
+            spawnParticles(z.x, 1.2, z.z, z.isShiny ? 0xfacc15 : 0x10b981, 10);
+
+            const mult = (z.isShiny ? 4.5 : 1) * GameState.prestigeMult * (GameState.achievements.clone_reborn.unlocked ? 1.25 : 1.0);
+            const atpGain = Math.floor((12 + GameState.wave * 4) * mult);
+            const bioGain = Math.floor((5 + GameState.wave * 1.5) * mult);
+            const calGain = Math.floor((4 + GameState.wave * 1.2) * mult);
+
+            GameState.atp += atpGain;
+            GameState.biomass += bioGain;
+            GameState.calcium += calGain;
+            if (z.isShiny || Math.random() < 0.35) GameState.echoes += z.isShiny ? 5 : 1;
+
+            spawnFloatingText(
+                z.isShiny ? '★ SHINY ABATIDO! +' + atpGain + ' ATP' : '+' + atpGain + ' ATP / +' + bioGain + ' BIO',
+                z.isShiny ? "#facc15" : "#10b981"
+            );
+
+            const dexEntry = GameState.biodex.find(d => d.id === z.speciesId) || GameState.biodex[0];
+            dexEntry.unlocked = true;
+            dexEntry.count++;
+            if (z.isShiny) dexEntry.shinyCount++;
+
+            if (GameState.inGymGauntlet) {
+                GameState.gymStage++;
+                if (GameState.gymStage >= 3) {
+                    GameState.inGymGauntlet = false;
+                    GameState.gymStage = 0;
+                    GameState.badges++;
+                    GameState.hp = GameState.maxHp;
+                    updateBossBar();
+                    triggerMilestoneCutscene(
+                        'INSÍGNIA DE EXPURGO #' + GameState.badges + ' CONQUISTADA!',
+                        "Você derrotou os 3 Guardiões Apex consecutivos sem regeneração celular! Seu córtex absorveu o genoma alfa (+25% Dano Permanente).",
+                        "#facc15"
+                    );
+                    broadcastRadioMsg('Transmissão Geral: A cobaia conquistou a Insígnia #' + GameState.badges + '! Células reforçadas.');
+                    renderBioDex();
+                } else {
+                    spawnFloatingText('GUARDIÃO ' + GameState.gymStage + '/3 DERROTADO! (SEM CURA)', "#f59e0b");
+                    broadcastRadioMsg('Guardião derrotado. Prepare-se: Guardião Apex (' + (GameState.gymStage + 1) + '/3) avançando!');
+                    spawnMutantZombie(false, true);
+                }
+            } else {
+                GameState.killsInWave++;
+                if (GameState.killsInWave >= GameState.killsRequired) {
+                    if (GameState.autoAdvance) {
+                        GameState.wave++;
+                        GameState.killsInWave = 0;
+                        GameState.killsRequired = 5 + GameState.wave * 2;
+                        spawnFloatingText('SETOR 4 // ONDA ' + GameState.wave + '!', "#f59e0b");
+                        broadcastRadioMsg('Operador: Onda ' + GameState.wave + ' iniciada. Cuidado com espécimes mais densos.');
+                    } else {
+                        GameState.killsInWave = GameState.killsRequired;
+                    }
+                }
+            }
+        }
+
+        function broadcastRadioMsg(text) {
+            const ticker = document.getElementById('radio-log-ticker');
+            if (ticker) {
+                ticker.textContent = '[' + (GameState.frequency / 10).toFixed(1) + ' MHz]: "' + text + '"';
+            }
+        }
+
+        function checkAchievements() {
+            Object.keys(GameState.achievements).forEach(key => {
+                const ach = GameState.achievements[key];
+                if (!ach.unlocked && ach.check(GameState)) {
+                    ach.unlocked = true;
+                    SoundEngine.playFanfare();
+                    spawnFloatingText('🏆 CONQUISTA: ' + ach.name.toUpperCase() + '!', "#facc15");
+                    broadcastRadioMsg('CÓRTEX: Proeza desbloqueada - "' + ach.name + '" (' + ach.bonusText + ')');
+                    const dot = document.getElementById('achievements-badge-dot');
+                    if (dot) dot.classList.remove('hidden');
+                    renderAchievementsList();
+                }
+            });
+        }
+
+        function spawnFloatingText(text, color = "#10b981") {
+            const layer = document.getElementById('floating-labels-layer');
+            if (!layer) return;
+            const el = document.createElement('div');
+            el.className = 'absolute font-mono-tech text-xs font-bold pointer-events-none transition-all duration-700 drop-shadow';
+            el.style.color = color;
+            el.style.left = (42 + (Math.random() - 0.5) * 18) + '%';
+            el.style.top = (42 + (Math.random() - 0.5) * 14) + '%';
+            el.textContent = text;
+            layer.appendChild(el);
+            setTimeout(() => {
+                el.style.transform = 'translateY(-42px) scale(1.08)';
+                el.style.opacity = '0';
+            }, 40);
+            setTimeout(() => el.remove(), 720);
+        }
+
+        function updateUI() {
+            document.getElementById('res-atp').textContent = Math.floor(GameState.atp);
+            document.getElementById('res-biomass').textContent = Math.floor(GameState.biomass);
+            document.getElementById('res-calcium').textContent = Math.floor(GameState.calcium);
+            document.getElementById('res-echoes').textContent = Math.floor(GameState.echoes);
+
+            const bpm = Math.floor(72 + (GameState.combatStance === 'frenzy' ? 42 : 0) + (playerState.isSprinting ? 22 : 0));
+            document.getElementById('bpm-display').textContent = bpm + ' BPM';
+
+            document.getElementById('vital-hp-text').textContent = Math.floor(GameState.hp) + '/' + GameState.maxHp;
+            document.getElementById('vital-hp-bar').style.width = ((GameState.hp / GameState.maxHp) * 100) + '%';
+
+            document.getElementById('vital-fracture-text').textContent = GameState.handBroken ? "QUEBRADA!" : Math.floor(GameState.boneFracture) + '%';
+            document.getElementById('vital-fracture-bar').style.width = GameState.boneFracture + '%';
+
+            document.getElementById('vital-tox-text').textContent = Math.floor(GameState.toxicity) + '%';
+            document.getElementById('vital-tox-bar').style.width = GameState.toxicity + '%';
+
+            document.getElementById('vital-noise-text').textContent = Math.floor(GameState.noiseDb) + ' dB';
+            document.getElementById('vital-noise-bar').style.width = Math.min(100, (GameState.noiseDb / 100) * 100) + '%';
+
+            if (GameState.inGymGauntlet) {
+                document.getElementById('wave-title').textContent = 'GINÁSIO DE EXPURGO (' + GameState.gymStage + '/3)';
+                document.getElementById('wave-progress-bar').style.width = ((GameState.gymStage / 3) * 100) + '%';
+                document.getElementById('wave-kills-text').textContent = 'Gauntlet Sem Cura Ativo!';
+            } else {
+                const pct = Math.min(100, (GameState.killsInWave / GameState.killsRequired) * 100);
+                document.getElementById('wave-progress-bar').style.width = pct + '%';
+                document.getElementById('wave-title').textContent = 'SETOR 4 // ONDA ' + GameState.wave;
+                document.getElementById('sector-display').textContent = 'SETOR 4 // ONDA ' + GameState.wave;
+                document.getElementById('wave-kills-text').textContent = 'Caçada no Setor: ' + GameState.killsInWave + ' / ' + GameState.killsRequired;
+            }
+
+            document.getElementById('stat-dps').textContent = calculateWeaponDamage().toFixed(1);
+            document.getElementById('rep-kills').textContent = GameState.kills;
+            document.getElementById('rep-shinies').textContent = GameState.shinies;
+            document.getElementById('rep-heals').textContent = GameState.healsCount;
+            document.getElementById('hud-dex-count').textContent = GameState.biodex.filter(d => d.unlocked).length + '/' + GameState.biodex.length;
+
+            const prestigeBtn = document.getElementById('prestige-btn');
+            if (prestigeBtn) {
+                if (GameState.wave >= 4) {
+                    prestigeBtn.removeAttribute('disabled');
+                    document.getElementById('prestige-pending').textContent = '+' + (GameState.wave * 20) + '% Dano & Osso';
+                } else {
+                    prestigeBtn.setAttribute('disabled', 'true');
+                    document.getElementById('prestige-pending').textContent = 'Requer Onda 4 (Atual: ' + GameState.wave + ')';
+                }
+            }
+        }
+
+        window.toggleGameSpeed = function() {
+            GameState.simSpeed = GameState.simSpeed === 1 ? 2 : 1;
+            const label = document.getElementById('speed-label');
+            if (label) {
+                label.textContent = GameState.simSpeed + 'x';
+                label.className = GameState.simSpeed === 2 ? 'font-bold text-amber-300' : 'font-bold text-emerald-300';
+            }
+            spawnFloatingText('VELOCIDADE: ' + GameState.simSpeed + 'x', "#06b6d4");
+        };
+
+        window.switchTab = function(tabName) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.className = "tab-btn px-2.5 py-1.5 rounded font-mono-tech text-xs uppercase tracking-wider bg-emerald-950/40 text-emerald-400/80 border border-emerald-900/50 hover:text-emerald-200 flex items-center gap-1.5 transition whitespace-nowrap cursor-pointer";
+            });
+
+            const panel = document.getElementById('tab-' + tabName);
+            const btn = document.getElementById('tab-btn-' + tabName);
+            if (panel) panel.classList.remove('hidden');
+            if (btn) btn.className = "tab-btn px-2.5 py-1.5 rounded font-mono-tech text-xs uppercase tracking-wider bg-emerald-600/25 text-emerald-200 border border-emerald-500/60 flex items-center gap-1.5 transition whitespace-nowrap cursor-pointer";
+
+            if (tabName === 'metabolism') renderBodyUpgrades();
+            if (tabName === 'weapons') renderWeaponsList();
+            if (tabName === 'biodex') renderBioDex();
+            if (tabName === 'colony') renderColonyTab();
+        };
+
+        window.setCombatStance = function(stance) {
+            GameState.combatStance = stance;
+            document.querySelectorAll('.stance-btn').forEach(b => {
+                b.className = "stance-btn px-2 py-2 rounded bg-emerald-950/60 border border-emerald-800/50 font-mono-tech text-[11px] text-emerald-300 transition cursor-pointer";
+            });
+            const activeBtn = document.getElementById('stance-' + stance);
+            if (activeBtn) {
+                activeBtn.className = "stance-btn px-2 py-2 rounded bg-amber-600/25 border border-amber-400/70 font-mono-tech text-[11px] text-amber-200 transition cursor-pointer";
+            }
+            const names = { cautious: "RITMO CAUTELOSO", balanced: "RITMO PADRÃO", frenzy: "FRENESI ADRENAL" };
+            document.getElementById('combat-pace-badge').textContent = names[stance] || "RITMO PADRÃO";
+            updateUI();
+        };
+
+        window.cycleCameraAngle = function() {
+            GameState.cameraMode = (GameState.cameraMode + 1) % 3;
+            const labels = ["3D TÁTICA", "OMBRO (AÇÃO)", "MAPA TOP-DOWN"];
+            document.getElementById('cam-mode-label').textContent = 'CÂMERA: ' + labels[GameState.cameraMode];
+        };
+
+        window.toggleNavMode = function() {
+            playerState.navMode = playerState.navMode === 'explore' ? 'hunt' : 'explore';
+            document.getElementById('nav-mode-label').textContent = playerState.navMode === 'explore'
+                ? "IA: EXPLORAR & EVITAR"
+                : "IA: CAÇADOR AGRESSIVO";
+        };
+
+        window.toggleAutoAdvance = function() {
+            GameState.autoAdvance = !GameState.autoAdvance;
+            const btn = document.getElementById('boss-toggle-btn');
+            if (btn) {
+                btn.textContent = GameState.autoAdvance ? "AVANÇO: AUTO" : "AVANÇO: TRAVADO";
+            }
+        };
+
+        window.updateAutopilotRule = function(ruleKey, val) {
+            if (typeof val === 'boolean') {
+                GameState.autopilot[ruleKey] = val;
+            } else {
+                GameState.autopilot[ruleKey] = Number(val);
+            }
+            if (ruleKey === 'splintThreshold') document.getElementById('lbl-auto-splint').textContent = 'Fratura \u2265 ' + val + '%';
+            if (ruleKey === 'dialysisThreshold') document.getElementById('lbl-auto-dialysis').textContent = 'Toxicidade \u2265 ' + val + '%';
+            if (ruleKey === 'retreatHpThreshold') document.getElementById('lbl-auto-kite').textContent = 'HP \u2264 ' + val + '% ou 3+ Zumbis';
+        };
+
+        function renderBodyUpgrades() {
+            const list = document.getElementById('body-upgrades-list');
+            if (!list) return;
+            list.innerHTML = '';
+            Object.keys(GameState.upgrades).forEach(key => {
+                const up = GameState.upgrades[key];
+                const cost = Math.floor(up.baseCost * Math.pow(up.costMult, up.level));
+                const div = document.createElement('div');
+                div.className = "bg-black/50 p-2.5 rounded border border-emerald-900/60 flex flex-col justify-between space-y-2";
+                div.innerHTML = `
+                    <div>
+                        <div class="flex justify-between font-mono-tech text-xs">
+                            <span class="text-emerald-200 font-bold">${up.name}</span>
+                            <span class="text-amber-400">Nv. ${up.level}</span>
+                        </div>
+                        <div class="text-[10px] text-emerald-300/75 mt-0.5">${up.desc}</div>
+                    </div>
+                    <button onclick="window.buyBodyUpgrade('${key}')" class="w-full py-1.5 px-2.5 rounded bg-emerald-950 hover:bg-emerald-900 border border-emerald-700/60 font-mono-tech text-xs text-emerald-200 flex items-center justify-between transition cursor-pointer">
+                        <span>MUTACIONAR</span>
+                        <strong class="text-amber-300">${cost} ATP</strong>
+                    </button>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        window.buyBodyUpgrade = function(key) {
+            const up = GameState.upgrades[key];
+            const cost = Math.floor(up.baseCost * Math.pow(up.costMult, up.level));
+            if (GameState.atp >= cost) {
+                GameState.atp -= cost;
+                up.level++;
+                if (key === 'liverSymbiosis') {
+                    GameState.maxHp += 15;
+                    GameState.hp += 15;
+                }
+                SoundEngine.playPunch(false);
+                renderBodyUpgrades();
+                updateUI();
+            }
+        };
+
+        function renderWeaponsList() {
+            const grid = document.getElementById('weapons-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            Object.keys(GameState.weapons).forEach(wKey => {
+                const w = GameState.weapons[wKey];
+                const isEquipped = GameState.activeWeapon === wKey;
+                const upgCost = Math.floor(30 * Math.pow(1.6, w.level));
+                const card = document.createElement('div');
+                card.className = 'bg-black/55 p-3 rounded border ' + (isEquipped ? 'border-amber-400 bg-amber-950/20' : 'border-emerald-900/60') + ' flex flex-col justify-between space-y-2';
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-center font-mono-tech text-xs mb-1">
+                            <span class="text-amber-300 font-bold flex items-center gap-1.5">
+                                <img src="${getSpriteImgSrc(w.sprite)}" class="w-6 h-6 object-contain rounded border border-cyan-800/60 bg-black/50 p-0.5 inline-block">
+                                ${w.name}
+                            </span>
+                            <span class="text-emerald-400">Dano: ${w.damage + w.level * 6}</span>
+                        </div>
+                        <p class="text-[11px] text-emerald-300/80 leading-snug">${w.desc}</p>
+                        <div class="mt-2 text-[10px] font-mono-tech text-cyan-300/90 flex flex-wrap gap-2">
+                            <span>Munição: ${w.costAmount > 0 ? (w.costAmount + ' ' + w.costType.toUpperCase()) : '0 (Punhos)'}</span>
+                            ${w.toxGen > 0 ? '<span class="text-purple-300">+' + w.toxGen + '% Tox</span>' : ''}
+                            ${w.noiseGen > 0 ? '<span class="text-red-300">+' + w.noiseGen + ' dB</span>' : ''}
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1.5 pt-2 border-t border-emerald-900/40">
+                        ${w.unlocked ? `
+                            <button onclick="window.equipWeapon('${wKey}')" class="flex-1 py-1.5 rounded ${isEquipped ? 'bg-amber-600/35 text-amber-200 border border-amber-400' : 'bg-emerald-950 hover:bg-emerald-900 text-emerald-200 border border-emerald-700'} font-mono-tech text-xs transition cursor-pointer">
+                                ${isEquipped ? 'ACOPLADA' : 'ACOPLAR'}
+                            </button>
+                            <button onclick="window.upgradeWeapon('${wKey}')" class="px-2.5 py-1.5 rounded bg-emerald-950 hover:bg-emerald-900 border border-emerald-700 text-amber-300 font-mono-tech text-xs transition cursor-pointer">
+                                +NV (${upgCost} ATP)
+                            </button>
+                        ` : `
+                            <button onclick="window.unlockWeapon('${wKey}')" class="w-full py-1.5 rounded bg-cyan-950 hover:bg-cyan-900 border border-cyan-600 text-cyan-200 font-mono-tech text-xs transition cursor-pointer">
+                                CULTIVAR ARMA (${w.unlockCost} ${w.unlockRes.toUpperCase()})
+                            </button>
+                        `}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.unlockWeapon = function(wKey) {
+            const w = GameState.weapons[wKey];
+            if (!w || w.unlocked) return;
+            const res = w.unlockRes;
+            if (GameState[res] >= w.unlockCost) {
+                GameState[res] -= w.unlockCost;
+                w.unlocked = true;
+                w.level = 1;
+                window.equipWeapon(wKey);
+                renderWeaponsList();
+
+                if (!GameState.seenFirstWeaponCutscene) {
+                    GameState.seenFirstWeaponCutscene = true;
+                    triggerMilestoneCutscene(
+                        "SIMBIOSE ARMAMENTISTA: " + w.name.toUpperCase(),
+                        "Tentáculos fibrosos perfuram a pele do seu antebraço direito, conectando a arma viva diretamente às suas artérias. Agora seus disparos consomem fluidos biológicos em troca de poder letal.",
+                        "#f43f5e"
+                    );
+                }
+            }
+        };
+
+        window.upgradeWeapon = function(wKey) {
+            const w = GameState.weapons[wKey];
+            const cost = Math.floor(30 * Math.pow(1.6, w.level));
+            if (GameState.atp >= cost) {
+                GameState.atp -= cost;
+                w.level++;
+                renderWeaponsList();
+                updateUI();
+            }
+        };
+
+        window.equipWeapon = function(wKey, isAutoFallback = false) {
+            const w = GameState.weapons[wKey];
+            if (!w || !w.unlocked) return;
+            GameState.activeWeapon = wKey;
+            if (!isAutoFallback) GameState.preferredWeapon = wKey;
+
+            document.getElementById('active-weapon-icon').innerHTML = '<img src="' + getSpriteImgSrc(w.sprite) + '" class="w-6 h-6 object-contain rounded border border-amber-500/50 bg-black/60 p-0.5 inline-block">';
+            document.getElementById('active-weapon-name').textContent = w.name;
+            document.getElementById('active-weapon-cost').textContent = w.costAmount > 0
+                ? 'Consome: ' + w.costAmount + ' ' + w.costType.toUpperCase() + ' / tiro'
+                : 'Gargalo: +Microfratura Óssea';
+
+            updatePlayerWeaponVisual3D();
+            renderWeaponsList();
+            updateUI();
+        };
+
+        function renderBioDex() {
+            const grid = document.getElementById('biodex-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            GameState.biodex.forEach(d => {
+                const card = document.createElement('div');
+                card.className = 'p-2.5 rounded border ' + (d.unlocked ? 'bg-black/55 border-emerald-800/80' : 'bg-black/25 border-gray-900 opacity-50');
+                card.innerHTML = `
+                    <div class="flex justify-between items-center font-mono-tech text-xs">
+                        <div class="flex items-center gap-2">
+                            ${d.unlocked ? `<img src="${getSpriteImgSrc(d.id === 'z2' || d.id === 'z5' ? 'mutant_stalker_2' : (d.id === 'z6' ? 'mutant_fungal_2' : 'mutant_fungal_1'))}" class="w-8 h-8 object-contain rounded border border-emerald-800 bg-black/60 p-0.5">` : '<div class="w-8 h-8 rounded border border-gray-900 bg-black/40 flex items-center justify-center text-gray-700 text-xs">?</div>'}
+                            <span class="${d.unlocked ? 'text-emerald-200' : 'text-gray-500'} font-bold">${d.unlocked ? d.name : '??? (NÃO CATALOGADO)'}</span>
+                        </div>
+                        <span class="text-yellow-400 font-bold">★ ${d.shinyCount}</span>
+                    </div>
+                    <div class="text-[10px] text-emerald-400/75 mt-0.5">${d.unlocked ? d.desc : 'Avance de onda para encontrar.'}</div>
+                    <div class="text-[10px] font-mono-tech text-amber-300 mt-1">Abates Registrados: ${d.count}</div>
+                `;
+                grid.appendChild(card);
+            });
+
+            const dexUnlockedCount = GameState.biodex.filter(d => d.count > 0).length;
+            const shinyTotal = GameState.biodex.reduce((acc, d) => acc + d.shinyCount, 0);
+            let bonusPct = (dexUnlockedCount * 8) + (shinyTotal * 5);
+            if (GameState.achievements.dex_scholar.unlocked) bonusPct = Math.round(bonusPct * 1.15);
+            document.getElementById('dex-bonus-mult').textContent = '+' + bonusPct + '% Dano Global';
+            document.getElementById('badge-count-label').textContent = GameState.badges + ' / 4 INSÍGNIAS';
+        }
+
+        window.startSectorGym = function() {
+            if (GameState.inGymGauntlet) return;
+            GameState.inGymGauntlet = true;
+            GameState.gymStage = 0;
+            spawnMutantZombie(false, true);
+            spawnFloatingText("GAUNTLET INICIADO: 3 GUARDIÕES SEM CURA!", "#f59e0b");
+            broadcastRadioMsg("Dra. Vena: ALERTA MÁXIMO! Gauntlet do Ginásio iniciado. Mantenha distância e economize ossos!");
+            updateBossBar();
+            updateUI();
+        };
+
+        function renderRadioOscilloscope() {
+            const canvas = document.getElementById('radio-tab-canvas');
+            if (!canvas || canvas.offsetParent === null) return;
+            const ctx = canvas.getContext('2d');
+            if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
+                canvas.width = canvas.clientWidth || 360;
+                canvas.height = canvas.clientHeight || 110;
+            }
+            const w = canvas.width;
+            const h = canvas.height;
+            const t = performance.now() * 0.006;
+
+            ctx.fillStyle = '#030705';
+            ctx.fillRect(0, 0, w, h);
+
+            ctx.strokeStyle = '#06b6d4';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            const freqFactor = (GameState.frequency - 850) * 0.0012;
+            for (let x = 0; x < w; x += 3) {
+                const y = h / 2 + Math.sin(x * freqFactor + t) * 24 * Math.cos(x * 0.02 - t * 0.5);
+                if (x === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+        }
+
+        window.onFrequencySlide = function(val) {
+            GameState.frequency = Number(val);
+            document.getElementById('current-freq-badge').textContent = (val / 10).toFixed(1) + ' MHz';
+            const bonus = getFrequencyBonuses();
+            document.getElementById('signal-lock-status').textContent = 'BANDA ' + (val / 10).toFixed(1) + ' MHz: ' + bonus.label;
+            SoundEngine.playRadioStatic(0.08);
+            checkAchievements();
+        };
+
+        window.decodeRadioDrop = function() {
+            if (GameState.echoes >= 8) {
+                GameState.echoes -= 8;
+                spawnBioCapsule();
+                spawnBioCapsule();
+                spawnFloatingText("2 CÁPSULAS LANÇADAS NO MAPA!", "#06b6d4");
+                updateUI();
+            }
+        };
+
+        window.emitHarmonicPulse = function() {
+            if (GameState.echoes >= 12) {
+                GameState.echoes -= 12;
+                GameState.boneFracture = 0;
+                GameState.handBroken = false;
+                GameState.toxicity = 0;
+                GameState.noiseDb = 0;
+                spawnFloatingText("PULSO HARMÔNICO: OSSO & TOXINA ZERADOS!", "#10b981");
+                updateUI();
+            }
+        };
+
+        window.lureApexMutant = function() {
+            if (GameState.echoes >= 20) {
+                GameState.echoes -= 20;
+                spawnMutantZombie(true, false);
+                spawnFloatingText("SINAL EMITIDO: MUTANTE ★ SHINY ATRAÍDO!", "#facc15");
+                updateUI();
+            }
+        };
+
+        window.triggerPrestige = function() {
+            if (GameState.wave < 4) return;
+            GameState.prestigeLevel++;
+            GameState.prestigeMult += (GameState.wave * 0.2);
+            GameState.wave = 1;
+            GameState.killsInWave = 0;
+            GameState.killsRequired = 5;
+            GameState.hp = GameState.maxHp;
+            GameState.boneFracture = 0;
+            GameState.handBroken = false;
+            GameState.toxicity = 0;
+            GameState.atp = 80;
+            window.equipWeapon('fists');
+
+            const badge = document.getElementById('prestige-badge');
+            if (badge) {
+                badge.classList.remove('hidden');
+                badge.textContent = 'GENOMA v' + GameState.prestigeLevel + '.0';
+            }
+            document.getElementById('prestige-level').textContent = 'Genoma v' + GameState.prestigeLevel + '.0';
+            document.getElementById('prestige-mult').textContent = GameState.prestigeMult.toFixed(2) + 'x';
+
+            triggerMilestoneCutscene(
+                'MEMÓRIA TRANSMITIDA // CLONE v' + GameState.prestigeLevel + '.0',
+                "Sua consciência atravessou a frequência 88.4 MHz para um novo tanque de clonagem. Seu novo corpo desperta nos punhos, mas com densidade óssea e memória muscular amplificadas!",
+                "#a855f7"
+            );
+            checkAchievements();
+            updateUI();
+        };
+
+        function renderColonyTab() {
+            const squadList = document.getElementById('squad-list');
+            if (squadList) {
+                squadList.innerHTML = '';
+                GameState.squad.forEach(sq => {
+                    const div = document.createElement('div');
+                    div.className = "bg-black/50 p-2.5 rounded border border-purple-900/60 flex items-center justify-between gap-2 font-mono-tech text-xs";
+                    div.innerHTML = `
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <img src="${getSpriteImgSrc('squad_ally')}" class="w-7 h-7 object-contain rounded border border-purple-800 bg-black/60 p-0.5">
+                                <div class="text-purple-200 font-bold">${sq.name} <span class="text-emerald-400">(DPS: ${sq.dps})</span></div>
+                            </div>
+                            <div class="text-[10px] text-emerald-300/75">${sq.desc}</div>
+                        </div>
+                        <button onclick="window.buySquadMember('${sq.id}')" class="px-3 py-1.5 rounded ${sq.unlocked ? 'bg-emerald-950 text-emerald-300 border border-emerald-700' : 'bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200'} shrink-0 cursor-pointer">
+                            ${sq.unlocked ? 'NO MAPA 3D' : ('RECRUTAR (' + sq.cost + ' ECOS)')}
+                        </button>
+                    `;
+                    squadList.appendChild(div);
+                });
+            }
+
+            const baseList = document.getElementById('base-list');
+            if (baseList) {
+                baseList.innerHTML = '';
+                GameState.baseOrgans.forEach(org => {
+                    const cost = Math.floor(org.cost * Math.pow(1.55, org.level));
+                    const div = document.createElement('div');
+                    div.className = "bg-black/50 p-2.5 rounded border border-emerald-900/60 flex items-center justify-between gap-2 font-mono-tech text-xs";
+                    div.innerHTML = `
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <img src="${getSpriteImgSrc(org.id === 'mycelium' ? 'base_acoustic_membrane' : (org.id === 'incubator' ? 'effect_biomass_tox' : (org.id === 'antenna' ? 'item_biocapsules' : 'weapon_bone_knuckles')))}" class="w-7 h-7 object-contain rounded border border-emerald-800 bg-black/60 p-0.5">
+                                <div class="text-emerald-200 font-bold">${org.name} <span class="text-amber-400">(Nv. ${org.level})</span></div>
+                            </div>
+                            <div class="text-[10px] text-emerald-300/75">${org.desc}</div>
+                        </div>
+                        <button onclick="window.buyBaseOrgan('${org.id}')" class="px-3 py-1.5 rounded bg-emerald-950 hover:bg-emerald-900 border border-emerald-700 text-amber-300 shrink-0 cursor-pointer">
+                            CULTIVAR (${cost} ATP)
+                        </button>
+                    `;
+                    baseList.appendChild(div);
+                });
+            }
+        }
+
+        window.buySquadMember = function(id) {
+            const sq = GameState.squad.find(s => s.id === id);
+            if (sq && !sq.unlocked && GameState.echoes >= sq.cost) {
+                GameState.echoes -= sq.cost;
+                sq.unlocked = true;
+
+                if (scene) {
+                    const allyGroup = new THREE.Group();
+                    const shadowGeo = new THREE.CircleGeometry(0.5, 12);
+                    const shadowMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.45 });
+                    const shadow = new THREE.Mesh(shadowGeo, shadowMat);
+                    shadow.rotation.x = -Math.PI / 2;
+                    shadow.position.y = 0.02;
+                    allyGroup.add(shadow);
+
+                    const allySpriteMat = new THREE.SpriteMaterial({
+                        map: getSpriteTexture('squad_ally'),
+                        transparent: true
+                    });
+                    const allySprite = new THREE.Sprite(allySpriteMat);
+                    allySprite.center.set(0.5, 0.08);
+                    allySprite.scale.set(2.0, 2.0, 1);
+                    allyGroup.add(allySprite);
+
+                    const allyLight = new THREE.PointLight(0xa855f7, 1.2, 7);
+                    allyLight.position.set(0, 1.2, 0);
+                    allyGroup.add(allyLight);
+
+                    allyGroup.sprite = allySprite;
+                    scene.add(allyGroup);
+                    squadMeshes.push(allyGroup);
+                }
+
+                if (!GameState.seenFirstSquadCutscene) {
+                    GameState.seenFirstSquadCutscene = true;
+                    triggerMilestoneCutscene(
+                        "SINAL RESPONDIDO: " + sq.name.toUpperCase(),
+                        "A comporta blindada do Setor 4 se abre em meio ao tiroteio. Guiado pela frequência 88.4 MHz do seu braço, o sobrevivente entra na formação e passa a percorrer o complexo ao seu lado!",
+                        "#a855f7"
+                    );
+                }
+
+                checkAchievements();
+                renderColonyTab();
+                updateUI();
+            }
+        };
+
+        window.buyBaseOrgan = function(id) {
+            const org = GameState.baseOrgans.find(o => o.id === id);
+            if (!org) return;
+            const cost = Math.floor(org.cost * Math.pow(1.55, org.level));
+            if (GameState.atp >= cost) {
+                GameState.atp -= cost;
+                org.level++;
+
+                if (scene && veinMeshes.length < 24) {
+                    const veinMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
+                    const vein = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.14, 3.2, 6), veinMat);
+                    const angle = veinMeshes.length * 0.7;
+                    vein.position.set(Math.cos(angle) * 24.5, 1.6, Math.sin(angle) * 24.5);
+                    vein.rotation.z = (Math.random() - 0.5) * 0.5;
+                    scene.add(vein);
+                    veinMeshes.push(vein);
+                }
+
+                checkAchievements();
+                renderColonyTab();
+                updateUI();
+            }
+        };
+
+        // ============================================================================
+        // 6. SISTEMA DE SAVE, EXPORT, IMPORT, OFFLINE PROGRESS & MODAIS
+        // ============================================================================
+        const SAVE_KEY = 'radio_esperanca_save_v2';
+
+        function getSerializableSaveData() {
+            GameState.lastSaveTime = Date.now();
+            return {
+                atp: GameState.atp,
+                biomass: GameState.biomass,
+                calcium: GameState.calcium,
+                echoes: GameState.echoes,
+                hp: GameState.hp,
+                maxHp: GameState.maxHp,
+                kills: GameState.kills,
+                shinies: GameState.shinies,
+                healsCount: GameState.healsCount,
+                manualHits: GameState.manualHits,
+                wave: GameState.wave,
+                killsInWave: GameState.killsInWave,
+                badges: GameState.badges,
+                prestigeLevel: GameState.prestigeLevel,
+                prestigeMult: GameState.prestigeMult,
+                activeWeapon: GameState.activeWeapon,
+                preferredWeapon: GameState.preferredWeapon,
+                combatStance: GameState.combatStance,
+                frequency: GameState.frequency,
+                lastSaveTime: GameState.lastSaveTime,
+                autopilot: GameState.autopilot,
+                upgrades: GameState.upgrades,
+                weapons: GameState.weapons,
+                biodex: GameState.biodex,
+                squad: GameState.squad,
+                baseOrgans: GameState.baseOrgans,
+                achievements: GameState.achievements
+            };
+        }
+
+        window.manualSave = function(isAuto = false) {
+            try {
+                const data = getSerializableSaveData();
+                localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+                const ping = document.getElementById('autosave-ping');
+                if (ping) {
+                    ping.classList.remove('hidden');
+                    setTimeout(() => ping.classList.add('hidden'), 600);
+                }
+                const msg = document.getElementById('save-status-msg');
+                if (msg && !isAuto) {
+                    msg.textContent = 'Salvo com sucesso às ' + new Date().toLocaleTimeString() + '!';
+                    msg.className = "font-mono-tech text-[11px] text-emerald-400";
+                }
+            } catch (e) {
+                console.error("Falha ao salvar:", e);
+            }
+        };
+
+        function loadSavedGame() {
+            try {
+                const raw = localStorage.getItem(SAVE_KEY);
+                if (!raw) return false;
+                const data = JSON.parse(raw);
+
+                GameState.atp = data.atp ?? GameState.atp;
+                GameState.biomass = data.biomass ?? GameState.biomass;
+                GameState.calcium = data.calcium ?? GameState.calcium;
+                GameState.echoes = data.echoes ?? GameState.echoes;
+                GameState.hp = data.hp ?? GameState.hp;
+                GameState.maxHp = data.maxHp ?? GameState.maxHp;
+                GameState.kills = data.kills ?? GameState.kills;
+                GameState.shinies = data.shinies ?? GameState.shinies;
+                GameState.healsCount = data.healsCount ?? GameState.healsCount;
+                GameState.manualHits = data.manualHits ?? GameState.manualHits;
+                GameState.wave = data.wave ?? GameState.wave;
+                GameState.killsInWave = data.killsInWave ?? GameState.killsInWave;
+                GameState.badges = data.badges ?? GameState.badges;
+                GameState.prestigeLevel = data.prestigeLevel ?? GameState.prestigeLevel;
+                GameState.prestigeMult = data.prestigeMult ?? GameState.prestigeMult;
+                GameState.activeWeapon = data.activeWeapon ?? GameState.activeWeapon;
+                GameState.preferredWeapon = data.preferredWeapon ?? GameState.preferredWeapon;
+                GameState.combatStance = data.combatStance ?? GameState.combatStance;
+                GameState.frequency = data.frequency ?? GameState.frequency;
+
+                if (data.autopilot) Object.assign(GameState.autopilot, data.autopilot);
+                if (data.upgrades) {
+                    Object.keys(data.upgrades).forEach(k => {
+                        if (GameState.upgrades[k]) GameState.upgrades[k].level = data.upgrades[k].level ?? 0;
+                    });
+                }
+                if (data.weapons) {
+                    Object.keys(data.weapons).forEach(k => {
+                        if (GameState.weapons[k]) {
+                            GameState.weapons[k].unlocked = data.weapons[k].unlocked;
+                            GameState.weapons[k].level = data.weapons[k].level ?? 0;
+                        }
+                    });
+                }
+                if (data.biodex && Array.isArray(data.biodex)) {
+                    data.biodex.forEach(savedEntry => {
+                        const local = GameState.biodex.find(b => b.id === savedEntry.id);
+                        if (local) {
+                            local.unlocked = savedEntry.unlocked;
+                            local.count = savedEntry.count;
+                            local.shinyCount = savedEntry.shinyCount;
+                        }
+                    });
+                }
+                if (data.squad && Array.isArray(data.squad)) {
+                    data.squad.forEach(savedSq => {
+                        const local = GameState.squad.find(s => s.id === savedSq.id);
+                        if (local) local.unlocked = savedSq.unlocked;
+                    });
+                }
+                if (data.baseOrgans && Array.isArray(data.baseOrgans)) {
+                    data.baseOrgans.forEach(savedOrg => {
+                        const local = GameState.baseOrgans.find(o => o.id === savedOrg.id);
+                        if (local) local.level = savedOrg.level;
+                    });
+                }
+                if (data.achievements) {
+                    Object.keys(data.achievements).forEach(k => {
+                        if (GameState.achievements[k]) GameState.achievements[k].unlocked = data.achievements[k].unlocked;
+                    });
+                }
+
+                if (data.lastSaveTime) {
+                    const elapsedSec = Math.floor((Date.now() - data.lastSaveTime) / 1000);
+                    if (elapsedSec > 15) {
+                        const cappedSec = Math.min(elapsedSec, 43200);
+                        const hours = Math.floor(cappedSec / 3600);
+                        const mins = Math.floor((cappedSec % 3600) / 60);
+
+                        const offBio = Math.floor(cappedSec * (GameState.baseOrgans[0].level * 0.9));
+                        const offCal = Math.floor(cappedSec * (GameState.baseOrgans[1].level * 0.8));
+                        const offAtp = Math.floor(cappedSec * (0.4 + GameState.baseOrgans[3].level * 1.5) * GameState.prestigeMult);
+                        const offEcho = Math.floor(cappedSec * (GameState.baseOrgans[3].level * 0.25));
+
+                        GameState.biomass += offBio;
+                        GameState.calcium += offCal;
+                        GameState.atp += offAtp;
+                        GameState.echoes += offEcho;
+
+                        setTimeout(() => {
+                            const offModal = document.getElementById('offline-modal');
+                            if (offModal && (offBio > 0 || offCal > 0 || offAtp > 0 || offEcho > 0)) {
+                                document.getElementById('offline-time-badge').textContent = hours + 'h ' + mins + 'm de ausência';
+                                document.getElementById('off-atp').textContent = '+' + offAtp;
+                                document.getElementById('off-bio').textContent = '+' + offBio;
+                                document.getElementById('off-cal').textContent = '+' + offCal;
+                                document.getElementById('off-echoes').textContent = '+' + offEcho;
+                                offModal.classList.remove('hidden');
+                                offModal.classList.add('flex');
+                            }
+                        }, 700);
+                    }
+                }
+
+                return true;
+            } catch (e) {
+                console.error("Falha ao carregar save:", e);
+                return false;
+            }
+        }
+
+        window.closeOfflineModal = function() {
+            const modal = document.getElementById('offline-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        };
+
+        window.exportSaveData = function() {
+            const data = getSerializableSaveData();
+            const jsonStr = JSON.stringify(data);
+            const base64Str = btoa(unescape(encodeURIComponent(jsonStr)));
+            const ta = document.getElementById('save-data-textarea');
+            if (ta) {
+                ta.value = base64Str;
+                ta.select();
+                try {
+                    navigator.clipboard.writeText(base64Str);
+                    document.getElementById('save-status-msg').textContent = "Save copiado para a área de transferência!";
+                } catch (e) {
+                    document.getElementById('save-status-msg').textContent = "Código gerado na caixa abaixo. Copie manualmente.";
+                }
+            }
+        };
+
+        window.importSaveData = function() {
+            const ta = document.getElementById('save-data-textarea');
+            const msg = document.getElementById('save-status-msg');
+            if (!ta || !ta.value.trim()) {
+                if (msg) msg.textContent = "Cole o código de save na caixa de texto!";
+                return;
+            }
+            try {
+                let jsonStr = ta.value.trim();
+                if (!jsonStr.startsWith('{')) {
+                    jsonStr = decodeURIComponent(escape(atob(jsonStr)));
+                }
+                const parsed = JSON.parse(jsonStr);
+                localStorage.setItem(SAVE_KEY, JSON.stringify(parsed));
+                if (msg) {
+                    msg.textContent = "Save importado com sucesso! Recarregando sistema...";
+                    msg.className = "font-mono-tech text-[11px] text-amber-300";
+                }
+                setTimeout(() => window.location.reload(), 800);
+            } catch (e) {
+                if (msg) {
+                    msg.textContent = "Erro: Código de save inválido ou corrompido!";
+                    msg.className = "font-mono-tech text-[11px] text-red-400";
+                }
+            }
+        };
+
+        window.hardResetGame = function() {
+            if (confirm("ATENÇÃO: Deseja realmente resetar todo o progresso genético e reiniciar do zero?")) {
+                if (confirm("Confirmação final: todas as insígnias, armas e Bio-Dex serão deletadas. Continuar?")) {
+                    localStorage.removeItem(SAVE_KEY);
+                    window.location.reload();
+                }
+            }
+        };
+
+        window.toggleSaveModal = function() {
+            const modal = document.getElementById('save-modal');
+            if (modal) {
+                const isHidden = modal.classList.contains('hidden');
+                if (isHidden) {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    document.getElementById('save-data-textarea').value = '';
+                    document.getElementById('save-status-msg').textContent = "Sistema nominal.";
+                } else {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }
+            }
+        };
+
+        window.toggleHelpModal = function() {
+            const modal = document.getElementById('help-modal');
+            if (modal) {
+                modal.classList.toggle('hidden');
+                modal.classList.toggle('flex');
+            }
+        };
+
+        window.toggleAchievementsModal = function() {
+            const modal = document.getElementById('achievements-modal');
+            if (modal) {
+                const isHidden = modal.classList.contains('hidden');
+                if (isHidden) {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    const dot = document.getElementById('achievements-badge-dot');
+                    if (dot) dot.classList.add('hidden');
+                    renderAchievementsList();
+                } else {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }
+            }
+        };
+
+        function renderAchievementsList() {
+            const container = document.getElementById('achievements-list-container');
+            if (!container) return;
+            container.innerHTML = '';
+            let unlockedCount = 0;
+            const totalCount = Object.keys(GameState.achievements).length;
+
+            Object.keys(GameState.achievements).forEach(key => {
+                const ach = GameState.achievements[key];
+                if (ach.unlocked) unlockedCount++;
+                const card = document.createElement('div');
+                card.className = 'p-2.5 rounded border ' + (ach.unlocked ? 'bg-black/60 border-yellow-700/80' : 'bg-black/25 border-gray-900 opacity-55') + ' flex items-center justify-between gap-3';
+                card.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded flex items-center justify-center ${ach.unlocked ? 'bg-yellow-950 text-yellow-400 border border-yellow-600/70' : 'bg-gray-900 text-gray-600'}">
+                            <i class="fa-solid ${ach.icon} text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-mono-tech text-xs ${ach.unlocked ? 'text-yellow-300 font-bold' : 'text-gray-400'}">${ach.name}</div>
+                            <div class="text-[10px] text-emerald-300/70">${ach.desc}</div>
+                        </div>
+                    </div>
+                    <div class="text-right shrink-0">
+                        <span class="font-mono-tech text-[10px] px-2 py-0.5 rounded ${ach.unlocked ? 'bg-yellow-950/80 text-yellow-300 border border-yellow-700/60' : 'bg-gray-900 text-gray-500'}">
+                            ${ach.unlocked ? ach.bonusText : 'BLOQUEADA'}
+                        </span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            const pill = document.getElementById('achievements-progress-pill');
+            if (pill) pill.textContent = unlockedCount + ' / ' + totalCount + ' DESBLOQUEADAS';
+        }
+
+        // ============================================================================
+        // 7. ATALHOS DE TECLADO BIOPUNK & INICIALIZAÇÃO
+        // ============================================================================
+        window.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            if (e.code === 'Space') {
+                e.preventDefault();
+                performManualStrike(null);
+            } else if (e.key === '1') {
+                window.switchTab('metabolism');
+            } else if (e.key === '2') {
+                window.switchTab('autopilot');
+            } else if (e.key === '3') {
+                window.switchTab('weapons');
+            } else if (e.key === '4') {
+                window.switchTab('biodex');
+            } else if (e.key === '5') {
+                window.switchTab('radio');
+            } else if (e.key === '6') {
+                window.switchTab('colony');
+            } else if (e.key === 'e' || e.key === 'E') {
+                TACTICAL_ROOMS.forEach((r, idx) => {
+                    const distDoor = Math.hypot(playerState.x - r.doorX, playerState.z - r.doorZ);
+                    if (distDoor < 5.0 && GameState.trapCooldown <= 0) {
+                        triggerRoomTrap(idx);
+                    }
+                });
+            } else if (e.key === 'c' || e.key === 'C') {
+                window.cycleCameraAngle();
+            } else if (e.key === 'm' || e.key === 'M') {
+                window.toggleAudio();
+            } else if (e.key === 'h' || e.key === 'H') {
+                window.toggleHelpModal();
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const hasSave = loadSavedGame();
+            if (hasSave) {
+                inCutscene = false;
+                const overlay = document.getElementById('cutscene-overlay');
+                if (overlay) overlay.style.display = 'none';
+            } else {
+                updateCutsceneUI();
+                renderCutsceneCanvas();
+            }
+
+            if (document.getElementById('chk-autoFistFallback')) {
+                document.getElementById('chk-autoFistFallback').checked = GameState.autopilot.autoFistFallback;
+                document.getElementById('chk-autoHazardRest').checked = GameState.autopilot.autoHazardRest;
+                document.getElementById('chk-prioritizeShinyAndLoot').checked = GameState.autopilot.prioritizeShinyAndLoot;
+                document.getElementById('lbl-auto-splint').textContent = 'Fratura \u2265 ' + GameState.autopilot.splintThreshold + '%';
+                document.getElementById('lbl-auto-dialysis').textContent = 'Toxicidade \u2265 ' + GameState.autopilot.dialysisThreshold + '%';
+                document.getElementById('lbl-auto-kite').textContent = 'HP \u2264 ' + GameState.autopilot.retreatHpThreshold + '% ou 3+ Zumbis';
+                if (document.getElementById('freq-slider')) document.getElementById('freq-slider').value = GameState.frequency;
+            }
+
+            renderBodyUpgrades();
+            renderWeaponsList();
+            renderBioDex();
+            renderColonyTab();
+            renderAchievementsList();
+            init3D();
+            updateUI();
+
+            setInterval(gameTick, 500);
+            setInterval(() => window.manualSave(true), 4000);
+        });
+    </script>
+</body>
+</html>

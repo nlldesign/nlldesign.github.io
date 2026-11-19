@@ -1,0 +1,10 @@
+## Interface: 16001
+## Interface-Forever: 16001
+## Interface-Classic: 16001
+## Title: |cffFF7D0ADruid Helper|r - |cffA335EE[v3.0 Forever]|r
+## Notes: Assistente completo Multi-Forma blindado para WoW Forever (Feral Tank, Gato DPS, Caster e Config).
+## Author: Lucas
+## Version: 3.0.0
+## SavedVariables: DruidHelperDB
+
+DruidHelper.lua

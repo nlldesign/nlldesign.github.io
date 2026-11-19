@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <pattern id="gridPat" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect width="800" height="450" fill="url(#gridPat)"/>
+  
+  <circle cx="620" cy="110" r="200" fill="rgba(16,185,129,0.1)"/>
+  <rect x="56" y="40" width="688" height="370" rx="20" fill="#101216" stroke="rgba(255,255,255,0.1)"/>
+  <text x="82" y="72" fill="#6ee7b7" font-family="monospace" font-size="12" font-weight="bold">STRAFEBET MVP  //  IGAMING UI PROTOTYPE</text>
+  <rect x="614" y="54" width="106" height="26" rx="13" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-opacity="0.4"/>
+  <circle cx="630" cy="67" r="4" fill="#10b981"/>
+  <text x="642" y="71" fill="#6ee7b7" font-family="monospace" font-size="10">LIVE ODDS</text>
+
+  <!-- Odds Match Rows -->
+  <rect x="82" y="100" width="410" height="84" rx="12" fill="#171920" stroke="rgba(255,255,255,0.08)"/>
+  <text x="100" y="124" fill="#a1a1aa" font-family="monospace" font-size="10">ESPORTS  •  BO3  •  MAPA 2</text>
+  <text x="100" y="148" fill="#ffffff" font-family="sans-serif" font-size="15" font-weight="600">FURIA  vs  NAVI</text>
+  <rect x="100" y="158" width="110" height="16" rx="4" fill="#27272a"/>
+  <text x="110" y="170" fill="#10b981" font-family="monospace" font-size="10">1.84</text>
+  <text x="342" y="146" fill="#10b981" font-family="monospace" font-size="18" font-weight="bold">1.84</text>
+  <text x="424" y="146" fill="#22d3ee" font-family="monospace" font-size="18" font-weight="bold">2.05</text>
+
+  <rect x="82" y="198" width="410" height="84" rx="12" fill="#171920" stroke="rgba(255,255,255,0.08)"/>
+  <text x="100" y="222" fill="#a1a1aa" font-family="monospace" font-size="10">BRASILEIRAO  •  72 MIN</text>
+  <text x="100" y="246" fill="#ffffff" font-family="sans-serif" font-size="15" font-weight="600">PALMEIRAS  vs  FLAMENGO</text>
+  <text x="342" y="244" fill="#e4e4e7" font-family="monospace" font-size="16" font-weight="bold">2.15</text>
+  <text x="394" y="244" fill="#a1a1aa" font-family="monospace" font-size="16">3.10</text>
+  <text x="444" y="244" fill="#e4e4e7" font-family="monospace" font-size="16" font-weight="bold">3.40</text>
+
+  <rect x="82" y="296" width="410" height="84" rx="12" fill="#171920" stroke="rgba(255,255,255,0.08)"/>
+  <text x="100" y="320" fill="#a1a1aa" font-family="monospace" font-size="10">NBA  •  Q3  •  SPREAD</text>
+  <text x="100" y="344" fill="#ffffff" font-family="sans-serif" font-size="15" font-weight="600">CELTICS -4.5  vs  LAKERS</text>
+  <text x="342" y="342" fill="#10b981" font-family="monospace" font-size="16" font-weight="bold">1.91</text>
+  <text x="424" y="342" fill="#e4e4e7" font-family="monospace" font-size="16" font-weight="bold">1.91</text>
+
+  <!-- Betslip Right Column -->
+  <rect x="514" y="100" width="206" height="280" rx="14" fill="#151821" stroke="#10b981" stroke-opacity="0.45"/>
+  <text x="534" y="128" fill="#ffffff" font-family="monospace" font-size="12" font-weight="bold">BETSLIP RAPIDO</text>
+  <rect x="534" y="144" width="166" height="58" rx="8" fill="#1f232e"/>
+  <text x="546" y="164" fill="#e4e4e7" font-family="sans-serif" font-size="11" font-weight="600">Vencedor: FURIA</text>
+  <text x="546" y="186" fill="#10b981" font-family="monospace" font-size="14" font-weight="bold">@ 1.84</text>
+  <rect x="534" y="216" width="166" height="40" rx="8" fill="#1f232e"/>
+  <text x="546" y="240" fill="#a1a1aa" font-family="monospace" font-size="11">STAKE:  R$ 100,00</text>
+  <text x="534" y="284" fill="#a1a1aa" font-family="monospace" font-size="10">RETORNO ESTIMADO</text>
+  <text x="534" y="308" fill="#6ee7b7" font-family="sans-serif" font-size="22" font-weight="700">R$ 184,00</text>
+  <rect x="534" y="328" width="166" height="36" rx="18" fill="#10b981"/>
+  <text x="568" y="350" fill="#042f2e" font-family="monospace" font-size="11" font-weight="bold">CONFIRMAR</text>
+
+</svg>

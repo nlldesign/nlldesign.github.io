@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity Token & Model Tracker</title>
+  <script src="/preload.js"></script>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --background: #0d0b14;
+      --foreground: #f8fafc;
+      --card: #181326;
+      --card-inner: #211a36;
+      --border: #2e264a;
+      --muted-foreground: #9490ab;
+      --primary: #38bdf8;
+      --primary-foreground: #0f172a;
+      --accent: #a855f7;
+    }
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    select option {
+      background-color: var(--card);
+      color: var(--foreground);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+    .surface-muted {
+      background-color: rgba(128, 128, 148, 0.12);
+    }
+    .surface-row:hover {
+      background-color: rgba(128, 128, 148, 0.08);
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
+</head>
+<body class="p-3 custom-scrollbar text-sm select-none">
+  <!-- Header -->
+  <div class="flex items-start justify-between gap-2 pb-2.5 mb-2.5 border-b border-[var(--border)]">
+    <div class="flex items-center gap-2 min-w-0">
+      <div class="w-8 h-8 rounded-lg bg-purple-500/15 text-purple-400 font-bold flex items-center justify-center border border-purple-500/25 flex-shrink-0">
+        ⚡
+      </div>
+      <div class="min-w-0">
+        <div class="flex items-center gap-1.5 flex-wrap">
+          <h1 class="font-bold text-sm tracking-tight text-[var(--foreground)]">Token & Model Tracker</h1>
+          <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Ao Vivo
+          </span>
+          <span id="plan-badge" class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium border border-[var(--border)] text-[var(--muted-foreground)] surface-muted">
+            Conectando...
+          </span>
+        </div>
+        <p class="text-[11px] text-[var(--muted-foreground)] truncate" id="model-label">Detectando modelo...</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-1.5 flex-shrink-0">
+      <label class="flex items-center gap-1 px-1.5 py-1 rounded-md border border-[var(--border)] bg-[var(--card)] text-[10px] text-[var(--muted-foreground)]" title="Cotação USD → BRL">
+        <span>US$1=R$</span>
+        <input
+          id="usd-brl-input"
+          type="number"
+          step="0.01"
+          min="0.1"
+          max="100"
+          value="5.88"
+          class="w-10 bg-transparent text-[var(--foreground)] font-mono font-semibold text-right outline-none"
+        />
+      </label>
+      <button id="btn-refresh" class="p-1.5 rounded-md border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--border)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors" title="Atualizar agora">
+        <svg id="refresh-icon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Conversation Selector -->
+  <div class="mb-2.5 bg-[var(--card)] px-2.5 py-1.5 rounded-lg border border-[var(--border)] flex items-center justify-between gap-2">
+    <div class="flex items-center gap-1.5 min-w-0 flex-1">
+      <span class="text-[11px] text-[var(--muted-foreground)] flex-shrink-0">Sessão:</span>
+      <select id="conv-select" class="bg-transparent text-xs text-[var(--foreground)] font-mono border-none outline-none cursor-pointer w-full truncate">
+        <option value="">Carregando...</option>
+      </select>
+    </div>
+    <span id="turn-badge" class="text-[10px] px-2 py-0.5 rounded surface-muted border border-[var(--border)] text-[var(--foreground)] font-medium flex-shrink-0">0 turnos</span>
+  </div>
+
+  <!-- Tabs -->
+  <div class="grid grid-cols-3 gap-1 p-1 rounded-lg bg-[var(--card)] border border-[var(--border)] mb-3" role="tablist">
+    <button id="tab-btn-overview" data-tab="overview" class="tab-btn py-1.5 px-2 rounded-md text-[11px] font-semibold transition-colors">
+      Visão Geral
+    </button>
+    <button id="tab-btn-models" data-tab="models" class="tab-btn py-1.5 px-2 rounded-md text-[11px] font-semibold transition-colors">
+      Modelos & Custos
+    </button>
+    <button id="tab-btn-history" data-tab="history" class="tab-btn py-1.5 px-2 rounded-md text-[11px] font-semibold transition-colors">
+      Histórico
+    </button>
+  </div>
+
+  <!-- TAB 1: OVERVIEW -->
+  <div id="tab-overview" class="tab-panel space-y-3">
+    <!-- 2x2 KPI Grid -->
+    <div class="grid grid-cols-2 gap-2">
+      <div class="bg-[var(--card)] p-2.5 rounded-xl border border-[var(--border)]">
+        <div class="text-[10px] text-[var(--muted-foreground)] font-medium mb-0.5">Tokens Totais</div>
+        <div class="text-base font-bold tracking-tight text-[var(--foreground)] font-mono" id="val-total-tokens">0</div>
+        <div class="text-[10px] text-sky-400 mt-0.5 font-mono truncate" id="val-prompt-out-sum">0 in + 0 out</div>
+      </div>
+
+      <div class="bg-[var(--card)] p-2.5 rounded-xl border border-[var(--border)]">
+        <div class="text-[10px] text-[var(--muted-foreground)] font-medium mb-0.5">Custo Real (por turno)</div>
+        <div class="text-base font-bold tracking-tight text-emerald-400 font-mono" id="val-cost-usd">$0.0000</div>
+        <div class="text-[10px] text-[var(--muted-foreground)] mt-0.5 font-mono truncate" id="val-cost-brl">≈ R$ 0,00</div>
+      </div>
+
+      <div class="bg-[var(--card)] p-2.5 rounded-xl border border-[var(--border)]">
+        <div class="text-[10px] text-[var(--muted-foreground)] font-medium mb-0.5">Economia c/ Cache</div>
+        <div class="text-base font-bold tracking-tight text-purple-400 font-mono" id="val-savings-usd">$0.0000</div>
+        <div class="text-[10px] text-[var(--muted-foreground)] mt-0.5 font-mono truncate" id="val-savings-sub">≈ R$ 0,00 (0% cache)</div>
+      </div>
+
+      <div class="bg-[var(--card)] p-2.5 rounded-xl border border-[var(--border)]">
+        <div class="text-[10px] text-[var(--muted-foreground)] font-medium mb-0.5">Modelos / Créditos</div>
+        <div class="text-base font-bold tracking-tight text-[var(--foreground)] font-mono" id="val-models-avail">--</div>
+        <div class="text-[10px] text-[var(--muted-foreground)] mt-0.5 font-mono truncate" id="val-credits-sub">Aguardando servidor</div>
+      </div>
+    </div>
+
+    <!-- Active Context Window -->
+    <div class="bg-[var(--card)] p-3 rounded-xl border border-[var(--border)]">
+      <div class="flex justify-between items-center text-xs mb-1">
+        <span class="text-[var(--muted-foreground)] font-medium" id="context-window-title">Uso da Janela de Contexto (1M)</span>
+        <span class="font-mono text-xs font-bold" id="context-percent">0.00%</span>
+      </div>
+      <div class="w-full surface-muted rounded-full h-2 overflow-hidden border border-[var(--border)]">
+        <div id="context-bar" class="bg-sky-400 h-2 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+      </div>
+      <div class="flex justify-between text-[10px] text-[var(--muted-foreground)] mt-1.5 font-mono">
+        <span id="active-context-label">0 tokens ativos</span>
+        <span id="max-context-label">1.000.000 máx</span>
+      </div>
+    </div>
+
+    <!-- Session Models Breakdown -->
+    <div class="bg-[var(--card)] rounded-xl border border-[var(--border)] overflow-hidden">
+      <div class="px-3 py-2 border-b border-[var(--border)] flex items-center justify-between">
+        <span class="text-[11px] font-semibold text-[var(--foreground)] uppercase tracking-wider">Modelos Usados nesta Sessão</span>
+        <button id="btn-goto-models" class="text-[10px] text-[var(--primary)] hover:underline font-medium">Ver todos os modelos →</button>
+      </div>
+      <div id="session-models-list" class="divide-y divide-[var(--border)]/60">
+        <div class="p-3 text-center text-xs text-[var(--muted-foreground)]">Nenhum turno registrado</div>
+      </div>
+    </div>
+
+    <!-- Live Quota Pools -->
+    <div class="space-y-2">
+      <div class="flex items-center justify-between">
+        <span class="text-[11px] font-semibold text-[var(--foreground)] uppercase tracking-wider">Cotas em Tempo Real</span>
+        <span class="text-[10px] text-[var(--muted-foreground)]" id="quota-source-label">Language Server</span>
+      </div>
+      <div id="quota-pools" class="space-y-2"></div>
+    </div>
+
+    <!-- Token Breakdown -->
+    <div class="bg-[var(--card)] p-3 rounded-xl border border-[var(--border)]">
+      <div class="text-[11px] font-semibold text-[var(--foreground)] mb-2 uppercase tracking-wider">Detalhamento de Tokens</div>
+      <div class="space-y-1.5">
+        <div class="flex items-center justify-between text-xs">
+          <span class="flex items-center gap-1.5 text-[var(--muted-foreground)]">
+            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+            Entrada (Prompt)
+          </span>
+          <span class="font-mono font-medium text-[var(--foreground)]" id="val-input-tokens">0</span>
+        </div>
+        <div class="flex items-center justify-between text-xs">
+          <span class="flex items-center gap-1.5 text-[var(--muted-foreground)]">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            Saída (Geração / Reasoning)
+          </span>
+          <span class="font-mono font-medium text-[var(--foreground)]" id="val-output-tokens">0</span>
+        </div>
+        <div class="flex items-center justify-between text-xs pt-1.5 border-t border-[var(--border)]/60">
+          <span class="flex items-center gap-1.5 text-purple-400">
+            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+            Cache Lido
+          </span>
+          <span class="font-mono font-bold text-purple-400" id="val-cache-tokens">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: MODELS & COSTS -->
+  <div id="tab-models" class="tab-panel hidden space-y-2.5">
+    <!-- Persistent Toolbar (never replaced on polling) -->
+    <div class="bg-[var(--card)] p-2.5 rounded-xl border border-[var(--border)] space-y-2">
+      <div class="flex items-center gap-1.5">
+        <input
+          id="models-search"
+          type="text"
+          placeholder="Buscar modelo (ex: Neon, Claude, Flash...)"
+          class="flex-1 min-w-0 px-2.5 py-1 rounded-md border border-[var(--border)] surface-muted text-xs text-[var(--foreground)] placeholder-[var(--muted-foreground)] outline-none focus:border-[var(--primary)]"
+        />
+        <button id="btn-toggle-grouping" class="px-2 py-1 rounded-md border border-[var(--border)] surface-muted text-[10px] font-semibold text-[var(--foreground)] hover:border-[var(--primary)] whitespace-nowrap transition-colors">
+          Famílias
+        </button>
+      </div>
+
+      <div class="flex items-center justify-between gap-2 flex-wrap">
+        <div id="provider-filters" class="flex items-center gap-1 flex-wrap">
+          <button data-provider="all" class="provider-pill px-2 py-0.5 rounded-full text-[10px] font-medium border transition-colors">Todos</button>
+          <button data-provider="Google" class="provider-pill px-2 py-0.5 rounded-full text-[10px] font-medium border transition-colors">Google</button>
+          <button data-provider="Anthropic" class="provider-pill px-2 py-0.5 rounded-full text-[10px] font-medium border transition-colors">Anthropic</button>
+          <button data-provider="OpenAI" class="provider-pill px-2 py-0.5 rounded-full text-[10px] font-medium border transition-colors">OpenAI</button>
+        </div>
+
+        <select id="models-sort" class="px-2 py-0.5 rounded-md border border-[var(--border)] surface-muted text-[10px] text-[var(--foreground)] outline-none cursor-pointer">
+          <option value="order">Ordem Antigravity</option>
+          <option value="cost-asc">Menor custo (Sessão)</option>
+          <option value="cost-desc">Maior custo (Sessão)</option>
+          <option value="quota-asc">Menor cota</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Models Container -->
+    <div id="models-list" class="space-y-2"></div>
+
+    <!-- Footnote -->
+    <div class="p-2.5 rounded-lg border border-[var(--border)] bg-[var(--card)] text-[10px] text-[var(--muted-foreground)] leading-relaxed">
+      💡 Valores por 1M de tokens baseados nas tabelas públicas pay-as-you-go das APIs (Nov/2026) para simulação e transparência. No plano Antigravity, o uso efetivo segue as cotas e créditos exibidos ao vivo.
+    </div>
+  </div>
+
+  <!-- TAB 3: HISTORY -->
+  <div id="tab-history" class="tab-panel hidden">
+    <div class="bg-[var(--card)] rounded-xl border border-[var(--border)] overflow-hidden">
+      <div class="px-3 py-2 border-b border-[var(--border)] flex justify-between items-center">
+        <div class="text-[11px] font-semibold text-[var(--foreground)] uppercase tracking-wider">Histórico Recente (Turnos)</div>
+        <span class="text-[10px] text-[var(--muted-foreground)]" id="history-count">0 passos</span>
+      </div>
+      <div class="max-h-[480px] overflow-y-auto custom-scrollbar divide-y divide-[var(--border)]/50" id="turns-list">
+        <div class="p-3 text-center text-xs text-[var(--muted-foreground)]">Aguardando dados...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3 text-center text-[10px] text-[var(--muted-foreground)] font-mono" id="last-updated">
+    Atualizando automaticamente a cada 2.5s
+  </div>
+
+  <script>
+    const STATE = {
+      activeConvId: null,
+      activeTab: 'overview',
+      usdToBrl: 5.88,
+      providerFilter: 'all',
+      sortBy: 'order',
+      groupByFamily: true,
+      searchQuery: '',
+      latestData: null,
+    };
+
+    try {
+      const savedRate = Number(localStorage.getItem('tokenTracker.usdToBrl'));
+      if (Number.isFinite(savedRate) && savedRate >= 0.1 && savedRate <= 100) {
+        STATE.usdToBrl = savedRate;
+      }
+      const savedGroup = localStorage.getItem('tokenTracker.groupByFamily');
+      if (savedGroup === 'false') {
+        STATE.groupByFamily = false;
+      }
+    } catch {}
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function doFetch(url, options) {
+      const mergedOptions = { cache: 'no-store', ...(options || {}) };
+      if (window.sidecar && window.sidecar.fetch) {
+        return window.sidecar.fetch(url, mergedOptions);
+      }
+      return fetch(url, mergedOptions);
+    }
+
+    function formatNumber(num) {
+      if (!num && num !== 0) return '0';
+      return new Intl.NumberFormat('pt-BR').format(num);
+    }
+
+    function formatCompact(num) {
+      if (!num) return '0';
+      if (num >= 1_000_000) return (num / 1_000_000).toFixed(2) + 'M';
+      if (num >= 1_000) return (num / 1_000).toFixed(1) + 'k';
+      return String(num);
+    }
+
+    function formatContextLabel(tokens) {
+      if (!tokens) return '1M';
+      if (tokens >= 1_000_000) return Math.round(tokens / 1_000_000) + 'M';
+      if (tokens >= 1_000) return Math.round(tokens / 1_000) + 'K';
+      return String(tokens);
+    }
+
+    function formatUsd(val) {
+      const n = Number(val) || 0;
+      if (n > 0 && n < 0.0001) return '$' + n.toFixed(5);
+      return '$' + n.toFixed(4);
+    }
+
+    function formatBrl(val) {
+      const n = Number(val) || 0;
+      return 'R$ ' + n.toFixed(2).replace('.', ',');
+    }
+
+    function formatUnitUsd(val) {
+      const n = Number(val) || 0;
+      if (n < 0.1) return '$' + n.toFixed(3);
+      return '$' + n.toFixed(2);
+    }
+
+    function quotaColor(percent, status) {
+      if (status === 'critical' || percent <= 15) return '#f43f5e';
+      if (status === 'warning' || percent <= 40) return '#f59e0b';
+      return '#22c55e';
+    }
+
+    function renderProgressRing(percent, status) {
+      const color = quotaColor(percent, status);
+      const safePct = Math.min(100, Math.max(0, Number(percent) || 0));
+      return (
+        '<div class="relative w-8 h-8 flex items-center justify-center flex-shrink-0">' +
+          '<svg class="w-8 h-8 -rotate-90" viewBox="0 0 36 36">' +
+            '<path stroke-width="3.5" stroke="rgba(128,128,148,0.22)" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />' +
+            '<path class="transition-all duration-700" stroke-width="3.5" stroke-linecap="round" stroke="' + color + '" stroke-dasharray="' + safePct + ', 100" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />' +
+          '</svg>' +
+        '</div>'
+      );
+    }
+
+    function syncTabUI() {
+      document.querySelectorAll('.tab-btn').forEach((btn) => {
+        const isActive = btn.dataset.tab === STATE.activeTab;
+        if (isActive) {
+          btn.className = 'tab-btn py-1.5 px-2 rounded-md text-[11px] font-semibold transition-colors bg-[var(--primary)] text-[var(--primary-foreground)] shadow-sm';
+        } else {
+          btn.className = 'tab-btn py-1.5 px-2 rounded-md text-[11px] font-semibold transition-colors text-[var(--muted-foreground)] hover:text-[var(--foreground)]';
+        }
+      });
+
+      document.querySelectorAll('.tab-panel').forEach((panel) => {
+        panel.classList.toggle('hidden', panel.id !== 'tab-' + STATE.activeTab);
+      });
+    }
+
+    function syncModelsToolbarUI() {
+      const data = STATE.latestData;
+      const famCount = data?.modelFamilies?.length || 0;
+      const allCount = data?.allModels?.length || 0;
+      const toggleBtn = document.getElementById('btn-toggle-grouping');
+      toggleBtn.textContent = STATE.groupByFamily
+        ? 'Famílias (' + famCount + ')'
+        : 'Variantes (' + allCount + ')';
+
+      document.querySelectorAll('.provider-pill').forEach((btn) => {
+        const active = btn.dataset.provider === STATE.providerFilter;
+        if (active) {
+          btn.className = 'provider-pill px-2 py-0.5 rounded-full text-[10px] font-semibold border border-[var(--primary)] bg-[var(--primary)]/15 text-[var(--primary)] transition-colors';
+        } else {
+          btn.className = 'provider-pill px-2 py-0.5 rounded-full text-[10px] font-medium border border-[var(--border)] surface-muted text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors';
+        }
+      });
+    }
+
+    function renderSessionModels(sessionModels) {
+      const container = document.getElementById('session-models-list');
+      if (!Array.isArray(sessionModels) || sessionModels.length === 0) {
+        container.innerHTML = '<div class="p-3 text-center text-xs text-[var(--muted-foreground)]">Nenhum turno registrado nesta sessão</div>';
+        return;
+      }
+
+      container.innerHTML = sessionModels.map((m) => {
+        return (
+          '<div class="px-3 py-2 surface-row flex items-center justify-between gap-2 text-xs">' +
+            '<div class="min-w-0">' +
+              '<div class="font-semibold text-[var(--foreground)] truncate">' + escapeHtml(m.model) + '</div>' +
+              '<div class="text-[10px] text-[var(--muted-foreground)] font-mono">' +
+                m.turns + ' turno' + (m.turns === 1 ? '' : 's') +
+                ' • ' + formatCompact(m.inputTokens + m.outputTokens) + ' in/out' +
+                (m.cacheReadTokens > 0 ? ' • ' + formatCompact(m.cacheReadTokens) + ' cache' : '') +
+              '</div>' +
+            '</div>' +
+            '<div class="text-right font-mono flex-shrink-0">' +
+              '<div class="font-bold text-emerald-400">' + formatUsd(m.costUsd) + '</div>' +
+              '<div class="text-[10px] text-[var(--muted-foreground)]">' + formatBrl(m.costBrl) + '</div>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+    }
+
+    function renderQuotaPools(pools, lsConnected) {
+      const container = document.getElementById('quota-pools');
+      const sourceLabel = document.getElementById('quota-source-label');
+
+      if (!lsConnected) {
+        sourceLabel.textContent = 'Desconectado';
+        container.innerHTML =
+          '<div class="bg-[var(--card)] p-3 rounded-xl border border-amber-500/30 text-xs text-[var(--muted-foreground)]">' +
+            '<span class="font-semibold text-amber-400">Language Server offline:</span> cotas ao vivo indisponíveis no momento. Os preços de referência continuam disponíveis na aba <span class="font-semibold text-[var(--foreground)]">Modelos & Custos</span>.' +
+          '</div>';
+        return;
+      }
+
+      sourceLabel.textContent = 'Language Server (ao vivo)';
+      if (!Array.isArray(pools) || pools.length === 0) {
+        container.innerHTML = '<div class="bg-[var(--card)] p-3 rounded-xl border border-[var(--border)] text-xs text-[var(--muted-foreground)]">Nenhuma cota retornada.</div>';
+        return;
+      }
+
+      container.innerHTML = pools.map((pool) => {
+        const windowBadge = pool.windowType === 'semanal'
+          ? '<span class="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-500/15 text-amber-400 border border-amber-500/25">Semanal</span>'
+          : '<span class="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-sky-500/15 text-sky-400 border border-sky-500/25">Janela 5h</span>';
+
+        const resetLabel = pool.resetInText
+          ? 'Renova em ' + escapeHtml(pool.resetInText)
+          : 'Ciclo ativo';
+
+        const familyTags = (pool.families || [])
+          .map((f) => '<span class="px-1.5 py-0.5 rounded text-[9px] surface-muted border border-[var(--border)] text-[var(--muted-foreground)]">' + escapeHtml(f) + '</span>')
+          .join('');
+
+        const hasSession = pool.sessionStats && pool.sessionStats.turns > 0;
+        const sessionFooter = hasSession
+          ? '<div class="px-3 py-1.5 bg-purple-500/10 border-t border-[var(--border)]/60 text-[10px] text-purple-300 flex items-center justify-between font-mono">' +
+              '<span>Usado na sessão: ' + pool.sessionStats.turns + ' turno' + (pool.sessionStats.turns === 1 ? '' : 's') + '</span>' +
+              '<span>' + formatCompact(pool.sessionStats.tokens) + ' tok • ' + formatUsd(pool.sessionStats.costUsd) + '</span>' +
+            '</div>'
+          : '';
+
+        return (
+          '<div class="bg-[var(--card)] rounded-xl border border-[var(--border)] overflow-hidden">' +
+            '<div class="p-3 flex items-center justify-between gap-2">' +
+              '<div class="min-w-0 space-y-1">' +
+                '<div class="flex items-center gap-1.5 flex-wrap">' +
+                  '<span class="text-xs font-semibold text-[var(--foreground)]">' + escapeHtml(pool.name) + '</span>' +
+                  windowBadge +
+                '</div>' +
+                '<div class="text-[11px] text-[var(--muted-foreground)]">' + resetLabel + ' • ' + pool.modelCount + ' variantes</div>' +
+                '<div class="flex items-center gap-1 flex-wrap pt-0.5">' + familyTags + '</div>' +
+              '</div>' +
+              '<div class="flex items-center gap-2 flex-shrink-0">' +
+                '<span class="font-bold font-mono text-xs text-[var(--foreground)]">' + pool.remainingPercent + '%</span>' +
+                renderProgressRing(pool.remainingPercent, pool.status) +
+              '</div>' +
+            '</div>' +
+            sessionFooter +
+          '</div>'
+        );
+      }).join('');
+    }
+
+    function renderModelsCatalog() {
+      const container = document.getElementById('models-list');
+      const data = STATE.latestData;
+      syncModelsToolbarUI();
+
+      if (!data) {
+        container.innerHTML = '<div class="p-3 text-center text-xs text-[var(--muted-foreground)]">Carregando modelos...</div>';
+        return;
+      }
+
+      const sourceList = STATE.groupByFamily
+        ? (data.modelFamilies || [])
+        : (data.allModels || []);
+
+      const query = STATE.searchQuery.trim().toLowerCase();
+      let items = sourceList.filter((item) => {
+        const provider = item.pricing?.provider || item.provider || '';
+        if (STATE.providerFilter !== 'all') {
+          if (!provider.toLowerCase().includes(STATE.providerFilter.toLowerCase())) {
+            return false;
+          }
+        }
+        if (query) {
+          const title = (STATE.groupByFamily ? item.family : item.label) || '';
+          const desc = item.tagDescription || '';
+          const modelId = item.modelId || '';
+          const hay = (title + ' ' + desc + ' ' + provider + ' ' + modelId).toLowerCase();
+          if (!hay.includes(query)) return false;
+        }
+        return true;
+      });
+
+      if (STATE.sortBy === 'cost-asc') {
+        items = [...items].sort((a, b) => (a.simulatedCost?.totalUsd || 0) - (b.simulatedCost?.totalUsd || 0));
+      } else if (STATE.sortBy === 'cost-desc') {
+        items = [...items].sort((a, b) => (b.simulatedCost?.totalUsd || 0) - (a.simulatedCost?.totalUsd || 0));
+      } else if (STATE.sortBy === 'quota-asc') {
+        items = [...items].sort((a, b) => {
+          const qa = a.quota ? a.quota.remainingPercent : 999;
+          const qb = b.quota ? b.quota.remainingPercent : 999;
+          return qa - qb;
+        });
+      }
+
+      if (items.length === 0) {
+        container.innerHTML = '<div class="bg-[var(--card)] p-4 rounded-xl border border-[var(--border)] text-center text-xs text-[var(--muted-foreground)]">Nenhum modelo corresponde ao filtro atual.</div>';
+        return;
+      }
+
+      const actualSessionUsd = Number(data.totalCostUsd) || 0;
+      const hasSessionTokens = (data.totalTokens || 0) > 0;
+
+      container.innerHTML = items.map((item) => {
+        const title = STATE.groupByFamily ? item.family : item.label;
+        const provider = item.pricing?.provider || item.provider || 'Outro';
+        const pricing = item.pricing || { input: 0, output: 0, cacheRead: 0, contextWindow: 1_000_000, tierNote: '' };
+        const usedInSession = Boolean(item.sessionUsage && item.sessionUsage.turns > 0);
+
+        let tagHtml = '';
+        if (item.disabled) {
+          tagHtml += '<span class="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-rose-500/15 text-rose-400 border border-rose-500/25">Indisponível</span>';
+        } else if (item.tagTitle === 'Notice') {
+          tagHtml += '<span class="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-500/15 text-amber-400 border border-amber-500/25">Aviso</span>';
+        } else if (item.tagTitle === 'New') {
+          tagHtml += '<span class="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-sky-500/15 text-sky-400 border border-sky-500/25">Novo</span>';
+        }
+        if (usedInSession) {
+          tagHtml += '<span class="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Usado na sessão</span>';
+        }
+
+        let effortsHtml = '';
+        if (STATE.groupByFamily && Array.isArray(item.efforts) && item.efforts.length > 0) {
+          effortsHtml = '<div class="flex items-center gap-1 flex-wrap mt-1">' +
+            item.efforts.map((eff) => '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono surface-muted border border-[var(--border)] text-[var(--muted-foreground)]">' + escapeHtml(eff) + '</span>').join('') +
+          '</div>';
+        }
+
+        let quotaHtml = '';
+        if (item.disabled) {
+          quotaHtml = '<div class="text-[10px] text-rose-400/90 mt-1.5">Bloqueado no plano atual</div>';
+        } else if (item.quota) {
+          const pct = item.quota.remainingPercent;
+          const color = quotaColor(pct, pct <= 15 ? 'critical' : pct <= 40 ? 'warning' : 'normal');
+          const resetTxt = item.quota.resetInText ? 'Renova em ' + escapeHtml(item.quota.resetInText) : '';
+          quotaHtml =
+            '<div class="mt-2 space-y-1">' +
+              '<div class="flex items-center justify-between text-[10px] font-mono">' +
+                '<span class="text-[var(--muted-foreground)]">' + (item.quota.windowType === 'semanal' ? 'Cota semanal' : 'Cota 5h') + (resetTxt ? ' • ' + resetTxt : '') + '</span>' +
+                '<span class="font-bold text-[var(--foreground)]">' + pct + '%</span>' +
+              '</div>' +
+              '<div class="w-full h-1.5 rounded-full surface-muted overflow-hidden">' +
+                '<div class="h-1.5 rounded-full transition-all duration-500" style="width:' + Math.min(100, Math.max(0, pct)) + '%; background-color:' + color + '"></div>' +
+              '</div>' +
+            '</div>';
+        } else {
+          quotaHtml = '<div class="text-[10px] text-[var(--muted-foreground)] mt-1.5">Cota ao vivo indisponível (offline)</div>';
+        }
+
+        const sim = item.simulatedCost || { totalUsd: 0, totalBrl: 0 };
+        let deltaHtml = '';
+        if (hasSessionTokens && actualSessionUsd > 0) {
+          const diffPct = ((sim.totalUsd - actualSessionUsd) / actualSessionUsd) * 100;
+          if (Math.abs(diffPct) < 0.5) {
+            deltaHtml = '<span class="text-[10px] font-mono text-[var(--muted-foreground)]">(= atual)</span>';
+          } else if (diffPct < 0) {
+            deltaHtml = '<span class="text-[10px] font-mono font-semibold text-emerald-400">(' + diffPct.toFixed(0) + '%)</span>';
+          } else {
+            deltaHtml = '<span class="text-[10px] font-mono font-semibold text-amber-400">(+' + diffPct.toFixed(0) + '%)</span>';
+          }
+        }
+
+        const sessionFooter = usedInSession
+          ? '<div class="px-3 py-1.5 bg-emerald-500/10 border-t border-[var(--border)]/60 flex items-center justify-between text-[10px] font-mono">' +
+              '<span class="text-emerald-400 font-semibold">Gasto real: ' + formatUsd(item.sessionUsage.costUsd) + ' (' + formatBrl(item.sessionUsage.costBrl) + ')</span>' +
+              '<span class="text-[var(--muted-foreground)]">' + item.sessionUsage.turns + ' turno' + (item.sessionUsage.turns === 1 ? '' : 's') + '</span>' +
+            '</div>'
+          : '';
+
+        const simFooter = hasSessionTokens
+          ? '<div class="px-3 py-1.5 surface-muted border-t border-[var(--border)]/60 flex items-center justify-between gap-2 text-[10px]">' +
+              '<span class="text-[var(--muted-foreground)]">Se rodasse toda a sessão aqui:</span>' +
+              '<span class="font-mono font-semibold text-[var(--foreground)]">' + formatUsd(sim.totalUsd) + ' <span class="text-[var(--muted-foreground)] font-normal">(' + formatBrl(sim.totalBrl) + ')</span> ' + deltaHtml + '</span>' +
+            '</div>'
+          : '';
+
+        const borderClass = usedInSession
+          ? 'border-emerald-500/40'
+          : item.disabled
+            ? 'border-[var(--border)] opacity-75'
+            : 'border-[var(--border)]';
+
+        return (
+          '<div class="bg-[var(--card)] rounded-xl border ' + borderClass + ' overflow-hidden">' +
+            '<div class="p-3">' +
+              '<div class="flex items-start justify-between gap-2">' +
+                '<div class="min-w-0">' +
+                  '<div class="flex items-center gap-1.5 flex-wrap">' +
+                    '<span class="text-xs font-bold text-[var(--foreground)]">' + escapeHtml(title) + '</span>' +
+                    '<span class="px-1.5 py-0.5 rounded text-[9px] font-medium surface-muted text-[var(--muted-foreground)]">' + escapeHtml(provider) + '</span>' +
+                    tagHtml +
+                  '</div>' +
+                  (item.tagDescription ? '<div class="text-[10px] text-[var(--muted-foreground)] mt-0.5 leading-snug">' + escapeHtml(item.tagDescription) + '</div>' : '') +
+                  effortsHtml +
+                '</div>' +
+              '</div>' +
+              quotaHtml +
+              '<div class="mt-2 pt-2 border-t border-[var(--border)]/60 flex items-center justify-between gap-2 flex-wrap text-[10px] font-mono">' +
+                '<div class="flex items-center gap-2 flex-wrap text-[var(--foreground)]">' +
+                  '<span><span class="text-[var(--muted-foreground)]">In:</span> ' + formatUnitUsd(pricing.input) + '</span>' +
+                  '<span><span class="text-[var(--muted-foreground)]">Out:</span> ' + formatUnitUsd(pricing.output) + '</span>' +
+                  '<span><span class="text-[var(--muted-foreground)]">Cache:</span> ' + formatUnitUsd(pricing.cacheRead) + '</span>' +
+                  '<span><span class="text-[var(--muted-foreground)]">Ctx:</span> ' + formatContextLabel(pricing.contextWindow) + '</span>' +
+                '</div>' +
+                '<span class="text-[9px] text-[var(--muted-foreground)] font-sans">' + escapeHtml(pricing.tierNote) + '</span>' +
+              '</div>' +
+            '</div>' +
+            sessionFooter +
+            simFooter +
+          '</div>'
+        );
+      }).join('');
+    }
+
+    function renderTurnsHistory(turns) {
+      const container = document.getElementById('turns-list');
+      document.getElementById('history-count').textContent = (turns ? turns.length : 0) + ' passos';
+
+      if (!Array.isArray(turns) || turns.length === 0) {
+        container.innerHTML = '<div class="p-3 text-center text-xs text-[var(--muted-foreground)]">Nenhum turno registrado nesta conversa.</div>';
+        return;
+      }
+
+      container.innerHTML = turns.map((t) => {
+        const timeStr = t.time
+          ? new Date(t.time).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+          : '';
+        const checkpointBadge = t.isCheckpoint
+          ? '<span class="px-1 py-0.2 rounded text-[9px] bg-amber-500/15 text-amber-400 border border-amber-500/25">Checkpoint</span>'
+          : '';
+
+        return (
+          '<div class="p-2.5 surface-row flex items-start justify-between gap-2 text-xs transition-colors">' +
+            '<div class="space-y-1 min-w-0 flex-1">' +
+              '<div class="flex items-center gap-1.5 flex-wrap">' +
+                '<span class="font-bold text-[var(--foreground)] font-mono text-[11px]">Turno #' + escapeHtml(t.step) + '</span>' +
+                '<span class="px-1.5 py-0.5 rounded text-[9px] font-medium surface-muted border border-[var(--border)] text-[var(--foreground)] truncate max-w-[165px]">' + escapeHtml(t.model) + '</span>' +
+                checkpointBadge +
+                '<span class="text-[10px] text-[var(--muted-foreground)]">' + escapeHtml(timeStr) + '</span>' +
+              '</div>' +
+              (t.tools ? '<div class="text-[10px] text-amber-400 truncate">🛠️ ' + escapeHtml(t.tools) + '</div>' : '') +
+            '</div>' +
+            '<div class="text-right font-mono flex-shrink-0">' +
+              '<div class="font-semibold text-[var(--foreground)] text-[11px]">+' + formatCompact(t.input + t.output) + ' <span class="text-[10px] text-[var(--muted-foreground)] font-normal">tok</span></div>' +
+              '<div class="text-[10px] text-emerald-400 font-semibold">' + formatUsd(t.costUsd) + '</div>' +
+              (t.cache > 0 ? '<div class="text-[9px] text-purple-400">⚡ ' + formatCompact(t.cache) + ' cache</div>' : '') +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+    }
+
+    async function loadConversations() {
+      try {
+        const ensureId = STATE.activeConvId || (window.sidecar && window.sidecar.conversationId) || '';
+        const url = ensureId
+          ? '/api/conversations?ensureId=' + encodeURIComponent(ensureId)
+          : '/api/conversations';
+        const res = await doFetch(url);
+        if (!res.ok) return;
+        const convs = await res.json();
+        const select = document.getElementById('conv-select');
+        const prevSelected = STATE.activeConvId || select.value;
+
+        if (Array.isArray(convs) && convs.length > 0) {
+          select.innerHTML = '';
+          convs.forEach((c, idx) => {
+            const opt = document.createElement('option');
+            opt.value = c.id;
+            const timeTxt = new Date(c.updatedAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            const labelTitle = c.title ? c.title : c.id.substring(0, 8) + '...';
+            opt.textContent = (idx === 0 ? '★ ' : '') + labelTitle + ' (' + timeTxt + ')';
+            select.appendChild(opt);
+          });
+
+          const sidecarId = window.sidecar && window.sidecar.conversationId;
+          if (prevSelected && convs.some((c) => c.id === prevSelected)) {
+            select.value = prevSelected;
+          } else if (sidecarId && convs.some((c) => c.id === sidecarId)) {
+            select.value = sidecarId;
+          } else {
+            select.value = convs[0].id;
+          }
+          STATE.activeConvId = select.value;
+        }
+      } catch (e) {
+        console.error('Erro ao carregar conversas:', e);
+      }
+    }
+
+    async function updateStats(forceRefresh = false) {
+      try {
+        const params = new URLSearchParams();
+        if (STATE.activeConvId) params.set('conversationId', STATE.activeConvId);
+        params.set('usdToBrl', String(STATE.usdToBrl));
+        if (forceRefresh) params.set('refresh', '1');
+
+        const res = await doFetch('/api/stats?' + params.toString());
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!data) return;
+        STATE.latestData = data;
+
+        // Plan & LS status badge
+        const planBadge = document.getElementById('plan-badge');
+        if (data.lsConnected) {
+          planBadge.textContent = data.planInfo?.tierName || 'Conectado';
+          planBadge.className = 'inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-sky-500/10 text-sky-400 border border-sky-500/25';
+        } else {
+          planBadge.textContent = 'Offline';
+          planBadge.className = 'inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-amber-500/10 text-amber-400 border border-amber-500/25';
+        }
+
+        document.getElementById('model-label').textContent = data.model || 'Desconhecido';
+        document.getElementById('turn-badge').textContent = (data.turnsCount || 0) + ' turnos';
+
+        // KPIs
+        document.getElementById('val-total-tokens').textContent = formatCompact(data.totalTokens || 0);
+        document.getElementById('val-prompt-out-sum').textContent = formatCompact(data.totalInput || 0) + ' in + ' + formatCompact(data.totalOutput || 0) + ' out';
+
+        document.getElementById('val-cost-usd').textContent = formatUsd(data.totalCostUsd || 0);
+        document.getElementById('val-cost-brl').textContent = '≈ ' + formatBrl(data.totalCostBrl || 0);
+
+        const cachePct = data.totalTokens > 0 ? Math.round(((data.totalCache || 0) / data.totalTokens) * 100) : 0;
+        document.getElementById('val-savings-usd').textContent = formatUsd(data.totalCacheSavingsUsd || 0);
+        document.getElementById('val-savings-sub').textContent = '≈ ' + formatBrl(data.totalCacheSavingsBrl || 0) + ' (' + cachePct + '% cache)';
+
+        const allModels = data.allModels || [];
+        const availCount = allModels.filter((m) => !m.disabled).length;
+        document.getElementById('val-models-avail').textContent = availCount + ' / ' + allModels.length;
+
+        const creditsParts = [];
+        if (data.planInfo?.availablePromptCredits !== null && data.planInfo?.availablePromptCredits !== undefined) {
+          creditsParts.push('Prompt: ' + formatNumber(data.planInfo.availablePromptCredits));
+        }
+        if (data.planInfo?.availableFlowCredits !== null && data.planInfo?.availableFlowCredits !== undefined) {
+          creditsParts.push('Flow: ' + formatNumber(data.planInfo.availableFlowCredits));
+        }
+        document.getElementById('val-credits-sub').textContent = creditsParts.length > 0
+          ? creditsParts.join(' • ')
+          : (data.lsConnected ? 'Modelos ativos no plano' : 'Modo offline');
+
+        // Context bar
+        const ctxMax = data.maxContextTokens || 1_000_000;
+        const ctxPct = data.contextPercent || 0;
+        document.getElementById('context-window-title').textContent = 'Uso da Janela de Contexto (' + formatContextLabel(ctxMax) + ')';
+        document.getElementById('context-percent').textContent = ctxPct + '%';
+        document.getElementById('active-context-label').textContent = formatNumber(data.activeContextTokens || 0) + ' tokens ativos';
+        document.getElementById('max-context-label').textContent = formatNumber(ctxMax) + ' máx';
+
+        const bar = document.getElementById('context-bar');
+        bar.style.width = (data.activeContextTokens > 0 ? Math.min(100, Math.max(1, ctxPct)) : 0) + '%';
+        if (ctxPct > 80) {
+          bar.className = 'bg-rose-500 h-2 rounded-full transition-all duration-500 ease-out';
+        } else if (ctxPct > 50) {
+          bar.className = 'bg-amber-400 h-2 rounded-full transition-all duration-500 ease-out';
+        } else {
+          bar.className = 'bg-sky-400 h-2 rounded-full transition-all duration-500 ease-out';
+        }
+
+        // Token breakdown
+        document.getElementById('val-input-tokens').textContent = formatNumber(data.totalInput || 0);
+        document.getElementById('val-output-tokens').textContent = formatNumber(data.totalOutput || 0);
+        document.getElementById('val-cache-tokens').textContent = formatNumber(data.totalCache || 0) + ' (' + cachePct + '%)';
+
+        // Subviews
+        renderSessionModels(data.sessionModels || []);
+        renderQuotaPools(data.quotaPools || [], Boolean(data.lsConnected));
+        renderModelsCatalog();
+        renderTurnsHistory(data.turns || []);
+
+        document.getElementById('last-updated').textContent = 'Atualizado às ' + new Date().toLocaleTimeString('pt-BR');
+      } catch (e) {
+        console.error('Erro na atualização:', e);
+      }
+    }
+
+    // Event bindings
+    document.querySelectorAll('.tab-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        STATE.activeTab = btn.dataset.tab;
+        syncTabUI();
+      });
+    });
+
+    document.getElementById('btn-goto-models').addEventListener('click', () => {
+      STATE.activeTab = 'models';
+      syncTabUI();
+    });
+
+    document.getElementById('conv-select').addEventListener('change', (e) => {
+      STATE.activeConvId = e.target.value;
+      updateStats();
+    });
+
+    const usdInput = document.getElementById('usd-brl-input');
+    usdInput.value = STATE.usdToBrl.toFixed(2);
+    usdInput.addEventListener('input', (e) => {
+      const n = Number(e.target.value);
+      if (Number.isFinite(n) && n >= 0.1 && n <= 100) {
+        STATE.usdToBrl = n;
+        try {
+          localStorage.setItem('tokenTracker.usdToBrl', String(n));
+        } catch {}
+        updateStats();
+      }
+    });
+
+    document.getElementById('btn-refresh').addEventListener('click', async () => {
+      const icon = document.getElementById('refresh-icon');
+      icon.classList.add('animate-spin');
+      await loadConversations();
+      await updateStats(true);
+      setTimeout(() => icon.classList.remove('animate-spin'), 350);
+    });
+
+    document.getElementById('models-search').addEventListener('input', (e) => {
+      STATE.searchQuery = e.target.value;
+      renderModelsCatalog();
+    });
+
+    document.getElementById('btn-toggle-grouping').addEventListener('click', () => {
+      STATE.groupByFamily = !STATE.groupByFamily;
+      try {
+        localStorage.setItem('tokenTracker.groupByFamily', String(STATE.groupByFamily));
+      } catch {}
+      renderModelsCatalog();
+    });
+
+    document.querySelectorAll('.provider-pill').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        STATE.providerFilter = btn.dataset.provider;
+        renderModelsCatalog();
+      });
+    });
+
+    document.getElementById('models-sort').addEventListener('change', (e) => {
+      STATE.sortBy = e.target.value;
+      renderModelsCatalog();
+    });
+
+    (async () => {
+      syncTabUI();
+      syncModelsToolbarUI();
+      await loadConversations();
+      await updateStats();
+      setInterval(() => {
+        if (!document.hidden) updateStats();
+      }, 2500);
+      setInterval(() => {
+        if (!document.hidden) loadConversations();
+      }, 15000);
+    })();
+  </script>
+</body>
+</html>
