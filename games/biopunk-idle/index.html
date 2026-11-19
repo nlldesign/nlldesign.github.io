@@ -2044,7 +2044,7 @@
                 } else if (playerState.isSprinting) {
                     const sFrame = Math.floor((elapsed * 12) % 5);
                     playerSprite.material.map = getSpriteTexture('player_sprint_' + sFrame);
-                } else if (distToWp > 0.5) {
+                } else if (Math.hypot(playerState.waypoint.x - playerState.x, playerState.waypoint.z - playerState.z) > 0.5) {
                     const wFrame = Math.floor((elapsed * 9) % 6);
                     playerSprite.material.map = getSpriteTexture('player_walk_' + wFrame);
                 } else {
