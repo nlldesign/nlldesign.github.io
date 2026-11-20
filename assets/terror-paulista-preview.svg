@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <pattern id="gridPat" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect width="800" height="450" fill="url(#gridPat)"/>
+  
+  <circle cx="620" cy="100" r="190" fill="rgba(239,68,68,0.14)"/>
+  <circle cx="170" cy="360" r="170" fill="rgba(16,185,129,0.08)"/>
+  <rect x="52" y="38" width="696" height="374" rx="20" fill="#100c0e" stroke="rgba(239,68,68,0.35)"/>
+  <text x="80" y="72" fill="#fca5a5" font-family="monospace" font-size="12" font-weight="bold">TERROR NA PAULISTA 3D  //  MASP • TRIANON • METRO LINHA 2-VERDE</text>
+  <!-- Iconic MASP Red Pillars & Suspended Volume -->
+  <rect x="80" y="98" width="640" height="212" rx="14" fill="#161114" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="150" y="132" width="18" height="138" fill="#ef4444"/>
+  <rect x="632" y="132" width="18" height="138" fill="#ef4444"/>
+  <rect x="150" y="124" width="500" height="16" fill="#ef4444"/>
+  <rect x="168" y="148" width="464" height="68" fill="#231c20" stroke="rgba(255,255,255,0.15)"/>
+  <text x="275" y="188" fill="#fecaca" font-family="monospace" font-size="13" font-weight="bold">VAO LIVRE DO MASP // 03:14 AM</text>
+  <text x="242" y="252" fill="#a1a1aa" font-family="monospace" font-size="11">CAVALETES DE CRISTAL (LINA BO BARDI)  •  FURTIVIDADE &amp; DINAMO</text>
+  <!-- Bottom HUD -->
+  <rect x="80" y="326" width="640" height="56" rx="12" fill="#181216" stroke="rgba(239,68,68,0.3)"/>
+  <text x="104" y="350" fill="#fca5a5" font-family="monospace" font-size="11">BATERIA DO DINAMO [F]: 42%   •   RUIDO: SILENCIOSO (AGACHADO)</text>
+  <text x="104" y="368" fill="#71717a" font-family="monospace" font-size="10">THREE.JS FIRST-PERSON SURVIVAL HORROR  •  WEB AUDIO PROCEDURAL</text>
+
+</svg>

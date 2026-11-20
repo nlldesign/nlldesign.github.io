@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <pattern id="gridPat" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect width="800" height="450" fill="url(#gridPat)"/>
+  
+  <circle cx="400" cy="225" r="210" fill="rgba(168,85,247,0.15)"/>
+  <rect x="52" y="38" width="696" height="374" rx="20" fill="#120f1d" stroke="rgba(168,85,247,0.35)"/>
+  <text x="80" y="72" fill="#d8b4fe" font-family="monospace" font-size="12" font-weight="bold">WIZARD CASTLE 3D  //  RETRO BOOMER-SHOOTER SPELL FPS</text>
+  <!-- Castle Dungeon Corridor & Staff HUD -->
+  <rect x="80" y="98" width="640" height="216" rx="14" fill="#191429" stroke="rgba(168,85,247,0.3)"/>
+  <rect x="220" y="134" width="360" height="144" fill="#110d1c" stroke="rgba(255,255,255,0.1)"/>
+  <circle cx="400" cy="206" r="28" fill="rgba(34,211,238,0.2)" stroke="#22d3ee" stroke-width="2"/>
+  <circle cx="400" cy="206" r="6" fill="#f59e0b"/>
+  <!-- Retro DOOM-style Bottom Status Bar -->
+  <rect x="80" y="326" width="640" height="58" rx="10" fill="#211a36" stroke="#a855f7" stroke-opacity="0.5"/>
+  <text x="104" y="360" fill="#f3e8ff" font-family="monospace" font-size="14" font-weight="bold">HP: 100%   |   MANA: 180   |   SPELL: ARCANE BOLT   |   FLOOR 03</text>
+
+</svg>

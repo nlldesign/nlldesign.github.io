@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <pattern id="gridPat" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect width="800" height="450" fill="url(#gridPat)"/>
+  
+  <circle cx="640" cy="95" r="190" fill="rgba(168,85,247,0.12)"/>
+  <circle cx="160" cy="360" r="170" fill="rgba(34,211,238,0.09)"/>
+  <rect x="52" y="38" width="696" height="374" rx="20" fill="#111117" stroke="rgba(255,255,255,0.1)"/>
+  <!-- Sidebar -->
+  <rect x="52" y="38" width="164" height="374" rx="20" fill="#16161f"/>
+  <text x="74" y="74" fill="#e4e4e7" font-family="monospace" font-size="11" font-weight="bold">OKLCH ADMIN v4</text>
+  <rect x="68" y="96" width="132" height="28" rx="8" fill="rgba(168,85,247,0.22)" stroke="#a855f7" stroke-opacity="0.5"/>
+  <text x="82" y="114" fill="#f3e8ff" font-family="sans-serif" font-size="11">1. Visao Geral</text>
+  <text x="82" y="146" fill="#a1a1aa" font-family="sans-serif" font-size="11">2. Vendas &amp; Pedidos</text>
+  <text x="82" y="176" fill="#a1a1aa" font-family="sans-serif" font-size="11">3. Clientes CRM</text>
+  <text x="82" y="206" fill="#a1a1aa" font-family="sans-serif" font-size="11">4. Produtos &amp; Estoque</text>
+  <text x="82" y="236" fill="#a1a1aa" font-family="sans-serif" font-size="11">5. Financeiro DRE</text>
+  <text x="82" y="266" fill="#a1a1aa" font-family="sans-serif" font-size="11">6. Configuracoes</text>
+  <rect x="68" y="356" width="132" height="28" rx="14" fill="#22222e"/>
+  <text x="84" y="374" fill="#67e8f9" font-family="monospace" font-size="10">OKLCH LIGHT/DARK</text>
+  <!-- Main Area -->
+  <text x="242" y="74" fill="#ffffff" font-family="sans-serif" font-size="16" font-weight="600">Visao Geral Executiva  •  Tokens Perceptuais OKLCH</text>
+  <rect x="242" y="96" width="150" height="78" rx="12" fill="#181822" stroke="rgba(255,255,255,0.08)"/>
+  <text x="258" y="118" fill="#a1a1aa" font-family="monospace" font-size="10">RECEITA MENSAL</text>
+  <text x="258" y="148" fill="#10b981" font-family="sans-serif" font-size="20" font-weight="700">R$ 142,8k</text>
+  <rect x="408" y="96" width="150" height="78" rx="12" fill="#181822" stroke="rgba(255,255,255,0.08)"/>
+  <text x="424" y="118" fill="#a1a1aa" font-family="monospace" font-size="10">PEDIDOS ATIVOS</text>
+  <text x="424" y="148" fill="#22d3ee" font-family="sans-serif" font-size="20" font-weight="700">1.284</text>
+  <rect x="574" y="96" width="150" height="78" rx="12" fill="#181822" stroke="rgba(255,255,255,0.08)"/>
+  <text x="590" y="118" fill="#a1a1aa" font-family="monospace" font-size="10">CONVERSAO</text>
+  <text x="590" y="148" fill="#d8b4fe" font-family="sans-serif" font-size="20" font-weight="700">4.82%</text>
+  <!-- Chart & Tokens Card -->
+  <rect x="242" y="192" width="482" height="192" rx="14" fill="#16161f" stroke="rgba(255,255,255,0.08)"/>
+  <text x="262" y="218" fill="#a1a1aa" font-family="monospace" font-size="10">--primary: oklch(0.62 0.21 285)  •  --chart-1..5</text>
+  <path d="M 266 340 L 330 302 L 394 316 L 458 268 L 522 280 L 586 238 L 650 248 L 700 218" stroke="#a855f7" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 266 355 L 330 335 L 394 342 L 458 310 L 522 315 L 586 286 L 650 292 L 700 264" stroke="#22d3ee" stroke-width="2" stroke-dasharray="5 5" fill="none"/>
+
+</svg>

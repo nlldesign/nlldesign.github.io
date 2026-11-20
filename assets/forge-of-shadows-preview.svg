@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <pattern id="gridPat" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect width="800" height="450" fill="url(#gridPat)"/>
+  
+  <circle cx="400" cy="225" r="200" fill="rgba(245,158,11,0.12)"/>
+  <rect x="52" y="38" width="696" height="374" rx="20" fill="#12100e" stroke="rgba(245,158,11,0.3)"/>
+  <text x="80" y="72" fill="#fcd34d" font-family="monospace" font-size="12" font-weight="bold">FORGE OF SHADOWS  //  240x180 PIXEL-ART TURN-BASED DUNGEON RPG</text>
+  <!-- Viewport + Party Stats & Combat Log -->
+  <rect x="80" y="98" width="410" height="280" rx="12" fill="#1b1714" stroke="rgba(245,158,11,0.35)"/>
+  <text x="102" y="126" fill="#fbbf24" font-family="monospace" font-size="10">CRIPTA DA FORJA  •  ANDAR B2  •  RENDER 240x180</text>
+  <rect x="130" y="148" width="310" height="164" fill="#110e0c" stroke="#78350f"/>
+  <text x="200" y="234" fill="#fde68a" font-family="monospace" font-size="14" font-weight="bold">[ GUARDIAO DE CINZAS ]</text>
+  <text x="102" y="352" fill="#e4e4e7" font-family="monospace" font-size="11">[ATACAR]   [MAGIA RUNICA]   [DEFENDER]   [POCAO]</text>
+  <rect x="510" y="98" width="210" height="280" rx="12" fill="#1b1714" stroke="rgba(255,255,255,0.08)"/>
+  <text x="530" y="126" fill="#fcd34d" font-family="monospace" font-size="11" font-weight="bold">STATUS DO HERÓI</text>
+  <text x="530" y="160" fill="#ef4444" font-family="monospace" font-size="12">VIDA:  142 / 160</text>
+  <text x="530" y="186" fill="#38bdf8" font-family="monospace" font-size="12">ETHER:  64 / 80</text>
+  <text x="530" y="212" fill="#fbbf24" font-family="monospace" font-size="12">OURO:   410 G</text>
+  <text x="530" y="256" fill="#a1a1aa" font-family="monospace" font-size="10">ESPADA FORJADA +3</text>
+  <text x="530" y="276" fill="#a1a1aa" font-family="monospace" font-size="10">ESCUDO DE OBSIDIANA</text>
+
+</svg>

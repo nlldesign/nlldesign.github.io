@@ -1349,7 +1349,10 @@
         readCaseBtn: "ver detalhes",
         techsLabel: "softwares &amp; disciplinas",
         openVercel: "abrir na vercel <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
-        officialSite: "site oficial <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        openGemini: "abrir no gemini <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        openAiStudio: "abrir no ai studio <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        playOnGeminiBtn: "jogar no gemini",
+        officialSite: "abrir aplicação <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         labelDesafio: "desafio",
         labelAbordagem: "abordagem",
         labelResultado: "resultado",
@@ -1412,7 +1415,10 @@
         readCaseBtn: "view details",
         techsLabel: "tools &amp; disciplines",
         openVercel: "open on vercel <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
-        officialSite: "official website <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        openGemini: "open in gemini <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        openAiStudio: "open in ai studio <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
+        playOnGeminiBtn: "play on gemini",
+        officialSite: "open live app <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         labelDesafio: "challenge",
         labelAbordagem: "approach",
         labelResultado: "outcome",
@@ -1867,6 +1873,256 @@
           githubUrl: 'https://github.com/nlldesign/nlldesign.github.io/tree/main/games/biopunk-idle',
           embedUrl: 'games/biopunk-idle/index.html',
           gallery: []
+        },
+
+        {
+          id: 'apex-impact',
+          category: 'jogos',
+          tag: 'webgl2 • destruição veicular',
+          num: '07',
+          title: 'apex impact: crash tour',
+          subtitle: 'corrida arcade &amp; deformação de malha 3d em tempo real • aftertouch e crashbreaker',
+          summary: 'jogo 3d de destruição veicular em webgl2 e three.js com garagem pbr (vortex gt-r, ironclad v8, colossus hauler), deformação física de vértices em colisões, câmera lenta aftertouch e explosão crashbreaker.',
+          image: 'assets/apex-impact-real.png?v=real4',
+          metrics: [
+            { val: 'webgl2 pbr', label: 'deformação de malha 3d em tempo real' },
+            { val: '5 veículos', label: 'vortex gt-r, ironclad v8, spyder, titan &amp; hauler' },
+            { val: 'crash tour', label: 'modo carreira, pista rápida &amp; laboratório de impacto' }
+          ],
+          desafio: 'recriar a sensação visceral de impacto e deformação metálica dos clássicos de corrida arcade diretamente no navegador sem depender de engines pesadas ou downloads externos.',
+          abordagem: 'construído no google ai studio com webgl2 e three.js: garagem interativa pbr com seleção de pintura e telemetria (massa de impacto, velocidade máxima e raio crashbreaker), física rígida com deslocamento dinâmico de vértices nas batidas, slow-motion direcional aftertouch pós-colisão e gatilho de detonação crashbreaker.',
+          resultado: 'jogo 3d publicado e acessível publicamente no google ai studio com carregamento instantâneo e três modos de jogo.',
+          techs: ['webgl2', 'three.js', 'pbr materials', 'real-time mesh deformation', 'google ai studio'],
+          vercelUrl: null,
+          siteUrl: 'https://apex-impact-crash-tour.ai.studio/',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: [
+            { src: 'assets/apex-impact-real.png', title: 'garagem pbr do apex impact: crash tour publicada ao vivo em apex-impact-crash-tour.ai.studio' }
+          ]
+        },
+
+        {
+          id: 'ferro-velho-gerais',
+          category: 'jogos',
+          tag: 'three.js • simulador 3d',
+          num: '08',
+          title: 'ferro-velho gerais 3d',
+          subtitle: 'simulador 3d de desmanche, oficina mecânica e revenda no interior de minas gerais',
+          summary: 'simulador 3d em three.js onde você desmonta e restaura carros peça por peça (20 componentes por veículo), abre o capô articulado para sacar motor 1.6, radiador e bateria, vende sucatas na balança e evolui sua loja em 3 fases.',
+          image: 'assets/ferro-velho-preview.svg?v=real4',
+          metrics: [
+            { val: '20 peças', label: 'desmanche completo por veículo &amp; vista explodida' },
+            { val: 'cofre 3d', label: 'capô articulado com motor, radiador, bateria e alternador' },
+            { val: '3 fases', label: 'barracão de sucata → garagem → revenda gerais' }
+          ],
+          desafio: 'transformar a complexidade mecânica de desmontar e restaurar um automóvel inteiro em uma interação espacial 3d clara, tátil e recompensadora dentro do navegador.',
+          abordagem: 'arquitetura em react, typescript, three.js e web audio procedural criada no google ai studio: ordem mecânica realista (remover radiador e filtro de ar antes de sacar o bloco 1.6), cavaletes hidráulicos ao retirar rodas, teste de ignição com ronco e fumaça, cotação diária de ferro/alumínio/cobre/borracha e evolução visual da fachada no pátio mineiro.',
+          resultado: 'simulador 3d completo com câmera orbital, vista explodida, oficina de reparo e progressão econômica.',
+          techs: ['three.js', 'react', 'typescript', 'web audio procedural', 'spatial ux', 'google ai studio'],
+          vercelUrl: null,
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'toxic-sluice',
+          category: 'jogos',
+          tag: 'webgl2 • sdf shader runner',
+          num: '09',
+          title: 'toxic sluice',
+          subtitle: 'survival runner 3d em 1ª pessoa em esgoto inundado com refração óptica e beer-lambert',
+          summary: 'runner 3d de sobrevivência em primeira pessoa renderizado via shaders webgl2 sdf dentro de galerias subterrâneas tóxicas com refração óptica em tempo real, reflexos fresnel e áudio procedural.',
+          image: 'assets/toxic-sluice-preview.svg?v=real4',
+          metrics: [
+            { val: 'webgl2 sdf', label: 'shaders glsl com refração e reflexo fresnel' },
+            { val: 'beer-lambert', label: 'absorção física de luz no fluido tóxico' },
+            { val: 'web audio', label: 'paisagem sonora hidráulica 100% procedural' }
+          ],
+          desafio: 'renderizar fluidos translúcidos, túneis úmidos e iluminação volumétrica convincente a 60fps no navegador sem carregar texturas externas pesadas.',
+          abordagem: 'desenvolvido no google ai studio combinando signed distance fields (sdf) em webgl2, cálculo físico de atenuação cromática beer-lambert na água contaminada, reflexos especulares fresnel e síntese sonora contínua via web audio api.',
+          resultado: 'experiência sensorial 3d enxuta que demonstra domínio de shaders matemáticos e atmosfera diegética.',
+          techs: ['webgl2', 'glsl sdf shaders', 'beer-lambert optics', 'web audio api', 'google ai studio'],
+          vercelUrl: null,
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'liminal-prism',
+          category: 'jogos',
+          tag: 'webgl2 • raymarching 3d',
+          num: '10',
+          title: 'liminal prism: backrooms webgl2',
+          subtitle: 'sobrevivência 3d em poolrooms &amp; backrooms com raymarching em tempo real',
+          summary: 'exploração liminar em primeira pessoa construída em arquivo html único com motor de raymarching webgl2 puro: piscinas infinitas de azulejos, cáusticas de água em tempo real, sombras suaves e pressão psicológica.',
+          image: 'assets/liminal-prism-preview.svg?v=real4',
+          metrics: [
+            { val: 'raymarching', label: 'geometria infinita gerada em fragment shader' },
+            { val: 'cáusticas', label: 'reflexos e ondulação de água em tempo real' },
+            { val: 'zero assets', label: '100% matemático em arquivo html único' }
+          ],
+          desafio: 'transmitir a inquietude arquitetônica das poolrooms — espaços infinitos, iluminação úmida e silêncio reverberante — usando exclusivamente matemática de shaders em um único arquivo.',
+          abordagem: 'implementado no gemini canvas com fragment shader webgl2 customizado executando raymarching de distância assinada (sdf), oclusão ambiental analítica, cáusticas procedurais nos azulejos submersos e controle de câmera fluida.',
+          resultado: 'protótipo webgl2 publicado via link direto do gemini canvas, pronto para abrir e explorar no navegador.',
+          techs: ['webgl2', 'raymarching glsl', 'procedural caustics', 'liminal spatial ux', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/KwpcVrce837b',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'terror-paulista',
+          category: 'jogos',
+          tag: 'three.js • survival horror sp',
+          num: '11',
+          title: 'terror na paulista — mvp 3d',
+          subtitle: 'survival horror 1ª pessoa na av. paulista, vão livre do masp, trianon &amp; metrô linha 2',
+          summary: 'jogo 3d de terror furtivo ambientado em marcos reais de são paulo (masp com cavaletes de cristal de lina bo bardi, parque trianon e estação trianon-masp), com lanterna a dínamo, agachamento, esconderijos e áudio procedural.',
+          image: 'assets/terror-paulista-preview.svg?v=real4',
+          metrics: [
+            { val: '4 cenários sp', label: 'paulista, masp, parque trianon &amp; metrô verde' },
+            { val: 'furtividade', label: 'ruído dinâmico, agachamento e dínamo manual' },
+            { val: 'web audio', label: 'passos, sirenes e tensão 100% sintetizados' }
+          ],
+          desafio: 'traduzir a arquitetura brutalista da avenida paulista na madrugada em um level design de furtividade onde luz e barulho precisam ser administrados a cada passo.',
+          abordagem: 'construído em arquivo único no gemini canvas com three.js e web audio api: recriação espacial dos pilares vermelhos e cavaletes de vidro do masp, travessia pelo parque trianon e catracas do metrô, mecânica de recarregar a lanterna no dínamo (gerando ruído que atrai a criatura) e indicador diegético de visibilidade.',
+          resultado: 'mvp 3d jogável publicado via link compartilhável do gemini canvas.',
+          techs: ['three.js', 'web audio api', 'stealth game design', 'são paulo architecture', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/orAoVLFiQN0S',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'sp-zona-morta',
+          category: 'jogos',
+          tag: 'mobile 9:16 • canvas survival',
+          num: '12',
+          title: 'sp zona morta: protocolo 011',
+          subtitle: 'sobrevivência a zumbis 3ª pessoa em formato vertical 9:16 ao longo de 10 atos em são paulo',
+          summary: 'jogo mobile-first em proporção vertical 9:16 dividido em 10 atos pela capital paulista: movimentação com uma mão, mira tática, gestão de munição e hordas progressivas.',
+          image: 'assets/sp-zona-morta-preview.svg?v=real4',
+          metrics: [
+            { val: 'formato 9:16', label: 'ergonomia mobile vertical para jogar com 1 mão' },
+            { val: '10 atos', label: 'progressão narrativa por regiões de são paulo' },
+            { val: 'html5 canvas', label: 'engine 2d/3ª pessoa leve em arquivo único' }
+          ],
+          desafio: 'desenhar um jogo de ação e sobrevivência com leitura imediata e controle confortável na orientação vertical de smartphones (estilo 9:16), sem obstruir o campo de visão com dedos.',
+          abordagem: 'desenvolvido no gemini canvas em html5 canvas e javascript puro: área inferior dedicada ao controle de polegar, hud compacto no topo com ato atual e integridade, progressão estruturada em 10 zonas de contenção pelo ddd 011 e dificuldade adaptativa.',
+          resultado: 'protótipo mobile-first publicado via link direto do gemini canvas.',
+          techs: ['html5 canvas', 'mobile 9:16 ux', 'one-hand ergonomics', 'game loop js', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/PCI3G9isG1RA',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'burnout-overdrive',
+          category: 'jogos',
+          tag: 'three.js • corrida arcade',
+          num: '13',
+          title: 'burnout overdrive 3d',
+          subtitle: 'corrida arcade 3d em alta velocidade, drift, tráfego urbano e takedowns',
+          summary: 'corrida arcade 3d inspirada na franquia burnout: acumule nitro dirigindo na contramão e tirando fino do tráfego, acione o boost contínuo e jogue rivais contra as muretas.',
+          image: 'assets/burnout-overdrive-preview.svg?v=real4',
+          metrics: [
+            { val: '300+ km/h', label: 'sensação de velocidade com fov dinâmico' },
+            { val: 'takedowns', label: 'combate veicular lateral contra rivais' },
+            { val: 'nitro x3', label: 'recarga por contramão, drift e near-miss' }
+          ],
+          desafio: 'entregar sensação de velocidade extrema e resposta imediata de direção arcade em three.js mantendo legibilidade da pista em alta velocidade.',
+          abordagem: 'prototipado no gemini canvas com three.js: abertura dinâmica de campo de visão (fov) ao acionar o turbo, partículas de faísca no contato entre chassis, geração contínua de tráfego e câmera de impacto nos takedowns.',
+          resultado: 'jogo arcade 3d publicado via link direto do gemini canvas.',
+          techs: ['three.js', 'webgl', 'arcade vehicle physics', 'dynamic fov', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/8JrqbYco5Drt',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'wizard-castle',
+          category: 'jogos',
+          tag: 'three.js • retro wizard fps',
+          num: '14',
+          title: 'wizard castle — retro 3d fps',
+          subtitle: 'boomer-shooter 3d de magia em castelo sombrio com sprites procedurais e iluminação dinâmica',
+          summary: 'fps retrô 3d em castelo arcano: lance projéteis elementais, explore corredores de pedra com iluminação dinâmica pbr, enfrente guardiões animados por sprites procedurais e ouça efeitos sintetizados.',
+          image: 'assets/wizard-castle-preview.svg?v=real4',
+          metrics: [
+            { val: 'retro fps', label: 'estética clássica dos anos 90 em three.js' },
+            { val: 'pbr + luz', label: 'tochas dinâmicas em alvenaria e madeira' },
+            { val: 'chroma sprites', label: 'inimigos e cajados gerados via código' }
+          ],
+          desafio: 'combinar o ritmo ágil dos FPS clássicos de labirinto (estilo Hexen/Heretic) com iluminação 3D moderna e zero arquivos de imagem externos.',
+          abordagem: 'construído no gemini canvas em arquivo html único: gerador procedural de texturas pbr de pedra/madeira e sprites de inimigos com transparência, iluminação pontual por projétil mágico e sintetizador web audio para magias e impactos.',
+          resultado: 'fps 3d completo acessível via link público do gemini canvas.',
+          techs: ['three.js', 'procedural sprites', 'pbr lighting', 'web audio synth', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/atpQi9xXW1wv',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'forge-of-shadows',
+          category: 'jogos',
+          tag: 'pixel canvas • dark fantasy rpg',
+          num: '15',
+          title: 'forge of shadows',
+          subtitle: 'dungeon crawler dark fantasy por turnos em pixel-art 240×180',
+          summary: 'rpg tático de exploração de masmorras em primeira pessoa com renderização interna 240×180 pixel-art, combate por turnos, magias rúnicas, forja de equipamentos e atmosfera dark fantasy.',
+          image: 'assets/forge-of-shadows-preview.svg?v=real4',
+          metrics: [
+            { val: '240×180', label: 'pipeline pixel-art autêntico com upscaling nítido' },
+            { val: 'turn-based', label: 'combate tático com ataque, runas e defesa' },
+            { val: 'dark fantasy', label: 'paleta sombria e progressão de masmorra' }
+          ],
+          desafio: 'criar uma interface de RPG de masmorra densa e atmosférica onde status do herói, janela de visão 3D pixelada e comandos de combate convivam com clareza.',
+          abordagem: 'desenvolvido no gemini canvas usando html5 canvas com buffer interno de baixa resolução (240×180) e image-rendering pixelated, sistema de encontros por turnos, inventário de armas forjadas e feedback visual de dano e magia.',
+          resultado: 'dungeon crawler jogável diretamente pelo link público do gemini canvas.',
+          techs: ['html5 canvas', '240x180 pixel engine', 'turn-based rpg ux', 'javascript', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/XPqQTCYW5Pu3',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'jogos-mortais',
+          category: 'jogos',
+          tag: 'three.js • escape room 3d',
+          num: '16',
+          title: 'jogos mortais — o teste final',
+          subtitle: 'puzzle &amp; escape room 3d sob pressão de cronômetro inspirado em saw',
+          summary: 'experiência 3d de suspense e resolução de enigmas mecânicos em sala trancada: inspecione engrenagens, decifre pistas visuais sob luz industrial e destrave o mecanismo antes que o tempo zere.',
+          image: 'assets/jogos-mortais-preview.svg?v=real4',
+          metrics: [
+            { val: 'escape 3d', label: 'inspeção espacial de pistas e mecanismos' },
+            { val: 'cronômetro', label: 'tensão real com feedback sonoro crescente' },
+            { val: 'touch + pc', label: 'interação direta em mobile e desktop' }
+          ],
+          desafio: 'equilibrar a pressão psicológica de um cronômetro regressivo com dicas visuais diegéticas suficientes para que o jogador resolva o puzzle pela observação do cenário.',
+          abordagem: 'criado no gemini canvas com three.js e web audio api: iluminação industrial dramática, interação por raycasting em objetos da sala, pistas integradas à geometria e trilha mecânica procedural que acelera nos segundos finais.',
+          resultado: 'escape room 3d interativo disponível via link público do gemini canvas.',
+          techs: ['three.js', 'raycasting puzzle ux', 'web audio tension', 'mobile &amp; desktop', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/Qw7DfuqiAtlQ',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
         }
       ],
       en: [
@@ -2013,6 +2269,256 @@
           vercelUrl: null,
           githubUrl: 'https://github.com/nlldesign/nlldesign.github.io/tree/main/games/biopunk-idle',
           embedUrl: 'games/biopunk-idle/index.html',
+          gallery: []
+        },
+
+        {
+          id: 'apex-impact',
+          category: 'jogos',
+          tag: 'webgl2 • vehicular destruction',
+          num: '07',
+          title: 'apex impact: crash tour',
+          subtitle: 'arcade racer &amp; real-time 3d mesh deformation • aftertouch &amp; crashbreaker',
+          summary: '3d vehicular destruction game built in webgl2 and three.js featuring a pbr garage (vortex gt-r, ironclad v8, colossus hauler), real-time vertex denting on impact, slow-motion aftertouch, and crashbreaker blasts.',
+          image: 'assets/apex-impact-real.png?v=real4',
+          metrics: [
+            { val: 'webgl2 pbr', label: 'real-time 3d mesh vertex deformation' },
+            { val: '5 vehicles', label: 'vortex gt-r, ironclad v8, spyder, titan &amp; hauler' },
+            { val: 'crash tour', label: 'career mode, quick track &amp; deformation lab' }
+          ],
+          desafio: 'recreating the visceral metal-crunching feedback of classic arcade crash racers directly in the browser without heavy external game engines.',
+          abordagem: 'built in google ai studio with webgl2 and three.js: interactive PBR garage with paint customization and impact telemetry (impact mass, top speed, crashbreaker radius), rigid-body collisions with dynamic vertex displacement, post-crash directional slow-motion aftertouch, and crashbreaker detonation.',
+          resultado: 'publicly playable 3d game live on google ai studio with instant loading and three gameplay modes.',
+          techs: ['webgl2', 'three.js', 'pbr materials', 'real-time mesh deformation', 'google ai studio'],
+          vercelUrl: null,
+          siteUrl: 'https://apex-impact-crash-tour.ai.studio/',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: [
+            { src: 'assets/apex-impact-real.png', title: 'apex impact: crash tour PBR garage live at apex-impact-crash-tour.ai.studio' }
+          ]
+        },
+
+        {
+          id: 'ferro-velho-gerais',
+          category: 'jogos',
+          tag: 'three.js • 3d mechanic sim',
+          num: '08',
+          title: 'ferro-velho gerais 3d',
+          subtitle: '3d junkyard disassembly, auto repair &amp; dealership simulator set in minas gerais',
+          summary: 'three.js 3d simulator where you strip and restore cars part-by-part (20 components per vehicle), pop the articulated hood to pull the 1.6 engine block, radiator, and battery, weigh scrap metal, and upgrade your dealership across 3 tiers.',
+          image: 'assets/ferro-velho-preview.svg?v=real4',
+          metrics: [
+            { val: '20 parts', label: 'per-vehicle disassembly &amp; 3d exploded view' },
+            { val: 'engine bay', label: 'articulated hood with 1.6 block, radiator &amp; battery' },
+            { val: '3 tiers', label: 'scrap shed → reformed garage → dealership' }
+          ],
+          desafio: 'turning complex automotive disassembly and restoration into an intuitive, tactile 3d spatial interaction inside a web browser.',
+          abordagem: 'architected in react, typescript, three.js, and procedural web audio in google ai studio: realistic mechanical dependency rules (removing radiator and air filter before pulling the 1.6 engine block), hydraulic stands when wheels come off, ignition test with engine rumble and exhaust smoke, daily scrap commodity pricing, and 3-stage dealership upgrades.',
+          resultado: 'full 3d mechanic and business loop with orbital camera, exploded view, and progressive shop evolution.',
+          techs: ['three.js', 'react', 'typescript', 'procedural web audio', 'spatial ux', 'google ai studio'],
+          vercelUrl: null,
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'toxic-sluice',
+          category: 'jogos',
+          tag: 'webgl2 • sdf shader runner',
+          num: '09',
+          title: 'toxic sluice',
+          subtitle: 'first-person webgl2 sdf survival runner with optical refraction &amp; beer-lambert decay',
+          summary: 'first-person survival runner set inside a flooded toxic sewer rendered via webgl2 sdf shaders with real-time optical refraction, fresnel reflections, beer-lambert light absorption, and procedural web audio.',
+          image: 'assets/toxic-sluice-preview.svg?v=real4',
+          metrics: [
+            { val: 'webgl2 sdf', label: 'custom glsl refraction &amp; fresnel reflections' },
+            { val: 'beer-lambert', label: 'physical light absorption in toxic water' },
+            { val: 'web audio', label: '100% procedural hydraulic soundscape' }
+          ],
+          desafio: 'rendering translucent fluids, wet subterranean tunnels, and atmospheric lighting at 60fps in the browser without heavy texture downloads.',
+          abordagem: 'built in google ai studio combining webgl2 signed distance fields (sdf), physical beer-lambert color attenuation through contaminated water, fresnel specular highlights, and continuous web audio synthesis.',
+          resultado: 'lean 3d shader showcase demonstrating mathematical rendering and diegetic tension.',
+          techs: ['webgl2', 'glsl sdf shaders', 'beer-lambert optics', 'web audio api', 'google ai studio'],
+          vercelUrl: null,
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'liminal-prism',
+          category: 'jogos',
+          tag: 'webgl2 • 3d raymarching',
+          num: '10',
+          title: 'liminal prism: backrooms webgl2',
+          subtitle: 'real-time raymarched poolrooms &amp; backrooms 3d survival in a single html file',
+          summary: 'first-person liminal exploration powered by a pure webgl2 raymarching engine in a single html file: endless tiled poolrooms, real-time water caustics, soft analytical shadows, and psychological dread.',
+          image: 'assets/liminal-prism-preview.svg?v=real4',
+          metrics: [
+            { val: 'raymarching', label: 'infinite sdf geometry in fragment shader' },
+            { val: 'caustics', label: 'real-time water ripples &amp; light refraction' },
+            { val: 'zero assets', label: '100% mathematical single-file html' }
+          ],
+          desafio: 'capturing the eerie architectural stillness of the poolrooms — flooded tiled halls, humid light, and echoing silence — using pure shader math in a single file.',
+          abordagem: 'implemented in gemini canvas with a custom webgl2 fragment shader executing signed-distance raymarching, analytical ambient occlusion, procedural water caustics, and smooth first-person navigation.',
+          resultado: 'webgl2 prototype published via direct gemini canvas share link, ready to launch in browser.',
+          techs: ['webgl2', 'raymarching glsl', 'procedural caustics', 'liminal spatial ux', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/KwpcVrce837b',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'terror-paulista',
+          category: 'jogos',
+          tag: 'three.js • survival horror sp',
+          num: '11',
+          title: 'terror na paulista — mvp 3d',
+          subtitle: 'first-person survival horror across av. paulista, masp glass easels, trianon &amp; metro line 2',
+          summary: '3d stealth survival horror set across iconic são paulo landmarks (masp museum with lina bo bardi’s crystal easels, trianon park, and trianon-masp subway station), featuring a hand-crank dynamo flashlight, crouching, hiding spots, and procedural audio.',
+          image: 'assets/terror-paulista-preview.svg?v=real4',
+          metrics: [
+            { val: '4 sp zones', label: 'paulista ave, masp, trianon park &amp; green metro' },
+            { val: 'stealth loop', label: 'noise meter, crouching &amp; dynamo cranking' },
+            { val: 'web audio', label: '100% synthesized footsteps, hums &amp; alerts' }
+          ],
+          desafio: 'translating são paulo’s brutalist midnight architecture into a tense stealth level where light and sound must be balanced at every step.',
+          abordagem: 'built as a single-file three.js + web audio experience in gemini canvas: spatial recreation of masp’s red pillars and suspended gallery, trianon park pathways, and subway turnstiles, paired with a hand-crank flashlight mechanic where recharging generates noise that attracts the stalker.',
+          resultado: 'playable 3d survival horror mvp accessible via public gemini canvas share link.',
+          techs: ['three.js', 'web audio api', 'stealth game design', 'são paulo architecture', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/orAoVLFiQN0S',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'sp-zona-morta',
+          category: 'jogos',
+          tag: 'mobile 9:16 • canvas survival',
+          num: '12',
+          title: 'sp zona morta: protocolo 011',
+          subtitle: 'vertical 9:16 third-person zombie survival across 10 acts in são paulo',
+          summary: 'mobile-first 9:16 vertical survival game spanning 10 acts across são paulo: one-handed thumb movement, tactical targeting, ammo management, and escalating zombie waves.',
+          image: 'assets/sp-zona-morta-preview.svg?v=real4',
+          metrics: [
+            { val: '9:16 vertical', label: 'one-handed mobile ergonomics' },
+            { val: '10 acts', label: 'narrative progression across são paulo districts' },
+            { val: 'html5 canvas', label: 'lightweight single-file 2d/3rd-person engine' }
+          ],
+          desafio: 'designing a fast-paced zombie survival loop optimized for vertical 9:16 smartphone screens without thumb occlusion.',
+          abordagem: 'built in gemini canvas with pure html5 canvas and javascript: lower-third thumb zone, compact top HUD showing current act and health, 10-stage campaign across area code 011, and adaptive wave scaling.',
+          resultado: 'mobile-first prototype accessible directly via public gemini canvas share link.',
+          techs: ['html5 canvas', 'mobile 9:16 ux', 'one-hand ergonomics', 'game loop js', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/PCI3G9isG1RA',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'burnout-overdrive',
+          category: 'jogos',
+          tag: 'three.js • arcade racing',
+          num: '13',
+          title: 'burnout overdrive 3d',
+          subtitle: 'high-speed 3d arcade racing, oncoming-traffic boost &amp; rival takedowns',
+          summary: '3d arcade racer inspired by burnout: build nitro by weaving through oncoming traffic and drifting corners, trigger chain boosts, and slam rivals into highway barriers.',
+          image: 'assets/burnout-overdrive-preview.svg?v=real4',
+          metrics: [
+            { val: '300+ km/h', label: 'high-speed sense of motion with dynamic fov' },
+            { val: 'takedowns', label: 'aggressive side-slam rival combat' },
+            { val: 'nitro x3', label: 'earned via oncoming lanes, drift &amp; near-misses' }
+          ],
+          desafio: 'delivering extreme sense of speed and responsive arcade handling in three.js while keeping distant traffic readable.',
+          abordagem: 'prototyped in gemini canvas with three.js: dynamic field-of-view (fov) warp under boost, chassis spark particles on contact, procedural highway traffic, and takedown impact cameras.',
+          resultado: '3d arcade racer playable via public gemini canvas share link.',
+          techs: ['three.js', 'webgl', 'arcade vehicle physics', 'dynamic fov', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/8JrqbYco5Drt',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'wizard-castle',
+          category: 'jogos',
+          tag: 'three.js • retro wizard fps',
+          num: '14',
+          title: 'wizard castle — retro 3d fps',
+          subtitle: '90s-inspired spellcasting boomer-shooter with procedural sprites &amp; dynamic lighting',
+          summary: 'retro 3d magic fps inside a dark arcane castle: cast elemental bolts, navigate stone corridors lit by dynamic PBR torches, battle procedural chroma-keyed guardians, and hear synthesized sound effects.',
+          image: 'assets/wizard-castle-preview.svg?v=real4',
+          metrics: [
+            { val: 'retro fps', label: '90s dungeon shooter feel in three.js' },
+            { val: 'pbr + light', label: 'dynamic spell &amp; torch lighting on stone' },
+            { val: 'code sprites', label: 'procedurally drawn enemies &amp; weapons' }
+          ],
+          desafio: 'blending classic 90s spell-FPS pacing (Hexen/Heretic style) with modern 3D point lighting and zero external image files.',
+          abordagem: 'built in gemini canvas as a single html file: procedural generator for stone/wood PBR textures and transparent enemy billboards, dynamic point lights attached to travelling spell projectiles, and web audio synthesis.',
+          resultado: 'playable 3d retro FPS available via public gemini canvas share link.',
+          techs: ['three.js', 'procedural sprites', 'pbr lighting', 'web audio synth', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/atpQi9xXW1wv',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'forge-of-shadows',
+          category: 'jogos',
+          tag: 'pixel canvas • dark fantasy rpg',
+          num: '15',
+          title: 'forge of shadows',
+          subtitle: 'first-person turn-based dark fantasy dungeon crawler in crisp 240×180 pixel art',
+          summary: 'tactical first-person dungeon crawler rendered at an authentic 240×180 internal pixel resolution, featuring turn-based combat, runic magic, weapon forging, and grim dark-fantasy atmosphere.',
+          image: 'assets/forge-of-shadows-preview.svg?v=real4',
+          metrics: [
+            { val: '240×180', label: 'authentic low-res pixel buffer with sharp upscale' },
+            { val: 'turn-based', label: 'tactical strikes, runes, guard &amp; potions' },
+            { val: 'dark fantasy', label: 'grim dungeon progression &amp; loot' }
+          ],
+          desafio: 'crafting an atmospheric dungeon-crawler interface where hero vitals, a pixelated 3D viewport, and tactical combat actions remain crystal clear.',
+          abordagem: 'developed in gemini canvas using an offscreen 240×180 html5 canvas buffer upscaled with pixelated rendering, turn-based encounter state machine, forged equipment tiers, and visual spell feedback.',
+          resultado: 'playable retro dungeon RPG accessible via public gemini canvas share link.',
+          techs: ['html5 canvas', '240x180 pixel engine', 'turn-based rpg ux', 'javascript', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/XPqQTCYW5Pu3',
+          githubUrl: null,
+          embedUrl: null,
+          gallery: []
+        },
+
+        {
+          id: 'jogos-mortais',
+          category: 'jogos',
+          tag: 'three.js • 3d escape room',
+          num: '16',
+          title: 'jogos mortais — o teste final',
+          subtitle: 'saw-inspired 3d mechanical escape room &amp; countdown puzzle',
+          summary: '3d suspense and mechanical puzzle experience inside a locked industrial room: inspect gears, decode environmental clues under harsh lighting, and unlock the mechanism before the timer hits zero.',
+          image: 'assets/jogos-mortais-preview.svg?v=real4',
+          metrics: [
+            { val: '3d escape', label: 'spatial clue inspection &amp; lock mechanics' },
+            { val: 'countdown', label: 'rising audio tension against the clock' },
+            { val: 'touch + pc', label: 'direct raycast interaction on mobile &amp; desktop' }
+          ],
+          desafio: 'balancing the urgency of a ticking countdown with clear diegetic visual clues so players solve the trap through environmental observation.',
+          abordagem: 'created in gemini canvas with three.js and web audio api: dramatic industrial spotlighting, raycast object inspection, clues embedded into room geometry, and procedural metallic audio that accelerates as time runs out.',
+          resultado: 'interactive 3d escape room playable via public gemini canvas share link.',
+          techs: ['three.js', 'raycasting puzzle ux', 'web audio tension', 'mobile &amp; desktop', 'gemini canvas'],
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/Qw7DfuqiAtlQ',
+          githubUrl: null,
+          embedUrl: null,
           gallery: []
         }
       ]
@@ -2518,23 +3024,52 @@
           category: 'labs',
           tag: 'edtech · python + static web',
           num: '08',
-          title: 'study-fatec',
-          subtitle: 'banco oficial do vestibular fatec (2016–2026) &amp; simulador sem uso de ia',
-          summary: 'simulador gratuito com mais de 1.000 questões oficiais recortadas via python/pymupdf, dicas determinísticas em 3 níveis sem custo de ia, botão eliminar 2 e painel de acertos por matéria no localstorage.',
-          image: 'assets/study-fatec-preview.svg?v=real3',
-          vercelUrl: null,
+          title: 'study-fatec (treino fatec)',
+          subtitle: 'banco oficial do vestibular fatec (2016–2026) &amp; simulador custo zero na vercel',
+          summary: 'simulador gratuito publicado na vercel com 873 questões oficiais recortadas via python/pymupdf, dicas determinísticas em 3 níveis sem spoiler e sem custo de ia, botão eliminar 2 e desempenho por matéria no localstorage.',
+          image: 'assets/study-fatec-real.png?v=real4',
+          vercelUrl: 'https://study-fatec.vercel.app/',
           githubUrl: 'https://github.com/nlldesign/Study-fatec',
-          status: 'github',
+          status: 'aberto',
           metrics: [
-            { val: '2016–2026', label: 'provas oficiais e gabaritos fatec' },
+            { val: '873 questões', label: 'provas oficiais e gabaritos fatec (2016–2026)' },
             { val: 'custo zero', label: 'gerador de dicas determinístico sem ia' },
-            { val: '3 níveis', label: 'comando, conceito-chave &amp; armadilhas' }
+            { val: '3 níveis', label: 'comando, conceito-chave &amp; eliminar 2' }
           ],
           desafio: 'preservar fórmulas matemáticas, mapas, tabelas e textos de apoio compartilhados das provas oficiais da fatec, oferecendo suporte pedagógico inteligente sem custos recorrentes de APIs de IA.',
-          abordagem: 'pipeline scraper em python + pymupdf (scraper/scrape.py) que recorta enunciados em imagens de alta resolução e vincula textos de apoio; motor de regras hints.py com 3 níveis de dicas + eliminar 2; e frontend estático puro em web/ com filtros e estatísticas em localstorage.',
-          resultado: 'repositório completo publicado no github (nlldesign/Study-fatec) pronto para rodar localmente ou via hospedagem estática com custo zero de operação.',
-          techs: ['python + pymupdf', 'rule-based hints', 'html5 / css3 / js', 'edtech ux', 'localstorage analytics'],
-          gallery: []
+          abordagem: 'pipeline scraper em python + pymupdf (scraper/scrape.py) que recorta enunciados em imagens de alta resolução e vincula textos de apoio; motor de regras hints.py com 3 níveis de dicas + eliminar 2; e frontend estático publicado na vercel com filtros por disciplina/semestre e estatísticas em localstorage.',
+          resultado: 'aplicação em produção na vercel (study-fatec.vercel.app) e código aberto no github (nlldesign/Study-fatec) com carregamento instantâneo e custo zero.',
+          techs: ['python + pymupdf', 'rule-based hints', 'html5 / css3 / js', 'vercel deploy', 'localstorage analytics'],
+          gallery: [
+            { src: 'assets/study-fatec-real.png', title: 'simulador treino fatec publicado na vercel com 873 questões oficiais e dicas em 3 níveis' }
+          ]
+        },
+        {
+          id: 'mapleads-studio',
+          category: 'labs',
+          tag: 'b2b crm · ai studio + cloud run',
+          num: '09',
+          title: 'mapleads 2.0 (mini-crm &amp; scripts)',
+          subtitle: 'prospecção ativa b2b no google maps, qualificação térmica de leads e funil crm',
+          summary: 'evolução da plataforma mapleads publicada no google cloud run: busca por nicho e raio gps, mapa de calor de leads (gelo total a quente), planilha anti-repetição, funil crm, scripts personalizados por serviço e logs de conversão.',
+          image: 'assets/mapleads-studio-real.png?v=real4',
+          vercelUrl: null,
+          siteUrl: 'https://mapleads-2-320873701802.us-east1.run.app/',
+          pillLabel: 'cloud run',
+          githubUrl: 'https://github.com/nlldesign/Mapleads',
+          status: 'aberto',
+          metrics: [
+            { val: '4 módulos', label: 'prospecção, funil crm, logs &amp; perfil/scripts' },
+            { val: '5 níveis', label: 'termômetro de leads: gelo total → quente' },
+            { val: 'anti-repetição', label: 'upload de planilha para filtrar base já abordada' }
+          ],
+          desafio: 'unificar a descoberta geográfica de empresas no google maps com a gestão comercial pós-coleta (qualificação térmica, roteiros de abordagem por tipo de serviço vendido e acompanhamento de conversão em funil).',
+          abordagem: 'construído no google ai studio e publicado no google cloud run com 4 áreas integradas: buscador com atalhos de nicho (clínicas, estética, restaurantes, oficinas, imobiliárias, advocacia) e filtro de planilha anti-repetição; mapa interativo classificado por temperatura comercial; kanban/funil crm; e gerador de scripts sob medida para o serviço ofertado (ex.: sites &amp; landing pages).',
+          resultado: 'aplicação saas b2b completa rodando ao vivo no google cloud run com interface limpa e fluxo comercial ponta a ponta.',
+          techs: ['react', 'google ai studio', 'google cloud run', 'b2b sales crm', 'google maps ux'],
+          gallery: [
+            { src: 'assets/mapleads-studio-real.png', title: 'interface ao vivo do mapleads 2.0 publicada no google cloud run' }
+          ]
         }
       ],
       en: [
@@ -2714,23 +3249,52 @@
           category: 'labs',
           tag: 'edtech · python + static web',
           num: '08',
-          title: 'study-fatec',
-          subtitle: 'official fatec exam bank (2016–2026) &amp; zero-cost rule-based simulator',
-          summary: 'free exam simulator indexing official 2016–2026 question crops via python/pymupdf, 3-level deterministic hints with zero AI API cost, eliminate-2 helper, and per-subject localstorage accuracy tracking.',
-          image: 'assets/study-fatec-preview.svg?v=real3',
-          vercelUrl: null,
+          title: 'study-fatec (fatec trainer)',
+          subtitle: 'official fatec exam bank (2016–2026) &amp; zero-cost simulator live on vercel',
+          summary: 'free exam simulator deployed on vercel with 873 official question crops via python/pymupdf, 3-level spoiler-free deterministic hints at zero AI cost, eliminate-2 helper, and localstorage accuracy tracking.',
+          image: 'assets/study-fatec-real.png?v=real4',
+          vercelUrl: 'https://study-fatec.vercel.app/',
           githubUrl: 'https://github.com/nlldesign/Study-fatec',
-          status: 'github',
+          status: 'live',
           metrics: [
-            { val: '2016–2026', label: 'official fatec exams &amp; answer keys' },
-            { val: 'zero cost', label: 'deterministic hint generator without ai' },
-            { val: '3 levels', label: 'prompt cues, key concepts &amp; distractors' }
+            { val: '873 questions', label: 'official fatec exams &amp; keys (2016–2026)' },
+            { val: 'zero cost', label: 'deterministic hint engine without ai' },
+            { val: '3 levels', label: 'prompt cues, key concepts &amp; eliminate-2' }
           ],
           desafio: 'preserving complex math formulas, maps, tables, and shared reading passages from official PDF exams while offering structured pedagogical hints without ongoing AI API costs.',
-          abordagem: 'implemented a python + pymupdf extraction pipeline (scraper/scrape.py) cropping high-res question visuals and linking shared context blocks; deterministic hints.py engine plus eliminate-2; and pure static web simulator with filters and localstorage analytics.',
-          resultado: 'complete codebase and asset bank published on github (nlldesign/Study-fatec), ready to run locally or via zero-cost static hosting.',
-          techs: ['python + pymupdf', 'rule-based hints', 'html5 / css3 / js', 'edtech ux', 'localstorage analytics'],
-          gallery: []
+          abordagem: 'implemented a python + pymupdf extraction pipeline (scraper/scrape.py) cropping high-res question visuals and linking shared context blocks; deterministic hints.py engine plus eliminate-2; and static web simulator deployed live on vercel.',
+          resultado: 'live in production on vercel (study-fatec.vercel.app) and open-source on github (nlldesign/Study-fatec) with zero operating cost.',
+          techs: ['python + pymupdf', 'rule-based hints', 'html5 / css3 / js', 'vercel deploy', 'localstorage analytics'],
+          gallery: [
+            { src: 'assets/study-fatec-real.png', title: 'study-fatec simulator live on vercel showing 873 official questions and 3-level hints' }
+          ]
+        },
+        {
+          id: 'mapleads-studio',
+          category: 'labs',
+          tag: 'b2b crm · ai studio + cloud run',
+          num: '09',
+          title: 'mapleads 2.0 (mini-crm &amp; scripts)',
+          subtitle: 'active b2b google maps prospecting, thermal lead scoring &amp; crm funnel',
+          summary: 'next-generation mapleads workspace deployed on google cloud run: niche and gps radius search, thermal lead map (ice cold to hot), anti-duplication sheet import, crm funnel, service-tailored outreach scripts, and conversion logs.',
+          image: 'assets/mapleads-studio-real.png?v=real4',
+          vercelUrl: null,
+          siteUrl: 'https://mapleads-2-320873701802.us-east1.run.app/',
+          pillLabel: 'cloud run',
+          githubUrl: 'https://github.com/nlldesign/Mapleads',
+          status: 'live',
+          metrics: [
+            { val: '4 modules', label: 'prospecting, crm funnel, logs &amp; scripts' },
+            { val: '5 tiers', label: 'lead temperature scale: ice cold → hot' },
+            { val: 'deduplication', label: 'spreadsheet upload to skip contacted leads' }
+          ],
+          desafio: 'bridging geographic business discovery on google maps with post-extraction sales execution (lead temperature scoring, service-specific pitch scripts, and funnel conversion tracking).',
+          abordagem: 'built in google ai studio and deployed on google cloud run across 4 connected views: niche/radius prospector with one-click category chips and anti-repetition spreadsheet upload; interactive thermal lead map; kanban crm pipeline; and tailored pitch generator matched to the user’s service offering.',
+          resultado: 'end-to-end b2b prospecting and crm web app running live on google cloud run.',
+          techs: ['react', 'google ai studio', 'google cloud run', 'b2b sales crm', 'google maps ux'],
+          gallery: [
+            { src: 'assets/mapleads-studio-real.png', title: 'mapleads 2.0 interface running live on google cloud run' }
+          ]
         }
       ]
     };
@@ -2756,9 +3320,11 @@
       grid.innerHTML = apps.map(app => {
         const rightPill = app.vercelUrl
           ? `<a href="${app.vercelUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('vercel_app', this.href, '${app.id}')" class="tag-pill text-[10.5px] text-cyan-400 hover:border-cyan-400 whitespace-nowrap"><span>vercel</span> ${svgArrow}</a>`
-          : (app.githubUrl
-            ? `<a href="${app.githubUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('github', this.href, '${app.id}')" class="tag-pill text-[10.5px] text-[var(--ink)] hover:border-[var(--ink)] whitespace-nowrap"><span>github</span> ${svgArrow}</a>`
-            : '');
+          : (app.siteUrl
+            ? `<a href="${app.siteUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('official_site', this.href, '${app.id}')" class="tag-pill text-[10.5px] text-cyan-400 hover:border-cyan-400 whitespace-nowrap"><span>${app.pillLabel || 'live'}</span> ${svgArrow}</a>`
+            : (app.githubUrl
+              ? `<a href="${app.githubUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('github', this.href, '${app.id}')" class="tag-pill text-[10.5px] text-[var(--ink)] hover:border-[var(--ink)] whitespace-nowrap"><span>github</span> ${svgArrow}</a>`
+              : ''));
         return `
         <article onclick="openCaseStudy('${app.id}')" class="portfolio-card reveal-on-scroll overflow-hidden flex flex-col justify-between group cursor-pointer">
           <div class="relative h-40 w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
@@ -3010,6 +3576,31 @@
           resultado: 'estudo visual e funcional de interação humano-ia para assistentes contextuais.',
           techs: ['google ai studio', 'gemini persona prompt', 'hud ui design', 'stateful chat', 'motion feedback'],
           gallery: []
+        },
+        {
+          id: 'oklch-admin',
+          category: 'drive',
+          tag: 'gemini canvas • tailwind v4 oklch',
+          num: '10',
+          title: 'painel administrativo oklch',
+          subtitle: 'dashboard responsivo de 6 módulos com sistema de cores perceptual oklch claro/escuro',
+          summary: 'aplicação administrativa completa construída no gemini canvas com 6 telas interativas (visão geral, vendas &amp; pedidos, clientes, produtos &amp; estoque, financeiro e configurações) e tokens css oklch.',
+          image: 'assets/oklch-admin-preview.svg?v=real4',
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/V1ZaiUKbZS4U',
+          githubUrl: null,
+          status: 'gemini',
+          originPill: 'gemini canvas',
+          metrics: [
+            { val: '6 módulos', label: 'overview, vendas, clientes, estoque, dre &amp; config' },
+            { val: 'oklch tokens', label: 'contraste perceptual uniforme em light &amp; dark' },
+            { val: 'canvas live', label: 'link público executável direto no gemini' }
+          ],
+          desafio: 'garantir legibilidade e hierarquia cromática consistente entre modo claro e modo escuro em um painel administrativo denso, evitando as distorções de luminosidade do espaço sRGB/HSL tradicional.',
+          abordagem: 'arquitetura single-file no gemini canvas utilizando variáveis css nativas no espaço perceptual oklch (--primary, --secondary, --background, --card e --chart-1 a --chart-5), navegação SPA instantânea entre 6 módulos operacionais, tabelas filtráveis e gráficos de desempenho.',
+          resultado: 'protótipo funcional navegável via link público do gemini canvas como referência de design system em oklch.',
+          techs: ['tailwind css v4 (oklch)', 'design tokens', 'enterprise dashboard ux', 'light/dark perceptual theme', 'gemini canvas'],
+          gallery: []
         }
       ],
       en: [
@@ -3228,6 +3819,31 @@
           resultado: 'visual and interaction study for context-aware ambient ai copilots.',
           techs: ['google ai studio', 'gemini persona prompt', 'hud ui design', 'stateful chat', 'motion feedback'],
           gallery: []
+        },
+        {
+          id: 'oklch-admin',
+          category: 'drive',
+          tag: 'gemini canvas • tailwind v4 oklch',
+          num: '10',
+          title: 'oklch admin dashboard',
+          subtitle: '6-module responsive admin workspace built on perceptual oklch light/dark color tokens',
+          summary: 'full administrative web app crafted in gemini canvas featuring 6 interactive screens (overview, sales &amp; orders, customers, inventory, financial reports, and settings) powered by perceptual oklch css tokens.',
+          image: 'assets/oklch-admin-preview.svg?v=real4',
+          vercelUrl: null,
+          geminiUrl: 'https://share.gemini.google/V1ZaiUKbZS4U',
+          githubUrl: null,
+          status: 'gemini',
+          originPill: 'gemini canvas',
+          metrics: [
+            { val: '6 screens', label: 'overview, sales, crm, inventory, finance &amp; settings' },
+            { val: 'oklch tokens', label: 'uniform perceptual contrast across light &amp; dark' },
+            { val: 'canvas live', label: 'public executable gemini canvas link' }
+          ],
+          desafio: 'maintaining predictable contrast and visual hierarchy across light and dark themes in a data-heavy admin dashboard without the perceived brightness shifts of standard HSL/RGB palettes.',
+          abordagem: 'architected as a self-contained single-file app in gemini canvas using perceptual oklch CSS custom properties (--primary, --secondary, --background, --card, --chart-1..5), instant 6-view SPA navigation, filterable tables, and KPI charts.',
+          resultado: 'interactive design-token benchmark accessible live via public gemini canvas share link.',
+          techs: ['tailwind css v4 (oklch)', 'design tokens', 'enterprise dashboard ux', 'light/dark perceptual theme', 'gemini canvas'],
+          gallery: []
         }
       ]
     };
@@ -3253,7 +3869,9 @@
       grid.innerHTML = projects.map(proj => {
         const rightPill = proj.githubUrl
           ? `<a href="${proj.githubUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('github', this.href, '${proj.id}')" class="tag-pill text-[10.5px] text-[var(--ink)] hover:border-[var(--ink)] whitespace-nowrap"><span>github</span> ${svgArrow}</a>`
-          : `<span class="tag-pill text-[10.5px] text-[var(--muted)] whitespace-nowrap">${proj.originPill}</span>`;
+          : (proj.geminiUrl
+            ? `<a href="${proj.geminiUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('gemini_canvas', this.href, '${proj.id}')" class="tag-pill text-[10.5px] text-cyan-400 hover:border-cyan-400 whitespace-nowrap"><span>gemini</span> ${svgArrow}</a>`
+            : `<span class="tag-pill text-[10.5px] text-[var(--muted)] whitespace-nowrap">${proj.originPill}</span>`);
         return `
         <article onclick="openCaseStudy('${proj.id}')" class="portfolio-card reveal-on-scroll overflow-hidden flex flex-col justify-between group cursor-pointer">
           <div class="relative h-40 w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
@@ -4081,7 +4699,18 @@
     // Renderiza a Tela de Jogos (Aba Separada com Animações)
     function renderGamesGrid() {
       const container = document.getElementById('gamesGridContainer');
-      container.innerHTML = gameProjects.map((g, idx) => `
+      const t = siteTranslations[currentGlobalLang] || siteTranslations.pt;
+      const svgArrow = "<svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>";
+      container.innerHTML = gameProjects.map((g, idx) => {
+        const leftAction = g.geminiUrl && !g.embedUrl && !g.vercelUrl ? t.playOnGeminiBtn : t.playGameBtn;
+        const rightBadge = g.vercelUrl
+          ? `<a href="${g.vercelUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('vercel_app', this.href, '${g.id}')" class="tag-pill text-[10.5px] text-cyan-400 hover:border-cyan-400 whitespace-nowrap"><span>vercel</span> ${svgArrow}</a>`
+          : (g.siteUrl
+            ? `<a href="${g.siteUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('ai_studio_game', this.href, '${g.id}')" class="tag-pill text-[10.5px] text-cyan-400 hover:border-cyan-400 whitespace-nowrap"><span>ai studio</span> ${svgArrow}</a>`
+            : (g.geminiUrl
+              ? `<a href="${g.geminiUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('gemini_canvas', this.href, '${g.id}')" class="tag-pill text-[10.5px] text-cyan-400 hover:border-cyan-400 whitespace-nowrap"><span>gemini</span> ${svgArrow}</a>`
+              : `<span class="text-xs text-[var(--muted)] group-hover:translate-x-1.5 transition-transform duration-200">→</span>`));
+        return `
         <article class="portfolio-card reveal-on-scroll overflow-hidden flex flex-col justify-between group cursor-pointer" onclick="openCaseStudy('${g.id}')">
           <div class="relative h-[220px] sm:h-[260px] w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
             <img src="${g.image}" alt="${g.title}" class="card-cover-img w-full h-full object-cover" />
@@ -4103,18 +4732,17 @@
               </p>
             </div>
 
-            <div class="pt-4 border-t border-[var(--line)] flex items-center justify-between">
+            <div class="pt-4 border-t border-[var(--line)] flex items-center justify-between gap-2">
               <span class="text-xs font-mono text-cyan-400 flex items-center gap-1.5">
                 <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
-                ${(siteTranslations[currentGlobalLang] || siteTranslations.pt).playGameBtn}
+                ${leftAction}
               </span>
-              <span class="text-xs text-[var(--muted)] group-hover:translate-x-1.5 transition-transform duration-200">
-                →
-              </span>
+              ${rightBadge}
             </div>
           </div>
         </article>
-      `).join('');
+      `;
+      }).join('');
 
       initScrollReveal();
       lucide.createIcons();
@@ -4206,6 +4834,13 @@
           </a>
         `;
       }
+      if (item.geminiUrl) {
+        linksHtml += `
+          <a href="${item.geminiUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('gemini_canvas', this.href, '${item.id}')" class="tag-pill text-xs hover:border-cyan-400 text-cyan-400 whitespace-nowrap">
+            <span>${tLang.openGemini}</span>
+          </a>
+        `;
+      }
       if (item.githubUrl) {
         linksHtml += `
           <a href="${item.githubUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('github', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)] whitespace-nowrap">
@@ -4219,6 +4854,7 @@
       const mediaFrame = document.getElementById('caseMediaFrame');
       const isGame = item.category === 'jogos';
       const playableSource = item.embedUrl || item.vercelUrl;
+      const externalPlayUrl = item.geminiUrl || item.siteUrl;
 
       if (isGame && playableSource) {
         mediaFrame.innerHTML = `
@@ -4243,6 +4879,29 @@
               </div>
             </div>
             <iframe id="gameIframe" src="about:blank" class="w-full h-full border-0" allow="fullscreen; autoplay; gamepad"></iframe>
+          </div>
+        `;
+      } else if (isGame && externalPlayUrl) {
+        const extBtnLabel = item.geminiUrl ? tLang.openGemini : tLang.openAiStudio;
+        const extChannel = item.geminiUrl ? 'gemini_canvas' : 'ai_studio_game';
+        mediaFrame.innerHTML = `
+          <div class="p-3 bg-[var(--surface)] border-b border-[var(--line)] flex items-center justify-between text-xs font-mono">
+            <span class="text-cyan-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+              ${tLang.gamePlayerHeader}
+            </span>
+            <a href="${externalPlayUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('${extChannel}', this.href, '${item.id}')" class="text-cyan-400 hover:underline flex items-center gap-1">
+              <span>${extBtnLabel}</span>
+            </a>
+          </div>
+          <div class="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
+            <img src="${item.image}" alt="${item.title}" class="absolute inset-0 w-full h-full object-cover opacity-55" />
+            <div class="relative z-10 flex flex-col items-center text-center p-6 bg-black/70 backdrop-blur-md rounded-2xl border border-white/10 max-w-md">
+              <a href="${externalPlayUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('${extChannel}', this.href, '${item.id}')" class="btn-pill-primary mb-2 text-xs inline-flex items-center gap-1.5">
+                <span>${extBtnLabel}</span>
+              </a>
+              <p class="text-xs text-[var(--muted)]">${tLang.gameControlsHint}</p>
+            </div>
           </div>
         `;
       } else {

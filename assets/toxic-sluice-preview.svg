@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <pattern id="gridPat" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect width="800" height="450" fill="url(#gridPat)"/>
+  
+  <circle cx="400" cy="225" r="210" fill="rgba(16,185,129,0.14)"/>
+  <rect x="52" y="38" width="696" height="374" rx="20" fill="#07120e" stroke="rgba(16,185,129,0.35)"/>
+  <text x="80" y="72" fill="#6ee7b7" font-family="monospace" font-size="12" font-weight="bold">TOXIC SLUICE  //  WEBGL2 SDF SHADER &amp; BEER-LAMBERT OPTICS</text>
+  <!-- Sewer Tunnel Perspective Rings -->
+  <circle cx="400" cy="215" r="118" stroke="#10b981" stroke-opacity="0.35" stroke-width="2"/>
+  <circle cx="400" cy="215" r="86" stroke="#10b981" stroke-opacity="0.5" stroke-width="2"/>
+  <circle cx="400" cy="215" r="54" stroke="#34d399" stroke-opacity="0.7" stroke-width="2"/>
+  <circle cx="400" cy="215" r="24" fill="rgba(16,185,129,0.25)" stroke="#6ee7b7" stroke-width="1.5"/>
+  <!-- Toxic Water Level Wave -->
+  <path d="M 80 265 Q 160 250 240 265 T 400 265 T 560 265 T 720 265 L 720 380 L 80 380 Z" fill="rgba(16,185,129,0.18)" stroke="#10b981" stroke-width="2"/>
+  <text x="104" y="315" fill="#a7f3d0" font-family="monospace" font-size="11">SHADER GLSL: Fresnel Reflection  +  Optical Refraction  +  Beer-Lambert Decay</text>
+  <text x="104" y="345" fill="#6ee7b7" font-family="monospace" font-size="11">BIO-TOXIN LEVEL: 64%   •   O2 RESERVE: 82%   •   WEB AUDIO SYNTHESIS</text>
+
+</svg>

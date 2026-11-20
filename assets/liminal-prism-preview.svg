@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <pattern id="gridPat" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect width="800" height="450" fill="url(#gridPat)"/>
+  
+  <circle cx="400" cy="225" r="210" fill="rgba(34,211,238,0.14)"/>
+  <rect x="52" y="38" width="696" height="374" rx="20" fill="#081318" stroke="rgba(34,211,238,0.35)"/>
+  <text x="80" y="72" fill="#67e8f9" font-family="monospace" font-size="12" font-weight="bold">LIMINAL PRISM  //  BACKROOMS POOLROOMS WEBGL2 RAYMARCHING</text>
+  <rect x="564" y="52" width="156" height="26" rx="13" fill="rgba(34,211,238,0.15)" stroke="#22d3ee"/>
+  <text x="584" y="69" fill="#cffafe" font-family="monospace" font-size="10">60FPS FRAGMENT SDF</text>
+  <!-- Poolrooms Tiled Pillars & Caustics -->
+  <rect x="80" y="98" width="640" height="276" rx="14" fill="#0c1d24" stroke="rgba(34,211,238,0.25)"/>
+  <rect x="130" y="98" width="64" height="210" fill="#132d38" stroke="rgba(34,211,238,0.3)"/>
+  <rect x="368" y="98" width="64" height="210" fill="#132d38" stroke="rgba(34,211,238,0.3)"/>
+  <rect x="606" y="98" width="64" height="210" fill="#132d38" stroke="rgba(34,211,238,0.3)"/>
+  <path d="M 80 308 Q 240 296 400 308 T 720 308 L 720 374 L 80 374 Z" fill="rgba(34,211,238,0.22)" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="104" y="346" fill="#ecfeff" font-family="monospace" font-size="11">RAYMARCHED CAUSTICS &amp; SOFT SHADOWS  •  SANITY: 88%  •  DEPTH: LEVEL -37</text>
+
+</svg>

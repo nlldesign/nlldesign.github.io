@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#111116"/>
+    </linearGradient>
+    <pattern id="gridPat" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect width="800" height="450" fill="url(#gridPat)"/>
+  
+  <circle cx="630" cy="100" r="190" fill="rgba(245,158,11,0.12)"/>
+  <circle cx="170" cy="360" r="170" fill="rgba(239,68,68,0.09)"/>
+  <rect x="52" y="38" width="696" height="374" rx="20" fill="#14110f" stroke="rgba(245,158,11,0.25)"/>
+  <text x="80" y="72" fill="#fcd34d" font-family="monospace" font-size="12" font-weight="bold">FERRO-VELHO GERAIS 3D  //  THREE.JS JUNKYARD &amp; MECHANIC SIM</text>
+  <rect x="572" y="52" width="150" height="26" rx="13" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-opacity="0.5"/>
+  <text x="590" y="69" fill="#fde68a" font-family="monospace" font-size="10">20 PECAS / CARRO</text>
+  <!-- 3D Car Exploded Wireframe Bay -->
+  <rect x="80" y="96" width="420" height="214" rx="14" fill="#1c1714" stroke="rgba(255,255,255,0.08)"/>
+  <text x="100" y="122" fill="#fbbf24" font-family="monospace" font-size="10">BAIA DE DESMANCHE  •  CAPO ARTICULADO [TECLA E]</text>
+  <!-- Stylized Car Chassis & Engine Block -->
+  <rect x="150" y="182" width="260" height="58" rx="12" fill="#29201b" stroke="#f59e0b" stroke-width="2"/>
+  <path d="M 190 182 L 222 144 H 335 L 368 182" stroke="#f59e0b" stroke-width="2" fill="rgba(245,158,11,0.1)"/>
+  <!-- Open Hood -->
+  <line x1="190" y1="182" x2="138" y2="142" stroke="#22d3ee" stroke-width="2.5"/>
+  <!-- Engine Block Callout -->
+  <rect x="156" y="192" width="48" height="34" rx="4" fill="rgba(16,185,129,0.25)" stroke="#10b981"/>
+  <text x="164" y="213" fill="#6ee7b7" font-family="monospace" font-size="9">1.6 OHV</text>
+  <!-- Wheels -->
+  <circle cx="200" cy="244" r="22" fill="#181311" stroke="#a1a1aa" stroke-width="3"/>
+  <circle cx="355" cy="244" r="22" fill="#181311" stroke="#a1a1aa" stroke-width="3"/>
+  <text x="100" y="292" fill="#a1a1aa" font-family="monospace" font-size="10">[1] INSPECIONAR   [2] DESMONTAR   [3] REPARAR &amp; MONTAR</text>
+  <!-- Right Shop Progression Panel -->
+  <rect x="518" y="96" width="204" height="214" rx="14" fill="#1c1714" stroke="rgba(16,185,129,0.35)"/>
+  <text x="536" y="122" fill="#6ee7b7" font-family="monospace" font-size="11" font-weight="bold">REVENDA GERAIS</text>
+  <text x="536" y="148" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="600">Fase 3: Loja Inaugurada</text>
+  <text x="536" y="174" fill="#a1a1aa" font-family="monospace" font-size="10">FERRO: 142 kg  •  COBRE: 38 kg</text>
+  <text x="536" y="194" fill="#a1a1aa" font-family="monospace" font-size="10">BATERIA 12V: 100% OK</text>
+  <text x="536" y="214" fill="#a1a1aa" font-family="monospace" font-size="10">RADIADOR + VENTOINHA: OK</text>
+  <rect x="536" y="254" width="168" height="34" rx="8" fill="#10b981"/>
+  <text x="556" y="275" fill="#052e16" font-family="monospace" font-size="11" font-weight="bold">DAR PARTIDA (IGNICAO)</text>
+  <!-- Bottom Telemetry -->
+  <rect x="80" y="326" width="642" height="58" rx="12" fill="#191512" stroke="rgba(255,255,255,0.07)"/>
+  <text x="100" y="350" fill="#e4e4e7" font-family="monospace" font-size="11">VISTA EXPLODIDA 3D  •  PATIO MINEIRO COM IPE-AMARELO  •  BALANCA DE SUCATA</text>
+  <text x="100" y="370" fill="#71717a" font-family="monospace" font-size="10">THREE.JS + WEB AUDIO PROCEDURAL + REACT + TYPESCRIPT</text>
+
+</svg>
