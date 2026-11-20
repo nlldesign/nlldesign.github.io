@@ -10,7 +10,7 @@
   </defs>
   <rect width="800" height="450" fill="url(#bgGrad)"/>
   <rect width="800" height="450" fill="url(#gridPat)"/>
-  
+
   <circle cx="190" cy="110" r="180" fill="rgba(34,211,238,0.1)"/>
   <circle cx="640" cy="340" r="180" fill="rgba(168,85,247,0.09)"/>
   <rect x="56" y="42" width="688" height="366" rx="20" fill="#101217" stroke="rgba(255,255,255,0.1)"/>
@@ -20,31 +20,31 @@
 
   <!-- Main World vs Isolated World Split -->
   <rect x="82" y="106" width="298" height="196" rx="14" fill="#171922" stroke="#22d3ee" stroke-opacity="0.45"/>
-  <text x="102" y="132" fill="#67e8f9" font-family="monospace" font-size="11" font-weight="bold">MAIN &amp; ISOLATED SCRIPTS</text>
+  <text x="102" y="132" fill="#67e8f9" font-family="monospace" font-size="11" font-weight="bold">ARQUITETURA EM 2 CAMADAS (MV3)</text>
   <rect x="102" y="148" width="258" height="36" rx="8" fill="#212430"/>
-  <text x="116" y="170" fill="#e4e4e7" font-family="monospace" font-size="11">content-main.js (8.8 KB)</text>
+  <text x="114" y="170" fill="#e4e4e7" font-family="sans-serif" font-size="11">Camada de Página — Leitura de Mercados</text>
   <rect x="102" y="194" width="258" height="36" rx="8" fill="#212430"/>
-  <text x="116" y="216" fill="#e4e4e7" font-family="monospace" font-size="11">content-isolated.js (4.0 KB)</text>
-  <text x="102" y="258" fill="#a1a1aa" font-family="sans-serif" font-size="11">Leitura segura do contexto da pagina</text>
-  <text x="102" y="274" fill="#a1a1aa" font-family="sans-serif" font-size="11">e ponte via chrome.runtime</text>
+  <text x="114" y="216" fill="#e4e4e7" font-family="sans-serif" font-size="11">Camada Isolada — Ponte Segura Chrome</text>
+  <text x="102" y="258" fill="#a1a1aa" font-family="sans-serif" font-size="11">Leitura segura do contexto da aba</text>
+  <text x="102" y="274" fill="#a1a1aa" font-family="sans-serif" font-size="11">com isolamento rigoroso de APIs</text>
 
   <!-- Bridge Arrows -->
   <path d="M 388 184 H 416 M 410 178 L 416 184 L 410 190" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M 416 218 H 388 M 394 212 L 388 218 L 394 224" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Popup UI & Companion Notebook -->
+  <!-- Popup UI & Companion Automation -->
   <rect x="424" y="106" width="294" height="196" rx="14" fill="#171922" stroke="#a855f7" stroke-opacity="0.5"/>
-  <text x="444" y="132" fill="#d8b4fe" font-family="monospace" font-size="11" font-weight="bold">POPUP CONTROL UI (25 KB)</text>
+  <text x="444" y="132" fill="#d8b4fe" font-family="monospace" font-size="11" font-weight="bold">PAINEL DE CONTROLE POPUP</text>
   <rect x="444" y="148" width="254" height="36" rx="8" fill="#231f33"/>
-  <text x="458" y="170" fill="#f3e8ff" font-family="monospace" font-size="11">popup.html + popup.css + .js</text>
+  <text x="456" y="170" fill="#f3e8ff" font-family="sans-serif" font-size="11">Interface Rápida &amp; Ações de 1 Clique</text>
   <rect x="444" y="194" width="254" height="36" rx="8" fill="#212430"/>
-  <text x="458" y="216" fill="#6ee7b7" font-family="monospace" font-size="11">Colab: Automacao_SeuBet_Iraq</text>
-  <text x="444" y="258" fill="#a1a1aa" font-family="sans-serif" font-size="11">Inspecao de mercados e painel rapido</text>
-  <text x="444" y="274" fill="#a1a1aa" font-family="sans-serif" font-size="11">com README e payloads JSON</text>
+  <text x="456" y="216" fill="#6ee7b7" font-family="sans-serif" font-size="11">Integração Estruturada Python / JSON</text>
+  <text x="444" y="258" fill="#a1a1aa" font-family="sans-serif" font-size="11">Inspeção rápida de mercados e fluxos</text>
+  <text x="444" y="274" fill="#a1a1aa" font-family="sans-serif" font-size="11">prontos para automação externa</text>
 
   <!-- Bottom Metadata Strip -->
   <rect x="82" y="322" width="636" height="58" rx="12" fill="#14161e" stroke="rgba(255,255,255,0.08)"/>
-  <text x="102" y="346" fill="#e4e4e7" font-family="monospace" font-size="11">ARQUITETURA: Page World Hook -> CustomEvent Bridge -> Extension Popup</text>
-  <text x="102" y="366" fill="#71717a" font-family="monospace" font-size="10">ARQUIVADO NO GOOGLE DRIVE (/01_Codigos/Extensao/betting-helper-extension)</text>
+  <text x="102" y="346" fill="#e4e4e7" font-family="sans-serif" font-size="11.5">FLUXO: Captura de Estado na Aba → Ponte Isolada → Painel Interativo</text>
+  <text x="102" y="366" fill="#71717a" font-family="monospace" font-size="10">EXTENSÃO CHROME MANIFEST V3 • ISOLAMENTO DE CONTEXTO &amp; AUTOMATIZAÇÃO</text>
 
 </svg>
