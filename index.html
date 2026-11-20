@@ -990,11 +990,11 @@
         </div>
 
         <div class="pt-4 border-t border-[var(--line)] flex flex-wrap items-center gap-3 sm:gap-4">
-          <button onclick="showView('sobre')" id="homeSobreCtaBtn" class="btn-pill-primary text-xs sm:text-sm">
+          <button onclick="trackInternalCta('home_sobre_cta', '#/sobre'); showView('sobre')" id="homeSobreCtaBtn" class="btn-pill-primary text-xs sm:text-sm">
             <span>Conhecer minha trajetória</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
-          <button onclick="showView('contato')" id="homeSobreContactBtn" class="btn-pill-secondary text-xs sm:text-sm">
+          <button onclick="trackInternalCta('home_sobre_contact', '#/contato'); showView('contato')" id="homeSobreContactBtn" class="btn-pill-secondary text-xs sm:text-sm">
             Falar comigo
           </button>
         </div>
@@ -1022,7 +1022,7 @@
           <button onclick="scrollMiniCarousel('homeMiniCasesTrack', 1)" class="mini-carousel-btn" aria-label="Próximo">
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
-          <button onclick="showView('portfolio')" id="homeMiniCasesCta" class="tag-pill cursor-pointer text-xs text-[var(--ink)] hover:border-[var(--ink)] whitespace-nowrap">
+          <button onclick="trackInternalCta('home_mini_cases_all', '#/portfolio'); showView('portfolio')" id="homeMiniCasesCta" class="tag-pill cursor-pointer text-xs text-[var(--ink)] hover:border-[var(--ink)] whitespace-nowrap">
             Ver portfólio completo →
           </button>
         </div>
@@ -1065,7 +1065,7 @@
             <button onclick="scrollMiniCarousel('homeMiniAiLabTrack', 1)" class="mini-carousel-btn" aria-label="Próximo">
               <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </button>
-            <button onclick="showView('ai-lab')" id="homeMiniAiLabCta" class="tag-pill cursor-pointer text-xs text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] whitespace-nowrap">
+            <button onclick="trackInternalCta('home_mini_ai_lab_all', '#/ai-lab'); showView('ai-lab')" id="homeMiniAiLabCta" class="tag-pill cursor-pointer text-xs text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] whitespace-nowrap">
               Explorar AI Lab →
             </button>
           </div>
@@ -1094,7 +1094,7 @@
             <button onclick="scrollMiniCarousel('homeMiniGamesTrack', 1)" class="mini-carousel-btn" aria-label="Próximo">
               <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </button>
-            <button onclick="showView('jogos')" id="homeMiniGamesCta" class="tag-pill cursor-pointer text-xs text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] whitespace-nowrap">
+            <button onclick="trackInternalCta('home_mini_games_all', '#/jogos'); showView('jogos')" id="homeMiniGamesCta" class="tag-pill cursor-pointer text-xs text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] whitespace-nowrap">
               Ver todos os jogos →
             </button>
           </div>
@@ -1287,7 +1287,7 @@
           <h3 id="sobreCtaTitle" class="text-xl sm:text-2xl font-medium text-[var(--ink)]">Tem um desafio de produto com UX no meio?</h3>
           <p id="sobreCtaSubtitle" class="text-sm text-[var(--muted)] mt-1 font-normal">Bora conversar e construir juntos.</p>
         </div>
-        <button onclick="showView('contato')" id="sobreCtaBtn" class="btn-pill-primary shrink-0">
+        <button onclick="trackInternalCta('sobre_contact_cta', '#/contato'); showView('contato')" id="sobreCtaBtn" class="btn-pill-primary shrink-0">
           Falar comigo →
         </button>
       </div>
@@ -1543,7 +1543,7 @@
             <svg class='inline-block w-3 h-3 shrink-0' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
           </a>
           <a href="https://wa.me/5511984789811" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('whatsapp', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors inline-flex items-center gap-1.5">
-            <span>(11) 98478-9811 • whatsapp</span>
+            <span>(11) 98478-9811 • WhatsApp</span>
             <svg class='inline-block w-3 h-3 shrink-0' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
           </a>
           <div class="flex items-center gap-5 pt-1">
@@ -1562,7 +1562,7 @@
 
       <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
         <div id="footerCopyright" class="text-center sm:text-left">© 2026 · Lucas Nellucci • UX &amp; Product Design</div>
-        <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" id="footerBackToTop" class="hover:text-[var(--ink)] transition-colors cursor-pointer">
+        <button onclick="trackInternalCta('footer_back_to_top', '#top'); window.scrollTo({ top: 0, behavior: 'smooth' })" id="footerBackToTop" class="hover:text-[var(--ink)] transition-colors cursor-pointer">
           Voltar ao topo ↑
         </button>
       </div>
@@ -5603,14 +5603,14 @@
         renderGamesGrid();
         lucide.createIcons();
 
-        // 10. Se houver um estudo de caso aberto, atualiza seus dados
+        // 10. Se houver um estudo de caso aberto, atualiza seus dados sem re-disparar eventos
         if (activeCaseId) {
-          openCaseStudy(activeCaseId);
+          openCaseStudy(activeCaseId, false, false);
         }
 
         // 11. Dispara evento no GTM / GA4 quando for clique do usuário
         if (shouldTrack) {
-          trackDataLayer('select_language', { language: lang, scope: 'global' });
+          trackDataLayer('select_language', { language: lang });
         }
       } finally {
         isChangingLang = false;
@@ -5733,27 +5733,49 @@
     
     // DataLayer Dispatcher para Google Tag Manager (GTM) & GA4
     window.dataLayer = window.dataLayer || [];
+    const MANAGED_DL_KEYS = [
+      'page_path', 'page_title', 'page_location',
+      'channel', 'link_url', 'click_context',
+      'case_id', 'case_title', 'case_category',
+      'language', 'theme', 'filter_name',
+      'carousel_id', 'action', 'card_index',
+      'game_url', 'image_src', 'image_caption',
+      'cta_name', 'cta_target'
+    ];
+    let lastTrackedPagePath = null;
+
     function trackDataLayer(eventName, params = {}) {
-      window.dataLayer.push({
-        event: eventName,
-        ...params
-      });
+      const payload = { event: eventName };
+      for (const k of MANAGED_DL_KEYS) {
+        payload[k] = undefined;
+      }
+      Object.assign(payload, params);
+      window.dataLayer.push(payload);
     }
 
     function trackOutboundClick(channel, url, context = 'general') {
       trackDataLayer('click_outbound', {
         channel: channel,
         link_url: url,
-        click_context: context,
-        page_location: window.location.href
+        click_context: context
       });
     }
 
     function trackGA4PageView(path, title) {
+      if (path === lastTrackedPagePath) return;
+      lastTrackedPagePath = path;
+      document.title = title;
       trackDataLayer('page_view', {
         page_path: path,
         page_title: title,
         page_location: window.location.origin + window.location.pathname + path
+      });
+    }
+
+    function trackInternalCta(ctaName, ctaTarget) {
+      trackDataLayer('click_internal_cta', {
+        cta_name: ctaName,
+        cta_target: ctaTarget
       });
     }
 
@@ -5762,6 +5784,7 @@
     let lastListView = 'home';
     let currentAiLabFilter = 'all';
     let suppressHashChange = false;
+    let suppressHashTimer = null;
 
     
     
@@ -5786,6 +5809,7 @@
         btn.classList.add('is-active');
         btn.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
+        trackDataLayer('toggle_mobile_menu', { action: 'open' });
       }
     }
 
@@ -5982,7 +6006,7 @@
     function onCardClick(idx, id) {
       if (carouselHasDragged) return; // Se estava arrastando, não clica
       if (idx !== currentCardIndex) {
-        scrollToCard(idx);
+        scrollToCard(idx, 'select_card');
       } else {
         openCaseStudy(id);
       }
@@ -6092,6 +6116,10 @@
     function scrollMiniCarousel(trackId, direction) {
       const track = document.getElementById(trackId);
       if (!track) return;
+      trackDataLayer('carousel_action', {
+        carousel_id: trackId,
+        action: direction < 0 ? 'prev' : 'next'
+      });
       track.scrollBy({ left: direction * 310, behavior: 'smooth' });
     }
 
@@ -6216,7 +6244,7 @@
       }).join('');
     }
 
-    function setAiLabFilter(filter) {
+    function setAiLabFilter(filter, shouldTrack = true) {
       currentAiLabFilter = filter;
       const btnMap = {
         all: document.getElementById('aiLabFilterAll'),
@@ -6232,6 +6260,9 @@
       const toolsSec = document.getElementById('driveProjectsSection');
       if (appsSec) appsSec.classList.toggle('hidden', filter === 'tools');
       if (toolsSec) toolsSec.classList.toggle('hidden', filter === 'apps');
+      if (shouldTrack) {
+        trackDataLayer('filter_ai_lab', { filter_name: filter });
+      }
       initScrollReveal();
     }
 
@@ -6269,46 +6300,49 @@
       });
 
       let targetHash = '#/';
+      let pageTitle = 'Home · Lucas Nellucci';
       if (viewId === 'home') {
         document.getElementById('viewHome').classList.remove('hidden');
         renderPortfolioCarousel();
         renderHomeMiniCarousels();
         targetHash = '#/';
-        trackGA4PageView('#/', 'Home · Lucas Nellucci');
+        pageTitle = 'Home · Lucas Nellucci';
       } else if (viewId === 'portfolio') {
         document.getElementById('viewPortfolio').classList.remove('hidden');
         renderPortfolioCasesGrid();
         targetHash = '#/portfolio';
-        trackGA4PageView('#/portfolio', 'Portfólio · Lucas Nellucci');
+        pageTitle = 'Portfólio · Lucas Nellucci';
       } else if (viewId === 'ai-lab') {
         document.getElementById('viewAiLab').classList.remove('hidden');
         renderVercelAppsGrid();
         renderDriveProjectsGrid();
-        setAiLabFilter(currentAiLabFilter || 'all');
+        setAiLabFilter(currentAiLabFilter || 'all', false);
         targetHash = '#/ai-lab';
-        trackGA4PageView('#/ai-lab', 'AI Lab · Lucas Nellucci');
+        pageTitle = 'AI Lab · Lucas Nellucci';
       } else if (viewId === 'sobre') {
         document.getElementById('viewSobre').classList.remove('hidden');
         updateSobreSection(currentGlobalLang);
         targetHash = '#/sobre';
-        trackGA4PageView('#/sobre', 'Sobre & Trajetória · Lucas Nellucci');
+        pageTitle = 'Sobre & Trajetória · Lucas Nellucci';
       } else if (viewId === 'jogos') {
         document.getElementById('viewJogos').classList.remove('hidden');
         renderGamesGrid();
         targetHash = '#/jogos';
-        trackGA4PageView('#/jogos', 'Jogos & 3D · Lucas Nellucci');
+        pageTitle = 'Jogos & 3D · Lucas Nellucci';
       } else if (viewId === 'contato') {
         document.getElementById('viewContato').classList.remove('hidden');
         targetHash = '#/contato';
-        trackGA4PageView('#/contato', 'Contato · Lucas Nellucci');
+        pageTitle = 'Contato · Lucas Nellucci';
       }
 
       if (updateHash && window.location.hash !== targetHash) {
         suppressHashChange = true;
+        clearTimeout(suppressHashTimer);
         window.location.hash = targetHash;
-        setTimeout(() => { suppressHashChange = false; }, 0);
+        suppressHashTimer = setTimeout(() => { suppressHashChange = false; }, 100);
       }
 
+      trackGA4PageView(targetHash, pageTitle);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       initScrollReveal();
       lucide.createIcons();
@@ -6361,7 +6395,7 @@
       // Dots
       const dots = document.getElementById('carouselDots');
       dots.innerHTML = portfolioProjects.map((_, idx) => `
-        <button onclick="scrollToCard(${idx})" class="h-2.5 rounded-full transition-all duration-300 ${idx === currentCardIndex ? 'bg-gradient-to-r from-[var(--accent)] to-purple-400 w-8 shadow-sm shadow-purple-500/30' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)] hover:w-3'}" aria-label="Ir para card ${idx + 1}"></button>
+        <button onclick="scrollToCard(${idx}, 'dot')" class="h-2.5 rounded-full transition-all duration-300 ${idx === currentCardIndex ? 'bg-gradient-to-r from-[var(--accent)] to-purple-400 w-8 shadow-sm shadow-purple-500/30' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)] hover:w-3'}" aria-label="Ir para card ${idx + 1}"></button>
       `).join('');
 
       track.scrollLeft = 0;
@@ -6379,11 +6413,18 @@
       });
     }
 
-    function scrollToCard(idx) {
+    function scrollToCard(idx, trackAction = null) {
       const track = document.getElementById('carouselTrack');
       const cards = track.querySelectorAll('.carousel-card');
       if (cards[idx]) {
         currentCardIndex = idx;
+        if (trackAction) {
+          trackDataLayer('carousel_action', {
+            carousel_id: 'hero_coverflow',
+            action: trackAction,
+            card_index: idx + 1
+          });
+        }
         const card = cards[idx];
         const targetScrollLeft = card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
         track.scrollTo({ left: Math.max(0, targetScrollLeft), behavior: 'smooth' });
@@ -6396,21 +6437,31 @@
     }
 
     function prevCard() {
-      trackDataLayer('carousel_action', { action: 'prev', card_index: currentCardIndex + 1 });
-      currentCardIndex = Math.max(0, currentCardIndex - 1);
-      scrollToCard(currentCardIndex);
+      const nextIdx = Math.max(0, currentCardIndex - 1);
+      trackDataLayer('carousel_action', {
+        carousel_id: 'hero_coverflow',
+        action: 'prev',
+        card_index: nextIdx + 1
+      });
+      currentCardIndex = nextIdx;
+      scrollToCard(nextIdx);
     }
 
     function nextCard() {
-      trackDataLayer('carousel_action', { action: 'next', card_index: currentCardIndex + 1 });
-      currentCardIndex = Math.min(portfolioProjects.length - 1, currentCardIndex + 1);
-      scrollToCard(currentCardIndex);
+      const nextIdx = Math.min(portfolioProjects.length - 1, currentCardIndex + 1);
+      trackDataLayer('carousel_action', {
+        carousel_id: 'hero_coverflow',
+        action: 'next',
+        card_index: nextIdx + 1
+      });
+      currentCardIndex = nextIdx;
+      scrollToCard(nextIdx);
     }
 
     function renderDots() {
       const dots = document.getElementById('carouselDots');
       dots.innerHTML = portfolioProjects.map((_, idx) => `
-        <button onclick="scrollToCard(${idx})" class="h-2.5 rounded-full transition-all duration-300 ${idx === currentCardIndex ? 'bg-gradient-to-r from-[var(--accent)] to-purple-400 w-8 shadow-sm shadow-purple-500/30' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)] hover:w-3'}" aria-label="Ir para card ${idx + 1}"></button>
+        <button onclick="scrollToCard(${idx}, 'dot')" class="h-2.5 rounded-full transition-all duration-300 ${idx === currentCardIndex ? 'bg-gradient-to-r from-[var(--accent)] to-purple-400 w-8 shadow-sm shadow-purple-500/30' : 'bg-[var(--line)] w-2.5 hover:bg-[var(--muted)] hover:w-3'}" aria-label="Ir para card ${idx + 1}"></button>
       `).join('');
     }
 
@@ -6478,14 +6529,13 @@
       return tLang.backToPortfolio;
     }
 
-    function openCaseStudy(id, updateHash = true) {
+    function openCaseStudy(id, updateHash = true, shouldTrack = true) {
       triggerTopProgressBar();
       const item = [...portfolioProjects, ...getVercelApps(), ...getDriveProjects(), ...gameProjects].find(c => c.id === id);
       if (!item) return;
 
       activeCaseId = id;
       currentCategory = item.category;
-      trackDataLayer('view_case_study', { case_id: id, case_title: item.title, case_category: item.category });
 
       document.querySelectorAll('.view-screen').forEach(el => el.classList.add('hidden'));
       document.getElementById('viewCaseStudy').classList.remove('hidden');
@@ -6684,8 +6734,13 @@
       const caseHash = '#/case/' + id;
       if (updateHash && window.location.hash !== caseHash) {
         suppressHashChange = true;
+        clearTimeout(suppressHashTimer);
         window.location.hash = caseHash;
-        setTimeout(() => { suppressHashChange = false; }, 0);
+        suppressHashTimer = setTimeout(() => { suppressHashChange = false; }, 100);
+      }
+      if (shouldTrack) {
+        trackGA4PageView(caseHash, `${item.title} · Lucas Nellucci`);
+        trackDataLayer('view_case_study', { case_id: id, case_title: item.title, case_category: item.category });
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
       initScrollReveal();
@@ -6701,19 +6756,21 @@
         : ((item.category === 'labs' || item.category === 'drive') ? aiLabAll : portfolioProjects);
       const curIdx = list.findIndex(c => c.id === activeCaseId);
       const nextItem = list[(curIdx + 1) % list.length];
+      trackInternalCta('next_case_banner', '#/case/' + nextItem.id);
       openCaseStudy(nextItem.id);
     }
 
     function navigateBack() {
+      let targetView = 'portfolio';
       if (lastListView && ['home', 'portfolio', 'ai-lab', 'jogos'].includes(lastListView)) {
-        showView(lastListView);
+        targetView = lastListView;
       } else if (currentCategory === 'jogos') {
-        showView('jogos');
+        targetView = 'jogos';
       } else if (currentCategory === 'labs' || currentCategory === 'drive') {
-        showView('ai-lab');
-      } else {
-        showView('portfolio');
+        targetView = 'ai-lab';
       }
+      trackInternalCta('case_back_button', targetView === 'home' ? '#/' : '#/' + targetView);
+      showView(targetView);
     }
 
     function runGameEmbed(url) {
@@ -6727,7 +6784,10 @@
     }
 
     function toggleFullscreenEmbed() {
-      trackDataLayer('toggle_game_fullscreen', { active_case: activeCaseId });
+      trackDataLayer('toggle_game_fullscreen', {
+        case_id: activeCaseId || 'none',
+        action: !document.fullscreenElement ? 'enter' : 'exit'
+      });
       const viewport = document.getElementById('embedViewport');
       if (!viewport) return;
       if (!document.fullscreenElement) {
@@ -6742,6 +6802,11 @@
       document.getElementById('lightboxImage').src = src;
       document.getElementById('lightboxCaption').innerText = cap || '';
       document.getElementById('lightboxModal').classList.remove('hidden');
+      trackDataLayer('view_image_lightbox', {
+        case_id: activeCaseId || 'none',
+        image_src: src,
+        image_caption: cap || ''
+      });
       lucide.createIcons();
     }
 
@@ -6762,6 +6827,7 @@
       root.setAttribute('data-theme', newTheme);
       localStorage.setItem('pf-theme', newTheme);
       updateThemeToggleText();
+      trackDataLayer('toggle_theme', { theme: newTheme });
     }
 
     // Inicialização do Tema
@@ -6797,9 +6863,12 @@
     }
 
     setGlobalLang(currentGlobalLang, false);
-    window.addEventListener('popstate', handleRouting);
     window.addEventListener('hashchange', () => {
-      if (!suppressHashChange) handleRouting();
+      if (suppressHashChange) {
+        suppressHashChange = false;
+        return;
+      }
+      handleRouting();
     });
     handleRouting();
     initPreloader();
