@@ -684,6 +684,35 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+
+    /* Compact controls for Home mini-carousels & AI Lab filter pills */
+    .mini-carousel-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .mini-carousel-btn:hover {
+      border-color: var(--ink);
+      background: color-mix(in srgb, var(--ink) 8%, transparent);
+      transform: scale(1.06);
+    }
+    .mini-carousel-btn:active {
+      transform: scale(0.94);
+    }
+    .tag-pill.is-filter-active {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+      font-weight: 600;
+    }
   </style>
 </head>
 <body class="relative">
@@ -731,13 +760,13 @@
   </div>
 
   <!-- ================================================================= -->
-  <!-- HEADER / NAVEGAÇÃO SUPERIOR (Grid 3 colunas idêntico ao luccas.social.br) -->
+  <!-- HEADER / NAVEGAÇÃO SUPERIOR -->
   <!-- ================================================================= -->
   <header class="site-nav">
     <div class="max-w-[1240px] mx-auto px-4 sm:px-12 h-[64px] sm:h-[72px] flex items-center justify-between gap-2.5 sm:gap-4 w-full">
-      
-      <!-- Esquerda: Brand Mark (Logo SVG + Nome) -->
-      <a href="#/portfolio" onclick="showView('portfolio'); closeMobileMenu(); return false;" class="flex items-center gap-2 sm:gap-3 group min-w-0">
+
+      <!-- Esquerda: Brand Mark (Logo SVG + Nome -> Home) -->
+      <a href="#/" onclick="showView('home'); closeMobileMenu(); return false;" class="flex items-center gap-2 sm:gap-3 group min-w-0">
         <svg class="w-7 h-7 sm:w-8 sm:h-8 shrink-0 text-[var(--ink)] transition-transform group-hover:scale-110 duration-300" viewBox="0 0 36 36" fill="none">
           <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/>
           <path d="M12 24L12 12L24 24L24 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -748,16 +777,19 @@
         </div>
       </a>
 
-      <!-- Centro (Desktop): Links das Telas Principais -->
-      <nav class="hidden md:flex items-center gap-1.5 lg:gap-2">
-        <button onclick="showView('portfolio')" id="navLinkPortfolio" class="nav-link" data-active="true">
+      <!-- Centro (Desktop): 5 Páginas Dedicadas -->
+      <nav class="hidden md:flex items-center gap-1 lg:gap-1.5">
+        <button onclick="showView('portfolio')" id="navLinkPortfolio" class="nav-link" data-active="false">
           portfólio
+        </button>
+        <button onclick="showView('ai-lab')" id="navLinkAiLab" class="nav-link" data-active="false">
+          ai lab
+        </button>
+        <button onclick="showView('jogos')" id="navLinkJogos" class="nav-link" data-active="false">
+          jogos
         </button>
         <button onclick="showView('sobre')" id="navLinkSobre" class="nav-link" data-active="false">
           sobre
-        </button>
-        <button onclick="showView('jogos')" id="navLinkJogos" class="nav-link" data-active="false">
-          jogos &amp; 3d
         </button>
         <button onclick="showView('contato')" id="navLinkContato" class="nav-link" data-active="false">
           contato
@@ -786,10 +818,6 @@
           linkedin <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
         </a>
 
-        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'header')" class="tag-pill hidden xl:inline-flex text-xs">
-          behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
-        </a>
-
         <!-- Botão Hambúrguer Mobile (Apenas em telas < 768px) -->
         <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="md:hidden w-9 h-9 sm:w-10 sm:h-10 rounded-full flex flex-col items-center justify-center gap-1.5 border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] transition-all active:scale-95 shadow-sm shrink-0" aria-label="Menu" aria-expanded="false">
           <span class="w-4 h-0.5 bg-current transition-all duration-300 origin-center ham-line-1"></span>
@@ -803,46 +831,62 @@
   <!-- ================================================================= -->
   <!-- DRAWER / OVERLAY DO MENU HAMBÚRGUER MOBILE                        -->
   <!-- ================================================================= -->
-  <div id="mobileMenuDrawer" class="fixed inset-0 z-40 bg-[var(--bg)]/95 backdrop-blur-2xl md:hidden flex flex-col justify-between p-6 pt-24 transition-all duration-300 pointer-events-none opacity-0 -translate-y-4" aria-hidden="true">
-    
+  <div id="mobileMenuDrawer" class="fixed inset-0 z-40 bg-[var(--bg)]/95 backdrop-blur-2xl md:hidden flex flex-col justify-between p-6 pt-24 transition-all duration-300 pointer-events-none opacity-0 -translate-y-4 overflow-y-auto" aria-hidden="true">
+
     <!-- Links Editoriais em Tipografia de Destaque -->
-    <div class="flex flex-col gap-2 my-auto">
-      <a href="#/portfolio" onclick="showView('portfolio'); closeMobileMenu(); return false;" class="flex items-center justify-between py-4 border-b border-[var(--line)] group">
+    <div class="flex flex-col gap-1 my-auto">
+      <a href="#/" onclick="showView('home'); closeMobileMenu(); return false;" class="flex items-center justify-between py-3.5 border-b border-[var(--line)] group">
+        <div class="flex items-baseline gap-3">
+          <span class="font-mono text-xs text-[var(--muted)]">00</span>
+          <span id="mobNavHome" class="text-2xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">início</span>
+        </div>
+        <span class="text-sm font-mono text-[var(--muted)] group-hover:translate-x-1.5 transition-transform">→</span>
+      </a>
+
+      <a href="#/portfolio" onclick="showView('portfolio'); closeMobileMenu(); return false;" class="flex items-center justify-between py-3.5 border-b border-[var(--line)] group">
         <div class="flex items-baseline gap-3">
           <span class="font-mono text-xs text-[var(--accent)]">01</span>
-          <span id="mobNavPortfolio" class="text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">portfólio</span>
+          <span id="mobNavPortfolio" class="text-2xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">portfólio</span>
         </div>
         <span class="text-sm font-mono text-[var(--muted)] group-hover:translate-x-1.5 transition-transform">→</span>
       </a>
 
-      <a href="#/sobre" onclick="showView('sobre'); closeMobileMenu(); return false;" class="flex items-center justify-between py-4 border-b border-[var(--line)] group">
+      <a href="#/ai-lab" onclick="showView('ai-lab'); closeMobileMenu(); return false;" class="flex items-center justify-between py-3.5 border-b border-[var(--line)] group">
         <div class="flex items-baseline gap-3">
-          <span class="font-mono text-xs text-[var(--accent)]">02</span>
-          <span id="mobNavSobre" class="text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">sobre</span>
+          <span class="font-mono text-xs text-cyan-400">02</span>
+          <span id="mobNavAiLab" class="text-2xl font-medium tracking-tight text-[var(--ink)] group-hover:text-cyan-400 transition-colors">ai lab</span>
         </div>
         <span class="text-sm font-mono text-[var(--muted)] group-hover:translate-x-1.5 transition-transform">→</span>
       </a>
 
-      <a href="#/jogos" onclick="showView('jogos'); closeMobileMenu(); return false;" class="flex items-center justify-between py-4 border-b border-[var(--line)] group">
+      <a href="#/jogos" onclick="showView('jogos'); closeMobileMenu(); return false;" class="flex items-center justify-between py-3.5 border-b border-[var(--line)] group">
         <div class="flex items-baseline gap-3">
           <span class="font-mono text-xs text-cyan-400">03</span>
-          <span id="mobNavJogos" class="text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-cyan-400 transition-colors">jogos &amp; 3d</span>
+          <span id="mobNavJogos" class="text-2xl font-medium tracking-tight text-[var(--ink)] group-hover:text-cyan-400 transition-colors">jogos</span>
         </div>
         <span class="text-sm font-mono text-[var(--muted)] group-hover:translate-x-1.5 transition-transform">→</span>
       </a>
 
-      <a href="#/contato" onclick="showView('contato'); closeMobileMenu(); return false;" class="flex items-center justify-between py-4 border-b border-[var(--line)] group">
+      <a href="#/sobre" onclick="showView('sobre'); closeMobileMenu(); return false;" class="flex items-center justify-between py-3.5 border-b border-[var(--line)] group">
         <div class="flex items-baseline gap-3">
           <span class="font-mono text-xs text-[var(--accent)]">04</span>
-          <span id="mobNavContato" class="text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">contato</span>
+          <span id="mobNavSobre" class="text-2xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">sobre</span>
+        </div>
+        <span class="text-sm font-mono text-[var(--muted)] group-hover:translate-x-1.5 transition-transform">→</span>
+      </a>
+
+      <a href="#/contato" onclick="showView('contato'); closeMobileMenu(); return false;" class="flex items-center justify-between py-3.5 border-b border-[var(--line)] group">
+        <div class="flex items-baseline gap-3">
+          <span class="font-mono text-xs text-[var(--accent)]">05</span>
+          <span id="mobNavContato" class="text-2xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">contato</span>
         </div>
         <span class="text-sm font-mono text-[var(--muted)] group-hover:translate-x-1.5 transition-transform">→</span>
       </a>
     </div>
 
     <!-- Rodapé do Menu Mobile: Alternador de Tema + Redes + Email -->
-    <div class="pt-6 border-t border-[var(--line)] flex flex-col gap-4">
-      <div class="flex items-center justify-between">
+    <div class="pt-5 border-t border-[var(--line)] flex flex-col gap-4">
+      <div class="flex items-center justify-between gap-2">
         <button onclick="toggleTheme()" class="tag-pill cursor-pointer text-xs py-2 px-4 shadow-sm" title="Alternar tema">
           <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent)] animate-pulse"></span>
           <span id="mobThemeToggleText">modo claro</span>
@@ -852,13 +896,13 @@
           <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'mobile_menu')" class="tag-pill text-xs">
             linkedin <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
           </a>
-          <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'mobile_menu')" class="tag-pill text-xs">
-            behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
+          <a href="https://github.com/nlldesign" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('github', this.href, 'mobile_menu')" class="tag-pill text-xs">
+            github <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
           </a>
         </div>
       </div>
 
-      <div class="text-[11px] font-mono text-[var(--muted)] text-center pt-2 opacity-70">
+      <div class="text-[11px] font-mono text-[var(--muted)] text-center pt-1 opacity-75">
         lucasnellucci@gmail.com • (11) 98478-9811
       </div>
     </div>
@@ -866,12 +910,12 @@
   </div>
 
   <!-- ================================================================= -->
-  <!-- TELA 1: PORTFÓLIO DE TRABALHOS + SEÇÃO SOBRE ABAIXO DO CARROSSEL  -->
+  <!-- TELA 0: HOME (#/) — CARROSSEL + SOBRE + 2 BLOCOS MINI-CARROSSEIS  -->
   <!-- ================================================================= -->
-  <main id="viewPortfolio" class="view-screen max-w-[1240px] mx-auto px-6 sm:px-12 py-14 sm:py-20 flex-1 w-full relative z-10">
-    
-    <!-- Hero Header do Portfólio (Animado) -->
-    <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20 anim-fade-in">
+  <main id="viewHome" class="view-screen max-w-[1240px] mx-auto px-6 sm:px-12 py-12 sm:py-16 flex-1 w-full relative z-10">
+
+    <!-- Hero Header -->
+    <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 anim-fade-in">
       <div class="tag-pill mb-5">
         <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
         <span id="heroPortTag">portfólio de produto</span>
@@ -884,18 +928,18 @@
       </p>
     </div>
 
-    <!-- Carrossel de Cards Centralizados com Snap e Animação de Hover -->
-    <div class="relative -mx-6 sm:-mx-12 mb-24 sm:mb-32 anim-fade-in anim-delay-1 overflow-hidden">
+    <!-- Carrossel Coverflow Principal -->
+    <div class="relative -mx-6 sm:-mx-12 mb-16 sm:mb-20 anim-fade-in anim-delay-1 overflow-hidden">
       <div id="carouselTrack" class="flex gap-8 overflow-x-auto snap-x snap-mandatory py-6 no-scrollbar scroll-smooth">
         <!-- Injetado dinamicamente via JS -->
       </div>
 
-      <!-- Controles do Carrossel (Prev / Indicadores / Next) -->
-      <div class="flex items-center justify-center gap-6 mt-6">
+      <!-- Controles do Carrossel -->
+      <div class="flex items-center justify-center gap-6 mt-5">
         <button onclick="prevCard()" class="carousel-control-btn" aria-label="Anterior">
           <i data-lucide="arrow-left" class="w-4 h-4"></i>
         </button>
-        
+
         <div id="carouselDots" class="flex items-center gap-2">
           <!-- Dots injetados via JS -->
         </div>
@@ -910,60 +954,9 @@
       </div>
     </div>
 
-        <!-- =============================================================== -->
-    
-    <!-- =============================================================== -->
-    <!-- PRODUTOS & EXPERIMENTOS WEB (DEPLOY LIVE NA VERCEL)             -->
-    <!-- =============================================================== -->
-    <section id="vercelAppsSection" class="max-w-[1120px] mx-auto pt-14 sm:pt-16 border-t border-[var(--line)] mb-16 sm:mb-24 reveal-on-scroll">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-        <div>
-          <div class="tag-pill mb-3">
-            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-            <span id="vercelAppsTag">produtos &amp; labs • vercel</span>
-          </div>
-          <h2 id="vercelAppsTitle" class="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)]">
-            aplicações &amp; protótipos funcionais em produção.
-          </h2>
-        </div>
-        <p id="vercelAppsSubtitle" class="text-xs sm:text-sm text-[var(--muted)] max-w-md font-light">
-          ferramentas de ia, saúde, rh, prospecção e produtividade construídas e publicadas na vercel — clique para abrir e navegar.
-        </p>
-      </div>
-
-      <div id="vercelAppsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Injetado via JS -->
-      </div>
-    </section>
-
-    <!-- =============================================================== -->
-    <!-- PLUGINS, EXTENSÕES & LABS DE IA (GOOGLE DRIVE & AI STUDIO)     -->
-    <!-- =============================================================== -->
-    <section id="driveProjectsSection" class="max-w-[1120px] mx-auto pt-14 sm:pt-16 border-t border-[var(--line)] mb-16 sm:mb-24 reveal-on-scroll">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-        <div>
-          <div class="tag-pill mb-3">
-            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
-            <span id="driveProjectsTag">plugins, extensões &amp; labs de ia • como funciona</span>
-          </div>
-          <h2 id="driveProjectsTitle" class="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)]">
-            plugins, extensões &amp; protótipos — como funcionam.
-          </h2>
-        </div>
-        <p id="driveProjectsSubtitle" class="text-xs sm:text-sm text-[var(--muted)] max-w-md font-light">
-          plugins criados para antigravity e jogos, extensões chrome, automações locais e protótipos de ia explicados em detalhes: problema, arquitetura e funcionamento.
-        </p>
-      </div>
-
-      <div id="driveProjectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Injetado via JS -->
-      </div>
-    </section>
-
-    <!-- RESUMO BREVE DO SOBRE NA HOME (LEVA PARA A PÁGINA #/sobre)      -->
-    <!-- =============================================================== -->
-    <section id="homeSobreTeaser" class="max-w-[920px] mx-auto pt-14 sm:pt-16 border-t border-[var(--line)] mb-16 sm:mb-24 reveal-on-scroll">
-      <div class="portfolio-card p-7 sm:p-10 md:p-12 flex flex-col gap-6">
+    <!-- Breve Resumo Sobre Mim (#homeSobreTeaser) -->
+    <section id="homeSobreTeaser" class="max-w-[960px] mx-auto pt-12 sm:pt-14 border-t border-[var(--line)] mb-14 sm:mb-20 reveal-on-scroll">
+      <div class="portfolio-card p-6 sm:p-9 md:p-11 flex flex-col gap-5">
         <div class="flex items-center justify-between gap-4">
           <div class="tag-pill">
             <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
@@ -973,7 +966,7 @@
         </div>
 
         <div class="max-w-2xl">
-          <h2 id="homeSobreTitle" class="text-2xl sm:text-4xl font-medium tracking-tight leading-[1.15] text-[var(--ink)] mb-4">
+          <h2 id="homeSobreTitle" class="text-2xl sm:text-3xl font-medium tracking-tight leading-[1.15] text-[var(--ink)] mb-3">
             entre o comportamento humano e o produto digital, alguém precisa traduzir.
           </h2>
           <p id="homeSobreSummary" class="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-light">
@@ -1000,18 +993,224 @@
       </div>
     </section>
 
+    <!-- =============================================================== -->
+    <!-- BLOCO 1: DESIGN DE PRODUTO — MINI-CARROSSEL (4 CASES)           -->
+    <!-- =============================================================== -->
+    <section id="homeBlockDesign" class="max-w-[1160px] mx-auto pt-12 sm:pt-14 border-t border-[var(--line)] mb-14 sm:mb-20 reveal-on-scroll">
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+        <div>
+          <div class="tag-pill mb-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+            <span id="homeMiniCasesTag">bloco 01 · design de produto</span>
+          </div>
+          <h2 id="homeMiniCasesTitle" class="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)]">
+            estudos de caso &amp; ux.
+          </h2>
+        </div>
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button onclick="scrollMiniCarousel('homeMiniCasesTrack', -1)" class="mini-carousel-btn" aria-label="Anterior">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          </button>
+          <button onclick="scrollMiniCarousel('homeMiniCasesTrack', 1)" class="mini-carousel-btn" aria-label="Próximo">
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+          <button onclick="showView('portfolio')" id="homeMiniCasesCta" class="tag-pill cursor-pointer text-xs text-[var(--ink)] hover:border-[var(--ink)] whitespace-nowrap">
+            ver portfólio completo →
+          </button>
+        </div>
+      </div>
+
+      <div id="homeMiniCasesTrack" class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-3 no-scrollbar scroll-smooth">
+        <!-- 4 cards injetados via JS -->
+      </div>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- BLOCO 2: CONSTRUÇÕES EM CÓDIGO — 2 MINI-CARROSSEIS (AI LAB & JOGOS) -->
+    <!-- =============================================================== -->
+    <section id="homeBlockBuilds" class="max-w-[1160px] mx-auto pt-12 sm:pt-14 border-t border-[var(--line)] mb-8 sm:mb-12 reveal-on-scroll">
+      <div class="mb-8">
+        <div class="tag-pill mb-3">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+          <span id="homeBuildsBlockTag">bloco 02 · construções em código, ia &amp; 3d</span>
+        </div>
+        <h2 id="homeBuildsBlockTitle" class="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)]">
+          produtos publicados, automações &amp; experimentos.
+        </h2>
+      </div>
+
+      <!-- Mini-Carrossel 2A: AI Lab (4 destaques) -->
+      <div class="mb-12">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-5">
+          <div>
+            <h3 id="homeMiniAiLabTitle" class="text-lg sm:text-xl font-medium text-[var(--ink)]">
+              ai lab — apps web, extensões &amp; plugins
+            </h3>
+            <p id="homeMiniAiLabSub" class="text-xs text-[var(--muted)] font-light mt-0.5">
+              4 destaques dos 17 projetos publicados com explicação técnica
+            </p>
+          </div>
+          <div class="flex items-center gap-2 sm:gap-3">
+            <button onclick="scrollMiniCarousel('homeMiniAiLabTrack', -1)" class="mini-carousel-btn" aria-label="Anterior">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+            <button onclick="scrollMiniCarousel('homeMiniAiLabTrack', 1)" class="mini-carousel-btn" aria-label="Próximo">
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+            <button onclick="showView('ai-lab')" id="homeMiniAiLabCta" class="tag-pill cursor-pointer text-xs text-cyan-400 hover:border-cyan-400 whitespace-nowrap">
+              explorar ai lab →
+            </button>
+          </div>
+        </div>
+
+        <div id="homeMiniAiLabTrack" class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-3 no-scrollbar scroll-smooth">
+          <!-- 4 cards injetados via JS -->
+        </div>
+      </div>
+
+      <!-- Mini-Carrossel 2B: Jogos & 3D (4 destaques) -->
+      <div>
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-5">
+          <div>
+            <h3 id="homeMiniGamesTitle" class="text-lg sm:text-xl font-medium text-[var(--ink)]">
+              jogos &amp; experiências 3d no navegador
+            </h3>
+            <p id="homeMiniGamesSub" class="text-xs text-[var(--muted)] font-light mt-0.5">
+              4 destaques entre os 16 jogos jogáveis em webgl2 e three.js
+            </p>
+          </div>
+          <div class="flex items-center gap-2 sm:gap-3">
+            <button onclick="scrollMiniCarousel('homeMiniGamesTrack', -1)" class="mini-carousel-btn" aria-label="Anterior">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+            <button onclick="scrollMiniCarousel('homeMiniGamesTrack', 1)" class="mini-carousel-btn" aria-label="Próximo">
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+            <button onclick="showView('jogos')" id="homeMiniGamesCta" class="tag-pill cursor-pointer text-xs text-cyan-400 hover:border-cyan-400 whitespace-nowrap">
+              ver todos os jogos →
+            </button>
+          </div>
+        </div>
+
+        <div id="homeMiniGamesTrack" class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-3 no-scrollbar scroll-smooth">
+          <!-- 4 cards injetados via JS -->
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ================================================================= -->
-  <!-- TELA 1.5: SOBRE (PÁGINA DEDICADA #/sobre)                         -->
+  <!-- TELA 1: PORTFÓLIO (#/portfolio) — CASES DE UX & PRODUTO           -->
+  <!-- ================================================================= -->
+  <main id="viewPortfolio" class="view-screen hidden max-w-[1240px] mx-auto px-6 sm:px-12 py-14 sm:py-20 flex-1 w-full relative z-10">
+
+    <div class="text-center max-w-3xl mx-auto mb-14 sm:mb-18 anim-fade-in">
+      <div class="tag-pill mb-5">
+        <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+        <span id="portPageTag">estudos de caso • product &amp; ux</span>
+      </div>
+      <h1 id="portPageTitle" class="text-4xl sm:text-6xl font-medium tracking-tight leading-[1.1] mb-5 text-[var(--ink)]">
+        decisões de produto <em class="font-serif-accent italic text-[var(--accent)]">com impacto mensurável.</em>
+      </h1>
+      <p id="portPageSubtitle" class="text-base sm:text-lg text-[var(--muted)] max-w-2xl mx-auto leading-relaxed font-light">
+        estudos completos de conversão, arquitetura de informação, e-commerce, aplicativos internos e comunicação digital.
+      </p>
+    </div>
+
+    <div id="portfolioCasesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
+      <!-- 5 cases UX injetados via JS -->
+    </div>
+
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- TELA 2: AI LAB (#/ai-lab) — APPS WEB + PLUGINS & EXTENSÕES        -->
+  <!-- ================================================================= -->
+  <main id="viewAiLab" class="view-screen hidden max-w-[1240px] mx-auto px-6 sm:px-12 py-14 sm:py-20 flex-1 w-full relative z-10">
+
+    <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12 anim-fade-in">
+      <div class="tag-pill mb-5">
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+        <span id="aiLabTag">ai lab • apps, agentes &amp; automações</span>
+      </div>
+      <h1 id="aiLabTitle" class="text-4xl sm:text-6xl font-medium tracking-tight leading-[1.1] mb-5 text-[var(--ink)]">
+        do prompt ao produto <em class="font-serif-accent italic text-cyan-400">em produção.</em>
+      </h1>
+      <p id="aiLabSubtitle" class="text-base sm:text-lg text-[var(--muted)] max-w-2xl mx-auto leading-relaxed font-light">
+        aplicações web em produção na vercel e cloud run, plugins criados para antigravity e jogos, extensões chrome e protótipos de ia explicados em detalhes.
+      </p>
+    </div>
+
+    <!-- Filtros Rápidos do AI Lab -->
+    <div class="flex flex-wrap items-center justify-center gap-2.5 mb-12 sm:mb-16">
+      <button onclick="setAiLabFilter('all')" id="aiLabFilterAll" class="tag-pill cursor-pointer text-xs is-filter-active">
+        todos (17)
+      </button>
+      <button onclick="setAiLabFilter('apps')" id="aiLabFilterApps" class="tag-pill cursor-pointer text-xs">
+        apps web em produção (9)
+      </button>
+      <button onclick="setAiLabFilter('tools')" id="aiLabFilterTools" class="tag-pill cursor-pointer text-xs">
+        plugins, extensões &amp; labs (8)
+      </button>
+    </div>
+
+    <!-- Subbloco 2.1: Aplicações Web em Produção (9 apps) -->
+    <section id="vercelAppsSection" class="max-w-[1120px] mx-auto pt-4 mb-16 sm:mb-24 reveal-on-scroll">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div>
+          <div class="tag-pill mb-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span id="vercelAppsTag">produtos &amp; labs • vercel &amp; cloud run</span>
+          </div>
+          <h2 id="vercelAppsTitle" class="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)]">
+            aplicações &amp; protótipos funcionais em produção.
+          </h2>
+        </div>
+        <p id="vercelAppsSubtitle" class="text-xs sm:text-sm text-[var(--muted)] max-w-md font-light">
+          ferramentas de ia, saúde, rh, prospecção e educação publicadas e acessíveis — clique para abrir e navegar.
+        </p>
+      </div>
+
+      <div id="vercelAppsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- 9 apps injetados via JS -->
+      </div>
+    </section>
+
+    <!-- Subbloco 2.2: Plugins, Extensões & Protótipos (8 itens) -->
+    <section id="driveProjectsSection" class="max-w-[1120px] mx-auto pt-12 sm:pt-14 border-t border-[var(--line)] mb-12 sm:mb-16 reveal-on-scroll">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div>
+          <div class="tag-pill mb-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+            <span id="driveProjectsTag">plugins, extensões &amp; labs de ia • como funciona</span>
+          </div>
+          <h2 id="driveProjectsTitle" class="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)]">
+            plugins, extensões &amp; protótipos — como funcionam.
+          </h2>
+        </div>
+        <p id="driveProjectsSubtitle" class="text-xs sm:text-sm text-[var(--muted)] max-w-md font-light">
+          plugins criados para antigravity e jogos, extensões chrome, automações locais e protótipos de ia explicados em detalhes: problema, arquitetura e funcionamento.
+        </p>
+      </div>
+
+      <div id="driveProjectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- 8 projetos injetados via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- TELA 3: SOBRE (PÁGINA DEDICADA #/sobre)                           -->
   <!-- ================================================================= -->
   <main id="viewSobre" class="view-screen hidden max-w-[880px] mx-auto px-6 sm:px-12 py-12 sm:py-20 flex-1 w-full relative z-10">
 
-    <!-- Topo: Voltar ao Portfólio -->
+    <!-- Topo: Voltar para Início -->
     <div class="mb-10 flex items-center justify-between gap-4">
-      <button onclick="showView('portfolio')" class="tag-pill cursor-pointer text-xs">
+      <button onclick="showView('home')" class="tag-pill cursor-pointer text-xs">
         <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
-        <span id="sobreBackLabel">voltar ao portfólio</span>
+        <span id="sobreBackLabel">voltar para início</span>
       </button>
 
       <div class="tag-pill">
@@ -1042,7 +1241,7 @@
         </div>
       </div>
 
-      <!-- Experiência Profissional (Timeline Estruturada do PDF) -->
+      <!-- Experiência Profissional -->
       <div class="mb-16 reveal-on-scroll">
         <span id="sobreExpLabel" class="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-6">experiência profissional</span>
         <div id="sobreExpTimeline" class="space-y-4">
@@ -1089,10 +1288,10 @@
   </main>
 
   <!-- ================================================================= -->
-  <!-- TELA 2: JOGOS & 3D (Aba 100% Separada dos Trabalhos de Produto)   -->
+  <!-- TELA 4: JOGOS & 3D (#/jogos)                                      -->
   <!-- ================================================================= -->
   <main id="viewJogos" class="view-screen hidden max-w-[1240px] mx-auto px-6 sm:px-12 py-14 sm:py-20 flex-1 w-full relative z-10">
-    
+
     <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20 anim-fade-in">
       <div class="tag-pill mb-5">
         <i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-cyan-400"></i>
@@ -1106,7 +1305,7 @@
       </p>
     </div>
 
-    <!-- Grid de Jogos -->
+    <!-- Grid de Jogos (16 jogos) -->
     <div id="gamesGridContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
       <!-- Injetado dinamicamente via JS -->
     </div>
@@ -1114,47 +1313,61 @@
   </main>
 
   <!-- ================================================================= -->
-  <!-- TELA 3: CONTATO (Invertido em Creme idêntico a luccas.social.br/contato) -->
+  <!-- TELA 5: CONTATO (#/contato) — TEMA CONSISTENTE COM O RESTANTE DO SITE -->
   <!-- ================================================================= -->
-  <main id="viewContato" class="view-screen hidden flex-1 w-full flex items-center justify-center py-20 px-6 sm:px-12 relative z-10 anim-fade-in" style="background: var(--inv-bg); color: var(--inv-ink);">
-    
-    <div class="max-w-2xl mx-auto text-center reveal-on-scroll">
-      
+  <main id="viewContato" class="view-screen hidden max-w-[920px] mx-auto px-6 sm:px-12 py-14 sm:py-24 flex-1 w-full flex items-center justify-center relative z-10 anim-fade-in">
+
+    <div class="portfolio-card p-8 sm:p-12 md:p-14 w-full text-center">
+
+      <div class="inline-flex tag-pill mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="contatoTag">vamos conversar</span>
+      </div>
+
       <!-- Mark Central -->
-      <div class="w-12 h-12 mx-auto mb-6 flex items-center justify-center">
+      <div class="w-12 h-12 mx-auto mb-5 flex items-center justify-center text-[var(--ink)]">
         <svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
           <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/>
           <path d="M12 24L12 12L24 24L24 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
 
-      <h1 id="contatoTitle" class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-5">
+      <h1 id="contatoTitle" class="text-3xl sm:text-5xl font-medium tracking-tight leading-[1.15] mb-5 text-[var(--ink)]">
         vamos construir sua experiência de produto juntos?
       </h1>
 
-      <p id="contatoSubtitle" class="text-base sm:text-lg opacity-80 max-w-lg mx-auto mb-10 font-light">
+      <p id="contatoSubtitle" class="text-base sm:text-lg text-[var(--muted)] max-w-lg mx-auto mb-9 font-light">
         conte mais sobre o desafio de design, interface ou produto e vamos juntos!
       </p>
 
-      <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
-        <a href="mailto:lucasnellucci@gmail.com" onclick="trackOutboundClick('email', this.href, 'contact_panel')" class="px-7 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105 inline-flex items-center gap-1.5" style="background: var(--inv-ink); color: var(--inv-bg);">
+      <div class="flex flex-wrap items-center justify-center gap-3.5 mb-10">
+        <a href="mailto:lucasnellucci@gmail.com" onclick="trackOutboundClick('email', this.href, 'contact_panel')" class="btn-pill-primary text-sm">
           <span id="contatoEmailText">enviar mensagem <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg></span>
         </a>
-        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'contact_panel')" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105 inline-flex items-center gap-1.5" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
+        <a href="https://wa.me/5511984789811" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('whatsapp', this.href, 'contact_panel')" class="btn-pill-secondary text-sm">
+          <span>whatsapp</span>
+          <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'contact_panel')" class="btn-pill-secondary text-sm">
           <span id="contatoLinkedinText">linkedin <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg></span>
         </a>
-        <a href="https://www.behance.net/lucasnellucci" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, 'contact_panel')" class="px-6 py-3 rounded-full text-sm font-medium border transition-all hover:scale-105 inline-flex items-center gap-1.5" style="border-color: color-mix(in srgb, var(--inv-ink) 30%, transparent); color: var(--inv-ink);">
-          <span id="contatoBehanceText">behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg></span>
+        <a href="https://github.com/nlldesign" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('github', this.href, 'contact_panel')" class="btn-pill-secondary text-sm">
+          <span>github</span>
+          <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
         </a>
       </div>
 
-      <div class="flex flex-col items-center gap-2">
-        <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs font-mono opacity-70">
-          <span>lucasnellucci@gmail.com</span>
-          <span>•</span>
-          <a href="https://wa.me/5511984789811" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('whatsapp', this.href, 'contact_panel')" class="hover:underline">(11) 98478-9811</a>
-        </div>
-        <span id="contatoLocationText" class="text-xs font-mono opacity-50">são paulo, brasil • disponível globalmente (remoto / híbrido)</span>
+      <div class="pt-6 border-t border-[var(--line)] grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono text-[var(--muted)] max-w-xl mx-auto">
+        <a href="mailto:lucasnellucci@gmail.com" onclick="trackOutboundClick('email', this.href, 'contact_card')" class="p-3 rounded-2xl border border-[var(--line)] bg-[var(--bg)]/60 hover:border-[var(--ink)] hover:text-[var(--ink)] transition-colors">
+          lucasnellucci@gmail.com
+        </a>
+        <a href="https://wa.me/5511984789811" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('whatsapp', this.href, 'contact_card')" class="p-3 rounded-2xl border border-[var(--line)] bg-[var(--bg)]/60 hover:border-[var(--ink)] hover:text-[var(--ink)] transition-colors">
+          +55 (11) 98478-9811 • whatsapp
+        </a>
+      </div>
+
+      <div class="mt-5">
+        <span id="contatoLocationText" class="text-xs font-mono text-[var(--muted)] opacity-75">são paulo, brasil • disponível globalmente (remoto / híbrido)</span>
       </div>
 
     </div>
@@ -1282,15 +1495,68 @@
     </div>
   </div>
 
-  <!-- RODAPÉ MINIMALISTA (Idêntico ao luccas.social.br) -->
-  <footer class="border-t border-[var(--line)] pt-8 pb-20 sm:py-8 text-xs text-[var(--muted)] font-mono relative z-10">
-    <div class="max-w-[1240px] mx-auto px-6 sm:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div id="footerCopyright" class="text-center sm:text-left">© 2026 · lucas nellucci • ux &amp; product design</div>
-      <div class="flex items-center gap-6">
-        <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" onclick="trackOutboundClick('linkedin', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">linkedin</a>
-        <a href="https://www.behance.net/lucasnellucci" target="_blank" onclick="trackOutboundClick('behance', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">behance</a>
-        <a href="https://github.com/nlldesign" target="_blank" class="hover:text-[var(--ink)] transition-colors">github</a>
-        <a href="mailto:lucasnellucci@gmail.com" onclick="trackOutboundClick('email', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors">email</a>
+  <!-- RODAPÉ COM PONTOS DE CONTATO E NAVEGAÇÃO RÁPIDA -->
+  <footer class="border-t border-[var(--line)] pt-12 pb-16 sm:py-12 text-xs text-[var(--muted)] relative z-10">
+    <div class="max-w-[1240px] mx-auto px-6 sm:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-[var(--line)]">
+
+        <!-- Coluna 1: Identidade -->
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center gap-2.5 text-[var(--ink)]">
+            <svg class="w-6 h-6 shrink-0" viewBox="0 0 36 36" fill="none">
+              <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/>
+              <path d="M12 24L12 12L24 24L24 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="font-medium text-sm tracking-tight">lucas nellucci</span>
+          </div>
+          <p id="footerBioLine" class="text-xs text-[var(--muted)] font-light leading-relaxed max-w-xs">
+            ux &amp; product designer em são paulo, brasil • disponível globalmente para projetos, consultoria e posições remotas ou híbridas.
+          </p>
+        </div>
+
+        <!-- Coluna 2: Páginas -->
+        <div class="flex flex-col gap-2.5 font-mono">
+          <span id="footerNavHeading" class="text-[11px] uppercase tracking-wider text-[var(--ink)] opacity-80 mb-1">navegação</span>
+          <div class="grid grid-cols-2 gap-y-2 gap-x-4 max-w-[260px]">
+            <a href="#/" onclick="showView('home'); return false;" id="footerNavHome" class="hover:text-[var(--ink)] transition-colors">início</a>
+            <a href="#/portfolio" onclick="showView('portfolio'); return false;" id="footerNavPortfolio" class="hover:text-[var(--ink)] transition-colors">portfólio</a>
+            <a href="#/ai-lab" onclick="showView('ai-lab'); return false;" id="footerNavAiLab" class="hover:text-[var(--ink)] transition-colors">ai lab</a>
+            <a href="#/jogos" onclick="showView('jogos'); return false;" id="footerNavJogos" class="hover:text-[var(--ink)] transition-colors">jogos</a>
+            <a href="#/sobre" onclick="showView('sobre'); return false;" id="footerNavSobre" class="hover:text-[var(--ink)] transition-colors">sobre</a>
+            <a href="#/contato" onclick="showView('contato'); return false;" id="footerNavContato" class="hover:text-[var(--ink)] transition-colors">contato</a>
+          </div>
+        </div>
+
+        <!-- Coluna 3: Pontos de Contato Direto -->
+        <div class="flex flex-col gap-2.5 font-mono">
+          <span id="footerContactHeading" class="text-[11px] uppercase tracking-wider text-[var(--ink)] opacity-80 mb-1">contato direto</span>
+          <a href="mailto:lucasnellucci@gmail.com" onclick="trackOutboundClick('email', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors inline-flex items-center gap-1.5">
+            <span>lucasnellucci@gmail.com</span>
+            <svg class='inline-block w-3 h-3 shrink-0' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
+          </a>
+          <a href="https://wa.me/5511984789811" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('whatsapp', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors inline-flex items-center gap-1.5">
+            <span>(11) 98478-9811 • whatsapp</span>
+            <svg class='inline-block w-3 h-3 shrink-0' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
+          </a>
+          <div class="flex items-center gap-5 pt-1">
+            <a href="https://www.linkedin.com/in/lucasnellucci/" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('linkedin', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors inline-flex items-center gap-1">
+              <span>linkedin</span>
+              <svg class='inline-block w-3 h-3 shrink-0' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
+            </a>
+            <a href="https://github.com/nlldesign" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('github', this.href, 'footer')" class="hover:text-[var(--ink)] transition-colors inline-flex items-center gap-1">
+              <span>github</span>
+              <svg class='inline-block w-3 h-3 shrink-0' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
+        <div id="footerCopyright" class="text-center sm:text-left">© 2026 · lucas nellucci • ux &amp; product design</div>
+        <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" id="footerBackToTop" class="hover:text-[var(--ink)] transition-colors cursor-pointer">
+          voltar ao topo ↑
+        </button>
       </div>
     </div>
   </footer>
@@ -1301,9 +1567,11 @@
       pt: {
         preloaderStatus: "carregando experiência...",
         preloaderDone: "pronto!",
+        navHome: "início",
         navPortfolio: "portfólio",
+        navAiLab: "ai lab",
         navSobre: "sobre",
-        navJogos: "jogos &amp; 3d",
+        navJogos: "jogos",
         navContato: "contato",
         roleSubtitle: "ux &amp; product designer",
         themeLight: "modo claro",
@@ -1313,9 +1581,33 @@
         heroPortTitle: 'trabalhos que começam <em class="font-serif-accent italic text-[var(--accent)]">em uma pergunta.</em>',
         heroPortSubtitle: "navegue pelos estudos de caso de produto, escolha um e veja o processo inteiro: o problema de negócio, a arquitetura e o que mudou no resultado.",
         openCaseBtn: "abrir case",
-        vercelAppsTag: "produtos &amp; labs • vercel",
+
+        homeMiniCasesTag: "bloco 01 · design de produto",
+        homeMiniCasesTitle: "estudos de caso &amp; ux.",
+        homeMiniCasesCta: "ver portfólio completo →",
+        homeBuildsBlockTag: "bloco 02 · construções em código, ia &amp; 3d",
+        homeBuildsBlockTitle: "produtos publicados, automações &amp; experimentos.",
+        homeMiniAiLabTitle: "ai lab — apps web, extensões &amp; plugins",
+        homeMiniAiLabSub: "4 destaques dos 17 projetos publicados com explicação técnica",
+        homeMiniAiLabCta: "explorar ai lab →",
+        homeMiniGamesTitle: "jogos &amp; experiências 3d no navegador",
+        homeMiniGamesSub: "4 destaques entre os 16 jogos jogáveis em webgl2 e three.js",
+        homeMiniGamesCta: "ver todos os jogos →",
+
+        portPageTag: "estudos de caso • product &amp; ux",
+        portPageTitle: 'decisões de produto <em class="font-serif-accent italic text-[var(--accent)]">com impacto mensurável.</em>',
+        portPageSubtitle: "estudos completos de conversão, arquitetura de informação, e-commerce, aplicativos internos e comunicação digital.",
+
+        aiLabTag: "ai lab • apps, agentes &amp; automações",
+        aiLabTitle: 'do prompt ao produto <em class="font-serif-accent italic text-cyan-400">em produção.</em>',
+        aiLabSubtitle: "aplicações web em produção na vercel e cloud run, plugins criados para antigravity e jogos, extensões chrome e protótipos de ia explicados em detalhes.",
+        aiLabFilterAll: "todos (17)",
+        aiLabFilterApps: "apps web em produção (9)",
+        aiLabFilterTools: "plugins, extensões &amp; labs (8)",
+
+        vercelAppsTag: "produtos &amp; labs • vercel &amp; cloud run",
         vercelAppsTitle: "aplicações &amp; protótipos funcionais em produção.",
-        vercelAppsSubtitle: "ferramentas de ia, saúde, rh, prospecção e educação construídas e publicadas na vercel e github — clique para abrir e navegar.",
+        vercelAppsSubtitle: "ferramentas de ia, saúde, rh, prospecção e educação publicadas e acessíveis — clique para abrir e navegar.",
         driveProjectsTag: "plugins, extensões &amp; labs de ia • como funciona",
         driveProjectsTitle: "plugins, extensões &amp; protótipos — como funcionam.",
         driveProjectsSubtitle: "plugins criados para antigravity e jogos, extensões chrome, automações locais e protótipos de ia explicados em detalhes: problema, arquitetura e funcionamento.",
@@ -1338,13 +1630,13 @@
         contatoSubtitle: "conte mais sobre o desafio de design, interface ou produto e vamos juntos!",
         contatoEmail: "enviar mensagem <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         contatoLinkedin: "linkedin <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
-        contatoBehance: "behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         contatoLocation: "são paulo, brasil • disponível globalmente (remoto / híbrido)",
 
+        backToHome: "voltar para início",
         backToPortfolio: "voltar ao portfólio",
+        backToAiLab: "voltar ao ai lab",
         backToGames: "voltar aos jogos",
         viewFigma: "ver no figma <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
-        viewBehance: "ver no behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         viewGithub: "ver no github <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         readCaseBtn: "ver detalhes",
         techsLabel: "softwares &amp; disciplinas",
@@ -1361,15 +1653,20 @@
         nextCaseBtn: "abrir case →",
         lightboxHint: "clique para ampliar a imagem",
 
+        footerBioLine: "ux &amp; product designer em são paulo, brasil • disponível globalmente para projetos, consultoria e posições remotas ou híbridas.",
+        footerNavHeading: "navegação",
+        footerContactHeading: "contato direto",
         footerCopyright: "© 2026 · lucas nellucci • ux &amp; product design",
         footerBackToTop: "voltar ao topo ↑"
       },
       en: {
         preloaderStatus: "loading experience...",
         preloaderDone: "ready!",
+        navHome: "home",
         navPortfolio: "portfolio",
+        navAiLab: "ai lab",
         navSobre: "about",
-        navJogos: "games &amp; 3d",
+        navJogos: "games",
         navContato: "contact",
         roleSubtitle: "ux &amp; product designer",
         themeLight: "light mode",
@@ -1379,9 +1676,33 @@
         heroPortTitle: 'work that begins <em class="font-serif-accent italic text-[var(--accent)]">with a question.</em>',
         heroPortSubtitle: "explore end-to-end product design case studies: business bottlenecks, information architecture, behavioral neuroscience, and measurable conversion lift.",
         openCaseBtn: "open case",
-        vercelAppsTag: "products &amp; labs • vercel",
+
+        homeMiniCasesTag: "block 01 · product design",
+        homeMiniCasesTitle: "case studies &amp; ux.",
+        homeMiniCasesCta: "view full portfolio →",
+        homeBuildsBlockTag: "block 02 · code builds, ai &amp; 3d",
+        homeBuildsBlockTitle: "shipped apps, automations &amp; experiments.",
+        homeMiniAiLabTitle: "ai lab — web apps, extensions &amp; plugins",
+        homeMiniAiLabSub: "4 highlights from 17 documented builds &amp; technical breakdowns",
+        homeMiniAiLabCta: "explore ai lab →",
+        homeMiniGamesTitle: "games &amp; browser 3d experiences",
+        homeMiniGamesSub: "4 highlights from 16 playable webgl2 &amp; three.js games",
+        homeMiniGamesCta: "view all games →",
+
+        portPageTag: "case studies • product &amp; ux",
+        portPageTitle: 'product decisions <em class="font-serif-accent italic text-[var(--accent)]">with measurable impact.</em>',
+        portPageSubtitle: "in-depth case studies spanning funnel conversion, information architecture, e-commerce, internal enterprise apps, and digital brand direction.",
+
+        aiLabTag: "ai lab • apps, agents &amp; automations",
+        aiLabTitle: 'from prompt to product <em class="font-serif-accent italic text-cyan-400">in production.</em>',
+        aiLabSubtitle: "live web applications on vercel and cloud run, custom plugins for antigravity and games, chrome extensions, and ai prototypes explained in detail.",
+        aiLabFilterAll: "all (17)",
+        aiLabFilterApps: "live web apps (9)",
+        aiLabFilterTools: "plugins, extensions &amp; labs (8)",
+
+        vercelAppsTag: "products &amp; labs • vercel &amp; cloud run",
         vercelAppsTitle: "live applications &amp; functional prototypes.",
-        vercelAppsSubtitle: "ai, healthcare, hr, lead generation, and education apps built and deployed on vercel and github — click any card to explore.",
+        vercelAppsSubtitle: "ai, healthcare, hr, lead generation, and education apps built and shipped live — click any card to explore.",
         driveProjectsTag: "plugins, extensions &amp; ai labs • how it works",
         driveProjectsTitle: "plugins, extensions &amp; ai prototypes — how they work.",
         driveProjectsSubtitle: "custom plugins for antigravity and games, chrome extensions, local automation labs, and ai prototypes explained clearly: problem, architecture, and how they work.",
@@ -1404,13 +1725,13 @@
         contatoSubtitle: "tell me more about your design, interface, or product challenge and let's create impact together!",
         contatoEmail: "send message <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         contatoLinkedin: "linkedin <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
-        contatoBehance: "behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         contatoLocation: "são paulo, brazil • globally available (remote / hybrid)",
 
+        backToHome: "back to home",
         backToPortfolio: "back to portfolio",
+        backToAiLab: "back to ai lab",
         backToGames: "back to games",
         viewFigma: "view on figma <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
-        viewBehance: "view on behance <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         viewGithub: "view on github <svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>",
         readCaseBtn: "view details",
         techsLabel: "tools &amp; disciplines",
@@ -1427,6 +1748,9 @@
         nextCaseBtn: "open case →",
         lightboxHint: "click to expand image",
 
+        footerBioLine: "ux &amp; product designer based in são paulo, brazil • available worldwide for projects, advisory, and remote/hybrid roles.",
+        footerNavHeading: "navigation",
+        footerContactHeading: "direct contact",
         footerCopyright: "© 2026 · lucas nellucci • ux &amp; product design",
         footerBackToTop: "back to top ↑"
       }
@@ -1454,7 +1778,6 @@
           techs: ['figma', 'notion', 'adobe illustrator', 'microsoft office', 'slack', 'trello'],
           figmaUrl: null,
           siteUrl: 'https://www.associacaocartaocristao.com.br/assistencia-medica.html',
-          behanceUrl: 'https://www.behance.net/gallery/137906687/Simulacao-de-novos-Associados-Cartao-Cristao',
           gallery: [
             { src: 'assets/framer/Fluxo-de-compras_8_GTX0kJEmjq2vIBhrdXL5C0U.png', title: 'landing page desktop e tela inicial do simulador' },
             { src: 'assets/framer/Fluxo-de-compras_9_4oCyiR01SRCSZjUX1T9vp7tqI.png', title: 'etapa interativa do questionário de saúde' },
@@ -1483,7 +1806,6 @@
           techs: ['ux research', 'design system', 'figma', 'benchmarking'],
           figmaUrl: null,
           siteUrl: null,
-          behanceUrl: null,
           gallery: [
             { src: 'assets/framer/home_14_DsvmVgOAemE4JIt5vN1qOFGMPQA.jpg', title: 'estudo de caso: mercado bom vizinho' },
             { src: 'assets/framer/home_13_SQzClZVbj1uonpNR1P2BdqW1gY.png', title: 'wireframes de storefront e catálogo mobile' },
@@ -1511,7 +1833,6 @@
           techs: ['fintech ux', 'style guide', 'figma', 'arquitetura de informação'],
           figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2154-4209&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2154%3A4209&show-proto-sidebar=1',
           siteUrl: null,
-          behanceUrl: null,
           gallery: [
             { src: 'assets/framer/cbanco_1_w9B2VOpmE5M3KT8QVwk42MpcHTE.png', title: 'website desktop e arquitetura institucional' },
             { src: 'assets/framer/cbanco_3_bsidmwZXZ65pLxB8ROqHEFIoD8c.png', title: '4 telas mobile: login, cadastro, open finance e dashboard' },
@@ -1540,7 +1861,6 @@
           techs: ['enterprise ux', 'ex design', 'figma', 'ui design'],
           figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2211-5714&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2211%3A5714&show-proto-sidebar=1',
           siteUrl: null,
-          behanceUrl: null,
           gallery: [
             { src: 'assets/framer/intern_1_k7XuUK8a3NSNh4RCb6b4iQOwejI.png', title: '10 telas mobile do app corporativo (feed, chat, perfil e treinamentos)' },
             { src: 'assets/framer/intern_2_N2wAqYWAsNq6keAihvfLfgXUlA.png', title: 'biblioteca de componentes e style guide no figma' },
@@ -1568,7 +1888,6 @@
           techs: ['figma', 'adobe photoshop', 'adobe illustrator', 'microsoft office', 'slack', 'trello'],
           figmaUrl: null,
           siteUrl: null,
-          behanceUrl: null,
           gallery: [
             { src: 'assets/framer/social-media_7_dzpes7047JLwMTB827dPxmFKO8A.png', title: 'associação cartão cristão • campanha março lilás' },
             { src: 'assets/framer/social-media_10_K0vZr2puFJXrIIwrG79VRjBMHA.png', title: 'associação cartão cristão • dia internacional da mulher' },
@@ -1600,7 +1919,6 @@
           techs: ['figma', 'notion', 'adobe illustrator', 'microsoft office', 'slack', 'trello'],
           figmaUrl: null,
           siteUrl: 'https://www.associacaocartaocristao.com.br/assistencia-medica.html',
-          behanceUrl: 'https://www.behance.net/gallery/137906687/Simulacao-de-novos-Associados-Cartao-Cristao',
           gallery: [
             { src: 'assets/framer/Fluxo-de-compras_8_GTX0kJEmjq2vIBhrdXL5C0U.png', title: 'desktop landing page and entry quotation screen' },
             { src: 'assets/framer/Fluxo-de-compras_9_4oCyiR01SRCSZjUX1T9vp7tqI.png', title: 'interactive health assessment step' },
@@ -1629,7 +1947,6 @@
           techs: ['ux research', 'design system', 'figma', 'benchmarking'],
           figmaUrl: null,
           siteUrl: null,
-          behanceUrl: null,
           gallery: [
             { src: 'assets/framer/home_14_DsvmVgOAemE4JIt5vN1qOFGMPQA.jpg', title: 'case study: bom vizinho supermarket' },
             { src: 'assets/framer/home_13_SQzClZVbj1uonpNR1P2BdqW1gY.png', title: 'mobile storefront and catalog wireframes' },
@@ -1657,7 +1974,6 @@
           techs: ['fintech ux', 'style guide', 'figma', 'information architecture'],
           figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2154-4209&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2154%3A4209&show-proto-sidebar=1',
           siteUrl: null,
-          behanceUrl: null,
           gallery: [
             { src: 'assets/framer/cbanco_1_w9B2VOpmE5M3KT8QVwk42MpcHTE.png', title: 'desktop website architecture and hero' },
             { src: 'assets/framer/cbanco_3_bsidmwZXZ65pLxB8ROqHEFIoD8c.png', title: '4 mobile screens: login, onboarding, open finance and dashboard' },
@@ -1686,7 +2002,6 @@
           techs: ['enterprise ux', 'ex design', 'figma', 'ui design'],
           figmaUrl: 'https://www.figma.com/proto/tt5eHlue47V0bkdj5EPe3V/Todas-demandas?page-id=2005%3A615&node-id=2211-5714&p=f&viewport=-480%2C300%2C0.32&t=lJrgc8zmPJiAmLVB-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2211%3A5714&show-proto-sidebar=1',
           siteUrl: null,
-          behanceUrl: null,
           gallery: [
             { src: 'assets/framer/intern_1_k7XuUK8a3NSNh4RCb6b4iQOwejI.png', title: '10 mobile app screens (feed, chat, employee profile and training)' },
             { src: 'assets/framer/intern_2_N2wAqYWAsNq6keAihvfLfgXUlA.png', title: 'component library and design system in figma' },
@@ -1714,7 +2029,6 @@
           techs: ['figma', 'adobe photoshop', 'adobe illustrator', 'microsoft office', 'slack', 'trello'],
           figmaUrl: null,
           siteUrl: null,
-          behanceUrl: null,
           gallery: [
             { src: 'assets/framer/social-media_7_dzpes7047JLwMTB827dPxmFKO8A.png', title: 'associação cartão cristão • women’s health campaign' },
             { src: 'assets/framer/social-media_10_K0vZr2puFJXrIIwrG79VRjBMHA.png', title: 'associação cartão cristão • international women’s day' },
@@ -2551,7 +2865,7 @@
         homeCta: 'conhecer minha trajetória',
         homeContact: 'falar comigo',
 
-        backLabel: 'voltar ao portfólio',
+        backLabel: 'voltar para início',
         tag: 'sobre · perfil &amp; trajetória',
         title: 'entre o comportamento humano e o produto digital, alguém precisa traduzir.',
         lead: 'designer de produto estratégico focado em resultados de negócio, unindo ux, marketing, neurociência aplicada ao comportamento do usuário e o uso avançado de inteligência artificial para otimizar processos, prototipar em código e sustentar decisões estratégicas.',
@@ -2701,7 +3015,7 @@
         homeCta: 'explore full background',
         homeContact: 'get in touch',
 
-        backLabel: 'back to portfolio',
+        backLabel: 'back to home',
         tag: 'about · profile &amp; background',
         title: 'between human behavior and digital products, someone needs to translate.',
         lead: 'strategic product designer focused on business results, combining ux, marketing, neuroscience applied to user behavior, and applied artificial intelligence to prototype in code, automate workflows, and drive product impact.',
@@ -3863,25 +4177,70 @@
 
         updateThemeToggleText();
 
+        const mobHome = document.getElementById('mobNavHome');
+        if (mobHome) mobHome.innerHTML = t.navHome;
+
         const navPort = document.getElementById('navLinkPortfolio');
         const mobPort = document.getElementById('mobNavPortfolio');
         if (navPort) navPort.innerHTML = t.navPortfolio;
         if (mobPort) mobPort.innerHTML = t.navPortfolio;
 
-        const navSob = document.getElementById('navLinkSobre');
-        const mobSob = document.getElementById('mobNavSobre');
-        if (navSob) navSob.innerHTML = t.navSobre;
-        if (mobSob) mobSob.innerHTML = t.navSobre;
+        const navAi = document.getElementById('navLinkAiLab');
+        const mobAi = document.getElementById('mobNavAiLab');
+        if (navAi) navAi.innerHTML = t.navAiLab;
+        if (mobAi) mobAi.innerHTML = t.navAiLab;
 
         const navJog = document.getElementById('navLinkJogos');
         const mobJog = document.getElementById('mobNavJogos');
         if (navJog) navJog.innerHTML = t.navJogos;
         if (mobJog) mobJog.innerHTML = t.navJogos;
 
+        const navSob = document.getElementById('navLinkSobre');
+        const mobSob = document.getElementById('mobNavSobre');
+        if (navSob) navSob.innerHTML = t.navSobre;
+        if (mobSob) mobSob.innerHTML = t.navSobre;
+
         const navCont = document.getElementById('navLinkContato');
         const mobCont = document.getElementById('mobNavContato');
         if (navCont) navCont.innerHTML = t.navContato;
         if (mobCont) mobCont.innerHTML = t.navContato;
+
+        // Mini-carousels Home, Página Portfólio & AI Lab headers/filters
+        const textMap = {
+          homeMiniCasesTag: t.homeMiniCasesTag,
+          homeMiniCasesTitle: t.homeMiniCasesTitle,
+          homeMiniCasesCta: t.homeMiniCasesCta,
+          homeBuildsBlockTag: t.homeBuildsBlockTag,
+          homeBuildsBlockTitle: t.homeBuildsBlockTitle,
+          homeMiniAiLabTitle: t.homeMiniAiLabTitle,
+          homeMiniAiLabSub: t.homeMiniAiLabSub,
+          homeMiniAiLabCta: t.homeMiniAiLabCta,
+          homeMiniGamesTitle: t.homeMiniGamesTitle,
+          homeMiniGamesSub: t.homeMiniGamesSub,
+          homeMiniGamesCta: t.homeMiniGamesCta,
+          portPageTag: t.portPageTag,
+          portPageTitle: t.portPageTitle,
+          portPageSubtitle: t.portPageSubtitle,
+          aiLabTag: t.aiLabTag,
+          aiLabTitle: t.aiLabTitle,
+          aiLabSubtitle: t.aiLabSubtitle,
+          aiLabFilterAll: t.aiLabFilterAll,
+          aiLabFilterApps: t.aiLabFilterApps,
+          aiLabFilterTools: t.aiLabFilterTools,
+          footerBioLine: t.footerBioLine,
+          footerNavHeading: t.footerNavHeading,
+          footerContactHeading: t.footerContactHeading,
+          footerNavHome: t.navHome,
+          footerNavPortfolio: t.navPortfolio,
+          footerNavAiLab: t.navAiLab,
+          footerNavJogos: t.navJogos,
+          footerNavSobre: t.navSobre,
+          footerNavContato: t.navContato
+        };
+        Object.entries(textMap).forEach(([elId, htmlVal]) => {
+          const el = document.getElementById(elId);
+          if (el && htmlVal !== undefined) el.innerHTML = htmlVal;
+        });
 
         // 3. Hero Portfólio
         const hPortTag = document.getElementById('heroPortTag');
@@ -3922,15 +4281,12 @@
         const cLk = document.getElementById('contatoLinkedinText');
         if (cLk) cLk.innerHTML = t.contatoLinkedin;
 
-        const cBe = document.getElementById('contatoBehanceText');
-        if (cBe) cBe.innerHTML = t.contatoBehance;
-
         const cLoc = document.getElementById('contatoLocationText');
         if (cLoc) cLoc.innerHTML = t.contatoLocation;
 
         // 7. Labels do Estudo de Caso
         const lBack = document.getElementById('caseBackLabel');
-        if (lBack) lBack.innerText = currentCategory === 'jogos' ? t.backToGames : t.backToPortfolio;
+        if (lBack) lBack.innerText = getBackLabelForView(currentCategory, t);
 
         const lDesafio = document.getElementById('caseLabelDesafio');
         if (lDesafio) lDesafio.innerHTML = t.labelDesafio;
@@ -3957,8 +4313,10 @@
         const fTop = document.getElementById('footerBackToTop');
         if (fTop) fTop.innerHTML = t.footerBackToTop;
 
-        // 9. Re-renderiza carrossel de portfólio e grid de jogos com os novos dados
+        // 9. Re-renderiza home, portfólio, ai lab e jogos com os novos dados
         renderPortfolioCarousel();
+        renderHomeMiniCarousels();
+        renderPortfolioCasesGrid();
         renderVercelAppsGrid();
         renderDriveProjectsGrid();
         renderGamesGrid();
@@ -4120,6 +4478,9 @@
 
     let activeCaseId = null;
     let currentCategory = 'trabalho';
+    let lastListView = 'home';
+    let currentAiLabFilter = 'all';
+    let suppressHashChange = false;
 
     
     
@@ -4447,48 +4808,224 @@
       }
     }, { passive: true });
 
-    // Roteamento SPA entre Telas Dedicadas (NÃO LP!)
-    function showView(viewId) {
+    function scrollMiniCarousel(trackId, direction) {
+      const track = document.getElementById(trackId);
+      if (!track) return;
+      track.scrollBy({ left: direction * 310, behavior: 'smooth' });
+    }
+
+    function renderMiniCarouselCard(item, accentType = 'accent') {
+      const t = siteTranslations[currentGlobalLang] || siteTranslations.pt;
+      const svgArrow = "<svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>";
+      const accentText = accentType === 'cyan' ? 'text-cyan-400' : 'text-[var(--accent)]';
+      const hoverTitle = accentType === 'cyan' ? 'group-hover:text-cyan-400' : 'group-hover:text-[var(--accent)]';
+      const actionLabel = item.category === 'jogos'
+        ? t.playGameBtn
+        : (item.category === 'drive' ? t.howItWorksBtn : t.openCaseBtn);
+
+      let extBadge = '';
+      if (item.vercelUrl) {
+        extBadge = `<a href="${item.vercelUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('vercel_app', this.href, '${item.id}')" class="tag-pill text-[10px] text-cyan-400 hover:border-cyan-400 whitespace-nowrap"><span>vercel</span> ${svgArrow}</a>`;
+      } else if (item.siteUrl) {
+        const ch = item.category === 'jogos' ? 'ai_studio_game' : 'official_site';
+        const lbl = item.pillLabel || (item.category === 'jogos' ? 'ai studio' : 'live');
+        extBadge = `<a href="${item.siteUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('${ch}', this.href, '${item.id}')" class="tag-pill text-[10px] text-cyan-400 hover:border-cyan-400 whitespace-nowrap"><span>${lbl}</span> ${svgArrow}</a>`;
+      } else if (item.geminiUrl) {
+        extBadge = `<a href="${item.geminiUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('gemini_canvas', this.href, '${item.id}')" class="tag-pill text-[10px] text-cyan-400 hover:border-cyan-400 whitespace-nowrap"><span>gemini</span> ${svgArrow}</a>`;
+      } else if (item.githubUrl) {
+        extBadge = `<a href="${item.githubUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('github', this.href, '${item.id}')" class="tag-pill text-[10px] text-[var(--ink)] hover:border-[var(--ink)] whitespace-nowrap"><span>github</span> ${svgArrow}</a>`;
+      }
+
+      return `
+        <article onclick="openCaseStudy('${item.id}')" class="portfolio-card flex-shrink-0 w-[78vw] sm:w-[290px] lg:w-[274px] snap-start overflow-hidden flex flex-col justify-between group cursor-pointer">
+          <div class="relative h-36 w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
+            <img src="${item.image}" alt="${item.title}" class="card-cover-img w-full h-full object-cover object-top" />
+            <div class="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-black/55 to-transparent pointer-events-none"></div>
+            <div class="absolute top-2.5 left-2.5 tag-pill backdrop-blur-md bg-[var(--surface)]/85 text-[10px] ${accentText}">
+              ${item.tag}
+            </div>
+          </div>
+          <div class="p-4 flex flex-col justify-between flex-1 gap-3">
+            <div>
+              <h4 class="text-base font-medium text-[var(--ink)] ${hoverTitle} transition-colors line-clamp-1 mb-1">
+                ${item.title}
+              </h4>
+              <p class="text-xs text-[var(--muted)] leading-relaxed font-light line-clamp-2">
+                ${item.summary}
+              </p>
+            </div>
+            <div class="pt-2.5 border-t border-[var(--line)] flex items-center justify-between gap-2">
+              <span class="text-[11px] font-mono ${accentText}">${actionLabel} →</span>
+              ${extBadge}
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderHomeMiniCarousels() {
+      const casesTrack = document.getElementById('homeMiniCasesTrack');
+      if (casesTrack) {
+        const fourCases = portfolioProjects.slice(0, 4);
+        casesTrack.innerHTML = fourCases.map(c => renderMiniCarouselCard(c, 'accent')).join('');
+      }
+
+      const aiTrack = document.getElementById('homeMiniAiLabTrack');
+      if (aiTrack) {
+        const allAi = [...getVercelApps(), ...getDriveProjects()];
+        const pickedAiIds = ['fibrocare', 'study-fatec', 'mapleads-studio', 'token-tracker'];
+        const fourAi = pickedAiIds.map(id => allAi.find(i => i.id === id)).filter(Boolean);
+        aiTrack.innerHTML = fourAi.map(a => renderMiniCarouselCard(a, 'cyan')).join('');
+      }
+
+      const gamesTrack = document.getElementById('homeMiniGamesTrack');
+      if (gamesTrack) {
+        const pickedGameIds = ['corpo-seco', 'swam-invasion', 'radio-esperanca', 'apex-impact'];
+        const fourGames = pickedGameIds.map(id => gameProjects.find(g => g.id === id)).filter(Boolean);
+        gamesTrack.innerHTML = fourGames.map(g => renderMiniCarouselCard(g, 'cyan')).join('');
+      }
+    }
+
+    function renderPortfolioCasesGrid() {
+      const grid = document.getElementById('portfolioCasesGrid');
+      if (!grid) return;
+      const t = siteTranslations[currentGlobalLang] || siteTranslations.pt;
+      const svgArrow = "<svg class='inline-block w-3 h-3 shrink-0 ml-0.5' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>";
+
+      grid.innerHTML = portfolioProjects.map((p, idx) => {
+        const leadMetric = (p.metrics && p.metrics[0])
+          ? `<span class="tag-pill text-[11px] font-mono text-[var(--accent)]">${p.metrics[0].val}</span>`
+          : '';
+        const rightLink = p.siteUrl
+          ? `<a href="${p.siteUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('official_site', this.href, '${p.id}')" class="tag-pill text-[10.5px] text-[var(--ink)] hover:border-[var(--ink)] whitespace-nowrap"><span>live</span> ${svgArrow}</a>`
+          : (p.figmaUrl
+            ? `<a href="${p.figmaUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); trackOutboundClick('figma_prototype', this.href, '${p.id}')" class="tag-pill text-[10.5px] text-[var(--ink)] hover:border-[var(--ink)] whitespace-nowrap"><span>figma</span> ${svgArrow}</a>`
+            : leadMetric);
+
+        return `
+        <article onclick="openCaseStudy('${p.id}')" class="portfolio-card reveal-on-scroll overflow-hidden flex flex-col justify-between group cursor-pointer ${portfolioProjects.length % 2 === 1 && idx === portfolioProjects.length - 1 ? 'md:col-span-2 md:max-w-[560px] md:mx-auto md:w-full' : ''}">
+          <div class="relative h-[220px] sm:h-[260px] w-full bg-[var(--surface)] overflow-hidden border-b border-[var(--line)]">
+            <img src="${p.image}" alt="${p.title}" class="card-cover-img w-full h-full object-cover" />
+            <div class="absolute top-4 left-4 tag-pill backdrop-blur-md bg-[var(--surface)]/85 text-xs">
+              ${p.tag}
+            </div>
+            <div class="absolute top-4 right-4 w-10 h-10 rounded-full backdrop-blur-md bg-[var(--surface)]/85 border border-[var(--line)] flex items-center justify-center font-serif-accent text-lg text-[var(--accent)]">
+              ${p.num}
+            </div>
+          </div>
+          <div class="p-6 sm:p-7 flex flex-col justify-between flex-1">
+            <div>
+              <h3 class="text-xl sm:text-2xl font-medium text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors duration-300 mb-2">
+                ${p.title}
+              </h3>
+              <p class="text-xs sm:text-sm text-[var(--muted)] leading-relaxed font-light mb-5">
+                ${p.summary}
+              </p>
+            </div>
+            <div class="pt-4 border-t border-[var(--line)] flex items-center justify-between gap-2">
+              <span class="text-xs font-mono text-[var(--accent)] flex items-center gap-1.5">
+                <span>${t.openCaseBtn}</span>
+                <span class="group-hover:translate-x-1 transition-transform">→</span>
+              </span>
+              ${rightLink}
+            </div>
+          </div>
+        </article>
+      `;
+      }).join('');
+    }
+
+    function setAiLabFilter(filter) {
+      currentAiLabFilter = filter;
+      const btnMap = {
+        all: document.getElementById('aiLabFilterAll'),
+        apps: document.getElementById('aiLabFilterApps'),
+        tools: document.getElementById('aiLabFilterTools')
+      };
+      Object.entries(btnMap).forEach(([k, btn]) => {
+        if (!btn) return;
+        btn.classList.toggle('is-filter-active', k === filter);
+      });
+
+      const appsSec = document.getElementById('vercelAppsSection');
+      const toolsSec = document.getElementById('driveProjectsSection');
+      if (appsSec) appsSec.classList.toggle('hidden', filter === 'tools');
+      if (toolsSec) toolsSec.classList.toggle('hidden', filter === 'apps');
+      initScrollReveal();
+    }
+
+    // Roteamento SPA entre Home e Páginas Dedicadas
+    function showView(viewId, updateHash = true) {
       activeCaseId = null;
       triggerTopProgressBar();
-      // Pausa qualquer jogo ativo
       const iframe = document.getElementById('gameIframe');
       if (iframe) iframe.src = 'about:blank';
 
-      // Esconde todas as telas
       document.querySelectorAll('.view-screen').forEach(el => el.classList.add('hidden'));
 
-      // Atualiza botões do header
-      const navs = ['portfolio', 'sobre', 'jogos', 'contato'];
-      navs.forEach(v => {
-        const link = document.getElementById('navLink' + v.charAt(0).toUpperCase() + v.slice(1));
-        const mobLink = document.getElementById('mobNav' + v.charAt(0).toUpperCase() + v.slice(1));
-        const isActive = v === viewId;
-        if (link) link.setAttribute('data-active', isActive ? 'true' : 'false');
-        if (mobLink) mobLink.setAttribute('data-active', isActive ? 'true' : 'false');
+      if (['home', 'portfolio', 'ai-lab', 'jogos'].includes(viewId)) {
+        lastListView = viewId;
+      }
+
+      const navMap = {
+        home: { mob: 'mobNavHome' },
+        portfolio: { nav: 'navLinkPortfolio', mob: 'mobNavPortfolio' },
+        'ai-lab': { nav: 'navLinkAiLab', mob: 'mobNavAiLab' },
+        jogos: { nav: 'navLinkJogos', mob: 'mobNavJogos' },
+        sobre: { nav: 'navLinkSobre', mob: 'mobNavSobre' },
+        contato: { nav: 'navLinkContato', mob: 'mobNavContato' }
+      };
+      Object.entries(navMap).forEach(([key, ids]) => {
+        const isActive = key === viewId;
+        if (ids.nav) {
+          const el = document.getElementById(ids.nav);
+          if (el) el.setAttribute('data-active', isActive ? 'true' : 'false');
+        }
+        if (ids.mob) {
+          const mob = document.getElementById(ids.mob);
+          if (mob) mob.setAttribute('data-active', isActive ? 'true' : 'false');
+        }
       });
 
-      if (viewId === 'portfolio') {
-        document.getElementById('viewPortfolio').classList.remove('hidden');
+      let targetHash = '#/';
+      if (viewId === 'home') {
+        document.getElementById('viewHome').classList.remove('hidden');
         renderPortfolioCarousel();
+        renderHomeMiniCarousels();
+        targetHash = '#/';
+        trackGA4PageView('#/', 'Home · Lucas Nellucci');
+      } else if (viewId === 'portfolio') {
+        document.getElementById('viewPortfolio').classList.remove('hidden');
+        renderPortfolioCasesGrid();
+        targetHash = '#/portfolio';
+        trackGA4PageView('#/portfolio', 'Portfólio · Lucas Nellucci');
+      } else if (viewId === 'ai-lab') {
+        document.getElementById('viewAiLab').classList.remove('hidden');
         renderVercelAppsGrid();
         renderDriveProjectsGrid();
-        window.location.hash = '#/portfolio';
-        trackGA4PageView('#/portfolio', 'Portfólio de Produto · Lucas Nellucci');
+        setAiLabFilter(currentAiLabFilter || 'all');
+        targetHash = '#/ai-lab';
+        trackGA4PageView('#/ai-lab', 'AI Lab · Lucas Nellucci');
       } else if (viewId === 'sobre') {
         document.getElementById('viewSobre').classList.remove('hidden');
         updateSobreSection(currentGlobalLang);
-        window.location.hash = '#/sobre';
+        targetHash = '#/sobre';
         trackGA4PageView('#/sobre', 'Sobre & Trajetória · Lucas Nellucci');
       } else if (viewId === 'jogos') {
         document.getElementById('viewJogos').classList.remove('hidden');
         renderGamesGrid();
-        window.location.hash = '#/jogos';
+        targetHash = '#/jogos';
         trackGA4PageView('#/jogos', 'Jogos & 3D · Lucas Nellucci');
       } else if (viewId === 'contato') {
         document.getElementById('viewContato').classList.remove('hidden');
-        window.location.hash = '#/contato';
+        targetHash = '#/contato';
         trackGA4PageView('#/contato', 'Contato · Lucas Nellucci');
+      }
+
+      if (updateHash && window.location.hash !== targetHash) {
+        suppressHashChange = true;
+        window.location.hash = targetHash;
+        setTimeout(() => { suppressHashChange = false; }, 0);
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -4653,7 +5190,14 @@
     }
 
     // Abre a Tela de Estudo de Caso (Idêntica a luccas.social.br/portfolio/[case])
-    function openCaseStudy(id) {
+    function getBackLabelForView(category, tLang) {
+      if (lastListView === 'home') return tLang.backToHome;
+      if (category === 'jogos' || lastListView === 'jogos') return tLang.backToGames;
+      if (category === 'labs' || category === 'drive' || lastListView === 'ai-lab') return tLang.backToAiLab;
+      return tLang.backToPortfolio;
+    }
+
+    function openCaseStudy(id, updateHash = true) {
       triggerTopProgressBar();
       const item = [...portfolioProjects, ...getVercelApps(), ...getDriveProjects(), ...gameProjects].find(c => c.id === id);
       if (!item) return;
@@ -4662,13 +5206,11 @@
       currentCategory = item.category;
       trackDataLayer('view_case_study', { case_id: id, case_title: item.title, case_category: item.category });
 
-      // Esconde outras telas e exibe a tela de case study
       document.querySelectorAll('.view-screen').forEach(el => el.classList.add('hidden'));
       document.getElementById('viewCaseStudy').classList.remove('hidden');
 
-      // Atualiza texto de voltar
       const tLang = siteTranslations[currentGlobalLang] || siteTranslations.pt;
-      document.getElementById('caseBackLabel').innerText = item.category === 'jogos' ? tLang.backToGames : tLang.backToPortfolio;
+      document.getElementById('caseBackLabel').innerText = getBackLabelForView(item.category, tLang);
 
       // Textos principais
       document.getElementById('caseBadge').innerHTML = item.tag;
@@ -4731,13 +5273,7 @@
           </a>
         `;
       }
-      if (item.behanceUrl) {
-        linksHtml += `
-          <a href="${item.behanceUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('behance', this.href, '${item.id}')" class="tag-pill text-xs hover:border-[var(--ink)] whitespace-nowrap">
-            <span>${tLang.viewBehance}</span>
-          </a>
-        `;
-      }
+
       if (item.geminiUrl) {
         linksHtml += `
           <a href="${item.geminiUrl}" target="_blank" rel="noopener noreferrer" onclick="trackOutboundClick('gemini_canvas', this.href, '${item.id}')" class="tag-pill text-xs hover:border-cyan-400 text-cyan-400 whitespace-nowrap">
@@ -4856,14 +5392,20 @@
       }
 
       // Banner de Próximo Case
+      const aiLabAll = [...getVercelApps(), ...getDriveProjects()];
       const list = item.category === 'jogos'
         ? gameProjects
-        : (item.category === 'labs' ? getVercelApps() : (item.category === 'drive' ? getDriveProjects() : portfolioProjects));
+        : ((item.category === 'labs' || item.category === 'drive') ? aiLabAll : portfolioProjects);
       const curIdx = list.findIndex(c => c.id === id);
       const nextItem = list[(curIdx + 1) % list.length];
       document.getElementById('nextCaseTitle').innerHTML = nextItem.title;
 
-      window.location.hash = '#/case/' + id;
+      const caseHash = '#/case/' + id;
+      if (updateHash && window.location.hash !== caseHash) {
+        suppressHashChange = true;
+        window.location.hash = caseHash;
+        setTimeout(() => { suppressHashChange = false; }, 0);
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
       initScrollReveal();
       lucide.createIcons();
@@ -4872,17 +5414,22 @@
     function goToNextCase() {
       const item = [...portfolioProjects, ...getVercelApps(), ...getDriveProjects(), ...gameProjects].find(c => c.id === activeCaseId);
       if (!item) return;
+      const aiLabAll = [...getVercelApps(), ...getDriveProjects()];
       const list = item.category === 'jogos'
         ? gameProjects
-        : (item.category === 'labs' ? getVercelApps() : (item.category === 'drive' ? getDriveProjects() : portfolioProjects));
+        : ((item.category === 'labs' || item.category === 'drive') ? aiLabAll : portfolioProjects);
       const curIdx = list.findIndex(c => c.id === activeCaseId);
       const nextItem = list[(curIdx + 1) % list.length];
       openCaseStudy(nextItem.id);
     }
 
     function navigateBack() {
-      if (currentCategory === 'jogos') {
+      if (lastListView && ['home', 'portfolio', 'ai-lab', 'jogos'].includes(lastListView)) {
+        showView(lastListView);
+      } else if (currentCategory === 'jogos') {
         showView('jogos');
+      } else if (currentCategory === 'labs' || currentCategory === 'drive') {
+        showView('ai-lab');
       } else {
         showView('portfolio');
       }
@@ -4947,23 +5494,32 @@
 
     // Roteador de Hash
     function handleRouting() {
-      const hash = window.location.hash || '#/portfolio';
+      const hash = window.location.hash || '#/';
       if (hash.startsWith('#/case/')) {
         const id = hash.replace('#/case/', '');
-        openCaseStudy(id);
+        if (activeCaseId !== id) {
+          openCaseStudy(id, false);
+        }
+      } else if (hash.startsWith('#/portfolio')) {
+        showView('portfolio', false);
+      } else if (hash.startsWith('#/ai-lab')) {
+        showView('ai-lab', false);
       } else if (hash.startsWith('#/jogos')) {
-        showView('jogos');
+        showView('jogos', false);
       } else if (hash.startsWith('#/sobre')) {
-        scrollToSobre();
+        showView('sobre', false);
       } else if (hash.startsWith('#/contato')) {
-        showView('contato');
+        showView('contato', false);
       } else {
-        showView('portfolio');
+        showView('home', false);
       }
     }
 
     setGlobalLang(currentGlobalLang, false);
     window.addEventListener('popstate', handleRouting);
+    window.addEventListener('hashchange', () => {
+      if (!suppressHashChange) handleRouting();
+    });
     handleRouting();
     initPreloader();
     initCardSpotlight();
