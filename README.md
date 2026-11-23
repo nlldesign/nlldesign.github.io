@@ -15,6 +15,11 @@
 
 ---
 
+### 📚 Documentação Técnica:
+- Consulte [docs/DOCUMENTACAO.md](docs/DOCUMENTACAO.md) para o histórico completo do projeto (Framer → SPA GitHub Pages → GTM/GA4 → Modularização), arquitetura zero-build, rotas, inventário dos 38 projetos e guia de manutenção/deploy.
+
+---
+
 ### 📬 Contato:
 - **GitHub:** [@nlldesign](https://github.com/nlldesign)
 - **Email:** [nellucci.design@gmail.com](mailto:nellucci.design@gmail.com)
