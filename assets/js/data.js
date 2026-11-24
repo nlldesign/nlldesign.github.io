@@ -4,6 +4,7 @@
 
 const framerToolsCatalog = [
   {"id":"figma","name":"Figma","category":"design","categoryLabel":{"pt":"Design & UI","en":"Design & UI"},"icon":"assets/framer/home_4_5Z8v52qhYA5LMbPVOFdRY7GSe9I.png","invertOnDark":false},
+  {"id":"miro","name":"Miro","category":"design","categoryLabel":{"pt":"Design & UI","en":"Design & UI"},"desc":{"pt":"Mapeamento de fluxos, jornadas e workshops colaborativos","en":"Flow mapping, user journeys, and collaborative workshops"},"icon":"assets/miro-icon.svg","invertOnDark":false},
   {"id":"adobe-cc","name":"Adobe Creative Cloud","category":"design","categoryLabel":{"pt":"Design & UI","en":"Design & UI"},"icon":"assets/framer/home_2_2dTXUAQpn5rzQOL7lKEsYtLLFjY.png","invertOnDark":false},
   {"id":"photoshop","name":"Adobe Photoshop","category":"design","categoryLabel":{"pt":"Design & UI","en":"Design & UI"},"icon":"assets/framer/home_5_MgzKIy3UUUS7d4mryou7TFbrJs.png","invertOnDark":false},
   {"id":"illustrator","name":"Adobe Illustrator","category":"design","categoryLabel":{"pt":"Design & UI","en":"Design & UI"},"icon":"assets/framer/home_3_qYE57wDzKLL57nJHRZVk0zI8aQ.png","invertOnDark":false},
@@ -162,8 +163,8 @@ const siteTranslations = {
     toolsTag: "Stack &amp; Ferramentas • Dia a Dia",
     toolsTitle: "Ferramentas que sustentam cada entrega.",
     toolsSubtitle: "Do design de interface e direção visual à documentação, gestão ágil e handoff com engenharia.",
-    toolsFilterAll: "Todas (9)",
-    toolsFilterDesign: "Design &amp; UI (4)",
+    toolsFilterAll: "Todas (10)",
+    toolsFilterDesign: "Design &amp; UI (5)",
     toolsFilterManagement: "Gestão &amp; Docs (5)",
     socialMediaExpandBtn: "Ver todas as 54 peças da campanha ↓",
     socialMediaCollapseBtn: "Mostrar apenas os 6 destaques ↑",
@@ -266,8 +267,8 @@ const siteTranslations = {
     toolsTag: "Tools &amp; Stack • Daily Workflow",
     toolsTitle: "Tools behind every product delivery.",
     toolsSubtitle: "From UI design and visual direction to documentation, agile management, and engineering handoff.",
-    toolsFilterAll: "All (9)",
-    toolsFilterDesign: "Design &amp; UI (4)",
+    toolsFilterAll: "All (10)",
+    toolsFilterDesign: "Design &amp; UI (5)",
     toolsFilterManagement: "Management &amp; Docs (5)",
     socialMediaExpandBtn: "View all 54 campaign creatives ↓",
     socialMediaCollapseBtn: "Show 6 highlights only ↑",
@@ -1620,9 +1621,9 @@ const gameProjectsData = {
 
 const sobreTranslations = {
   pt: {
-    homeTag: "Sobre",
-    homeTitle: "Entre o comportamento humano e o produto digital, alguém precisa traduzir.",
-    homeSummary: "UX &amp; Product Designer no Grupo H2. Uno pesquisa comportamental, neurociência e inteligência artificial aplicada — da descoberta e prototipação em código à criação de ferramentas próprias.",
+    homeTag: "Sobre mim",
+    homeTitle: "Eu traduzo comportamento humano em produtos digitais claros.",
+    homeSummary: "Sou UX &amp; Product Designer no Grupo H2. No meu trabalho, uno pesquisa comportamental, neurociência e inteligência artificial aplicada — da descoberta e prototipação em código à criação das minhas próprias ferramentas.",
     homeHighlights: [
       "Product Design",
       "UX &amp; CRO",
@@ -1632,80 +1633,80 @@ const sobreTranslations = {
     homeCta: "Conhecer minha trajetória",
     homeContact: "Falar comigo",
     backLabel: "Voltar para início",
-    tag: "Sobre · Perfil &amp; Trajetória",
-    title: "Entre o comportamento humano e o produto digital, alguém precisa traduzir.",
-    lead: "Designer de produto estratégico focado em resultados de negócio, unindo UX, marketing, neurociência aplicada ao comportamento humano e inteligência artificial para simplificar jornadas, validar ideias em código e apoiar decisões melhores.",
+    tag: "Sobre mim · Perfil &amp; Trajetória",
+    title: "Eu traduzo comportamento humano em produtos digitais claros.",
+    lead: "Sou Product Designer com olhar estratégico para negócio. No dia a dia, combino UX, marketing, neurociência aplicada ao comportamento e inteligência artificial para simplificar jornadas, validar hipóteses em código real e apoiar decisões mais seguras.",
     paragraphs: [
-      "Adoto uma visão prática e multidisciplinar que conecta pesquisa com pessoas, métricas reais de uso e ferramentas de inteligência artificial para entender o que o usuário realmente precisa e transformar isso em produto.",
-      "Ao longo da minha trajetória, participei de projetos desafiadores que pediam visão de sistema, raciocínio analítico e criatividade aplicada — sempre tratando clareza, acessibilidade e facilidade de uso como prioridade.",
-      "No trabalho com inteligência artificial, vou além de perguntas pontuais: uso fluxos com agentes na etapa de descoberta, tiro protótipos funcionais do papel em código real e crio ferramentas de apoio — como extensões de navegador e o monitor de custos no Antigravity — cuidando sempre da confiança e do controle de quem está usando."
+      "Trabalho de forma prática e multidisciplinar: conecto pesquisa com pessoas, métricas reais de uso e ferramentas de IA para entender o que realmente trava a experiência — e transformar isso em produto funcional.",
+      "Ao longo da minha trajetória, conduzi projetos que exigiam visão sistêmica, leitura analítica e criatividade aplicada. Em todos eles, trato clareza, acessibilidade e facilidade de uso como inegociáveis.",
+      "Com inteligência artificial, vou além de prompts pontuais: estruturo fluxos com agentes na etapa de descoberta, coloco protótipos navegáveis de pé em código e construo ferramentas próprias — como extensões para navegador e o monitor de custos Token Tracker no Antigravity — sempre garantindo transparência e controle para quem usa."
     ],
-    aiHeading: "Como atuo com inteligência artificial",
+    aiHeading: "Como eu atuo com inteligência artificial",
     aiPillars: [
       {
         num: "01",
         title: "Descoberta &amp; Pesquisa Acelerada",
-        desc: "Organizo entrevistas, análises de mercado e sinais de comportamento com apoio de IA conectada a fontes reais para chegar a hipóteses claras em horas, e não semanas."
+        desc: "Uso IA conectada a fontes reais para organizar entrevistas, análises de mercado e sinais de comportamento, chegando a hipóteses testáveis em horas — não em semanas."
       },
       {
         num: "02",
         title: "Protótipos Funcionais em Código",
-        desc: "Levo ideias além de telas paradas no Figma: valido fluxos completos em aplicações reais publicadas para testar usabilidade e valor antes do desenvolvimento final."
+        desc: "Levo minhas ideias além de telas estáticas no Figma: publico fluxos reais em código para validar usabilidade, atrito e valor antes mesmo do desenvolvimento final."
       },
       {
         num: "03",
         title: "Agentes, Plugins &amp; Automações",
-        desc: "Desenvolvo ferramentas sob medida para o dia a dia — como o painel Token Tracker no Antigravity 2.0, extensões para Chrome, complementos de jogos e automações locais."
+        desc: "Construo ferramentas sob medida para resolver dores do dia a dia — como o painel Token Tracker no Antigravity 2.0, extensões para Chrome, addons de jogos e automações locais."
       },
       {
         num: "04",
         title: "Experiências Claras com IA",
-        desc: "Cuido dos detalhes que geram confiança na ponta: respostas rápidas enquanto o sistema processa, saídas alternativas quando algo falha, fontes claras e controle humano."
+        desc: "Desenho interfaces de IA focadas em confiança: estados de carregamento transparentes, saídas alternativas quando algo falha, fontes rastreáveis e controle humano em cada decisão."
       }
     ],
-    expHeading: "Experiência profissional",
+    expHeading: "Minha experiência profissional",
     experiences: [
       {
         company: "Grupo H2",
         role: "Product Designer Pleno",
         period: "Set 2025 – Atual",
         location: "São Paulo, Brasil",
-        desc: "Atuação estratégica em Product Design, evoluindo jornadas digitais, design systems e validação contínua de produto junto a equipes multidisciplinares."
+        desc: "Atuo estrategicamente em Product Design, evoluindo jornadas digitais, escalando design systems e validando entregas de produto de forma contínua junto a squads multidisciplinares."
       },
       {
         company: "BlackBox Technology &amp; Cybersecurity",
         role: "Product Marketing Manager",
         period: "Jan 2025 – Set 2025",
         location: "Orlando, FL · EUA",
-        desc: "Liderança de estratégias para experiências digitais centradas no usuário, com foco em usabilidade, engajamento, conversão, SEO e análise de comportamento em squads ágeis."
+        desc: "Liderei estratégias para experiências digitais centradas no usuário, unindo usabilidade, engajamento, conversão, SEO e análise comportamental em squads ágeis."
       },
       {
         company: "EasyChange",
         role: "UX Designer",
         period: "Mai 2024 – Set 2025",
         location: "São Paulo, Brasil",
-        desc: "Atuação entre marketing digital e UX: tradução de resultados de campanhas e mapas de calor em melhorias de jornada, landing pages e comunicação interna."
+        desc: "Atuei na ponte entre marketing digital e UX, traduzindo dados de campanhas e mapas de calor em melhorias práticas de jornada, landing pages e comunicação interna."
       },
       {
         company: "Neogrid",
         role: "Instructional Designer",
         period: "Abr 2023 – Fev 2024",
         location: "São Paulo, Brasil",
-        desc: "Criação de programas estratégicos de treinamento corporativo, conteúdos interativos em plataformas LMS, campanhas internas e produção de vídeo em Adobe Premiere."
+        desc: "Estruturei programas estratégicos de treinamento corporativo, criei conteúdos interativos em plataformas LMS, conduzi campanhas internas e produzi vídeos no Adobe Premiere."
       },
       {
         company: "Associação Cartão Cristão do Brasil",
         role: "Web Designer",
         period: "Jan 2021 – Abr 2023",
         location: "São Paulo, Brasil",
-        desc: "Criação e otimização de landing pages e fluxos de simulação, gestão de redes sociais, relatórios de campanha e peças animadas com Photoshop e Illustrator."
+        desc: "Criei e otimizei landing pages e fluxos de simulação para conversão, geri campanhas para 9 marcas nas redes sociais, acompanhei relatórios de performance e produzi peças animadas em Photoshop e Illustrator."
       },
       {
         company: "Nesta",
         role: "Estágio em UI/UX Design",
         period: "Jan 2019 – Dez 2019",
         location: "São Paulo, Brasil",
-        desc: "Criação de interfaces responsivas, wireframes e protótipos validados com usuários reais, testes de qualidade e páginas de conversão para o setor educacional."
+        desc: "Desenhei interfaces responsivas, wireframes e protótipos validados com usuários reais, além de apoiar testes de qualidade e páginas de conversão para o setor educacional."
       }
     ],
     eduHeading: "Formação &amp; certificações",
@@ -1743,6 +1744,7 @@ const sobreTranslations = {
       "Liderança &amp; Governança",
       "Design Systems",
       "Figma",
+      "Miro",
       "Google Analytics &amp; GTM",
       "Hotjar &amp; Clarity",
       "SEO &amp; Search Console",
@@ -1751,22 +1753,22 @@ const sobreTranslations = {
       "Slack &amp; Azure",
       "Scrum &amp; Squads Ágeis"
     ],
-    processHeading: "Processo de trabalho",
+    processHeading: "Como eu trabalho",
     steps: [
       {
         num: "01",
         title: "Diagnóstico &amp; Descoberta",
-        desc: "Cruzo números reais de navegação e mapas de calor com entrevistas qualitativas e análise de mercado para achar onde o usuário trava de verdade."
+        desc: "Cruzo métricas reais de navegação e mapas de calor com entrevistas qualitativas e benchmarking para encontrar exatamente onde o usuário trava."
       },
       {
         num: "02",
         title: "Arquitetura &amp; Design System",
-        desc: "Desenho fluxos limpos e fáceis de entender no Figma, organizando componentes reutilizáveis e protótipos interativos para testar rápido."
+        desc: "Estruturo fluxos limpos e intuitivos no Figma e no Miro, organizando componentes reutilizáveis e protótipos interativos para testar rápido."
       },
       {
         num: "03",
         title: "Validação &amp; Entrega Ágil",
-        desc: "Valido hipóteses junto com o time técnico em ciclos ágeis, acompanho o resultado depois do lançamento e sigo ajustando com apoio de IA."
+        desc: "Valido hipóteses lado a lado com o time técnico em ciclos ágeis, meço o impacto após o lançamento e continuo iterando com apoio de dados e IA."
       }
     ],
     ctaTitle: "Tem um desafio de produto com UX no meio?",
@@ -1774,92 +1776,92 @@ const sobreTranslations = {
     ctaBtn: "Falar comigo →"
   },
   en: {
-    homeTag: "About",
-    homeTitle: "Between human behavior and digital products, someone needs to translate.",
-    homeSummary: "UX &amp; Product Designer at Grupo H2. Blending behavioral research, neuroscience, and applied artificial intelligence — from product discovery and live code prototyping to custom productivity tools.",
+    homeTag: "About me",
+    homeTitle: "I translate human behavior into clear digital products.",
+    homeSummary: "I’m a UX &amp; Product Designer at Grupo H2. I combine behavioral research, neuroscience, and applied artificial intelligence — from discovery and live code prototyping to building my own productivity tools.",
     homeHighlights: [
       "Product Design",
       "UX &amp; CRO",
       "Neuroscience",
       "Applied AI &amp; Agents"
     ],
-    homeCta: "Explore full background",
+    homeCta: "Explore my background",
     homeContact: "Get in touch",
     backLabel: "Back to home",
-    tag: "About · Profile &amp; Background",
-    title: "Between human behavior and digital products, someone needs to translate.",
-    lead: "Strategic product designer focused on business results, combining UX, marketing, neuroscience applied to user behavior, and artificial intelligence to simplify journeys, test ideas in real code, and support clearer decisions.",
+    tag: "About me · Profile &amp; Background",
+    title: "I translate human behavior into clear digital products.",
+    lead: "I’m a strategic Product Designer focused on business outcomes. Every day, I blend UX, marketing, behavioral neuroscience, and artificial intelligence to simplify journeys, validate ideas in real code, and support smarter decisions.",
     paragraphs: [
-      "I work with a practical, multidisciplinary mindset — bringing together user research, real usage metrics, and AI tools to understand what people truly need and turn those insights into focused products.",
-      "Across my career, I have worked on complex projects that called for systems thinking, clear structure, and creative problem-solving — always putting accessibility, clarity, and usability first.",
-      "In daily work with artificial intelligence, I go beyond quick prompts: I use AI workflows during discovery, build interactive live prototypes to validate friction early, and craft custom productivity tools like browser extensions and the Antigravity cost monitor while keeping people firmly in control."
+      "I work with a hands-on, multidisciplinary mindset — connecting user research, live usage metrics, and AI tools to uncover what actually blocks people and turn those insights into focused products.",
+      "Throughout my career, I’ve worked on complex initiatives that demanded systems thinking, analytical rigor, and creative problem-solving — always treating clarity, accessibility, and ease of use as non-negotiable.",
+      "With artificial intelligence, I go far beyond one-off prompts: I run agent-assisted discovery workflows, ship interactive prototypes in real code, and build custom tools — like Chrome extensions and the Antigravity Token Tracker — always keeping transparency and human control front and center."
     ],
     aiHeading: "How I work with artificial intelligence",
     aiPillars: [
       {
         num: "01",
         title: "Accelerated Discovery &amp; Research",
-        desc: "Synthesizing user interviews, competitive reviews, and behavioral signals with source-backed AI to shape clear testable hypotheses in hours rather than weeks."
+        desc: "I use source-backed AI to synthesize user interviews, competitive reviews, and behavioral signals so I can shape testable hypotheses in hours instead of weeks."
       },
       {
         num: "02",
         title: "Functional Code Prototyping",
-        desc: "Taking ideas beyond static frames into live web prototypes so teams can test real interaction friction before engineering starts."
+        desc: "I take ideas beyond static Figma frames by shipping live web prototypes to test real interaction friction before engineering starts."
       },
       {
         num: "03",
         title: "Agents, Plugins &amp; Tooling",
-        desc: "Creating helpful workflow tools — such as the Token Tracker plugin for Antigravity 2.0, Chrome extensions, game addons, and local test dashboards."
+        desc: "I build custom workflow tools for real daily needs — including the Token Tracker plugin for Antigravity 2.0, Chrome extensions, game addons, and local automation dashboards."
       },
       {
         num: "04",
         title: "Human-Centered AI Interfaces",
-        desc: "Designing AI features around everyday trust: smooth waiting states, helpful fallbacks when quotas run out, clear sources, and human oversight."
+        desc: "I design AI features around everyday trust: clear loading states, graceful fallbacks when limits hit, traceable sources, and human oversight."
       }
     ],
-    expHeading: "Work experience",
+    expHeading: "My work experience",
     experiences: [
       {
         company: "Grupo H2",
         role: "Mid-Level Product Designer",
         period: "Sep 2025 – Present",
         location: "São Paulo, Brazil",
-        desc: "Driving product design strategy, improving user journeys, scaling design systems, and validating product updates with cross-functional teams."
+        desc: "I drive product design strategy, evolve digital journeys, scale design systems, and continuously validate product updates alongside cross-functional squads."
       },
       {
         company: "BlackBox Technology &amp; Cybersecurity",
         role: "Product Marketing Manager",
         period: "Jan 2025 – Sep 2025",
         location: "Orlando, FL · USA",
-        desc: "Led user-centered digital strategy focusing on usability, conversion growth, SEO, and behavioral analytics across agile product teams."
+        desc: "I led user-centered digital strategies focused on usability, engagement, conversion growth, SEO, and behavioral analytics across agile product teams."
       },
       {
         company: "EasyChange",
         role: "UX Designer",
         period: "May 2024 – Sep 2025",
         location: "São Paulo, Brazil",
-        desc: "Worked across digital marketing and UX: turning campaign analytics and heatmaps into clearer user journeys, landing pages, and team communication."
+        desc: "I bridged digital marketing and UX, turning campaign results and heatmaps into clearer user journeys, high-converting landing pages, and internal communication."
       },
       {
         company: "Neogrid",
         role: "Instructional Designer",
         period: "Apr 2023 – Feb 2024",
         location: "São Paulo, Brazil",
-        desc: "Built corporate training programs, interactive LMS courses, internal engagement campaigns, and video training assets in Adobe Premiere."
+        desc: "I built corporate training programs, designed interactive LMS courses, ran internal engagement campaigns, and produced video assets in Adobe Premiere."
       },
       {
         company: "Associação Cartão Cristão do Brasil",
         role: "Web Designer",
         period: "Jan 2021 – Apr 2023",
         location: "São Paulo, Brazil",
-        desc: "Designed and improved landing pages and quote flows, ran social media calendars and reports, and produced campaign graphics and motion pieces."
+        desc: "I designed and optimized landing pages and quote flows for conversion, managed social media campaigns across 9 partner brands, tracked performance reports, and created motion pieces in Photoshop and Illustrator."
       },
       {
         company: "Nesta",
         role: "UI/UX Design Intern",
         period: "Jan 2019 – Dec 2019",
         location: "São Paulo, Brazil",
-        desc: "Designed responsive screens, wireframes, and tested prototypes with real users alongside QA checks and education landing pages."
+        desc: "I designed responsive interfaces, wireframes, and prototypes validated with real users, supporting QA checks and conversion landing pages for the education sector."
       }
     ],
     eduHeading: "Education &amp; certifications",
@@ -1897,6 +1899,7 @@ const sobreTranslations = {
       "Leadership &amp; Governance",
       "Design Systems",
       "Figma",
+      "Miro",
       "Google Analytics &amp; GTM",
       "Hotjar &amp; Clarity",
       "SEO &amp; Search Console",
@@ -1905,22 +1908,22 @@ const sobreTranslations = {
       "Slack &amp; Azure",
       "Scrum &amp; Agile Squads"
     ],
-    processHeading: "Work methodology",
+    processHeading: "How I work",
     steps: [
       {
         num: "01",
         title: "Diagnosis &amp; Insights",
-        desc: "Combining live usage analytics and heatmaps with qualitative research and competitive reviews to spot where users actually get stuck."
+        desc: "I combine live usage analytics and heatmaps with qualitative interviews and benchmarking to pinpoint where users truly get stuck."
       },
       {
         num: "02",
         title: "Architecture &amp; Design System",
-        desc: "Mapping clean, low-friction flows in Figma with reusable components and interactive prototypes for early testing."
+        desc: "I map clean, intuitive flows in Figma and Miro, building reusable components and interactive prototypes for fast validation."
       },
       {
         num: "03",
         title: "Validation &amp; Agile Delivery",
-        desc: "Validating ideas alongside engineers in agile sprints, measuring real-world impact after launch, and refining continuously with AI."
+        desc: "I validate hypotheses alongside engineers in agile sprints, measure post-launch impact, and keep iterating with data and AI."
       }
     ],
     ctaTitle: "Have a product or UX challenge in mind?",
