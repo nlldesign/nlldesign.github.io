@@ -20,7 +20,7 @@ function cardKeydownAttr(actionJs) {
   const safeAction = actionJs.replace(/"/g, '&quot;');
   return (
     `role="button" tabindex="0" ` +
-    `onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${safeAction}}"`
+    `onkeydown="if(event.target!==event.currentTarget&&event.target.closest('a,button'))return;if(event.key==='Enter'||event.key===' '){event.preventDefault();${safeAction}}"`
   );
 }
 

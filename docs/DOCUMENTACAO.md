@@ -32,7 +32,12 @@
   - Cards visuais de **Ferramentas & Disciplinas** nas páginas de estudo de caso (`#/case/:id`) combinando os ícones PNG do Framer com ícones semânticos Lucide.
   - Galeria sob demanda das **54 peças de Social Media** (6 destaques iniciais + expansão assíncrona das 48 peças restantes `social-media_7..60` com `loading="lazy"`).
 - **Polimento Editorial, Contatos & Acessibilidade**:
-  - Headline da Home revisada (PT/EN), remoção de prefixos redundantes nos cases 03 e 04, narrativa em 1ª pessoa ativa, período dinâmico por projeto, `document.title` traduzido por rota, fallback de `#/case/:id` inválido para `#/portfolio`, meta tags Open Graph/Twitter Card, navegação por teclado (`Enter`/`Space`) em todos os cards/galerias, e-mail oficial unificado (`nellucci.design@gmail.com`) e telefone/WhatsApp restrito exclusivamente à página Sobre (`#/sobre`).
+  - Headline da Home revisada (PT/EN), remoção de prefixos redundantes nos cases 03 e 04, narrativa em 1ª pessoa ativa, período dinâmico por projeto, `document.title` traduzido por rota, fallback de `#/case/:id` inválido para `#/portfolio`, meta tags Open Graph/Twitter Card, navegação por teclado (`Enter`/`Space`) em todos os cards/galerias e e-mail oficial unificado (`nellucci.design@gmail.com`).
+
+### Fase 5 — Miro, Reordenação da Home & Alinhamento de Tom de Voz (PR #2 e PR #3)
+- **Ferramentas (10 no total):** criação de `assets/miro-icon.svg` e inclusão do **Miro** em `framerToolsCatalog`, atualizando os filtros na Home e no Portfólio para `Todas (10)` / `Design & UI (5)` / `Gestão & Docs (5)`.
+- **Home & Contato:** reposicionamento de `#homeSobreTeaser` imediatamente acima da seção de Ferramentas (`#homeToolsSection`), remoção do link do GitHub no Footer e direcionamento do CTA principal `"Enviar mensagem"` em `#/contato` para WhatsApp (`wa.me/5511984789811`), mantendo o bloco de contato direto em `#/sobre` e o e-mail oficial nos canais de contato.
+- **Tom de voz (PT & EN):** padronização completa em 1ª pessoa ativa no português e sujeito `"I"` explícito no inglês em todo o catálogo, documentada em `docs/TOM_DE_VOZ.md`.
 
 ---
 
@@ -40,18 +45,20 @@
 
 ```text
 nlldesign.github.io/
-├── index.html                  # Shell SPA (~980 linhas), meta tags OG/Twitter, GTM e 7 views
+├── index.html                  # Shell SPA (~976 linhas), meta tags OG/Twitter, GTM e 7 views
 ├── favicon.svg                 # Monograma NLL Design adaptativo
 ├── README.md                   # Apresentação do repositório e link para documentação
 ├── docs/
-│   └── DOCUMENTACAO.md         # Este documento (histórico, arquitetura, inventário e manutenção)
+│   ├── DOCUMENTACAO.md         # Este documento (histórico, arquitetura, inventário e manutenção)
+│   └── TOM_DE_VOZ.md           # Guia bilíngue de tom de voz (1ª pessoa ativa PT & EN)
 └── assets/
     ├── css/
     │   └── styles.css          # Design tokens, tema dark/light, coverflow, marquee e reduced-motion
     ├── js/
-    │   ├── data.js             # Traduções PT/EN, catálogo de 38 projetos, 9 ferramentas e 48 extras Social Media
+    │   ├── data.js             # Traduções PT/EN, catálogo de 38 projetos, 10 ferramentas e 48 extras Social Media
     │   └── app.js              # Roteador SPA, carrosséis, marquee, lightbox, acessibilidade e GTM
-    ├── framer/                 # Assets originais exportados do Framer (ícones oficiais + telas + 54 peças)
+    ├── miro-icon.svg           # Ícone vetorial do Miro (adicionado ao stack de ferramentas)
+    ├── framer/                 # Assets originais exportados do Framer (9 ícones + telas + 54 peças)
     └── *.png / *.jpg / *.svg   # Capas e screenshots dos apps Vercel, plugins e jogos 3D
 ```
 

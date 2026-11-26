@@ -169,7 +169,7 @@ const siteTranslations = {
     socialMediaExpandBtn: "Ver todas as 54 peças da campanha ↓",
     socialMediaCollapseBtn: "Mostrar apenas os 6 destaques ↑",
     socialMediaGalleryCount: "54 peças da campanha",
-    sobreDirectContactLabel: "Contato direto (exclusivo nesta página)"
+    sobreDirectContactLabel: "Contato direto"
   },
   en: {
     preloaderStatus: "Loading experience...",
@@ -273,7 +273,7 @@ const siteTranslations = {
     socialMediaExpandBtn: "View all 54 campaign creatives ↓",
     socialMediaCollapseBtn: "Show 6 highlights only ↑",
     socialMediaGalleryCount: "54 campaign creatives",
-    sobreDirectContactLabel: "Direct contact (exclusive to this page)"
+    sobreDirectContactLabel: "Direct contact"
   }
 };
 
